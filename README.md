@@ -1,4 +1,4 @@
-# ProntoMiao#
+# ProntoMiao
 
 [ING_SW_GDocs][ING_SW_Link]
 
