@@ -9,9 +9,6 @@
     
 }
 
-.searchbar{
-    float : none;
-}
 .btn{
     float : right;
     margin-left : 5px;
@@ -26,6 +23,7 @@
     margin-left : 5px;
     margin-right : 5px;
     
+    
 
 }
 
@@ -36,16 +34,20 @@
     margin-right : 10px;
 }
 
-.navbar-nav.ml-auto{
-    margin-right: 0;
+
+.navbar-nav{
+    margin-right: 0px;
+    display: inline-block;
+    position: inherit;
     
 
 }
 
-.navbar-nav{
-    margin-right: 0px;
-    display:inline;
-
+.navbar-buttons{
+    display: flex;
+  justify-content: right;
+  position:relative;
+  align-items: center;
 }
 
 .container-footer {
@@ -58,4 +60,15 @@
     display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
+}
+
+.container-navbar{
+    display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.container-navbar > .navbar-buttons{
+   
+  justify-content: right;
 }
