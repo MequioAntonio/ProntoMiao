@@ -1,4 +1,18 @@
+.navbar {
+    background-color: #4d88ff;
+
+
+}
+
+.searchbar{
+    float : none;
+}
+.btn{
+    float : right;
+}
+
 .nav-item{
+    float : left;
     color : white;
     margin-left : 5px;
     margin-right : 5px;
