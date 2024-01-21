@@ -4,11 +4,20 @@
 
 }
 
+.navbar-brand{
+    color : white;
+    
+}
+
 .searchbar{
     float : none;
 }
 .btn{
     float : right;
+    margin-left : 5px;
+    margin-right : 5px;
+    color : white;
+    border-color: white;
 }
 
 .nav-item{
@@ -16,4 +25,37 @@
     color : white;
     margin-left : 5px;
     margin-right : 5px;
+    
+
+}
+
+.nav-link{
+    display: inline-block;
+    color : white;
+    margin-left : 10px;
+    margin-right : 10px;
+}
+
+.navbar-nav.ml-auto{
+    margin-right: 0;
+    
+
+}
+
+.navbar-nav{
+    margin-right: 0px;
+    display:inline;
+
+}
+
+.container-footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+
+.container-fluid{
+    display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
 }
