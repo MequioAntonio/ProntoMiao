@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { AnimalCardComponentComponent } from '../animal-card-component/animal-card-component.component';
+
 @Component({
-  selector: 'app-home-component',
+  selector: 'app-home',
   standalone: true,
   imports: [AnimalCardComponentComponent],
-  templateUrl: './home-component.component.html',
-  styleUrl: './home-component.component.scss'
+  templateUrl: './home.component.html',
+  styleUrl: './home.component.scss',
 })
-export class HomeComponentComponent {
-
+export class HomeComponent {
+  
 }
