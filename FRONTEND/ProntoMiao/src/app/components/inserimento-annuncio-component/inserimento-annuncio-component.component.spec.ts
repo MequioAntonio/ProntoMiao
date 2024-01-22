@@ -11,7 +11,7 @@ describe('InserimentoAnnuncioComponentComponent', () => {
       imports: [InserimentoAnnuncioComponentComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(InserimentoAnnuncioComponentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
