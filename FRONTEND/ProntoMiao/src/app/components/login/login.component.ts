@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from "@angular/common";
+import { CommonModule } from '@angular/common';
 import {
   FormBuilder,
   FormControl,
@@ -22,7 +22,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 'app-login-component',
+  selector: 'app-login',
   standalone: true,
   imports: [
     CommonModule,
@@ -37,10 +37,10 @@ import { MatButtonModule } from '@angular/material/button';
     MatButtonModule,
     MatDividerModule,
   ],
-  templateUrl: './login-component.component.html',
-  styleUrl: './login-component.component.scss',
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.scss',
 })
-export class LoginComponentComponent {
+export class LoginComponent {
   loginForm: FormGroup;
 
   constructor(private fb: FormBuilder) {
@@ -49,7 +49,6 @@ export class LoginComponentComponent {
       password: ['', Validators.required],
     });
   }
-
 
   /**
    * Returns the name of the control.
@@ -74,19 +73,18 @@ export class LoginComponentComponent {
    * @return {string} the error message based on the control's validation errors
    */
   getErrorMessage(control: AbstractControl) {
-    if (this.getControlName(control) == 'email'){
+    if (this.getControlName(control) == 'email') {
       if (control.hasError('required')) {
         return 'Devi inserire una Email!';
       }
 
-    return control.hasError('email') ? 'Email non valida!' : '';
-  }else{
+      return control.hasError('email') ? 'Email non valida!' : '';
+    } else {
       if (control.hasError('required')) {
         return 'Devi inserire una Password!';
       }
 
       return 'Devi inserire una Password!';
-
-  }
+    }
   }
 }
