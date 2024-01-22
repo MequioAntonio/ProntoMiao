@@ -25,10 +25,11 @@
         (change)="pngInputChange($event)"
         accept=".png"
       />
-      <button mat-flat-button color="primary" (click)="pngInput.click()">
+      <button class="formButton" mat-flat-button color="primary" (click)="pngInput.click()">
         Scegli immagine (PNG)
       </button>
     </form>
+    <button class="formButton" mat-raised-button color="primary">Invia Dati</button>
   </div>
 
   <img
