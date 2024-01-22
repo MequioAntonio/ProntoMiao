@@ -40,3 +40,4 @@ Thumbs.db
 *.vscode
 *.angular/cache
 *node_modules
+/FRONTEND/ProntoMiao/.angular/cache
