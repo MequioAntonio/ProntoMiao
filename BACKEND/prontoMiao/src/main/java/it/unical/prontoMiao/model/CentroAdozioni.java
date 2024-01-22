@@ -6,9 +6,9 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name="centro_adozioni")
-public class CentroAdozioni {
-    @Id
-    private String email;
+public class CentroAdozioni extends Utente{
+
+
     private String descrizione;
     private String orari;
     private String eventi;
@@ -16,19 +16,19 @@ public class CentroAdozioni {
     public CentroAdozioni() {
     }
 
-    public CentroAdozioni(String email, String descrizione, String orari, String eventi) {
-        this.email = email;
+    public CentroAdozioni(String email, String password, String descrizione, String orari, String eventi) {
+        super(email, password);
         this.descrizione = descrizione;
         this.orari = orari;
         this.eventi = eventi;
     }
 
     public String getEmail() {
-        return email;
+        return super.getEmail();
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        super.setEmail(email);
     }
 
     public String getDescrizione() {
