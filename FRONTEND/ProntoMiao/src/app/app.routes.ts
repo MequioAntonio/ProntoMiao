@@ -8,7 +8,7 @@ import { AnimalInfoComponent } from './components/animal-info/animal-info.compon
 import { AnimalCardComponent } from './components/animal-card/animal-card.component';
 
 export const routes: Routes = [
-  { path: 'home', component: HomeComponent },
+  { path: '', component: HomeComponent },
   { path: 'signup', component: SignUpComponent },
   { path: 'login', component: LoginComponent },
   { path: 'adoption-form', component: AdoptionFormComponent },
