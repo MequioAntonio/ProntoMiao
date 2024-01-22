@@ -1,5 +1,7 @@
-<div class="registrationform">
-  <!-- <div class="formcontent">
+<div class="container align-middle">
+  <div class="row justify-content-md-center">
+    <div class="col-md-auto">
+      <!-- <div class="formcontent">
     <p>Esegui l'Accesso a ProntoMiao!</p>
     <mat-form-field appearance="outline">
       <mat-label>Username</mat-label>
@@ -11,42 +13,50 @@
     </mat-form-field>
   </div> -->
 
-  <form [formGroup]="profileForm" (ngSubmit)="submit()">
+      <form [formGroup]="profileForm" (ngSubmit)="submit()">
+        <div class="form-group mb-3">
+          <input
+            type="email"
+            formControlName="email"
+            class="form-control"
+            [ngClass]="
+              profileForm.controls['email'].invalid && profileForm.controls['email'].touched
+                ? 'is-invalid'
+                : ''
+            "
+            placeholder="Inserisci la tua email"
+          />
+        </div>
 
-    <div class="form-group mb-3">
-      <input
-        type="email"
-        formControlName="email"
-        class="form-control"
-        [ngClass]="f['email'].errors && f['email'].errors['required'] ? 'is-invalid' : ''"
-        placeholder="Inserisci la tua email"
+        <div class="form-group mb-3">
+          <input
+            type="password"
+            formControlName="password"
+            class="form-control"
+            [ngClass]="
+              profileForm.controls['password'].invalid && profileForm.controls['password'].touched
+                ? 'is-invalid'
+                : ''
+            "
+            placeholder="Inserisci la tua password"
+          />
+        </div>
+
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1" />
+          <label class="form-check-label" for="exampleCheck1">Ricordami</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        {{ profileForm.value | json }}
+      </form>
+    </div>
+    <div class="col-md-auto">
+      <img
+        src="./assets/login.png"
+        alt="Dai, Registrati!"
+        height="250"
+        width="250"
       />
     </div>
-
-    <div class="form-group mb-3">
-      <input
-        type="password"
-        formControlName="password"
-        class="form-control"
-        placeholder="Inserisci la tua password"
-      />
-    </div>
-
-    <div class="mb-3 form-check">
-      <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-      <label class="form-check-label" for="exampleCheck1">Ricordami</label>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-    {{ profileForm.value | json }}
-  </form>
-
-
-  <div class="image">
-    <img
-      src="./assets/login.png"
-      alt="Dai, Registrati!"
-      height="250"
-      width="250"
-    />
   </div>
 </div>
