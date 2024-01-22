@@ -11,5 +11,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
   styleUrl: './inserimento-annuncio-component.component.scss'
 })
 export class InserimentoAnnuncioComponentComponent {
-
+  pngInputChange(fileInputEvent: any) {
+    console.log(fileInputEvent.target.files[0]);
+  }
 }

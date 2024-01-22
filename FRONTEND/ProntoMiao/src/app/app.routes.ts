@@ -4,7 +4,6 @@ import { LoginComponentComponent } from './components/login-component/login-comp
 import { HomeComponentComponent } from './components/home-component/home-component.component';
 import { InserimentoSegnalazioneComponent } from './components/inserimento-segnalazione/inserimento-segnalazione.component';
 
-
 export const routes: Routes = [
   { path: 'home', component: HomeComponentComponent },
   { path: 'signup', component: SignUpComponentComponent },
