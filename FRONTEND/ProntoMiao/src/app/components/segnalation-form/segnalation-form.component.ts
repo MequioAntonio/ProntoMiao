@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from "@angular/common";
+import { CommonModule } from '@angular/common';
 import {
   FormBuilder,
   FormControl,
@@ -22,7 +22,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 'app-inserimento-annuncio-component',
+  selector: 'app-segnalation-form',
   standalone: true,
   imports: [
     CommonModule,
@@ -37,10 +37,10 @@ import { MatButtonModule } from '@angular/material/button';
     MatButtonModule,
     MatDividerModule,
   ],
-  templateUrl: './inserimento-annuncio-component.component.html',
-  styleUrl: './inserimento-annuncio-component.component.scss'
+  templateUrl: './segnalation-form.component.html',
+  styleUrl: './segnalation-form.component.scss',
 })
-export class InserimentoAnnuncioComponentComponent {
+export class SegnalationFormComponent {
   pngInputChange(fileInputEvent: any) {
     console.log(fileInputEvent.target.files[0]);
   }
