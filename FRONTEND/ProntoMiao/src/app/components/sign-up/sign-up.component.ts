@@ -6,10 +6,16 @@ import { MatCheckbox } from '@angular/material/checkbox';
 import { MatButton } from '@angular/material/button';
 
 @Component({
-  selector: 'app-sign-up-component',
+  selector: 'app-sign-up',
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, MatSelectModule, MatCheckbox, MatButton],
-  templateUrl: './sign-up-component.component.html',
-  styleUrl: './sign-up-component.component.scss',
+  imports: [
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatCheckbox,
+    MatButton,
+  ],
+  templateUrl: './sign-up.component.html',
+  styleUrl: './sign-up.component.scss',
 })
-export class SignUpComponentComponent {}
+export class SignUpComponent {}
