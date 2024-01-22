@@ -15,7 +15,7 @@ import {
   standalone: true,
   imports: [CommonModule, RouterOutlet, HttpClientModule, FormsModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+  styleUrl: './app.component.css',
 })
 export class AppComponent {
   title = 'ProntoMiao';
