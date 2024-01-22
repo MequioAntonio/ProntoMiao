@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { AnimalCardComponentComponent } from '../animal-card-component/animal-card-component.component';
+import { AnimalCardComponent } from '../animal-card/animal-card.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [AnimalCardComponentComponent],
+  imports: [AnimalCardComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
-  
+
 }
