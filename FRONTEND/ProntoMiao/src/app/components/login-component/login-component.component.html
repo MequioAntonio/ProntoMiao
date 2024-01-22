@@ -1,20 +1,23 @@
 <div class="parent">
 
   <div class="form">
-    <mat-form-field class="formField">
-      <mat-label required>Email</mat-label>
-      <input matInput required />
-    </mat-form-field>
-    <mat-form-field class="formField">
-      <mat-label>Password</mat-label>
-      <input matInput required/>
-    </mat-form-field>
-    <section class="formCheckbox">
-      <mat-checkbox>Rimani Connesso</mat-checkbox>
-    </section>
+    <form [formGroup]="loginForm" class="form">
+      <mat-form-field class="formField">
+        <mat-label required>Email</mat-label>
+        <input type="email" matInput required formControlName="email" />
+        <mat-error *ngIf='loginForm.controls["email"].invalid'>{{getErrorMessage(loginForm.controls["email"])}}</mat-error>
+      </mat-form-field>
+      <mat-form-field class="formField">
+        <mat-label>Password</mat-label>
+        <input type="password" matInput required formControlName="password" />
+        <mat-error *ngIf='loginForm.controls["password"].invalid'>{{getErrorMessage(loginForm.controls["password"])}}</mat-error>
+      </mat-form-field>
+      <section class="formCheckbox">
+        <mat-checkbox>Rimani Connesso</mat-checkbox>
+      </section>
 
-
-    <button mat-raised-button color="primary">Accedi</button>
+      <button mat-raised-button color="primary">Accedi</button>
+    </form>
   </div>
 
   <img
