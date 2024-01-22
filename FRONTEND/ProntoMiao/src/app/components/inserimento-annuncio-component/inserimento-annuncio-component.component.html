@@ -1,0 +1,31 @@
+<div class="parent">
+  <div class="form">
+    <form class="form">
+      <mat-form-field class="formField" appearance="outline">
+        <mat-label required>Titolo</mat-label>
+        <input matInput required />
+      </mat-form-field>
+      <mat-form-field class="formField" appearance="outline">
+        <mat-label required>Descrizione</mat-label>
+        <textarea matInput required></textarea>
+      </mat-form-field>
+      <mat-form-field class="formField" appearance="outline">
+        <mat-label required>Dati di Geolocalizzazione</mat-label>
+        <textarea matInput required></textarea>
+      </mat-form-field>
+      <input #pngInput hidden="true" type="file" onclick="this.value=null" (change)="pngInputChange($event)" accept=".png"/>
+<button mat-flat-button color="primary" (click)="pngInput.click()">Scegli immagine (PNG)</button>
+      <mat-form-field class="formField" appearance="outline">
+        <mat-label>Informazioni Aggiuntive</mat-label>
+        <textarea matInput></textarea>
+      </mat-form-field>
+    </form>
+  </div>
+
+  <img
+    src="./assets/login.png"
+    alt="Dai, Registrati!"
+    height="250"
+    width="250"
+  />
+</div>

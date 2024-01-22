@@ -12,3 +12,18 @@
     gap: 10em;
   }
   
+  
+  .formField {
+    margin-bottom: 0.5em
+  }
+  
+  .formCheckbox{
+    margin-bottom: 1.25em
+  }
+
+  :host {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
