@@ -11,8 +11,8 @@ export const routes: Routes = [
   { path: 'homepage', component: HomeComponentComponent },
   { path: 'signup', component: SignUpComponentComponent },
   { path: 'login', component: LoginComponentComponent },
-  { path: 'addreport', component: InserimentoSegnalazioneComponent },
   { path: 'addadoption', component: InserimentoAnnuncioComponentComponent},
+  { path: 'addreport', component: InserimentoSegnalazioneComponent },
   { path: 'card', component: AnimalCardComponentComponent },
   { path: 'info', component: AnimalInfoComponentComponent},
 ];
