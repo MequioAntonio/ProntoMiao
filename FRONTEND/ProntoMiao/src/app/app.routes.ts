@@ -9,7 +9,7 @@ export const routes: Routes = [
   { path: 'home', component: HomeComponentComponent },
   { path: 'signup', component: SignUpComponentComponent },
   { path: 'login', component: LoginComponentComponent },
-  { path: 'inserimento-segnalazione', component: InserimentoSegnalazioneComponent }
+  { path: 'inserimento-segnalazione', component: InserimentoSegnalazioneComponent},
   { path: 'addadoption', component: InserimentoAnnuncioComponentComponent},
-  { path: 'animalpost', component: AnimalPostComponentComponent}
+  { path: 'animalpost', component: AnimalPostComponentComponent},
 ];

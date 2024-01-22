@@ -13,19 +13,28 @@
         <mat-label required>Dati di Geolocalizzazione</mat-label>
         <textarea matInput required></textarea>
       </mat-form-field>
-      <input #pngInput hidden="true" type="file" onclick="this.value=null" (change)="pngInputChange($event)" accept=".png"/>
-<button mat-flat-button color="primary" (click)="pngInput.click()">Scegli immagine (PNG)</button>
       <mat-form-field class="formField" appearance="outline">
         <mat-label>Informazioni Aggiuntive</mat-label>
         <textarea matInput></textarea>
       </mat-form-field>
+      <input
+        #pngInput
+        hidden="true"
+        type="file"
+        onclick="this.value=null"
+        (change)="pngInputChange($event)"
+        accept=".png"
+      />
+      <button mat-flat-button color="primary" (click)="pngInput.click()">
+        Scegli immagine (PNG)
+      </button>
     </form>
   </div>
 
   <img
-    src="./assets/login.png"
-    alt="Dai, Registrati!"
-    height="250"
-    width="250"
+    src="./assets/inserimento_annuncio.png"
+    alt="Dai, inserisci un annuncio!"
+    height="300"
+    width="300"
   />
 </div>
