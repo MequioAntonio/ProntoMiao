@@ -7,3 +7,21 @@
     display: flex;
     margin: 10px 10px 0px 10px;
 }
+
+.box {
+  display: flex;
+  flex-direction: row;
+  height: 300px; /* altezza del contenitore */
+  justify-content: center; /* distribuzione degli elementi lungo l'asse principale */
+  align-content: space-around; /* distribuzione degli elementi lungo l'asse trasversale */
+}
+
+.box-item {
+  flex: 1; /* rapporto di crescita o di riduzione degli elementi */
+  text-align: center; /* allineamento del testo */
+}
+
+.titletext {
+  text-decoration: solid;
+  text-size-adjust: 3em;
+}
