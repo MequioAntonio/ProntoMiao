@@ -30,4 +30,13 @@ public class AnnuncioServiceImpl implements AnnuncioService {
         }
         return opt.get();
     }
+
+    @Override
+    public List<Annuncio> getAnnunciByCentro(Integer id)  throws ChangeSetPersister.NotFoundException{
+        Optional<Annuncio> opt = annuncioRepository.findByCentro(id);
+        if (opt.isEmpty()) {
+            throw new ChangeSetPersister.NotFoundException();
+        }
+        return (List<Annuncio>) opt.get();
+    }
 }

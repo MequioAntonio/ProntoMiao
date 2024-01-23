@@ -7,4 +7,6 @@ import java.util.List;
 public interface CentroAdozioniService {
     public List<CentroAdozioni> getCentriAdozione();
 
+    public CentroAdozioni getCentroByEmail(String email);
+
 }

@@ -8,4 +8,6 @@ import java.util.List;
 public interface AnnuncioService {
     public List<Annuncio> getAnnunci();
     public Annuncio getAnnuncioById(int idAnnuncio) throws ChangeSetPersister.NotFoundException;
+
+    public List<Annuncio> getAnnunciByCentro(Integer id) throws ChangeSetPersister.NotFoundException;
 }
