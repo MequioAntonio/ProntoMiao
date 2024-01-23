@@ -21,7 +21,7 @@ public class UtentePrivatoServiceImpl implements UtentePrivatoService {
 
     @Override
     public UtentePrivato getUtenteByEmail(String email) throws ChangeSetPersister.NotFoundException {
-        return utentePrivatoRepository.findByEmail("%"+email+"%");
+        return utentePrivatoRepository.findByemail("%"+email+"%");
     }
 
     @Override

@@ -14,4 +14,6 @@ public interface UtentePrivatoRepository extends JpaRepository<UtentePrivato, St
     UtentePrivato findByNomeLike(String nome);
 
     UtentePrivato findByEmail(String email);
+
+    UtentePrivato findByemail(String email);
 }
