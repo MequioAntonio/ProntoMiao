@@ -10,7 +10,6 @@ import java.util.List;
 @Repository
 public interface UtentePrivatoRepository extends JpaRepository<UtentePrivato, String> {
 
-    UtentePrivato findById(Integer id);
 
     UtentePrivato findByNomeLike(String nome);
 
