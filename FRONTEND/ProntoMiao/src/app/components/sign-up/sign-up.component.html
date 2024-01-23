@@ -29,7 +29,25 @@
 </mat-step>
 <mat-step [stepControl]="secondFormGroup" label="Completa la registrazione">
   <form [formGroup]="secondFormGroup" class="form">
-    <ng-template matStepLabel>Completa la registrazione</ng-template>
+    <ng-template matStepLabel>Utente Privato
+    </ng-template>
+    <mat-form-field appearance="outline">
+      <mat-label>Nome</mat-label>
+      <input matInput>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Cognome</mat-label>
+      <input matInput>
+    </mat-form-field>
+   <div>
+      <button mat-raised-button matStepperPrevious class="control" color="primary">Indietro</button>
+      <button mat-raised-button matStepperNext color="primary">Registrati</button>
+    </div>
+</form></mat-step>
+
+<mat-step [stepControl]="secondFormGroup" label="Completa la registrazione">
+  <form [formGroup]="secondFormGroup" class="form">
+    <ng-template matStepLabel>Centro Adozione</ng-template>
     <mat-form-field appearance="outline">
       <mat-label>Nome</mat-label>
       <input matInput>
