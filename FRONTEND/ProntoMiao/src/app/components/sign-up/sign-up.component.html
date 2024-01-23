@@ -1,7 +1,7 @@
 <div class="parent">
   <div class="form">
     <p>Registrati a ProntoMiao</p>
-    <mat-stepper [linear]="!isLinear" #stepper>
+    <mat-stepper [linear]="isLinear" #stepper>
       <mat-step [stepControl]="firstFormGroup">
         <form [formGroup]="firstFormGroup" class="form">
           <ng-template matStepLabel>Inserisci i tuoi dati</ng-template>
@@ -28,8 +28,9 @@
 </form>
 </mat-step>
 <mat-step [stepControl]="secondFormGroup" label="Completa la registrazione">
-  <form [formGroup]="secondFormGroup">
-    <ng-template matStepLabel>Completa la registrazione</ng-template>
+  <form [formGroup]="secondFormGroup" class="form">
+    <ng-template matStepLabel>Utente Privato
+    </ng-template>
     <mat-form-field appearance="outline">
       <mat-label>Nome</mat-label>
       <input matInput>
@@ -38,27 +39,30 @@
       <mat-label>Cognome</mat-label>
       <input matInput>
     </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Select</mat-label>
-      <mat-select>
-        <mat-option value="one">Utente Privato</mat-option>
-        <mat-option value="two">Centro Adozioni</mat-option>
-      </mat-select>
-      <button mat-raised-button matStepperPrevious color="primary">Indietro</button>
+   <div>
+      <button mat-raised-button matStepperPrevious class="control" color="primary">Indietro</button>
       <button mat-raised-button matStepperNext color="primary">Registrati</button>
+    </div>
+</form></mat-step>
+
+<mat-step [stepControl]="secondFormGroup" label="Completa la registrazione">
+  <form [formGroup]="secondFormGroup" class="form">
+    <ng-template matStepLabel>Centro Adozione</ng-template>
+    <mat-form-field appearance="outline">
+      <mat-label>Nome</mat-label>
+      <input matInput>
     </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Cognome</mat-label>
+      <input matInput>
+    </mat-form-field>
+   <div>
+      <button mat-raised-button matStepperPrevious class="control" color="primary">Indietro</button>
+      <button mat-raised-button matStepperNext color="primary">Registrati</button>
+    </div>
 </form></mat-step></mat-stepper>
   </div>
   <div class="image">
     <img src="./assets/signup.png" alt="Dai, Registrati!" height="250" width="250">
   </div>
 </div>
-
-<!--  <mat-form-field appearance="outline">
-      <mat-label>Nome</mat-label>
-      <input matInput>
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Cognome</mat-label>
-      <input matInput>
-    </mat-form-field>-->>

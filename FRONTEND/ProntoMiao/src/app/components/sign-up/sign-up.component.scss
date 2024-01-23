@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    margin-top: 20px;
   }
 
 .parent {
@@ -10,4 +11,11 @@
   display: flex;
   justify-content: center;
   gap: 10em;
+}
+
+.control{
+  margin-left: 15px;
+  margin-right: 15px;
+
+
 }
