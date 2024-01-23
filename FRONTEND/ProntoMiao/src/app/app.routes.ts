@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './components/login/login.component';
-import { SignUpComponent } from './components/sign-up/sign-up.component';
-import { SegnalationFormComponent } from './components/segnalation-form/segnalation-form.component';
-import { AdoptionFormComponent } from './components/adoption-form/adoption-form.component';
-import { HomeComponent } from './components/home/home.component';
-import { AnimalInfoComponent } from './components/animal-info/animal-info.component';
+import { LoginComponent } from './pages/login/login.component';
+import { SignUpComponent } from './pages/sign-up/sign-up.component';
+import { SegnalationFormComponent } from './pages/segnalation-form/segnalation-form.component';
+import { AdoptionFormComponent } from './pages/adoption-form/adoption-form.component';
+import { HomeComponent } from './pages/home/home.component';
+import { AnimalInfoComponent } from './pages/animal-info/animal-info.component';
 import { AnimalCardComponent } from './components/animal-card/animal-card.component';
 
 export const routes: Routes = [

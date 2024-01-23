@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { AnimalCardComponent } from '../animal-card/animal-card.component';
+import { AnimalCardComponent } from '../../components/animal-card/animal-card.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatIconModule} from '@angular/material/icon';
 import {MatGridListModule} from '@angular/material/grid-list';
@@ -7,7 +7,7 @@ import {MatCardModule} from '@angular/material/card';
 
 import { NgbCarousel, NgbCarouselModule, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
-import { SmallCardComponent } from '../small-card/small-card.component';
+import { SmallCardComponent } from '../../components/small-card/small-card.component';
 
 
 @Component({
