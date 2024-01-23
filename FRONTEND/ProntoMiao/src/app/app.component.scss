@@ -1,5 +1,3 @@
-
-
 .logo{
   height: 100%;
   width: auto;
@@ -23,6 +21,7 @@
 
 
 .toolFoot{
-  position: fixed;
+  position: static;
   bottom: 0;
+  z-index: 100;
 }
