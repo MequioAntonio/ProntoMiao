@@ -1,7 +1,7 @@
 <div class="flexGrid my-container">
   <div class="main-content">
     <div class="animal-name">
-      Nome-Animale
+      {{annuncio.animale.nome}}
     </div>
     <div class="animal-image">
       <img src="/media/cc0-images/grapefruit-slice-332-332.jpg">
@@ -9,6 +9,7 @@
     <div>
       <mat-icon aria-hidden="false" aria-label="sesso" fontIcon="pets"></mat-icon>
       <mat-icon aria-hidden="false" aria-label="data di nascita" fontIcon="cake"></mat-icon>
+      <strong>{{annuncio.animale.eta}}</strong>
       <mat-icon aria-hidden="false" aria-label="sterilizzato" fontIcon="local_hospital"></mat-icon>
       <mat-icon aria-hidden="false" aria-label="carattere" fontIcon="psychology"></mat-icon>
       <mat-icon aria-hidden="false" aria-label="storia" fontIcon="book_5"></mat-icon>

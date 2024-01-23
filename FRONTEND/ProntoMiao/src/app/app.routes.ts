@@ -14,5 +14,5 @@ export const routes: Routes = [
   { path: 'adoption-form', component: AdoptionFormComponent },
   { path: 'segnalation-form', component: SegnalationFormComponent },
   { path: 'card', component: AnimalCardComponent },
-  { path: 'info', component: AnimalInfoComponent },
+  { path: 'info/:idAnnuncio', component: AnimalInfoComponent },
 ];
