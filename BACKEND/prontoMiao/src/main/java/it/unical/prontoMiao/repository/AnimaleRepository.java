@@ -13,4 +13,7 @@ public interface AnimaleRepository extends JpaRepository<Animale,Integer> {
 
     List<Animale> findByNomeLikeIgnoreCaseAndRazzaLikeIgnoreCaseAndTagliaLikeIgnoreCaseOrderByNomeAsc(@Nullable String nome, @Nullable String razza, @Nullable String taglia);
 
+
+
+
 }
