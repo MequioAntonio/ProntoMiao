@@ -16,5 +16,6 @@ public class CentroAdozioniServiceImpl implements CentroAdozioniService {
     @Override
     public List<CentroAdozioni> getCentriAdozione() {
         return centroAdozioniRepository.findAll();
+
     }
 }

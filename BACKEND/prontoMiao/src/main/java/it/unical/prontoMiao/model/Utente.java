@@ -1,7 +1,8 @@
 package it.unical.prontoMiao.model;
 
-import org.springframework.data.annotation.Id;
-
+import jakarta.persistence.*;
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Utente {
     @Id
     private String email;

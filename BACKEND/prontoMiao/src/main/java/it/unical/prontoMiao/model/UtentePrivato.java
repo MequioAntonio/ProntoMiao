@@ -1,8 +1,15 @@
 package it.unical.prontoMiao.model;
 
-public class UtentePrivato extends Utente{
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name="privato")
+public class UtentePrivato extends Utente{
     private String nome;
+
+    @Column(name = "codice_fiscale")
     private String cf;
 
     private String telefono;

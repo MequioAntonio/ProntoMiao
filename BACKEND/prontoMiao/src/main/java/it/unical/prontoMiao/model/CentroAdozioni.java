@@ -1,19 +1,17 @@
 package it.unical.prontoMiao.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name="centro_adozioni")
 public class CentroAdozioni extends Utente{
-
 
     private String descrizione;
     private String orari;
     private String eventi;
 
     public CentroAdozioni() {
+        super();
     }
 
     public CentroAdozioni(String email, String password, String descrizione, String orari, String eventi) {

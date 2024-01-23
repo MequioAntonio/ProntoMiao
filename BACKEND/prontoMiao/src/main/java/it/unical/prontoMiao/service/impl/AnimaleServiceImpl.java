@@ -15,8 +15,12 @@ public class AnimaleServiceImpl implements AnimaleService {
     @Autowired
     private AnimaleRepository animaleRepository;
     @Override
-    public List<Animale> getAnimali() {
-        return animaleRepository.findAll();
+    public List<Animale> getAnimali(String nome, String razza, String taglia) {
+        return animaleRepository.findByNomeLikeIgnoreCaseAndRazzaLikeIgnoreCaseAndTagliaLikeIgnoreCaseOrderByNomeAsc("%"+nome+"%", "%"+razza+"%", "%"+taglia+"%");
     }
 
+    @Override
+    public List<Animale> getAnimaleByNome(String nome) {
+        return animaleRepository.findByNomeLike("%"+nome+"%");
+    }
 }
