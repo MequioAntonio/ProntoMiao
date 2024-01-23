@@ -9,4 +9,5 @@ import java.util.List;
 public interface AnimaleService {
     public List<Animale> getAnimali(String nome, String razza, String taglia);
     public List<Animale> getAnimaleByNome(String nome);
+    public Animale insertAnimale(Animale a);
 }
