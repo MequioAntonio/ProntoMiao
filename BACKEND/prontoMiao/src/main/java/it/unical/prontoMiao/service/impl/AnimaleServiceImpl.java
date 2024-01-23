@@ -17,6 +17,6 @@ public class AnimaleServiceImpl implements AnimaleService {
     @Override
     public List<Animale> getAnimali() {
         return animaleRepository.findAll();
-
     }
+
 }
