@@ -1,8 +1,10 @@
 package it.unical.prontoMiao.controller;
 
+import it.unical.prontoMiao.model.Animale;
 import it.unical.prontoMiao.model.UtentePrivato;
 import it.unical.prontoMiao.service.UtentePrivatoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +35,16 @@ public class UtentePrivatoController {
     public ResponseEntity deleteUtentePrivato(@PathVariable String email) {
         utentePrivatoService.deleteUtentePrivato(email);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value= "/{emailUtentePrivato}", method = RequestMethod.GET)
+    public ResponseEntity getUtenteByEmail(@PathVariable String email) {
+        try {
+            UtentePrivato res = utentePrivatoService.getUtenteByEmail(email);
+            return new ResponseEntity<>(res, HttpStatus.OK);
+        } catch (ChangeSetPersister.NotFoundException e) {
+            return new ResponseEntity("Nessun utente trovato", HttpStatus.NOT_FOUND);
+        }
     }
 
 
