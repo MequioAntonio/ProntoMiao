@@ -8,12 +8,20 @@
   flex: auto;
 }
 
+.full{
+  height: 75%;
+  display: grid;
+  align-items: center;
+  grid-template-rows: 1fr;
+
+}
 
 .stroke {
     border: solid !important;
     border-width: thin !important;
     margin: 0 0.4em;
 }
+
 
 .mat-toolbar{
   height: 6rem;
