@@ -24,8 +24,6 @@ public class SegnalazioneServiceImpl implements SegnalazioneService {
     private SegnalazioneRepository segnalazioneRepository;
     @Autowired
     private CentroAdozioniRepository centroAdozioniRepository;
-    @Autowired
-    private FileUtility fileUtility;
     @Override
     public List<Segnalazione> getSegnalazione() {
         return segnalazioneRepository.findAll();
