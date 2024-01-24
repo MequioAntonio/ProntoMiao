@@ -10,6 +10,7 @@ import {
   AbstractControl,
 } from '@angular/forms';
 import {
+  MatFormFieldAppearance,
   MatFormFieldModule,
 } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -20,6 +21,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { AuthService } from '../../services/auth.service';
+import { ValidatorsService } from '../../services/validators.service';
 
 @Component({
   selector: 'app-login',
@@ -37,26 +39,22 @@ import { AuthService } from '../../services/auth.service';
     MatButtonModule,
     MatDividerModule,
   ],
-  providers: [AuthService],
+  providers: [AuthService, ValidatorsService],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
-  loginForm: FormGroup;
+  apparenceSetting = 'outline' as MatFormFieldAppearance
 
-  constructor(private fb: FormBuilder, private aS: AuthService) {
-    this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
-    });
-  }
+  constructor(private fb: FormBuilder, private aS: AuthService) {}
 
-  /**
-   * Returns the name of the control.
-   *
-   * @param {AbstractControl} control - the control for which the name is needed
-   * @return {string} the name of the control
-   */
+  loginForm = this.fb.group({
+    email: ['', [Validators.required, ValidatorsService.emailValidator()]],
+    password: ['', [Validators.required,Validators.minLength(8)]],
+    keepConnected:['']
+  });
+
+
   getControlName(control: AbstractControl): string {
     const parent = control.parent;
     const formGroup = parent as FormGroup;
@@ -67,30 +65,34 @@ export class LoginComponent {
     );
   }
 
-  /**
-   * Returns an error message based on the type of control and its validation errors.
-   *
-   * @param {AbstractControl} control - the form control to check for errors
-   * @return {string} the error message based on the control's validation errors
-   */
+
   getErrorMessage(control: AbstractControl) {
     if (this.getControlName(control) == 'email') {
       if (control.hasError('required')) {
         return 'Devi inserire una Email!';
+      }else if (control.hasError('invalidEmail')){
+        return 'Inserire un Email Valida!'
+      } else {
+        return null
       }
 
-      return control.hasError('email') ? 'Email non valida!' : '';
-    } else {
+    } else if (this.getControlName(control) == 'password') {
       if (control.hasError('required')) {
         return 'Devi inserire una Password!';
+      } else if (control.hasError('minlength')) {
+        return 'Inserire una Password valida!';
+      } else {
+        return null
       }
-
-      return 'Devi inserire una Password!';
+    } else {
+      return null;
     }
   }
 
   login(): void{
-    this.aS.signIn(this.loginForm.controls["email"].value, this.loginForm.controls["password"].value, true).subscribe(data =>{
+    this.aS.signIn(
+      this.loginForm.controls["email"].value!,
+      this.loginForm.controls["password"].value!, true).subscribe(data =>{
       console.log(data);
     });
   }
