@@ -10,7 +10,6 @@ import {
   AbstractControl,
 } from '@angular/forms';
 import {
-  FloatLabelType,
   MatFormFieldModule,
 } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
