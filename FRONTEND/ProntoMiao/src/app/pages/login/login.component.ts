@@ -20,6 +20,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -43,7 +44,7 @@ import { MatButtonModule } from '@angular/material/button';
 export class LoginComponent {
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private aS: AuthService) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
@@ -86,5 +87,11 @@ export class LoginComponent {
 
       return 'Devi inserire una Password!';
     }
+  }
+
+  login(): void{
+    this.aS.signIn(this.loginForm.controls["email"].value, this.loginForm.controls["password"].value, true).subscribe(data =>{
+      console.log(data);
+    });
   }
 }
