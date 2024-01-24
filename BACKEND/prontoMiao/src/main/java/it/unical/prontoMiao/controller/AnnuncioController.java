@@ -7,11 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -30,6 +28,15 @@ public class AnnuncioController {
             return new ResponseEntity<>(res, HttpStatus.OK);
         } catch (ChangeSetPersister.NotFoundException e) {
             return new ResponseEntity("Nessun annuncio trovato", HttpStatus.NOT_FOUND);
+        }
+    }
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity<Annuncio> insertAnnuncio(@RequestBody Annuncio annuncio) {
+        try {
+            return new ResponseEntity<>(annuncioService.insertAnnuncio(annuncio), HttpStatus.OK);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new ResponseEntity("Errore nel salvataggio del file", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

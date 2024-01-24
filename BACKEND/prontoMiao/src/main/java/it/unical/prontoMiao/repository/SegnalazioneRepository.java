@@ -1,15 +1,15 @@
 package it.unical.prontoMiao.repository;
 
 import it.unical.prontoMiao.model.Annuncio;
+import it.unical.prontoMiao.model.Segnalazione;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
+public interface SegnalazioneRepository extends JpaRepository<Segnalazione,Integer>{
 
-public interface AnnuncioRepository extends JpaRepository<Annuncio,Integer> {
+        Optional<Segnalazione> findById(int idSegnalazione);
 
-    Optional<Annuncio> findById(int idAnnuncio);
-    //Optional<Annuncio> findByCentro(String email); // correggere con l'id reale nel db
-}
+    }
