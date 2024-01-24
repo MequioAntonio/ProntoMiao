@@ -1,36 +1,34 @@
 package it.unical.prontoMiao.controller;
 
+import it.unical.prontoMiao.model.Utente;
+import it.unical.prontoMiao.service.AuthenticationService;
+import jakarta.persistence.Access;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.stereotype.Component;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-@Component
-public class AutenticazioneController implements AuthenticationProvider {
+@RestController
+@RequestMapping("/auth")
+public class AutenticazioneController  {
     @Autowired
-    private UserDetailsService userDetailsService;
-
-    @Override
-    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        String email = authentication.getName();
-        String password = authentication.getCredentials().toString();
-
-        UserDetails userDetails = userDetailsService.loadUserByUsername(email);
-
-        if (!password.equals(userDetails.getPassword())) {
-            throw new BadCredentialsException("Invalid username or password");
+    private AuthenticationService authenticationService;
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public ResponseEntity<String> login(@RequestBody Utente request) {
+        try {
+            String token = authenticationService.login(request);
+            return ResponseEntity.ok(authenticationService.login(request));
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
-
-        return new UsernamePasswordAuthenticationToken(email, password, userDetails.getAuthorities());
     }
 
-    @Override
-    public boolean supports(Class<?> authentication) {
-        return authentication.equals(UsernamePasswordAuthenticationToken.class);
+    @RequestMapping(value = "/signup", method = RequestMethod.POST)
+    public ResponseEntity<Utente> signup(@RequestBody Utente request) {
+        return ResponseEntity.ok(authenticationService.signup(request));
     }
+
 }
