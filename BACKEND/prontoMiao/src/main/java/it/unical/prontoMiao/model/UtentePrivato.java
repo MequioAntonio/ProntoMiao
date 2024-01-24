@@ -64,4 +64,8 @@ public class UtentePrivato extends Utente{
     public void setInformazioni_aggiuntive(String informazioni_aggiuntive){
         this.informazioni_aggiuntive=informazioni_aggiuntive;
     }
+
+    public String getPassword() {
+        return super.getPassword();
+    }
 }

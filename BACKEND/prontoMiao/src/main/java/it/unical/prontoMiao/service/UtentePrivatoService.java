@@ -16,5 +16,6 @@ public interface UtentePrivatoService {
     public UtentePrivato insertUtentePrivato(UtentePrivato up);
     public UtentePrivato updateUtentePrivato(String email, UtentePrivato up);
     public void deleteUtentePrivato(String email);
+    public UtentePrivato loadUserByUsername(String email);
 
 }

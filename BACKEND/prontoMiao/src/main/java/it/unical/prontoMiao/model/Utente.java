@@ -21,4 +21,7 @@ public class Utente {
         this.email=email;
     }
 
+    protected String getPassword() {
+        return this.password;
+    }
 }
