@@ -47,8 +47,13 @@ public class UtentePrivatoController {
         }
     } */
 
+    @GetMapping("/utente/{email}")
+    public Optional<UtentePrivato> getUserByEmail(@PathVariable String email) throws ChangeSetPersister.NotFoundException {
+        return utentePrivatoService.getUtenteByEmail(email);
+    }
+
     @GetMapping("/utente/{id}")
-    public Optional<UtentePrivato> getUserByEmail(@PathVariable String id) throws ChangeSetPersister.NotFoundException {
+    public Optional<Optional<UtentePrivato>> getUserByID(@PathVariable String id) throws ChangeSetPersister.NotFoundException {
         return utentePrivatoService.getUtenteByID(id);
     }
 

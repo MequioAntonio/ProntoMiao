@@ -21,11 +21,17 @@ public class UtentePrivatoServiceImpl implements UtentePrivatoService {
     }
 
 
-    public Optional<UtentePrivato> getUtenteByID(String id)  {
+    public Optional<UtentePrivato> getUtenteByEmail(String email)  {
 
-        return utentePrivatoRepository.findById(id);
+        return Optional.ofNullable(utentePrivatoRepository.findByEmail(email));
 
     }
+    public Optional<Optional<UtentePrivato>> getUtenteByID(String id)  {
+
+        return Optional.ofNullable(utentePrivatoRepository.findById(id));
+
+    }
+
 
     @Override
     public UtentePrivato insertUtentePrivato(UtentePrivato up) {
