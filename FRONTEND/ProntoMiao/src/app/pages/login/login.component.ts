@@ -38,6 +38,7 @@ import { AuthService } from '../../services/auth.service';
     MatButtonModule,
     MatDividerModule,
   ],
+  providers: [AuthService],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
