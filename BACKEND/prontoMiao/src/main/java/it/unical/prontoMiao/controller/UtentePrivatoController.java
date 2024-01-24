@@ -1,6 +1,5 @@
 package it.unical.prontoMiao.controller;
 
-import it.unical.prontoMiao.model.Animale;
 import it.unical.prontoMiao.model.UtentePrivato;
 import it.unical.prontoMiao.service.UtentePrivatoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/utente")
@@ -37,15 +37,19 @@ public class UtentePrivatoController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(value= "/{emailUtentePrivato}", method = RequestMethod.GET)
-    public ResponseEntity getUtenteByEmail(@PathVariable String email) {
+  /*  @RequestMapping(value= "/utente/{id}", method = RequestMethod.GET)
+    public ResponseEntity getUtenteByID(@PathVariable String id) {
         try {
-            UtentePrivato res = utentePrivatoService.getUtenteByEmail(email);
+            Optional<UtentePrivato> res = utentePrivatoService.getUtenteByID(id);
             return new ResponseEntity<>(res, HttpStatus.OK);
         } catch (ChangeSetPersister.NotFoundException e) {
             return new ResponseEntity("Nessun utente trovato", HttpStatus.NOT_FOUND);
         }
-    }
+    } */
 
+    @GetMapping("/utente/{id}")
+    public Optional<UtentePrivato> getUserByEmail(@PathVariable String id) throws ChangeSetPersister.NotFoundException {
+        return utentePrivatoService.getUtenteByID(id);
+    }
 
 }

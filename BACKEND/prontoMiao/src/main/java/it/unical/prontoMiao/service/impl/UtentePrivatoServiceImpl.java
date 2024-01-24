@@ -5,10 +5,11 @@ import it.unical.prontoMiao.repository.UtentePrivatoRepository;
 import it.unical.prontoMiao.service.UtentePrivatoService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 @Transactional
 public class UtentePrivatoServiceImpl implements UtentePrivatoService {
@@ -19,9 +20,11 @@ public class UtentePrivatoServiceImpl implements UtentePrivatoService {
         return utentePrivatoRepository.findAll();
     }
 
-    @Override
-    public UtentePrivato getUtenteByEmail(String email) throws ChangeSetPersister.NotFoundException {
-        return utentePrivatoRepository.findByemail("%"+email+"%");
+
+    public Optional<UtentePrivato> getUtenteByID(String id)  {
+
+        return utentePrivatoRepository.findById(id);
+
     }
 
     @Override
