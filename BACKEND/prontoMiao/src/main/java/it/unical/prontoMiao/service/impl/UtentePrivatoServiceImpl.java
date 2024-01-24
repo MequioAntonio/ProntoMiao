@@ -6,8 +6,14 @@ import it.unical.prontoMiao.repository.UtentePrivatoRepository;
 import it.unical.prontoMiao.service.UtentePrivatoService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -38,7 +44,7 @@ public class UtentePrivatoServiceImpl implements UtentePrivatoService {
     }
     public Optional<Optional<UtentePrivato>> getUtenteByID(String id)  {
 
-        return Optional.ofNullable(utentePrivatoRepository.findById(id));
+        return Optional.of(utentePrivatoRepository.findById(id));
 
     }
 
@@ -58,6 +64,9 @@ public class UtentePrivatoServiceImpl implements UtentePrivatoService {
     public void deleteUtentePrivato(String email) {
         utentePrivatoRepository.deleteById(email);
     }
+
+
+
 
 
 }
