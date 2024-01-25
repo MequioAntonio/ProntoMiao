@@ -29,7 +29,9 @@
 
 
 .toolFoot{
-  position: static;
+  position:relative;
   bottom: 0;
   z-index: 100;
+  margin-top: 20px;
+  background-color: #eff7fc;
 }

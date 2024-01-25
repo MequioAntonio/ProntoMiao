@@ -7,19 +7,30 @@
       <img src={{annuncio.foto_profilo}}>
       <!--<input type="file" (change)="handleUpload($event)"/>-->
     </div>
-    <div>
+    <div class="shortinfo">
       <mat-icon aria-hidden="false" aria-label="sesso" fontIcon="pets"></mat-icon>
       <mat-icon aria-hidden="false" aria-label="data di nascita" fontIcon="cake"></mat-icon>
       <strong>{{annuncio.animale.eta}}</strong>
       <mat-icon aria-hidden="false" aria-label="sterilizzato" fontIcon="local_hospital"></mat-icon>
-      <mat-icon aria-hidden="false" aria-label="carattere" fontIcon="psychology"></mat-icon>
       <mat-icon aria-hidden="false" aria-label="storia" fontIcon="book_5"></mat-icon>
-      <mat-icon aria-hidden="false" aria-label="esigenze particolari" fontIcon="diversity_1"></mat-icon>
 
+    </div>
+    <div class="longinfo">
+      <div class="longinfospec">
+      <mat-icon aria-hidden="false" aria-label="carattere" fontIcon="psychology"></mat-icon>
+      <h2>Carattere</h2>
+    <p class="longtext"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>  
+    </div>
+      <div class="longinfospec">
+        <mat-icon aria-hidden="false" aria-label="esigenze particolari" fontIcon="diversity_1"></mat-icon>
+        <h2>Famiglia</h2>
+        <p class="longtext"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>  
+      
+    </div>
     </div>
   </div>
   <div class="sidebar-content">
     Compila il modulo di adozione
-    <button mat-raised-button>Qui</button>
+    <button mat-raised-button class="adotta">Qui</button>
   </div>
 </div>
