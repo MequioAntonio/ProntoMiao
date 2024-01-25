@@ -8,7 +8,7 @@ import { AnimalInfoComponent } from './pages/animal-info/animal-info.component';
 import { AnimalCardComponent } from './components/animal-card/animal-card.component';
 import { ProfilepageComponent } from './profilepage/profilepage.component';
 import { UserhomeComponent } from './userhome/userhome.component';
-import { CenterhomeComponent } from './centerhome/centerhome.component';
+import { CenterProfilePrivateComponent } from './center-profile-private/center-profile-private.component';
 import { CenterProfilePublicComponent } from './center-profile-public/center-profile-public.component';
 
 export const routes: Routes = [
@@ -21,7 +21,7 @@ export const routes: Routes = [
   { path: 'info/:idAnnuncio', component: AnimalInfoComponent },
   { path: 'profile', component: ProfilepageComponent},
   { path: 'userhome', component : UserhomeComponent},
-  { path: 'centerhome', component: CenterhomeComponent},
-  { path: 'centerprofile', component: CenterProfilePublicComponent}
+  { path: 'centerprofile', component: CenterProfilePublicComponent},
+  { path: 'private', component: CenterProfilePrivateComponent}
 
 ];

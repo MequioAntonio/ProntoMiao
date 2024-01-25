@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CenterhomeComponent } from './centerhome.component';
+import { FeedbackCardComponent } from './feedback-card.component';
 
-describe('CenterhomeComponent', () => {
-  let component: CenterhomeComponent;
-  let fixture: ComponentFixture<CenterhomeComponent>;
+describe('FeedbackCardComponent', () => {
+  let component: FeedbackCardComponent;
+  let fixture: ComponentFixture<FeedbackCardComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CenterhomeComponent]
+      imports: [FeedbackCardComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(CenterhomeComponent);
+    fixture = TestBed.createComponent(FeedbackCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
