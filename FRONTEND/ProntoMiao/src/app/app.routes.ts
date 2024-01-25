@@ -6,6 +6,10 @@ import { AdoptionFormComponent } from './pages/adoption-form/adoption-form.compo
 import { HomeComponent } from './pages/home/home.component';
 import { AnimalInfoComponent } from './pages/animal-info/animal-info.component';
 import { AnimalCardComponent } from './components/animal-card/animal-card.component';
+import { ProfilepageComponent } from './profilepage/profilepage.component';
+import { UserhomeComponent } from './userhome/userhome.component';
+import { CenterhomeComponent } from './centerhome/centerhome.component';
+import { CenterProfilePublicComponent } from './center-profile-public/center-profile-public.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -15,4 +19,9 @@ export const routes: Routes = [
   { path: 'segnalation-form', component: SegnalationFormComponent },
   { path: 'card', component: AnimalCardComponent },
   { path: 'info/:idAnnuncio', component: AnimalInfoComponent },
+  { path: 'profile', component: ProfilepageComponent},
+  { path: 'userhome', component : UserhomeComponent},
+  { path: 'centerhome', component: CenterhomeComponent},
+  { path: 'centerprofile', component: CenterProfilePublicComponent}
+
 ];
