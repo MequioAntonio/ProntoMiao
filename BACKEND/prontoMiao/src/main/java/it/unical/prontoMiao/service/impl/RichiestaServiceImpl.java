@@ -10,11 +10,13 @@ import it.unical.prontoMiao.service.RichiestaService;
 import it.unical.prontoMiao.utility.FileUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class RichiestaServiceImpl implements RichiestaService {
     @Autowired
     private RichiestaRepository richiestaRepository;
