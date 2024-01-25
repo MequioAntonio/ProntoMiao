@@ -13,7 +13,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrl: './animal-info.component.scss',
 })
 export class AnimalInfoComponent {
-  annuncio!: Annuncio;
+  annuncio?: Annuncio;
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {}
 

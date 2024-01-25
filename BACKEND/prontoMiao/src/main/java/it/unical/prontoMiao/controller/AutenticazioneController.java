@@ -1,6 +1,7 @@
 package it.unical.prontoMiao.controller;
 
 import it.unical.prontoMiao.model.Utente;
+import it.unical.prontoMiao.response.JwtTokenResponse;
 import it.unical.prontoMiao.service.AuthenticationService;
 import jakarta.persistence.Access;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +18,9 @@ public class AutenticazioneController  {
     @Autowired
     private AuthenticationService authenticationService;
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResponseEntity<String> login(@RequestBody Utente request) {
+    public ResponseEntity<Object> login(@RequestBody Utente request) {
         try {
-            String token = authenticationService.login(request);
+            JwtTokenResponse token = authenticationService.login(request);
             return ResponseEntity.ok(authenticationService.login(request));
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);

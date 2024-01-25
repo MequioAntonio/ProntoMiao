@@ -9,4 +9,6 @@ public interface CentroAdozioniService {
 
     public CentroAdozioni getCentroByEmail(String email);
 
+    public void deleteCentroAdozioni(int idCentroAdozioni);
+
 }

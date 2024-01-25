@@ -18,10 +18,15 @@ public class CentroAdozioniServiceImpl implements CentroAdozioniService {
         return centroAdozioniRepository.findAll();
 
     }
-
-
     @Override
     public CentroAdozioni getCentroByEmail(String email) {
         return centroAdozioniRepository.findByEmail("%"+email+"%");
     }
+
+    @Override
+    public void deleteCentroAdozioni(int idCentroAdozioni) {
+        centroAdozioniRepository.deleteById(idCentroAdozioni);
+
+    }
+
 }

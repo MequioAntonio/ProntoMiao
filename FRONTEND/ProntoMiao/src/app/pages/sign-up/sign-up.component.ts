@@ -11,11 +11,12 @@ import { ValidatorsService } from '../../services/validators.service';
 import { NgIf, CommonModule } from '@angular/common';
 import { ChipsComponent } from "../../components/chips/chips.component";
 import { AuthService } from '../../services/auth.service';
+import { routes } from '../../app.routes';
 
 @Component({
     selector: 'app-sign-up',
     standalone: true,
-    providers: [ValidatorsService],
+    providers: [ValidatorsService, AuthService],
     templateUrl: './sign-up.component.html',
     styleUrl: './sign-up.component.scss',
     imports: [
@@ -42,7 +43,7 @@ export class SignUpComponent {
 
   tipoUtente = this.otherUserData["zero"]
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private authService: AuthService) {}
 
 
   genericFrom = this.fb.group({
@@ -141,20 +142,44 @@ export class SignUpComponent {
 
 
   signupPrivato(): void{
-    AuthService.signUpGeneric(
+    this.authService.signUpGeneric(
       this.genericFrom.controls["email"].value!,
       this.genericFrom.controls["password"].value!,
-    )
+    ).subscribe({
+      next:(a:any)=>{
+        if (a.id > 0) {
+          alert("Registrazione è avvenuta con successo!")
+          location.href="/login";
+        }
+      }, 
+      error:(e:any)=>{
+        console.error(e);
+        
+      }, 
+
+    })
 
     
 
   }
 
   signupCentro(): void{
-    AuthService.signUpGeneric(
+    this.authService.signUpGeneric(
       this.genericFrom.controls["email"].value!,
       this.genericFrom.controls["password"].value!,
-    )
+    ).subscribe({
+      next:(a:any)=>{
+        if (a.id > 0) {
+          alert("Registrazione è avvenuta con successo!")
+          location.href="/login";
+        }
+      }, 
+      error:(e:any)=>{
+        console.error(e);
+        
+      }, 
+
+    })
 
   }
 

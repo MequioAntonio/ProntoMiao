@@ -5,9 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CentroAdozioniRepository extends JpaRepository<CentroAdozioni, String> {
+public interface CentroAdozioniRepository extends JpaRepository<CentroAdozioni, Integer> {
 
     //CentroAdozioni findByNomeLike(String nome);
-
     CentroAdozioni findByEmail(String s);
+
 }

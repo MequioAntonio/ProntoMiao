@@ -2,6 +2,7 @@ package it.unical.prontoMiao.service.impl;
 
 import it.unical.prontoMiao.model.Utente;
 import it.unical.prontoMiao.repository.UtenteRepository;
+import it.unical.prontoMiao.response.JwtTokenResponse;
 import it.unical.prontoMiao.service.AuthenticationService;
 import it.unical.prontoMiao.service.JwtService;
 import it.unical.prontoMiao.service.UtenteService;
@@ -25,7 +26,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Autowired
     private AuthenticationManager authenticationManager;
     @Override
-    public String login(Utente utente) throws IllegalArgumentException{
+    public JwtTokenResponse login(Utente utente) throws IllegalArgumentException{
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(utente.getEmail(), utente.getPassword()));
@@ -40,7 +41,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         }
         String jwt = jwtService.generateToken(user);
 
-        return jwt;
+        return new JwtTokenResponse(jwt);
     }
 
     @Override

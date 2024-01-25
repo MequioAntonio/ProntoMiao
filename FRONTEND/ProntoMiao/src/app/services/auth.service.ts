@@ -1,34 +1,50 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { JwtTokenResponse } from '../model/JwtTokenResponse';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  static signUpEP = `http://backend.url/signup`
-  static signInEP = `http://backend.url/signin`
+  signUpEP = `http://localhost:8080/auth/signup`
+  signInEP = `http://localhost:8080/auth/login`
 
-  static Logged=false
-  static Privato=true
+  Logged=false
+  Privato=true
 
-  static http: HttpClient
-
-  constructor()
+  constructor(private http: HttpClient)
   { }
 
-  static isLogged(){
-    return this.Logged
+  clearToken(){
+    sessionStorage.removeItem("token");
+    localStorage.removeItem("token");
   }
 
-  static isPrivato(){
+  getToken() {
+    if (sessionStorage.getItem("token")) {
+      return sessionStorage.getItem("token");
+    }
+    if (localStorage.getItem("token")) {
+      return localStorage.getItem("token");
+    }
+    return "";
+  }
+  
+
+  isLogged(){
+    return sessionStorage.getItem("token") || localStorage.getItem("token");
+    //return this.Logged
+  }
+
+  isPrivato(){
     return this.Privato
   }
 
-  static isCentro(){
+  isCentro(){
     return !this.Privato
   }
 
-  static signUpGeneric(_email: string, _password: string){
+  signUpGeneric(_email: string, _password: string){
     return this.http.post(this.signUpEP, {
       email: _email,
       password: _password,
@@ -36,7 +52,7 @@ export class AuthService {
   }
 
 
-  static signUpPrivato(_email: string, _password: string){
+  signUpPrivato(_email: string, _password: string){
     return this.http.post(this.signUpEP, {
       email: _email,
       password: _password,
@@ -44,17 +60,22 @@ export class AuthService {
   }
 
 
-  static signUpCentro(_email: string, _password: string){
+  signUpCentro(_email: string, _password: string){
     return this.http.post(this.signUpEP, {
       email: _email,
       password: _password,
     })
   }
 
-  static signIn(_email: string, _password: string, _tipo: boolean){
-    return this.http.post(this.signInEP, {
+  signIn(_email: string, _password: string){
+    return this.http.post<JwtTokenResponse>(this.signInEP, {
       email: _email,
       password: _password
     })
+  }
+
+  logout() {
+    this.clearToken()
+    location.href="/";
   }
 }

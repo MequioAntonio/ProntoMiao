@@ -22,6 +22,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { AuthService } from '../../services/auth.service';
 import { ValidatorsService } from '../../services/validators.service';
+import { JwtTokenResponse } from '../../model/JwtTokenResponse';
 
 @Component({
   selector: 'app-login',
@@ -45,8 +46,9 @@ import { ValidatorsService } from '../../services/validators.service';
 })
 export class LoginComponent {
   apparenceSetting = 'outline' as MatFormFieldAppearance
+  jwtToken: JwtTokenResponse | undefined;
 
-  constructor(private fb: FormBuilder, private aS: AuthService) {}
+  constructor(private fb: FormBuilder, private authService: AuthService) {}
 
   loginForm = this.fb.group({
     email: ['', [Validators.required, ValidatorsService.emailValidator()]],
@@ -90,9 +92,17 @@ export class LoginComponent {
   }
 
   login(): void{
-    AuthService.signIn(
+    console.log(this.loginForm.controls["keepConnected"].value)
+    this.authService.signIn(
       this.loginForm.controls["email"].value!,
-      this.loginForm.controls["password"].value!, true).subscribe(data =>{
+      this.loginForm.controls["password"].value!
+    ).subscribe((data) =>{
+      this.authService.clearToken()
+      if (this.loginForm.controls["keepConnected"].value){
+        localStorage.setItem("token", data.token);
+      } else {
+        sessionStorage.setItem("token", data.token);
+      }
       console.log(data);
     });
     console.log(this.loginForm);
