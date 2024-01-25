@@ -5,36 +5,53 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AuthService {
-  signUpEP = `http://backend.url/signup`
-  signInEP = `http://backend.url/signin`
+  static signUpEP = `http://backend.url/signup`
+  static signInEP = `http://backend.url/signin`
 
-  Logged=false
-  Privato=true
+  static Logged=false
+  static Privato=true
 
-  constructor(private http: HttpClient)
+  static http: HttpClient
+
+  constructor()
   { }
 
-  isLogged(){
+  static isLogged(){
     return this.Logged
   }
 
-  isPrivato(){
+  static isPrivato(){
     return this.Privato
   }
 
-  isCentro(){
+  static isCentro(){
     return !this.Privato
   }
 
-  signUp(_email: string, _password: string, _tipo: boolean){
+  static signUpGeneric(_email: string, _password: string){
     return this.http.post(this.signUpEP, {
       email: _email,
       password: _password,
-      tipo: _tipo
     })
   }
 
-  signIn(_email: string, _password: string, _tipo: boolean){
+
+  static signUpPrivato(_email: string, _password: string){
+    return this.http.post(this.signUpEP, {
+      email: _email,
+      password: _password,
+    })
+  }
+
+
+  static signUpCentro(_email: string, _password: string){
+    return this.http.post(this.signUpEP, {
+      email: _email,
+      password: _password,
+    })
+  }
+
+  static signIn(_email: string, _password: string, _tipo: boolean){
     return this.http.post(this.signInEP, {
       email: _email,
       password: _password
