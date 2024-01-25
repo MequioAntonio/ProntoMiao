@@ -90,10 +90,13 @@ export class LoginComponent {
   }
 
   login(): void{
-    this.aS.signIn(
+    AuthService.signIn(
       this.loginForm.controls["email"].value!,
       this.loginForm.controls["password"].value!, true).subscribe(data =>{
       console.log(data);
     });
+    console.log(this.loginForm);
   }
+
+
 }
