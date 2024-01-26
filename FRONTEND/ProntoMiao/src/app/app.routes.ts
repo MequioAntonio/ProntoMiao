@@ -10,6 +10,7 @@ import { ProfilepageComponent } from './pages/profilepage/profilepage.component'
 import { UserhomeComponent } from './pages/userhome/userhome.component';
 import { CenterProfilePrivateComponent } from './pages/center-profile-private/center-profile-private.component';
 import { CenterProfilePublicComponent } from './pages/center-profile-public/center-profile-public.component';
+import { AdoptionsPageComponent } from './pages/adoptions-page/adoptions-page.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -22,6 +23,7 @@ export const routes: Routes = [
   { path: 'profile', component: ProfilepageComponent},
   { path: 'userhome', component : UserhomeComponent},
   { path: 'centerprofile', component: CenterProfilePublicComponent},
-  { path: 'private', component: CenterProfilePrivateComponent}
+  { path: 'private', component: CenterProfilePrivateComponent},
+  { path: 'adoptions', component: AdoptionsPageComponent},
 
 ];
