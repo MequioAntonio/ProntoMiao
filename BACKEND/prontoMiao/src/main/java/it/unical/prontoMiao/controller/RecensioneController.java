@@ -29,6 +29,17 @@ public class RecensioneController {
             return new ResponseEntity("Nessuna recensione trovata", HttpStatus.NOT_FOUND);
         }
     }
+
+    @RequestMapping(value = "/centro/{idCentro}", method = RequestMethod.GET)
+    public ResponseEntity getRecensioneByCentro(@PathVariable int idCentro) {
+        try {
+            Recensione recensioni = recensioneService.getRecensioneByCentro(idCentro);
+            return new ResponseEntity<>(recensioni, HttpStatus.OK);
+        } catch (ChangeSetPersister.NotFoundException e) {
+            return new ResponseEntity("Nessun centro trovato", HttpStatus.NOT_FOUND);
+        }
+    }
+
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Recensione> insertRecensione(@RequestBody Recensione recensione) {
         try {

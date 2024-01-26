@@ -28,12 +28,26 @@ public class RecensioneServiceImp implements RecensioneService {
     }
 
     @Override
+    public Recensione getRecensioneByCentro(int idCentro) throws ChangeSetPersister.NotFoundException {
+        Optional<Recensione> recensioni = recensioneRepository.findByCentro(idCentro);
+        if (recensioni.isEmpty()) {
+            throw new ChangeSetPersister.NotFoundException();
+        }
+        return recensioni.get();
+    }
+
+
+    @Override
     public Recensione insertRecensione(Recensione recensione) throws IOException {
         return null;
     }
 
     @Override
     public void deleteRecensioneById(int idRecensione) {
-
+        try {
+            recensioneRepository.deleteById(idRecensione);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
