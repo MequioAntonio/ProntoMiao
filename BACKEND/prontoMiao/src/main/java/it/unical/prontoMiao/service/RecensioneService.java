@@ -1,7 +1,6 @@
 package it.unical.prontoMiao.service;
 
 import it.unical.prontoMiao.model.Recensione;
-import it.unical.prontoMiao.model.Richiesta;
 import org.springframework.data.crossstore.ChangeSetPersister;
 
 import java.io.IOException;

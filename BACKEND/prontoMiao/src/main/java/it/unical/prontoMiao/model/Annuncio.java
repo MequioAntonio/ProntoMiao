@@ -61,6 +61,7 @@ public class Annuncio {
         return titolo;
     }
 
+
     public void setTitolo(String titolo) {this.titolo = titolo;}
 
 
