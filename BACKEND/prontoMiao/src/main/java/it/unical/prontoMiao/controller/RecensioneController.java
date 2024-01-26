@@ -38,4 +38,9 @@ public class RecensioneController {
             return new ResponseEntity("Errore nel salvataggio del file", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @DeleteMapping("/{idRecensione}")
+    public ResponseEntity deleteRecensioneById(@PathVariable int idRecensione) {
+        recensioneService.deleteRecensioneById(idRecensione);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
