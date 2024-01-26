@@ -1,6 +1,7 @@
 package it.unical.prontoMiao.model;
 
 import jakarta.persistence.*;
+import org.springframework.lang.NonNull;
 
 @Entity
 @Table(name = "annuncio")
@@ -8,11 +9,12 @@ public class Annuncio {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private String titolo;
-    private String foto_profilo;
+    @NonNull
     private String descrizione;
-    private String indirizzo;
+    @NonNull
     private String informazioni_mediche;
+    @NonNull
+    private String titolo;
     @ManyToOne
     @JoinColumn(name = "id_centro")
     private CentroAdozioni centro;
@@ -24,15 +26,11 @@ public class Annuncio {
     public Annuncio() {
     }
 
-    public Annuncio(int id, String titolo, String foto_profilo, String descrizione, String indirizzo, String informazioni_mediche, CentroAdozioni centro, Animale animale) {
+    public Annuncio(int id, String descrizione, String informazioni_mediche, String titolo) {
         this.id = id;
-        this.titolo = titolo;
-        this.foto_profilo = foto_profilo;
         this.descrizione = descrizione;
-        this.indirizzo = indirizzo;
         this.informazioni_mediche = informazioni_mediche;
-        this.centro = centro;
-        this.animale = animale;
+        this.titolo = titolo;
     }
 
 
@@ -44,22 +42,6 @@ public class Annuncio {
         this.id = id;
     }
 
-    public String getTitolo() {
-        return titolo;
-    }
-
-    public void setTitolo(String titolo) {
-        this.titolo = titolo;
-    }
-
-    public String getFoto_profilo() {
-        return foto_profilo;
-    }
-
-    public void setFoto_profilo(String foto_profilo) {
-        this.foto_profilo = foto_profilo;
-    }
-
     public String getDescrizione() {
         return descrizione;
     }
@@ -67,15 +49,6 @@ public class Annuncio {
     public void setDescrizione(String descrizione) {
         this.descrizione = descrizione;
     }
-
-    public String getIndirizzo() {
-        return indirizzo;
-    }
-
-    public void setIndirizzo(String indirizzo) {
-        this.indirizzo = indirizzo;
-    }
-
     public String getInformazioni_mediche() {
         return informazioni_mediche;
     }
@@ -84,20 +57,12 @@ public class Annuncio {
         this.informazioni_mediche = informazioni_mediche;
     }
 
-    public Animale getAnimale() {
-        return animale;
+    public String getTitolo() {
+        return titolo;
     }
 
-    public void setAnimale(Animale animale) {
-        this.animale = animale;
-    }
+    public void setTitolo(String titolo) {this.titolo = titolo;}
 
-    public CentroAdozioni getCentro() {
-        return centro;
-    }
 
-    public void setCentro(CentroAdozioni centro) {
-        this.centro = centro;
-    }
 
 }
