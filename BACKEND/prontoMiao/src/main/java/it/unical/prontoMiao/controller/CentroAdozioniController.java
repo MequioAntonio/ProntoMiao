@@ -26,8 +26,8 @@ public class CentroAdozioniController {
         return new ResponseEntity<List<CentroAdozioni>>(centroAdozioniService.getCentriAdozione(), HttpStatus.OK);
     }
 
-    @GetMapping("/centro-adozioni/{email}")
-    public CentroAdozioni getCenterByEmail(@PathVariable String email) throws ChangeSetPersister.NotFoundException {
-        return centroAdozioniService.getCentroByEmail(email);
+    @GetMapping("/{id}")
+    public Optional<CentroAdozioni> getCenterByID(@PathVariable int id) throws ChangeSetPersister.NotFoundException {
+        return centroAdozioniService.getCentroByID(id);
     }
 }

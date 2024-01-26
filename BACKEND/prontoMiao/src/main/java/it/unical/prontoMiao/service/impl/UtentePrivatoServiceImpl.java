@@ -40,7 +40,7 @@ public class UtentePrivatoServiceImpl implements UtentePrivatoService {
         return Optional.ofNullable(utentePrivatoRepository.findByEmail(email));
 
     }
-    public Optional<Optional<UtentePrivato>> getUtenteByID(String id)  {
+    public Optional<UtentePrivato> getUtenteByID(int id)  {
 
         return Optional.of(utentePrivatoRepository.findById(id));
 

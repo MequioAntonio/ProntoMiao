@@ -55,12 +55,12 @@ public class AnnuncioServiceImpl implements AnnuncioService {
         return annuncioRepository.save(annuncio);
     }
 
-    //@Override
-   /* public List<Annuncio> getAnnunciByCentro(String email)  throws ChangeSetPersister.NotFoundException{
-        Optional<Annuncio> opt = annuncioRepository.findByCentro(email);
+    @Override
+    public List<Annuncio> getAnnunciByCentro(int idAnnuncio)  throws ChangeSetPersister.NotFoundException{
+        Optional<Annuncio> opt = annuncioRepository.findByCentro(idAnnuncio);
         if (opt.isEmpty()) {
             throw new ChangeSetPersister.NotFoundException();
         }
         return (List<Annuncio>) opt.get();
-    }*/
+    }
 }
