@@ -1,6 +1,7 @@
 package it.unical.prontoMiao.service.impl;
 
 import it.unical.prontoMiao.model.CentroAdozioni;
+import it.unical.prontoMiao.model.UtentePrivato;
 import it.unical.prontoMiao.repository.CentroAdozioniRepository;
 import it.unical.prontoMiao.service.CentroAdozioniService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 @Service
 @Transactional
 public class CentroAdozioniServiceImpl implements CentroAdozioniService {
@@ -18,9 +20,10 @@ public class CentroAdozioniServiceImpl implements CentroAdozioniService {
         return centroAdozioniRepository.findAll();
 
     }
-    @Override
-    public CentroAdozioni getCentroByEmail(String email) {
-        return centroAdozioniRepository.findByEmail("%"+email+"%");
+    public Optional<CentroAdozioni> getCentroByID(int id)  {
+
+        return Optional.of(centroAdozioniRepository.findCentroById(id));
+
     }
 
     @Override

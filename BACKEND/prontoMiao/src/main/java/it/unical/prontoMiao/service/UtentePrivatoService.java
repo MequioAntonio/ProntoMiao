@@ -11,7 +11,7 @@ public interface UtentePrivatoService {
 
     public Optional<UtentePrivato> getUtenteByEmail(String email) throws ChangeSetPersister.NotFoundException;
 
-    public Optional<Optional<UtentePrivato>> getUtenteByID(String id) throws ChangeSetPersister.NotFoundException;
+    public Optional<UtentePrivato> getUtenteByID(int id) throws ChangeSetPersister.NotFoundException;
 
     public UtentePrivato insertUtentePrivato(UtentePrivato up);
     public UtentePrivato updateUtentePrivato(String email, UtentePrivato up);
