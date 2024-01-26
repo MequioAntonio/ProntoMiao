@@ -5,11 +5,12 @@ import it.unical.prontoMiao.repository.RecensioneRepository;
 import it.unical.prontoMiao.service.RecensioneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
-
+@Service
 public class RecensioneServiceImp implements RecensioneService {
     @Autowired
     RecensioneRepository recensioneRepository;
