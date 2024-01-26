@@ -6,8 +6,8 @@ import { AdoptionFormComponent } from './pages/adoption-form/adoption-form.compo
 import { HomeComponent } from './pages/home/home.component';
 import { AnimalInfoComponent } from './pages/animal-info/animal-info.component';
 import { AnimalCardComponent } from './components/animal-card/animal-card.component';
-import { ProfilepageComponent } from './profilepage/profilepage.component';
-import { UserhomeComponent } from './userhome/userhome.component';
+import { ProfilepageComponent } from './pages/profilepage/profilepage.component';
+import { UserhomeComponent } from './pages/userhome/userhome.component';
 import { CenterProfilePrivateComponent } from './pages/center-profile-private/center-profile-private.component';
 import { CenterProfilePublicComponent } from './pages/center-profile-public/center-profile-public.component';
 
