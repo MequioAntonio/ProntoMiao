@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { AnimalCardComponent } from '../components/animal-card/animal-card.component';
-import { FeedbackCardComponent } from '../feedback-card/feedback-card.component';
+import { AnimalCardComponent } from '../../components/animal-card/animal-card.component';
+import { FeedbackCardComponent } from '../../feedback-card/feedback-card.component';
 
 @Component({
   selector: 'app-center-profile-public',
