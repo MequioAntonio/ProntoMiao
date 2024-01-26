@@ -10,13 +10,17 @@ public class Richiesta {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @Column(nullable = false)
     private int stato;
+    @Column(nullable = false)
     private Date data;
+
     @ManyToOne
-    @JoinColumn(name = "id_utente")
+    @JoinColumn(name = "id_utente", nullable = false)
     private UtentePrivato utente;
+
     @ManyToOne
-    @JoinColumn(name = "id_annuncio")
+    @JoinColumn(name = "id_annuncio", nullable = false)
     private Annuncio annuncio;
 
     public Richiesta() {

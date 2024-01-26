@@ -10,7 +10,7 @@ public class Recensione {
     private int id;
     private int voto;
     private String descrizione;
-    @ManyToOne//un centro può ricevere tante recensioni
+    @ManyToOne
     @JoinColumn(name = "id_centro")
     private CentroAdozioni centro;
     @ManyToOne//?

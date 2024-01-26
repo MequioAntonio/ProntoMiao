@@ -8,20 +8,30 @@ public class Animale {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @Column(nullable = false)
     private String nome;
+    @Column(nullable = false)
     private int eta;
+    @Column(nullable = false)
     private String razza;
+    @Column(nullable = false)
     private String taglia;
+    @Column(nullable = false)
+    private String specie;
+    @Column(nullable = false)
+    private String sesso;
 
     public Animale() {
     }
 
-    public Animale(int id, String nome, int eta, String razza, String taglia) {
+    public Animale(int id, String nome, int eta, String razza, String taglia, String specie, String sesso) {
         this.id = id;
         this.nome = nome;
         this.eta = eta;
         this.razza = razza;
         this.taglia = taglia;
+        this.specie = specie;
+        this.sesso = sesso;
     }
 
     public int getId() {
@@ -62,5 +72,21 @@ public class Animale {
 
     public void setTaglia(String taglia) {
         this.taglia = taglia;
+    }
+
+    public String getSpecie() {
+        return specie;
+    }
+
+    public void setSpecie(String specie) {
+        this.specie = specie;
+    }
+
+    public String getSesso() {
+        return sesso;
+    }
+
+    public void setSesso(String sesso) {
+        this.sesso = sesso;
     }
 }

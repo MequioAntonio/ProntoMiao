@@ -1,6 +1,7 @@
 package it.unical.prontoMiao.model;
 
 import jakarta.persistence.*;
+import org.springframework.lang.NonNull;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -12,9 +13,10 @@ public class Utente implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @Column(nullable = false, unique = true)
     private String email;
+    @Column(nullable = false)
     private String password;
-    //private String fotoProfilo; lo facciamo Byte? perchè nel DB è un Varchar
 
     public Utente(){};
 

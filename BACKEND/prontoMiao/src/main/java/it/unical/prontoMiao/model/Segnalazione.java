@@ -8,21 +8,23 @@ public class Segnalazione {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @Column(nullable = false)
     private String titolo;
+    @Column(nullable = false)
     private String descrizione;
+    @Column(nullable = false)
     private String indirizzo;
     @ManyToOne
     @JoinColumn(name = "id_centro")
     private CentroAdozioni centro;
-
     @ManyToOne
-    @JoinColumn(name = "id_privato")
-    private Utente utente;
+    @JoinColumn(name = "id_privato", nullable = false)
+    private UtentePrivato utente;
 
     public Segnalazione() {
     }
 
-    public Segnalazione(int id, String titolo, String descrizione, String indirizzo, CentroAdozioni centro, Utente utente) {
+    public Segnalazione(int id, String titolo, String descrizione, String indirizzo, CentroAdozioni centro, UtentePrivato utente) {
         this.id = id;
         this.titolo = titolo;
         this.descrizione = descrizione;
@@ -71,11 +73,11 @@ public class Segnalazione {
         this.centro = centro;
     }
 
-    public Utente getUtente() {
+    public UtentePrivato getUtente() {
         return utente;
     }
 
-    public void setUtente(Utente utente) {
+    public void setUtente(UtentePrivato utente) {
         this.utente = utente;
     }
 }
