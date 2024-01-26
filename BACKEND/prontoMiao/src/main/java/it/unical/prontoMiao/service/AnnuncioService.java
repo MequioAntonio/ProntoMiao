@@ -11,5 +11,5 @@ public interface AnnuncioService {
     public Annuncio getAnnuncioById(int idAnnuncio) throws ChangeSetPersister.NotFoundException;
 
     public Annuncio insertAnnuncio(Annuncio annuncio) throws IOException;
-   // public List<Annuncio> getAnnunciByCentro(String email) throws ChangeSetPersister.NotFoundException;
+    public List<Annuncio> getAnnunciByCentro(int idCentro) throws ChangeSetPersister.NotFoundException;
 }
