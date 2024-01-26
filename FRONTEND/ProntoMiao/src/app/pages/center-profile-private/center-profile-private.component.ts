@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AnimalCardComponent } from '../../components/animal-card/animal-card.component';
-import { FeedbackCardComponent } from '../../feedback-card/feedback-card.component';
 import {MatButtonModule} from '@angular/material/button';
+import { FeedbackCardComponent } from '../../components/feedback-card/feedback-card.component';
 
 
 @Component({

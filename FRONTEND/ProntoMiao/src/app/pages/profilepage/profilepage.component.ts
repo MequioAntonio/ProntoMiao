@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AnimalCardComponent } from '../components/animal-card/animal-card.component'; 
+import { AnimalCardComponent } from '../../components/animal-card/animal-card.component';
 
 @Component({
   selector: 'app-profilepage',
