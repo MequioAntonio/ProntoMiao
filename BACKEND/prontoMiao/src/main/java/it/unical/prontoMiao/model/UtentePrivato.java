@@ -1,18 +1,27 @@
 package it.unical.prontoMiao.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name="privato")
 public class UtentePrivato extends Utente{
-    private String nome;
 
-    @Column(name = "codice_fiscale")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    @OneToOne
+    @MapsId
+    private Utente utente;
+    @Column(nullable = false)
+    private String nome;
+    @Column(nullable = false)
+    private String cognome;
+
+    @Column(name = "codice_fiscale", nullable = false, unique = true)
     private String cf;
 
     private String telefono;
+    private String indirizzo;
     private String preferenze;
     private String condizioni_abitative;
     private String informazioni_aggiuntive;
@@ -21,10 +30,12 @@ public class UtentePrivato extends Utente{
         super();
     };
 
-    public UtentePrivato(String email, String password, String nome, String cf){
+    public UtentePrivato(String email, String password, String nome, String cognome, String cf, String indirizzo){
         super(email,password);
         this.nome=nome;
+        this.cognome = cognome;
         this.cf=cf;
+        this.indirizzo = indirizzo;
     };
 
     public String getNome(){
@@ -45,6 +56,13 @@ public class UtentePrivato extends Utente{
     public String getInformazioni_aggiuntive(){
         return this.informazioni_aggiuntive;
     };
+    public String getIndirizzo(){
+        return this.indirizzo;
+    }
+
+    public String getCognome() {
+        return cognome;
+    }
 
     public void setNome(String nome){
         this.nome=nome;

@@ -19,7 +19,7 @@ public class FileUtility {
     private String fileDirectory;
     public void base64ToFile(String encodedFile, String folderName) throws IOException {
         String filename = getNomeFIle(encodedFile);
-        String path = fileDirectory + "/" + folderName;
+        String path = System.getProperty("user.dir") + "/" + folderName;
         //File folder = new File("/Users/saradramis/Desktop/prontomiao/"+folderName);
         Files.createDirectories(Paths.get(fileDirectory + "/"+folderName));
 
