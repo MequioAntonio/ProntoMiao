@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AnimalCardComponent } from '../../components/animal-card/animal-card.component';
 import {MatButtonModule} from '@angular/material/button';
 import { FeedbackCardComponent } from '../../components/feedback-card/feedback-card.component';
-
+import { Centro } from '../model/Centro.ts';
 
 @Component({
   selector: 'app-center-profile-private',
@@ -12,5 +12,14 @@ import { FeedbackCardComponent } from '../../components/feedback-card/feedback-c
   styleUrl: './center-profile-private.component.scss'
 })
 export class CenterProfilePrivateComponent {
+
+    //string immagine?
+    centro!: Centro;
+
+    //Fare costruttore 
+    
+    //Fare modificaProfilo
+  
+    //Fare aggiungiAdozione
 
 }
