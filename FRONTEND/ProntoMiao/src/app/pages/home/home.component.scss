@@ -11,8 +11,8 @@
 }
 
 .car{
-  width:80%;
-
+  width:50%;
+  box-shadow: 2px 2px 20px #171717;
 }
 
 .carouselCont {
@@ -20,6 +20,7 @@
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   place-items: center;
+
 }
 
 

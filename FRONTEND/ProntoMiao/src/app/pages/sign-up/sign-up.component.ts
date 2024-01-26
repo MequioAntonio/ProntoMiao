@@ -151,15 +151,15 @@ export class SignUpComponent {
           alert("Registrazione è avvenuta con successo!")
           location.href="/login";
         }
-      }, 
+      },
       error:(e:any)=>{
         console.error(e);
-        
-      }, 
+
+      },
 
     })
 
-    
+
 
   }
 
@@ -173,11 +173,11 @@ export class SignUpComponent {
           alert("Registrazione è avvenuta con successo!")
           location.href="/login";
         }
-      }, 
+      },
       error:(e:any)=>{
         console.error(e);
-        
-      }, 
+
+      },
 
     })
 
