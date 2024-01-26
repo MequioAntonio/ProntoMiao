@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AnimalCardComponent } from '../../components/animal-card/animal-card.component';
-import { UtentePrivato } from '../model/UtentePrivato.ts';
+import { UtentePrivato } from '../../model/UtentePrivato';
 
 @Component({
   selector: 'app-profilepage',

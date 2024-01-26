@@ -18,8 +18,10 @@ export class CenterProfilePrivateComponent {
 
     //Fare costruttore
 
-    //Fare modificaProfilo
 
+    //Fare modificaProfilo
+    modificaProfilo(){}
     //Fare aggiungiAdozione
+    aggiungiAdozione(){}
 
 }
