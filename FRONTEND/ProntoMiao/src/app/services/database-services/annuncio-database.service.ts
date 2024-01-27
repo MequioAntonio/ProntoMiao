@@ -6,12 +6,12 @@ import { Observable, of } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class AnnuncioDatabaseService extends DatabaseService{
+export class AnnuncioDatabaseService {
 
-  constructor() { super(); }
+  constructor(private dbs: DatabaseService) { }
 
-  public static getAllAnnunci(){
-    super.http.get(super.baseUrl+"/annuncio").subscribe({
+  public getAllAnnunci(){
+    this.dbs.http.get(this.dbs.baseUrl+"/annuncio").subscribe({
       next:(r:any)=>{
         return r;
       },
@@ -22,8 +22,8 @@ export class AnnuncioDatabaseService extends DatabaseService{
   }
 
   // NON PRESENTE NEL B.E.
-  // public static getAllAnnunciByNome(){
-  //   this.http.get(this.baseUrl+"/annuncio/byNome").subscribe({
+  // public getAllAnnunciByNome(){
+  //   this.dbs.http.get(this.dbs.baseUrl+"/annuncio/byNome").subscribe({
   //     next:(r:any)=>{
   //       return r;
   //     },
@@ -33,11 +33,11 @@ export class AnnuncioDatabaseService extends DatabaseService{
   //   })
   // }
 
-  public static insertAnnuncio(annuncio: Annuncio){
+  public insertAnnuncio(annuncio: Annuncio){
     let observable: Observable<Annuncio> = of(annuncio)
     observable.subscribe({
       next:(r:any)=>{
-        this.http.post(this.baseUrl+"/annuncio", r)
+        this.dbs.http.post(this.dbs.baseUrl+"/annuncio", r)
       },
       error:(e:any)=>{
         console.error(e);
@@ -46,11 +46,11 @@ export class AnnuncioDatabaseService extends DatabaseService{
     })
   }
   // NON PRESENTE NEL B.E.
-  // public static updateAnnuncio(id: String, annuncio: Annuncio){
+  // public updateAnnuncio(id: String, annuncio: Annuncio){
   //   let observable: Observable<Annuncio> = of(annuncio)
   //   observable.subscribe({
   //     next:(r:any)=>{
-  //       this.http.post(this.baseUrl+"/annuncio/${id}", r)
+  //       this.dbs.http.post(this.dbs.baseUrl+"/annuncio/${id}", r)
   //     },
   //     error:(e:any)=>{
   //       console.error(e);
@@ -60,12 +60,12 @@ export class AnnuncioDatabaseService extends DatabaseService{
   // }
 
   // NON PRESENTE NEL B.E.
-  // public static deleteAnnuncio(id: String){
-  //   this.http.delete(this.baseUrl+"/annuncio/${id}")
+  // public deleteAnnuncio(id: String){
+  //   this.dbs.http.delete(this.dbs.baseUrl+"/annuncio/${id}")
   // }
 
-  public static getAnnuncioByID(id: String){
-    this.http.get(this.baseUrl+"/annuncio/${id}").subscribe({
+  public getAnnuncioByID(id: String){
+    this.dbs.http.get(this.dbs.baseUrl+"/annuncio/${id}").subscribe({
       next:(r:any)=>{
         return r;
       },
@@ -75,8 +75,8 @@ export class AnnuncioDatabaseService extends DatabaseService{
     })
   }
 
-  public static getAllAnnunciByCentro(id_Centro: String){
-    this.http.get(this.baseUrl+"/annuncio/byCentro/${id}").subscribe({
+  public getAllAnnunciByCentro(id_Centro: String){
+    this.dbs.http.get(this.dbs.baseUrl+"/annuncio/byCentro/${id}").subscribe({
       next:(r:any)=>{
         return r;
       },

@@ -4,12 +4,11 @@ import { DatabaseService } from './database.service';
 @Injectable({
   providedIn: 'root'
 })
-export class CentroAdozioniDatabaseService extends DatabaseService{
+export class CentroAdozioniDatabaseService{
 
-  constructor() { super(); }
-  
-  public static getAllCentriAdozioni(){
-    this.http.get(this.baseUrl+"/centro-adozioni").subscribe({
+  constructor(private dbs: DatabaseService) { }
+  public getAllCentriAdozioni(){
+    this.dbs.http.get(this.dbs.baseUrl+"/centro-adozioni").subscribe({
       next:(r:any)=>{
         return r;
       },

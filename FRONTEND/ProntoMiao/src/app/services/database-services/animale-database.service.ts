@@ -2,16 +2,17 @@ import { Injectable } from '@angular/core';
 import { DatabaseService } from './database.service';
 import { Animale } from '../../model/Animale';
 import { Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AnimaleDatabaseService extends DatabaseService{
+export class AnimaleDatabaseService{
 
-  constructor() { super(); }
+  constructor(private dbs: DatabaseService) { }
 
-  public static getAllAnimali(){
-    super.http.get(super.baseUrl+"/animale").subscribe({
+  public getAllAnimali(){
+    this.dbs.http.get(this.dbs.baseUrl+"/animale").subscribe({
       next:(r:any)=>{
         return r;
       },
@@ -21,8 +22,8 @@ export class AnimaleDatabaseService extends DatabaseService{
     })
   }
 
-  public static getAllAnimaliByNome(){
-    this.http.get(this.baseUrl+"/animale/byNome").subscribe({
+  public getAllAnimaliByNome(){
+    this.dbs.http.get(this.dbs.baseUrl+"/animale/byNome").subscribe({
       next:(r:any)=>{
         return r;
       },
@@ -32,11 +33,11 @@ export class AnimaleDatabaseService extends DatabaseService{
     })
   }
 
-  public static insertAnimale(animale: Animale){
+  public insertAnimale(animale: Animale){
     let observable: Observable<Animale> = of(animale)
     observable.subscribe({
       next:(r:any)=>{
-        this.http.post(this.baseUrl+"/animale", r)
+        this.dbs.http.post(this.dbs.baseUrl+"/animale", r)
       },
       error:(e:any)=>{
         console.error(e);
@@ -45,11 +46,11 @@ export class AnimaleDatabaseService extends DatabaseService{
     })
   }
 
-  public static updateAnimale(id: String, animale: Animale){
+  public updateAnimale(id: String, animale: Animale){
     let observable: Observable<Animale> = of(animale)
     observable.subscribe({
       next:(r:any)=>{
-        this.http.post(this.baseUrl+"/animale/${id}", r)
+        this.dbs.http.post(this.dbs.baseUrl+"/animale/${id}", r)
       },
       error:(e:any)=>{
         console.error(e);
@@ -58,12 +59,12 @@ export class AnimaleDatabaseService extends DatabaseService{
     })
   }
 
-  public static deleteAnimale(id: String){
-    this.http.delete(this.baseUrl+"/animale/${id}")
+  public deleteAnimale(id: String){
+    this.dbs.http.delete(this.dbs.baseUrl+"/animale/${id}")
   }
 
-  public static getAnimaleByID(id: String){
-    this.http.get(this.baseUrl+"/animale/${id}").subscribe({
+  public getAnimaleByID(id: String){
+    this.dbs.http.get(this.dbs.baseUrl+"/animale/${id}").subscribe({
       next:(r:any)=>{
         return r;
       },

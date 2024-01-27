@@ -1,14 +1,14 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHandler } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class DatabaseService {
 
-  constructor() { }
+  constructor(public http: HttpClient) { }
 
-  protected static baseUrl = 'http://localhost:8080/';
-
-  protected static http: HttpClient
+  public baseUrl = 'http://localhost:8080/';
 }
