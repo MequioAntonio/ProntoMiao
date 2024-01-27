@@ -100,4 +100,15 @@ export class DatabaseService {
       },
     })
   }
+
+  public static insertAnimale(){
+    this.http.post(this.baseUrl+"/animale", ).subscribe({
+      next:(r:any)=>{
+        return r;
+      },
+      error:(e:any)=>{
+        console.error(e);
+      },
+    })
+  }
 }
