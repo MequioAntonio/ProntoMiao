@@ -12,16 +12,16 @@ import { AnnuncioDatabaseService } from '../../services/database-services/annunc
 })
 export class UserhomeComponent {
 
-  listaAnnunci?: any;
+  listaAnnunci?: Annuncio[];
 
-  constructor() {}
+  constructor(private annuncioservice: AnnuncioDatabaseService) {}
 
   ngOnInit() {
     this.getAnnunci();
   }
   
   getAnnunci(): void {
-    this.listaAnnunci = AnnuncioDatabaseService.getAllAnnunci();
+    //this.listaAnnunci = this.annuncioservice.getAllAnnunci().subscribe(annunci => this.listaAnnunci = annunci);
   }
 
 }

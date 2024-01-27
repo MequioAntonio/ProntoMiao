@@ -39,7 +39,7 @@ export class AppComponent {
     } else if(this.authService.getTipoUtente() == "CENTRO") {
       return "Centro adozioni";
     } else {
-      return "COGLIONE";
+      return "Iscriviti";
     }
   }
 

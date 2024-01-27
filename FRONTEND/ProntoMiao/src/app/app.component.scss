@@ -6,6 +6,8 @@
 
 .spacerBig {
   flex: auto;
+  justify-content: end;
+  align-items: center;
 }
 
 .full{
@@ -34,4 +36,16 @@
   bottom: 0;
   z-index: 100;
   margin-top: 20px;
+}
+
+.searchbar{
+  width: 180px;
+height: 65px;
+}
+
+.rightcorner{
+  display: flex; 
+  align-items: start; 
+  justify-content: center;
+  
 }
