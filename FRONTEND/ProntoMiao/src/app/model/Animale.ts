@@ -4,4 +4,7 @@ export interface Animale {
     razza: string;
     taglia: string;
     eta : number;
+    sesso : string;
+    infomediche: string;
+    sterilizzato: boolean;
 }
