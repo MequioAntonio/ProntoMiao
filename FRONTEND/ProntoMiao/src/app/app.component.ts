@@ -47,15 +47,16 @@ export class AppComponent {
 
   getIdUtente(){
     console.log(this.authService.getIdUtente());
+    return this.authService.getIdUtente();
 
   }
   profilepage(){
     let id : any = this.getIdUtente();
     console.log("L'id è" + id);
     if (this.authService.getTipoUtente() == "PRIVATO") {
-      this.router.navigate(['profile']);
+      this.router.navigate(['profile/' + id]);
     } else if(this.authService.getTipoUtente() == "CENTRO") {
-      this.router.navigate(['centerprofile/'+this.authService.getIdUtente()]);
+      this.router.navigate(['centerprofile/' + id]);
   } 
 }
 

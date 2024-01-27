@@ -7,6 +7,6 @@ export interface UtentePrivato {
     preferenze : string;
     cf: string;
     telefono: number;
-    informazioniagg: string;
-    condizioniAbitative: string;
+    informazioni_aggiuntive: string;
+    condizioni_abitative: string;
 }

@@ -47,7 +47,7 @@ public class UtentePrivatoController {
         }
     } */
 
-    @GetMapping("/{email}")
+    @GetMapping("/byEmail/{email}")
     public Optional<UtentePrivato> getUserByEmail(@PathVariable String email) throws ChangeSetPersister.NotFoundException {
         return utentePrivatoService.getUtenteByEmail(email);
     }

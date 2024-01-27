@@ -21,7 +21,7 @@ export const routes: Routes = [
   { path: 'segnalation-form', component: SegnalationFormComponent },
   { path: 'card', component: AnimalCardComponent },
   { path: 'annuncio/:idAnnuncio', component: AnimalInfoComponent },
-  { path: 'profile', component: ProfilepageComponent},
+  { path: 'profile/:idUtente', component: ProfilepageComponent},
   { path: 'userhome', component : UserhomeComponent},
   { path: 'centerprofile/:idProfile', component: CenterProfilePublicComponent},
   { path: 'private/', component: CenterProfilePrivateComponent},

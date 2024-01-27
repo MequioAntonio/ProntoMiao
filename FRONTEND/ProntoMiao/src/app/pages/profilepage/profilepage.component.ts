@@ -19,7 +19,7 @@ export class ProfilepageComponent {
   constructor(private authService: AuthService, private route: ActivatedRoute, private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.http.get("http://localhost:8080/utente?id=$"+this.authService.getIdUtente()).subscribe({
+    this.http.get("http://localhost:8080/utente/"+this.authService.getIdUtente()).subscribe({
       next:(u:any)=>{
         this.utenteprivato = u;
       }, 
