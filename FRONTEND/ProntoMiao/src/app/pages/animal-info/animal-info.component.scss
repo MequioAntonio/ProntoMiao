@@ -72,3 +72,23 @@
     margin-left: 40%;
     margin-top: 10px;
 }
+
+.topinfo {
+display: flex;
+margin-top: 2%;
+column-gap: 10px;
+
+}
+
+.shortinfo{
+    display: flex;
+    justify-content: flex-start;
+   width: 50%;
+}
+
+.shortstring{
+
+    display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
