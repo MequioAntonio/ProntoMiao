@@ -10,5 +10,5 @@ export class DatabaseService {
 
   constructor(public http: HttpClient) { }
 
-  public baseUrl = 'http://localhost:8080/';
+  public baseUrl = 'http://localhost:8080';
 }

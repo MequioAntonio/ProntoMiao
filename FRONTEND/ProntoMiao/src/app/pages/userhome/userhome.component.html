@@ -1,6 +1,6 @@
 <div class="listannunci">
 @for (annuncio of listaAnnunci; track annuncio.id) {
-    <app-animal-card></app-animal-card>
+  <app-animal-card [annuncio]="annuncio"> </app-animal-card>
   } @empty {
     Empty list of annunci
   }

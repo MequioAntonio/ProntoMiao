@@ -14,9 +14,11 @@ export class AnnuncioDatabaseService {
     let result: Annuncio[] = [] ;
     this.dbs.http.get(this.dbs.baseUrl+"/annuncio").subscribe({
       next:(r:any)=>{
+        console.log(r);
         result = r;
       },
       error:(e:any)=>{
+        console.error("mario");
         console.error(e);
       },
     })
