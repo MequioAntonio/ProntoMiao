@@ -76,7 +76,7 @@ export class AnnuncioDatabaseService {
   }
 
   public getAllAnnunciByCentro(id_Centro: String){
-    this.dbs.http.get(this.dbs.baseUrl+"/annuncio/byCentro/${id}").subscribe({
+    this.dbs.http.get(this.dbs.baseUrl+"/annuncio/byCentro/${id_Centro}").subscribe({
       next:(r:any)=>{
         return r;
       },
