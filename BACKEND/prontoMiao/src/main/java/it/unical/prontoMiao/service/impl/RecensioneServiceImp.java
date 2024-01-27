@@ -1,5 +1,6 @@
 package it.unical.prontoMiao.service.impl;
 
+import it.unical.prontoMiao.model.Annuncio;
 import it.unical.prontoMiao.model.Recensione;
 import it.unical.prontoMiao.repository.RecensioneRepository;
 import it.unical.prontoMiao.service.RecensioneService;
@@ -30,13 +31,12 @@ public class RecensioneServiceImp implements RecensioneService {
     }
 
     @Override
-    public Recensione getRecensioneByCentro(int idCentro) throws ChangeSetPersister.NotFoundException {
-        Optional<Recensione> recensioni = recensioneRepository.findByCentro_Id(idCentro);
-
-        if (recensioni.isEmpty()) {
+    public List<Recensione> getRecensioniByCentro(int idCentro)  throws ChangeSetPersister.NotFoundException{
+        Optional<Recensione> opt = recensioneRepository.findByCentro_Id(idCentro);
+        if (opt.isEmpty()) {
             throw new ChangeSetPersister.NotFoundException();
         }
-        return recensioni.get();
+        return (List<Recensione>) opt.get();
     }
 
 

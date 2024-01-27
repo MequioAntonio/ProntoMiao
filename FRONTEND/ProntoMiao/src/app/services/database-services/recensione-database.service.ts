@@ -8,10 +8,19 @@ export class RecensioneDatabaseService extends DatabaseService {
 
   constructor() { super(); }
 
-
-
   public static getAllRecensioni(){
     this.http.get(this.baseUrl+"/recensione").subscribe({
+      next:(r:any)=>{
+        return r;
+      },
+      error:(e:any)=>{
+        console.error(e);
+      },
+    })
+  }
+
+  public static getRecensioneById(id: String){
+    this.http.get(this.baseUrl+"/recensione/${id}").subscribe({
       next:(r:any)=>{
         return r;
       },
