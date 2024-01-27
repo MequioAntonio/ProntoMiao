@@ -5,6 +5,5 @@ export interface Animale {
     taglia: string;
     eta : number;
     sesso : string;
-    infomediche: string;
-    sterilizzato: boolean;
+    specie: string;
 }
