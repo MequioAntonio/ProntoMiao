@@ -32,6 +32,17 @@ export class AppComponent {
   isLogged() {
     return this.authService.isLogged();
   }
+
+  getTipoUtente() {
+    if (this.authService.getTipoUtente() == "PRIVATO") {
+      return "Privato";
+    } else if(this.authService.getTipoUtente() == "CENTRO") {
+      return "Centro adozioni";
+    } else {
+      return "COGLIONE";
+    }
+  }
+
   logoutUser() {
     this.authService.logout();
   }
