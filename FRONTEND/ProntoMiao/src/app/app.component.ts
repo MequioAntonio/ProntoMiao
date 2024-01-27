@@ -60,6 +60,16 @@ export class AppComponent {
   } 
 }
 
+homepage(){
+  let id : any = this.getIdUtente();
+  console.log("L'id è" + id);
+  if (this.authService.getTipoUtente() == "PRIVATO") {
+    this.router.navigate(['userhome']);
+  } else if(this.authService.getTipoUtente() == "CENTRO") {
+    this.router.navigate(['centerhome']);
+} 
+}
+
   logoutUser() {
     this.authService.logout();
   }
