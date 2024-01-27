@@ -164,7 +164,7 @@ export class SignUpComponent {
       next:(a:any)=>{
         if (a.id > 0) {
           //alert("Registrazione è avvenuta con successo!")
-          this.snackBar.open("Registrazione è avvenuta con successo!").afterDismissed().subscribe(() => {
+          this.snackBar.open("Registrazione è avvenuta con successo!","",{duration:3000}).afterDismissed().subscribe(() => {
             location.href="/login";
           });
         }
@@ -198,10 +198,9 @@ export class SignUpComponent {
       next:(a:any)=>{
         if (a.id > 0) {
           //alert("Registrazione è avvenuta con successo!")
-          this.snackBar.open("Registrazione è avvenuta con successo!",).afterDismissed().subscribe(() => {
+          this.snackBar.open("Registrazione è avvenuta con successo!","",{duration:3000}).afterDismissed().subscribe(() => {
             location.href="/login";
           });
-          location.href="/login";
         }
       },
       error:(e:any)=>{
