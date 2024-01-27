@@ -12,6 +12,8 @@ import { NgIf, CommonModule } from '@angular/common';
 import { ChipsComponent } from "../../components/chips/chips.component";
 import { AuthService } from '../../services/auth.service';
 import { routes } from '../../app.routes';
+import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
+
 
 @Component({
     selector: 'app-sign-up',
@@ -29,9 +31,11 @@ import { routes } from '../../app.routes';
         FormsModule,
         ReactiveFormsModule,
         CommonModule,
-        ChipsComponent
+        ChipsComponent,
+        MatSnackBarModule        
     ]
 })
+
 export class SignUpComponent {
   apparenceSetting = 'outline' as MatFormFieldAppearance
   isLinear = true
@@ -43,8 +47,11 @@ export class SignUpComponent {
 
   tipoUtente = this.otherUserData["zero"]
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {}
+  constructor(private fb: FormBuilder, private authService: AuthService, private snackBar: MatSnackBar) {}
 
+  openSnackBar(message: string) {
+    this.snackBar.open(message);
+  }
 
   genericFrom = this.fb.group({
     email: ['', [ Validators.required, ValidatorsService.emailValidator()]],
@@ -158,7 +165,8 @@ export class SignUpComponent {
     ).subscribe({
       next:(a:any)=>{
         if (a.id > 0) {
-          alert("Registrazione è avvenuta con successo!")
+          //alert("Registrazione è avvenuta con successo!")
+          this.openSnackBar('Registrazione avvenuta con successo!');
           location.href="/login";
         }
       },
@@ -180,7 +188,8 @@ export class SignUpComponent {
     ).subscribe({
       next:(a:any)=>{
         if (a.id > 0) {
-          alert("Registrazione è avvenuta con successo!")
+          //alert("Registrazione è avvenuta con successo!")
+          this.openSnackBar('Registrazione avvenuta con successo!');
           location.href="/login";
         }
       },
