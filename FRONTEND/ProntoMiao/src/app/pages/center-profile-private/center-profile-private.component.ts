@@ -25,11 +25,11 @@ export class CenterProfilePrivateComponent {
     this.http.get("http://localhost:8080/centro/"+this.route.snapshot.paramMap.get("idCentro")).subscribe({
       next:(c:any)=>{
         this.centro = c;
-      }, 
+      },
       error:(e:any)=>{
         console.error(e);
 
-      }, 
+      },
     })
 
   }
@@ -38,7 +38,9 @@ export class CenterProfilePrivateComponent {
 
     //Fare modificaProfilo
     modificaProfilo(){}
-    //Fare aggiungiAdozione
-    aggiungiAdozione(){}
+    
+    aggiungiAdozione(){
+      location.href="/adoption-form";
+    }
 
 }
