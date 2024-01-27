@@ -11,6 +11,7 @@ import { UserhomeComponent } from './pages/userhome/userhome.component';
 import { CenterProfilePrivateComponent } from './pages/center-profile-private/center-profile-private.component';
 import { CenterProfilePublicComponent } from './pages/center-profile-public/center-profile-public.component';
 import { AdoptionsPageComponent } from './pages/adoptions-page/adoptions-page.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -19,11 +20,13 @@ export const routes: Routes = [
   { path: 'adoption-form', component: AdoptionFormComponent },
   { path: 'segnalation-form', component: SegnalationFormComponent },
   { path: 'card', component: AnimalCardComponent },
-  { path: 'info/:idAnnuncio', component: AnimalInfoComponent },
+  { path: 'annuncio/:idAnnuncio', component: AnimalInfoComponent },
   { path: 'profile', component: ProfilepageComponent},
   { path: 'userhome', component : UserhomeComponent},
   { path: 'centerprofile', component: CenterProfilePublicComponent},
   { path: 'private', component: CenterProfilePrivateComponent},
   { path: 'adoptions', component: AdoptionsPageComponent},
+  { path: '404', component: NotFoundComponent},
+  //{ path : '**', redirectTo: '/404'} 
 
 ];

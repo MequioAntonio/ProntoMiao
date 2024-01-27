@@ -1,6 +1,7 @@
 package it.unical.prontoMiao.controller;
 
 import it.unical.prontoMiao.model.Utente;
+import it.unical.prontoMiao.request.AuthRequest;
 import it.unical.prontoMiao.response.JwtTokenResponse;
 import it.unical.prontoMiao.service.AuthenticationService;
 import jakarta.persistence.Access;
@@ -28,7 +29,7 @@ public class AutenticazioneController  {
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
-    public ResponseEntity<Utente> signup(@RequestBody Utente request) {
+    public ResponseEntity<Utente> signup(@RequestBody AuthRequest request) {
         return ResponseEntity.ok(authenticationService.signup(request));
     }
 

@@ -1,32 +1,24 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { DatabaseService } from './database.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class DatabaseService {
+export class RecensioneDatabaseService extends DatabaseService {
 
-  constructor() { }
+  constructor() { super(); }
 
-  private static baseUrl = 'http://localhost:8080/';
 
-  private static http: HttpClient
 
   public static getAllRecensioni(){
     this.http.get(this.baseUrl+"/recensione").subscribe({
       next:(r:any)=>{
-        console.log(r)
+        return r;
       },
       error:(e:any)=>{
         console.error(e);
-
       },
     })
-
-
-
   }
-
 
 }

@@ -42,7 +42,7 @@ public class AnnuncioController {
             return new ResponseEntity("Errore nel salvataggio del file", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @GetMapping("/{idCentro}")
+    @RequestMapping(value= "/byCentro/{idCentro}", method = RequestMethod.GET)
     public ResponseEntity<List<Annuncio>> getAllAnnunciByCentro(@PathVariable int idCentro){
         try {
             return new ResponseEntity<List<Annuncio>>(annuncioService.getAnnunciByCentro(idCentro), HttpStatus.OK);

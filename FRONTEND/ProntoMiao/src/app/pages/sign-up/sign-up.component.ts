@@ -12,6 +12,8 @@ import { NgIf, CommonModule } from '@angular/common';
 import { ChipsComponent } from "../../components/chips/chips.component";
 import { AuthService } from '../../services/auth.service';
 import { routes } from '../../app.routes';
+import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
+
 
 @Component({
     selector: 'app-sign-up',
@@ -29,9 +31,11 @@ import { routes } from '../../app.routes';
         FormsModule,
         ReactiveFormsModule,
         CommonModule,
-        ChipsComponent
+        ChipsComponent,
+        MatSnackBarModule        
     ]
 })
+
 export class SignUpComponent {
   apparenceSetting = 'outline' as MatFormFieldAppearance
   isLinear = true
@@ -43,8 +47,11 @@ export class SignUpComponent {
 
   tipoUtente = this.otherUserData["zero"]
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {}
+  constructor(private fb: FormBuilder, private authService: AuthService, private snackBar: MatSnackBar) {}
 
+  openSnackBar(message: string) {
+    this.snackBar.open(message);
+  }
 
   genericFrom = this.fb.group({
     email: ['', [ Validators.required, ValidatorsService.emailValidator()]],
@@ -140,15 +147,26 @@ export class SignUpComponent {
   }
 
 
-
   signupPrivato(): void{
-    this.authService.signUpGeneric(
-      this.genericFrom.controls["email"].value!,
-      this.genericFrom.controls["password"].value!,
+    var req = {
+      email: this.genericFrom.controls["email"].value!,
+      password: this.genericFrom.controls["password"].value!,
+      tipoUtente: "Privato",
+      nome: this.privatoForm.controls["nome"].value!,
+      cognome: this.privatoForm.controls["cognome"].value!,
+      cf: this.privatoForm.controls["cf"].value!,
+      indirizzo: this.privatoForm.controls["indirizzo"].value!,
+      telefono: this.privatoForm.controls["telefono"].value!,
+      preferenze: this.privatoForm.controls["preferenze"].value!,
+      condizioni: this.privatoForm.controls["condizioni"].value!,
+      infromazioni: this.privatoForm.controls["infromazioni"].value!,
+    }
+    this.authService.signUpPrivato(req
     ).subscribe({
       next:(a:any)=>{
         if (a.id > 0) {
-          alert("Registrazione è avvenuta con successo!")
+          //alert("Registrazione è avvenuta con successo!")
+          this.openSnackBar('Registrazione avvenuta con successo!');
           location.href="/login";
         }
       },
@@ -170,7 +188,8 @@ export class SignUpComponent {
     ).subscribe({
       next:(a:any)=>{
         if (a.id > 0) {
-          alert("Registrazione è avvenuta con successo!")
+          //alert("Registrazione è avvenuta con successo!")
+          this.openSnackBar('Registrazione avvenuta con successo!');
           location.href="/login";
         }
       },
