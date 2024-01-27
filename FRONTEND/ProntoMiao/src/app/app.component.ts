@@ -9,6 +9,8 @@ import { AuthService } from './services/auth.service';
 import {FormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { Router } from '@angular/router';
+import { CenterProfilePrivateComponent } from './pages/center-profile-private/center-profile-private.component';
 
 @Component({
   selector: 'app-root',
@@ -43,11 +45,19 @@ export class AppComponent {
     }
   }
 
+  profilepage(){
+    if (this.authService.getTipoUtente() == "PRIVATO") {
+      this.router.navigate(['/pages/profilepage.html']);
+    } else if(this.authService.getTipoUtente() == "CENTRO") {
+      this.router.navigate(['/pages/center-profile-private.html']);
+  }
+}
+
   logoutUser() {
     this.authService.logout();
   }
   title = 'ProntoMiao';
   searchValue: string = "";
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 }

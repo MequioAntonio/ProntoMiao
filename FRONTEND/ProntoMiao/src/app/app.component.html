@@ -1,20 +1,27 @@
 <p class="tb">
   <mat-toolbar color="primary">
-
     <a class="logo" routerLink="/">
       <img class="logo" src="./assets/imgs/logo.png" alt="ProntoMiao">
     </a>
-    <button mat-button>
-      La Nostra Missione
-    </button>
-    <button mat-button>
-      Chi Siamo
-    </button>
-    @if (isLogged()) {
+    
+    @if (!isLogged()) {
+      <button mat-button>
+        La Nostra Missione
+      </button>
+      <button mat-button>
+        Chi Siamo
+      </button>
+    } @else {
+      <button mat-button><mat-icon>home</mat-icon>
+      </button>
+      <button mat-button (click)="profilepage()">
+        Il Mio Profilo
+      </button>
       <button mat-button (click)="logoutUser()">
         Logout
       </button>  
     }
+
 
     <span class="spacerBig"></span>
     @if (!isLogged()) {
@@ -26,9 +33,9 @@
       </button>  
     } @else {
       <span class="rightcorner">
-      <mat-form-field class="searchbar">
+      <mat-form-field class="searchbar" >
         <mat-label>Ricerca</mat-label>
-        <input matInput type="text" [(ngModel)]="searchValue" >
+        <input matInput type="text"  [(ngModel)]="searchValue" >
       </mat-form-field>
       <button mat-stroked-button class="stroke"><mat-icon>search</mat-icon></button>
     </span>
