@@ -5,7 +5,10 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
-
+import { AuthService } from './services/auth.service';
+import {FormsModule} from '@angular/forms';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @Component({
   selector: 'app-root',
@@ -17,12 +20,23 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
-    RouterLink
+    RouterLink,
+    FormsModule,
+    MatInputModule,
+    MatFormFieldModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
+  isLogged() {
+    return this.authService.isLogged();
+  }
+  logoutUser() {
+    this.authService.logout();
+  }
   title = 'ProntoMiao';
+  searchValue: string = "";
 
+  constructor(private authService: AuthService) {}
 }

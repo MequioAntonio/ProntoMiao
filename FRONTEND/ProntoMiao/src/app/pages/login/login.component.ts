@@ -104,6 +104,7 @@ export class LoginComponent {
         sessionStorage.setItem("token", data.token);
       }
       console.log(data);
+      location.href = "/";
     });
     console.log(this.loginForm);
   }

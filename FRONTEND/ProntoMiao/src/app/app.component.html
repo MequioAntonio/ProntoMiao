@@ -10,13 +10,27 @@
     <button mat-button>
       Chi Siamo
     </button>
+    @if (isLogged()) {
+      <button mat-button (click)="logoutUser()">
+        Logout
+      </button>  
+    }
+
     <span class="spacerBig"></span>
-    <button mat-stroked-button class="stroke" routerLink="/login">
-      Login
-    </button>
-    <button mat-stroked-button class="stroke" routerLink="/signup">
-      Registrati
-    </button>
+    @if (!isLogged()) {
+      <button mat-stroked-button class="stroke" routerLink="/login">
+        Login
+      </button>
+      <button mat-stroked-button class="stroke" routerLink="/signup">
+        Registrati
+      </button>  
+    } @else {
+      <mat-form-field>
+        <mat-label>Ricerca</mat-label>
+        <input matInput type="text" [(ngModel)]="searchValue">
+      </mat-form-field>
+      <button mat-stroked-button class="stroke"><mat-icon>search</mat-icon></button>
+    }
   </mat-toolbar>
 </p>
 
