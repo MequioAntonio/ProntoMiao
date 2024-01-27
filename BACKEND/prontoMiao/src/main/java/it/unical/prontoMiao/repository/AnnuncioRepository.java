@@ -11,5 +11,5 @@ import java.util.Optional;
 public interface AnnuncioRepository extends JpaRepository<Annuncio,Integer> {
 
     Optional<Annuncio> findById(int idAnnuncio);
-    Optional<Annuncio> findByCentro(int idCentro);
+    Optional<Annuncio> findByCentro_Id(int idCentro);
 }
