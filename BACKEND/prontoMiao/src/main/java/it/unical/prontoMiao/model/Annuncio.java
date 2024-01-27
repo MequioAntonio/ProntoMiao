@@ -72,6 +72,22 @@ public class Annuncio {
     public void setFoto_profilo(String foto_profilo) {
         this.foto_profilo = foto_profilo;
     }
+
+    public CentroAdozioni getCentro() {
+        return centro;
+    }
+
+    public void setCentro(CentroAdozioni centro) {
+        this.centro = centro;
+    }
+
+    public Animale getAnimale() {
+        return animale;
+    }
+
+    public void setAnimale(Animale animale) {
+        this.animale = animale;
+    }
 }
 
 
