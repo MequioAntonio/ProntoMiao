@@ -63,8 +63,13 @@ export class AnimaleDatabaseService{
     this.dbs.http.delete(this.dbs.baseUrl+"/animale/${id}")
   }
 
+<<<<<<< HEAD
   public getAnimaleByID(id: String){
     this.dbs.http.get(this.dbs.baseUrl+"/animale/${id}").subscribe({
+=======
+  public static getAnimaleById(id: String){
+    this.http.get(this.baseUrl+"/animale/${id}").subscribe({
+>>>>>>> b1665da4fc2da9a1eb9c67e065644dec5363c79e
       next:(r:any)=>{
         return r;
       },
