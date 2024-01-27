@@ -1,13 +1,12 @@
 import { Animale } from "./Animale";
+import { Centro } from "./Centro";
 
 export interface Annuncio {
     id : number;
-    id_animale : number;
+    titolo: string;
     descrizione: string;
     foto_profilo: string;
-    id_centro: number;
-    indirizzo: string;
     informazioni_mediche: string;
-    titolo: string;
     animale : Animale;
+    centro: Centro
 }
