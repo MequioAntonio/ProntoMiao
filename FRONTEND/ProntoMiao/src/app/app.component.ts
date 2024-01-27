@@ -9,7 +9,6 @@ import { AuthService } from './services/auth.service';
 import {FormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import { DatabaseService } from './services/database.service';
 
 @Component({
   selector: 'app-root',
@@ -29,7 +28,7 @@ import { DatabaseService } from './services/database.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   isLogged() {
     return this.authService.isLogged();
   }
@@ -40,7 +39,4 @@ export class AppComponent implements OnInit {
   searchValue: string = "";
 
   constructor(private authService: AuthService) {}
-  ngOnInit(): void {
-    DatabaseService.getAllRecensioni();
-  }
 }
