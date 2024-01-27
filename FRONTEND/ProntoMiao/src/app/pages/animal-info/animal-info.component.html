@@ -3,17 +3,17 @@
     <div class="animal-name">
       {{annuncio?.animale?.nome}}
     </div>
+    <div class="topinfo">
     <div class="animal-image">
-      <img src={{annuncio?.foto_profilo}}>
+      <img src={{annuncio?.foto_profilo}} height="180px" width="170px">
       <!--<input type="file" (change)="handleUpload($event)"/>-->
     </div>
     <div class="shortinfo">
-      <mat-icon aria-hidden="false" aria-label="sesso" fontIcon="pets">{{annuncio?.animale?.sesso}}</mat-icon>
-      <mat-icon aria-hidden="false" aria-label="data di nascita" fontIcon="cake">{{annuncio?.animale?.eta}}</mat-icon>
-      <strong>{{annuncio?.animale?.eta}}</strong>
-      <mat-icon aria-hidden="false" aria-label="sterilizzato" fontIcon="local_hospital">{{annuncio?.animale?.specie}}</mat-icon>
-      <mat-icon aria-hidden="false" aria-label="storia" fontIcon="book_5">{{annuncio?.animale?.taglia}}</mat-icon>
-
+      <p class="shortstring"><mat-icon aria-hidden="false" aria-label="sesso" fontIcon="filter_vintage"></mat-icon>{{annuncio?.animale?.sesso}}</p>
+      <p class="shortstring"><mat-icon aria-hidden="false" aria-label="data di nascita" fontIcon="cake"></mat-icon>{{annuncio?.animale?.eta}}</p>
+      <p class="shortstring"><mat-icon aria-hidden="false" aria-label="sterilizzato" fontIcon="local_hospital"></mat-icon>{{annuncio?.animale?.specie}}</p>
+      <p class="shortstring"><mat-icon aria-hidden="false" aria-label="storia" fontIcon="transform"></mat-icon>{{annuncio?.animale?.taglia}}</p>
+      </div>
     </div>
     <div class="longinfo">
       <div class="longinfospec">

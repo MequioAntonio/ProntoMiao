@@ -49,9 +49,6 @@ export class SignUpComponent {
 
   constructor(private fb: FormBuilder, private authService: AuthService, private snackBar: MatSnackBar) {}
 
-  openSnackBar(message: string) {
-    this.snackBar.open(message);
-  }
 
   genericFrom = this.fb.group({
     email: ['', [ Validators.required, ValidatorsService.emailValidator()]],
@@ -72,6 +69,7 @@ export class SignUpComponent {
   });
 
   centroForm = this.fb.group({
+    nome: ['', Validators.required],
     desc: ['', Validators.required],
     orari: ['', Validators.required],
     indirizzo: ['', Validators.required],
@@ -161,13 +159,14 @@ export class SignUpComponent {
       condizioni: this.privatoForm.controls["condizioni"].value!,
       infromazioni: this.privatoForm.controls["infromazioni"].value!,
     }
-    this.authService.signUpPrivato(req
+    this.authService.signUpPrivatoCentro(req
     ).subscribe({
       next:(a:any)=>{
         if (a.id > 0) {
           //alert("Registrazione è avvenuta con successo!")
-          this.openSnackBar('Registrazione avvenuta con successo!');
-          location.href="/login";
+          this.snackBar.open("Registrazione è avvenuta con successo!","",{duration:3000}).afterDismissed().subscribe(() => {
+            location.href="/login";
+          });
         }
       },
       error:(e:any)=>{
@@ -182,15 +181,26 @@ export class SignUpComponent {
   }
 
   signupCentro(): void{
-    this.authService.signUpGeneric(
-      this.genericFrom.controls["email"].value!,
-      this.genericFrom.controls["password"].value!,
+    var req = {
+      email: this.genericFrom.controls["email"].value!,
+      password: this.genericFrom.controls["password"].value!,
+      tipoUtente: "Centro Adozioni",
+      nome: this.centroForm.controls["nome"].value!,
+      descrizione: this.centroForm.controls["desc"].value!,
+      orari: this.centroForm.controls["orari"].value!,
+      indirizzo: this.centroForm.controls["indirizzo"].value!,
+      eventi: this.centroForm.controls["eventi"].value!,
+    }
+
+    this.authService.signUpPrivatoCentro(
+      req
     ).subscribe({
       next:(a:any)=>{
         if (a.id > 0) {
           //alert("Registrazione è avvenuta con successo!")
-          this.openSnackBar('Registrazione avvenuta con successo!');
-          location.href="/login";
+          this.snackBar.open("Registrazione è avvenuta con successo!","",{duration:3000}).afterDismissed().subscribe(() => {
+            location.href="/login";
+          });
         }
       },
       error:(e:any)=>{

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { Annuncio } from '../../model/Annuncio';
 
 @Component({
   selector: 'app-animal-card',
@@ -9,4 +10,8 @@ import { MatCardModule } from '@angular/material/card';
   templateUrl: './animal-card.component.html',
   styleUrl: './animal-card.component.scss',
 })
-export class AnimalCardComponent {}
+export class AnimalCardComponent {
+
+  annuncio?: Annuncio;
+
+}

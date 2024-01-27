@@ -6,12 +6,7 @@ import jakarta.persistence.*;
 @Table(name="centro_adozioni")
 public class CentroAdozioni extends Utente{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    @OneToOne
-    @MapsId
-    private Utente utente;
+
     @Column(nullable = false)
     private String nome;
     @Column(nullable = false)
@@ -24,6 +19,9 @@ public class CentroAdozioni extends Utente{
 
     public CentroAdozioni() {
         super();
+    }
+    public CentroAdozioni(String email, String password) {
+        super(email, password);
     }
 
     public CentroAdozioni(String email, String password, String nome, String descrizione, String orari, String eventi, String indirizzo) {
@@ -77,4 +75,8 @@ public class CentroAdozioni extends Utente{
     public String getNome() {
         return nome;
     }
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
 }
