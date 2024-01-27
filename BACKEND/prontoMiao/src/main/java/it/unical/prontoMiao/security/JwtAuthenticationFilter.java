@@ -1,5 +1,6 @@
 package it.unical.prontoMiao.security;
 
+import io.jsonwebtoken.ExpiredJwtException;
 import it.unical.prontoMiao.service.JwtService;
 import it.unical.prontoMiao.service.UtenteService;
 import jakarta.servlet.FilterChain;
@@ -36,7 +37,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return;
         }
         jwt = authHeader.substring(7);
-        userEmail = jwtService.extractUserName(jwt);
+        try{
+            userEmail = jwtService.extractUserName(jwt);
+        }catch (ExpiredJwtException e) {
+            filterChain.doFilter(request, response);
+            return;
+        }
         if (StringUtils.isNotEmpty(userEmail)
                 && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = userService.userDetailsService()
