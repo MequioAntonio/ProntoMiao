@@ -17,6 +17,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
 
@@ -42,12 +46,29 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Utente user = utenteRepository.findByEmailIgnoreCase(utente.getEmail())
-                .orElseThrow(() -> new IllegalArgumentException("Credenziali errate"));
+
+        Utente user = null;
+        Optional<UtentePrivato> optPrivato = utentePrivatoRepository.findByEmailIgnoreCase(utente.getEmail());
+        Optional<CentroAdozioni> optCentro = centroAdozioniRepository.findByEmailIgnoreCase(utente.getEmail());
+        String tipoUtente = "NA";
+        if (optPrivato.isPresent()) {
+            user = optPrivato.get();
+            tipoUtente = "PRIVATO";
+        }
+        if (optCentro.isPresent()) {
+            user = optCentro.get();
+            tipoUtente = "CENTRO";
+        }
+        if (user == null) {
+            user = utenteRepository.findByEmailIgnoreCase(utente.getEmail())
+                    .orElseThrow(() -> new IllegalArgumentException("Credenziali errate"));
+        }
         if(!encoder.matches(utente.getPassword(),user.getPassword())){
             throw new IllegalArgumentException("Credenziali errate");
         }
-        String jwt = jwtService.generateToken(user);
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("tipo", tipoUtente);
+        String jwt = jwtService.generateToken(claims, user);
 
         return new JwtTokenResponse(jwt);
     }

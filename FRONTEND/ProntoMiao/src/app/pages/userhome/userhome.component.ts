@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AnimalCardComponent } from '../../components/animal-card/animal-card.component';
 import { Annuncio } from '../../model/Annuncio';
+import { AnnuncioDatabaseService } from '../../services/database-services/annuncio-database.service';
 
 @Component({
   selector: 'app-userhome',
@@ -11,6 +12,16 @@ import { Annuncio } from '../../model/Annuncio';
 })
 export class UserhomeComponent {
 
-  annunci?: Annuncio[];
+  listaAnnunci?: any;
+
+  constructor() {}
+
+  ngOnInit() {
+    this.getAnnunci();
+  }
+  
+  getAnnunci(): void {
+    this.listaAnnunci = AnnuncioDatabaseService.getAllAnnunci();
+  }
 
 }

@@ -1,11 +1,13 @@
 package it.unical.prontoMiao.repository;
 
 import it.unical.prontoMiao.model.Animale;
+import it.unical.prontoMiao.model.Utente;
 import it.unical.prontoMiao.model.UtentePrivato;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface UtentePrivatoRepository extends JpaRepository<UtentePrivato, Integer> {
@@ -16,4 +18,7 @@ public interface UtentePrivatoRepository extends JpaRepository<UtentePrivato, In
     UtentePrivato findByEmail(String email);
 
     UtentePrivato findById(int id);
+
+    Optional<UtentePrivato> findByEmailIgnoreCase(String email);
+
 }
