@@ -20,13 +20,13 @@ export const routes: Routes = [
   { path: 'adoption-form', component: AdoptionFormComponent },
   { path: 'segnalation-form', component: SegnalationFormComponent },
   { path: 'card', component: AnimalCardComponent },
-  { path: 'info/:idAnnuncio', component: AnimalInfoComponent },
+  { path: 'annuncio/:idAnnuncio', component: AnimalInfoComponent },
   { path: 'profile', component: ProfilepageComponent},
   { path: 'userhome', component : UserhomeComponent},
   { path: 'centerprofile', component: CenterProfilePublicComponent},
   { path: 'private', component: CenterProfilePrivateComponent},
   { path: 'adoptions', component: AdoptionsPageComponent},
   { path: '404', component: NotFoundComponent},
-  { path : '**', redirectTo: '/404'} 
+  //{ path : '**', redirectTo: '/404'} 
 
 ];
