@@ -1,5 +1,6 @@
 package it.unical.prontoMiao.controller;
 
+import it.unical.prontoMiao.model.Annuncio;
 import it.unical.prontoMiao.model.Recensione;
 import it.unical.prontoMiao.service.RecensioneService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,13 +34,12 @@ public class RecensioneController {
         }
     }
 
-    @RequestMapping(value = "/centro/{idCentro}", method = RequestMethod.GET)
-    public ResponseEntity getRecensioneByCentro(@PathVariable int idCentro) {
+    @RequestMapping(value= "/byCentro/{idCentro}", method = RequestMethod.GET)
+    public ResponseEntity<List<Recensione>> getAllRecensioniByCentro(@PathVariable int idCentro){
         try {
-            Recensione recensioni = recensioneService.getRecensioneByCentro(idCentro);
-            return new ResponseEntity<>(recensioni, HttpStatus.OK);
+            return new ResponseEntity<List<Recensione>>(recensioneService.getRecensioniByCentro(idCentro), HttpStatus.OK);
         } catch (ChangeSetPersister.NotFoundException e) {
-            return new ResponseEntity("Nessun centro trovato", HttpStatus.NOT_FOUND);
+            return new ResponseEntity("Nessuna recensione trovata", HttpStatus.NOT_FOUND);
         }
     }
 
