@@ -18,4 +18,15 @@ export class CentroAdozioniDatabaseService{
     })
   }
 
+  public getCenterByID(id: String){
+    this.dbs.http.get(this.dbs.baseUrl+"/centro-adozioni/${id}").subscribe({
+      next:(r:any)=>{
+        return r;
+      },
+      error:(e:any)=>{
+        console.error(e);
+      },
+    })
+  }
+
 }
