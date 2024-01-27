@@ -21,7 +21,7 @@ export class UserhomeComponent {
   }
   
   getAnnunci(): void {
-    //this.listaAnnunci = this.annuncioservice.getAllAnnunci().subscribe(annunci => this.listaAnnunci = annunci);
+    this.listaAnnunci = this.annuncioservice.getAllAnnunci();
   }
 
 }
