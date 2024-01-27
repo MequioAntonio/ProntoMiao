@@ -24,6 +24,7 @@ export const routes: Routes = [
   { path: 'annuncio/:idAnnuncio', component: AnimalInfoComponent },
   { path: 'profile/:idUtente', component: ProfilepageComponent},
   { path: 'userhome', component : UserhomeComponent},
+  { path: 'centerhome', component: CenterhomeComponent},
   { path: 'centerprofile/:idCentro', component: CenterProfilePublicComponent},
   { path: 'private/', component: CenterProfilePrivateComponent},
   { path: 'adoptions', component: AdoptionsPageComponent},
