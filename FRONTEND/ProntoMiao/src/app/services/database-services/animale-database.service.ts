@@ -62,7 +62,7 @@ export class AnimaleDatabaseService extends DatabaseService{
     this.http.delete(this.baseUrl+"/animale/${id}")
   }
 
-  public static getAnimaleByID(id: String){
+  public static getAnimaleById(id: String){
     this.http.get(this.baseUrl+"/animale/${id}").subscribe({
       next:(r:any)=>{
         return r;

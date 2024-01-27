@@ -30,6 +30,20 @@ export class AuthService {
     return "";
   }
   
+  decodeToken() {
+    if (this.getToken() != "") {
+      return JSON.parse(window.atob(this.getToken()!.split('.')[1]));
+    }
+    return null;
+  }
+
+  getTipoUtente() {//ritorna "PRIVATO", "CENTRO" o "NA"
+    //console.log(this.decodeToken())
+    if (this.decodeToken() == null) {
+      return null;
+    }
+    return this.decodeToken().tipo;
+  }
 
   isLogged(){
     return sessionStorage.getItem("token") || localStorage.getItem("token");
