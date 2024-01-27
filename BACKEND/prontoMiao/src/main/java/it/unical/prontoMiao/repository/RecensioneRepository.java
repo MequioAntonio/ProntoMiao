@@ -13,5 +13,6 @@ public interface RecensioneRepository extends JpaRepository<Recensione,Integer> 
 
     Optional<Recensione> deleteById(int idRecensione);
 
-    Optional<Recensione> findByCentro(int idCentro);
+    Optional<Recensione> findByCentro_Id(int idCentro);
+
 }
