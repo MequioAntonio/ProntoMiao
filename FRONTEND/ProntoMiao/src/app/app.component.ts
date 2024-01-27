@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterLink, RouterOutlet } from '@angular/router';
@@ -9,6 +9,7 @@ import { AuthService } from './services/auth.service';
 import {FormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { DatabaseService } from './services/database.service';
 
 @Component({
   selector: 'app-root',
@@ -28,7 +29,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   isLogged() {
     return this.authService.isLogged();
   }
@@ -39,4 +40,7 @@ export class AppComponent {
   searchValue: string = "";
 
   constructor(private authService: AuthService) {}
+  ngOnInit(): void {
+    DatabaseService.getAllRecensioni();
+  }
 }

@@ -12,7 +12,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrl: './feedback-card.component.scss'
 })
 export class FeedbackCardComponent {
-  recensione!:Recensione; 
+  recensione!:Recensione;
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {}
 
@@ -21,11 +21,11 @@ export class FeedbackCardComponent {
     this.http.get("http://localhost:8080/recensione/"+this.route.snapshot.paramMap.get("idRecensione")).subscribe({
       next:(r:any)=>{
         this.recensione = r;
-      }, 
+      },
       error:(e:any)=>{
         console.error(e);
 
-      }, 
+      },
     })
 }
 }
