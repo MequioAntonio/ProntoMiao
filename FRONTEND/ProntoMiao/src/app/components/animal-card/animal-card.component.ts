@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { Annuncio } from '../../model/Annuncio';
+import { Input } from '@angular/core';
 
 @Component({
   selector: 'app-animal-card',
@@ -12,6 +13,6 @@ import { Annuncio } from '../../model/Annuncio';
 })
 export class AnimalCardComponent {
 
-  annuncio?: Annuncio;
+  @Input() annuncio?: Annuncio;
 
 }
