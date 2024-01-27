@@ -52,16 +52,8 @@ export class AuthService {
   }
 
 
-  signUpPrivato(request: any){
+  signUpPrivatoCentro(request: any){
     return this.http.post(this.signUpEP, request)
-  }
-
-
-  signUpCentro(_email: string, _password: string){
-    return this.http.post(this.signUpEP, {
-      email: _email,
-      password: _password,
-    })
   }
 
   signIn(_email: string, _password: string){

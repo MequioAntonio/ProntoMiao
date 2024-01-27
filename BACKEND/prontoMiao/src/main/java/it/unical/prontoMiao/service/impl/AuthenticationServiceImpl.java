@@ -1,7 +1,9 @@
 package it.unical.prontoMiao.service.impl;
 
+import it.unical.prontoMiao.model.CentroAdozioni;
 import it.unical.prontoMiao.model.Utente;
 import it.unical.prontoMiao.model.UtentePrivato;
+import it.unical.prontoMiao.repository.CentroAdozioniRepository;
 import it.unical.prontoMiao.repository.UtentePrivatoRepository;
 import it.unical.prontoMiao.repository.UtenteRepository;
 import it.unical.prontoMiao.request.AuthRequest;
@@ -22,6 +24,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     UtenteRepository utenteRepository;
     @Autowired
     UtentePrivatoRepository utentePrivatoRepository;
+    @Autowired
+    CentroAdozioniRepository centroAdozioniRepository;
     @Autowired
     PasswordEncoder encoder;
     @Autowired
@@ -65,6 +69,13 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             utentePrivatoRepository.save(privato);
             return privato;
         }
-        return u;
+        CentroAdozioni centro = new CentroAdozioni(u.getEmail(),u.getPassword());
+        centro.setNome(utente.getNome());
+        centro.setDescrizione(utente.getDescrizione());
+        centro.setEventi(utente.getEventi());
+        centro.setIndirizzo(utente.getIndirizzo());
+        centro.setOrari(utente.getOrari());
+        centroAdozioniRepository.save(centro);
+        return centro;
     }
 }
