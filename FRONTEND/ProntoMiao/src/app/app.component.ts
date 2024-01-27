@@ -47,9 +47,9 @@ export class AppComponent {
 
   profilepage(){
     if (this.authService.getTipoUtente() == "PRIVATO") {
-      this.router.navigate(['/pages/profilepage.html']);
+      this.router.navigate(['profile']);
     } else if(this.authService.getTipoUtente() == "CENTRO") {
-      this.router.navigate(['/pages/center-profile-private.html']);
+      this.router.navigate(['centerprofile']);
   }
 }
 
