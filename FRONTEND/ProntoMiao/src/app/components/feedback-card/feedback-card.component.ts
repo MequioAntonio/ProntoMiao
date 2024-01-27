@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {MatCardModule} from '@angular/material/card';
+import { Recensione } from '../../model/Recensione';
 
 @Component({
   selector: 'app-feedback-card',
@@ -9,6 +10,8 @@ import {MatCardModule} from '@angular/material/card';
   styleUrl: './feedback-card.component.scss'
 })
 export class FeedbackCardComponent {
+
+  recensione?: Recensione;
 
   constructor() {}
 
