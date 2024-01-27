@@ -12,6 +12,7 @@ import { CenterProfilePrivateComponent } from './pages/center-profile-private/ce
 import { CenterProfilePublicComponent } from './pages/center-profile-public/center-profile-public.component';
 import { AdoptionsPageComponent } from './pages/adoptions-page/adoptions-page.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { CenterhomeComponent } from './pages/centerhome/centerhome.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -21,12 +22,13 @@ export const routes: Routes = [
   { path: 'segnalation-form', component: SegnalationFormComponent },
   { path: 'card', component: AnimalCardComponent },
   { path: 'annuncio/:idAnnuncio', component: AnimalInfoComponent },
-  { path: 'profile', component: ProfilepageComponent},
+  { path: 'profile/:idUtente', component: ProfilepageComponent},
   { path: 'userhome', component : UserhomeComponent},
-  { path: 'centerprofile', component: CenterProfilePublicComponent},
-  { path: 'private', component: CenterProfilePrivateComponent},
+  { path: 'centerhome', component: CenterhomeComponent},
+  { path: 'centerprofile/:idCentro', component: CenterProfilePublicComponent},
+  { path: 'private/:idCentro', component: CenterProfilePrivateComponent},
   { path: 'adoptions', component: AdoptionsPageComponent},
   { path: '404', component: NotFoundComponent},
-  //{ path : '**', redirectTo: '/404'} 
+  { path : '**', redirectTo: '404'} 
 
 ];

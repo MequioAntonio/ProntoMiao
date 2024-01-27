@@ -13,8 +13,8 @@ public class AuthRequest {
     private String cf;
     private String telefono;
     private String preferenze;
-    private String condizioni_abitative;
-    private String informazioni_aggiuntive;
+    private String condizioni;
+    private String informazioni;
 
     public AuthRequest() {
     }
@@ -115,19 +115,19 @@ public class AuthRequest {
         this.preferenze = preferenze;
     }
 
-    public String getCondizioni_abitative() {
-        return condizioni_abitative;
+    public String getCondizioni() {
+        return condizioni;
     }
 
-    public void setCondizioni_abitative(String condizioni_abitative) {
-        this.condizioni_abitative = condizioni_abitative;
+    public void setCondizioni(String condizioni) {
+        this.condizioni = condizioni;
     }
 
-    public String getInformazioni_aggiuntive() {
-        return informazioni_aggiuntive;
+    public String getInformazioni() {
+        return informazioni;
     }
 
-    public void setInformazioni_aggiuntive(String informazioni_aggiuntive) {
-        this.informazioni_aggiuntive = informazioni_aggiuntive;
+    public void setInformazioni(String informazioni) {
+        this.informazioni = informazioni;
     }
 }

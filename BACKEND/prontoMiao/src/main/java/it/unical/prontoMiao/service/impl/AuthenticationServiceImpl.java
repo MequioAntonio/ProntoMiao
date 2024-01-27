@@ -85,8 +85,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             privato.setCognome(utente.getCognome());
             privato.setTelefono(utente.getTelefono());
             privato.setPreferenze(utente.getPreferenze());
-            privato.setCondizioni_abitative(utente.getCondizioni_abitative());
-            privato.setInformazioni_aggiuntive(utente.getCondizioni_abitative());
+            privato.setIndirizzo(utente.getIndirizzo());
+            privato.setInformazioni_aggiuntive(utente.getInformazioni());
+            privato.setCondizioni_abitative(utente.getCondizioni());
             privato.setId(u.getId());
             utentePrivatoRepository.save(privato);
             return privato;

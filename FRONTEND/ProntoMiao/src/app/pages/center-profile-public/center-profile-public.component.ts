@@ -20,7 +20,7 @@ export class CenterProfilePublicComponent {
 
   ngOnInit(): void {
 
-    this.http.get("http://localhost:8080/centro/"+this.route.snapshot.paramMap.get("idCentro")).subscribe({
+    this.http.get("http://localhost:8080/centro-adozioni/"+this.route.snapshot.paramMap.get("idCentro")).subscribe({
       next:(c:any)=>{
         this.centro = c;
       }, 

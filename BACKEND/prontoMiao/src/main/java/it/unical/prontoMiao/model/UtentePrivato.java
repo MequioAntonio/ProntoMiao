@@ -56,6 +56,9 @@ public class UtentePrivato extends Utente{
     public String getIndirizzo(){
         return this.indirizzo;
     }
+    public void setIndirizzo(String indirizzo){
+        this.indirizzo=indirizzo;
+    }
 
     public String getCognome() {
         return cognome;

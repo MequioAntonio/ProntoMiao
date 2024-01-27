@@ -157,7 +157,7 @@ export class SignUpComponent {
       telefono: this.privatoForm.controls["telefono"].value!,
       preferenze: this.privatoForm.controls["preferenze"].value!,
       condizioni: this.privatoForm.controls["condizioni"].value!,
-      infromazioni: this.privatoForm.controls["infromazioni"].value!,
+      informazioni: this.privatoForm.controls["infromazioni"].value!,
     }
     this.authService.signUpPrivatoCentro(req
     ).subscribe({
