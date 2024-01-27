@@ -10,15 +10,17 @@ export class AnnuncioDatabaseService {
 
   constructor(private dbs: DatabaseService) { }
 
-  public getAllAnnunci(){
+  public getAllAnnunci(): Annuncio[] {
+    let result: Annuncio[] = [] ;
     this.dbs.http.get(this.dbs.baseUrl+"/annuncio").subscribe({
       next:(r:any)=>{
-        return r;
+        result = r;
       },
       error:(e:any)=>{
         console.error(e);
       },
     })
+    return result
   }
 
   // NON PRESENTE NEL B.E.
