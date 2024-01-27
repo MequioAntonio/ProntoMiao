@@ -16,106 +16,99 @@ export class DatabaseService {
   public static getAllRecensioni(){
     this.http.get(this.baseUrl+"/recensione").subscribe({
       next:(r:any)=>{
-        console.log(r)
+        return r;
       },
       error:(e:any)=>{
         console.error(e);
-
       },
     })
-
-
-
   }
 
   public static getAllAnimali(){
     this.http.get(this.baseUrl+"/animale").subscribe({
       next:(r:any)=>{
-        console.log(r)
+        return r;
       },
       error:(e:any)=>{
         console.error(e);
-
       },
     })
-
-
-
   }
 
   public static getAllAnnunci(){
     this.http.get(this.baseUrl+"/annuncio").subscribe({
       next:(r:any)=>{
-        console.log(r)
+        return r;
       },
       error:(e:any)=>{
         console.error(e);
-
       },
     })
-
-
-
   }
 
   public static getAllCentriAdozioni(){
     this.http.get(this.baseUrl+"/centro-adozioni").subscribe({
       next:(r:any)=>{
-        console.log(r)
+        return r;
       },
       error:(e:any)=>{
         console.error(e);
-
       },
     })
-
-
-
   }
 
   public static getAllRichieste(){
     this.http.get(this.baseUrl+"/richiesta").subscribe({
       next:(r:any)=>{
-        console.log(r)
+        return r;
       },
       error:(e:any)=>{
         console.error(e);
-
       },
     })
-
-
-
   }
 
   public static getAllSegnalazioni(){
     this.http.get(this.baseUrl+"/segnalazione").subscribe({
       next:(r:any)=>{
-        console.log(r)
+        return r;
       },
       error:(e:any)=>{
         console.error(e);
-
       },
     })
-
-
-
   }
 
   public static getAllUtentiPrivati(){
     this.http.get(this.baseUrl+"/utente").subscribe({
       next:(r:any)=>{
-        console.log(r)
+        return r;
       },
       error:(e:any)=>{
         console.error(e);
-
       },
     })
-
-
-
   }
 
+  public static getAllAnimaliByNome(){
+    this.http.get(this.baseUrl+"/animale/byNome").subscribe({
+      next:(r:any)=>{
+        return r;
+      },
+      error:(e:any)=>{
+        console.error(e);
+      },
+    })
+  }
+
+  public static insertAnimale(){
+    this.http.post(this.baseUrl+"/animale", ).subscribe({
+      next:(r:any)=>{
+        return r;
+      },
+      error:(e:any)=>{
+        console.error(e);
+      },
+    })
+  }
 }
