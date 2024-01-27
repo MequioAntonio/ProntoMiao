@@ -45,6 +45,14 @@ export class AuthService {
     return this.decodeToken().tipo;
   }
 
+  getIdUtente() {//ritorna qualcosa
+    //console.log(this.decodeToken())
+    if (this.decodeToken() == null) {
+      return null;
+    }
+    return this.decodeToken().id;
+  }
+
   isLogged(){
     return sessionStorage.getItem("token") || localStorage.getItem("token");
     //return this.Logged
