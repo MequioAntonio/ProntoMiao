@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { DatabaseServiceService } from './database-service.service';
+import { DatabaseServiceService } from './database.service';
 
 describe('DatabaseServiceService', () => {
   let service: DatabaseServiceService;
