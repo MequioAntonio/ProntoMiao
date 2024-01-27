@@ -140,11 +140,21 @@ export class SignUpComponent {
   }
 
 
-
   signupPrivato(): void{
-    this.authService.signUpGeneric(
-      this.genericFrom.controls["email"].value!,
-      this.genericFrom.controls["password"].value!,
+    var req = {
+      email: this.genericFrom.controls["email"].value!,
+      password: this.genericFrom.controls["password"].value!,
+      tipoUtente: "Privato",
+      nome: this.privatoForm.controls["nome"].value!,
+      cognome: this.privatoForm.controls["cognome"].value!,
+      cf: this.privatoForm.controls["cf"].value!,
+      indirizzo: this.privatoForm.controls["indirizzo"].value!,
+      telefono: this.privatoForm.controls["telefono"].value!,
+      preferenze: this.privatoForm.controls["preferenze"].value!,
+      condizioni: this.privatoForm.controls["condizioni"].value!,
+      infromazioni: this.privatoForm.controls["infromazioni"].value!,
+    }
+    this.authService.signUpPrivato(req
     ).subscribe({
       next:(a:any)=>{
         if (a.id > 0) {

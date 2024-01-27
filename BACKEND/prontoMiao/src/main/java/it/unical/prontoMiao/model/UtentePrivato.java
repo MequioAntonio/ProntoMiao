@@ -6,12 +6,6 @@ import jakarta.persistence.*;
 @Table(name="privato")
 public class UtentePrivato extends Utente{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    @OneToOne
-    @MapsId
-    private Utente utente;
     @Column(nullable = false)
     private String nome;
     @Column(nullable = false)
@@ -28,6 +22,9 @@ public class UtentePrivato extends Utente{
 
     public UtentePrivato(){
         super();
+    };
+    public UtentePrivato(String email, String password){
+        super(email,password);
     };
 
     public UtentePrivato(String email, String password, String nome, String cognome, String cf, String indirizzo){
@@ -62,6 +59,9 @@ public class UtentePrivato extends Utente{
 
     public String getCognome() {
         return cognome;
+    }
+    public void setCognome(String cognome){
+        this.cognome=cognome;
     }
 
     public void setNome(String nome){
