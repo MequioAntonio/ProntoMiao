@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DatabaseService } from './database.service';
+import { Centro } from '../../model/Centro';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,26 +9,16 @@ import { DatabaseService } from './database.service';
 export class CentroAdozioniDatabaseService{
 
   constructor(private dbs: DatabaseService) { }
-  public getAllCentriAdozioni(){
-    this.dbs.http.get(this.dbs.baseUrl+"/centro-adozioni").subscribe({
-      next:(r:any)=>{
-        return r;
-      },
-      error:(e:any)=>{
-        console.error(e);
-      },
-    })
+  public getAllCentriAdozioni(): Observable<Centro[]> {
+    let result = this.dbs.http.get<Centro[]>(this.dbs.baseUrl+"/centro-adozioni")
+
+    return result;
   }
 
-  public getCenterByID(id: String){
-    this.dbs.http.get(this.dbs.baseUrl+"/centro-adozioni/${id}").subscribe({
-      next:(r:any)=>{
-        return r;
-      },
-      error:(e:any)=>{
-        console.error(e);
-      },
-    })
+  public getCenterByID(id: String): Observable<Centro> {
+    let result = this.dbs.http.get<Centro>(this.dbs.baseUrl+"/centro-adozioni/${id}")
+
+    return result
   }
 
 }
