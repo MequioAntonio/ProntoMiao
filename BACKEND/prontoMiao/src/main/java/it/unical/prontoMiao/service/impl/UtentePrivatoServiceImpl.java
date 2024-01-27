@@ -47,14 +47,14 @@ public class UtentePrivatoServiceImpl implements UtentePrivatoService {
     }
 
     @Override
-    public UtentePrivato updateUtentePrivato(String email, UtentePrivato up) {
-        up.setEmail(email);
+    public UtentePrivato updateUtentePrivato(int id, UtentePrivato up) {
+        up.setId(id);
         return utentePrivatoRepository.save(up);
     }
 
     @Override
-    public void deleteUtentePrivato(String email) {
-        utentePrivatoRepository.deleteById(email);
+    public void deleteUtentePrivato(int id) {
+        utentePrivatoRepository.deleteById(id);
     }
 
 

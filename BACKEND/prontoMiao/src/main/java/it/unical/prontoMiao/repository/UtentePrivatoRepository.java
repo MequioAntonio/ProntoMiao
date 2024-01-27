@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface UtentePrivatoRepository extends JpaRepository<UtentePrivato, String> {
+public interface UtentePrivatoRepository extends JpaRepository<UtentePrivato, Integer> {
 
 
     UtentePrivato findByNomeLike(String nome);

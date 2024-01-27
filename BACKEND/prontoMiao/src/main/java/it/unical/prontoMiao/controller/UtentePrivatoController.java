@@ -26,14 +26,14 @@ public class UtentePrivatoController {
         return new ResponseEntity<UtentePrivato>(utentePrivatoService.insertUtentePrivato(up), HttpStatus.OK);
     }
 
-    @RequestMapping(value= "/{emailUtentePrivato}", method = RequestMethod.POST)
-    public ResponseEntity<UtentePrivato> updateUtentePrivato(@PathVariable String email, @RequestBody UtentePrivato up) {
-        return new ResponseEntity<UtentePrivato>(utentePrivatoService.updateUtentePrivato(email, up), HttpStatus.OK);
+    @RequestMapping(value= "/{id}", method = RequestMethod.POST)
+    public ResponseEntity<UtentePrivato> updateUtentePrivato(@PathVariable int id, @RequestBody UtentePrivato up) {
+        return new ResponseEntity<UtentePrivato>(utentePrivatoService.updateUtentePrivato(id, up), HttpStatus.OK);
     }
 
-    @RequestMapping(value= "/{emailUtentePrivato}", method = RequestMethod.DELETE)
-    public ResponseEntity deleteUtentePrivato(@PathVariable String email) {
-        utentePrivatoService.deleteUtentePrivato(email);
+    @RequestMapping(value= "/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity deleteUtentePrivato(@PathVariable int id) {
+        utentePrivatoService.deleteUtentePrivato(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
