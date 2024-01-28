@@ -170,7 +170,7 @@ export class SignUpComponent {
         }
       },
       error:(e:any)=>{
-        console.error(e);
+        this.snackBar.open("ERRORE! Registrazione non avvenuta!","",{duration:3000});
 
       },
 
@@ -204,7 +204,7 @@ export class SignUpComponent {
         }
       },
       error:(e:any)=>{
-        console.error(e);
+        this.snackBar.open("ERRORE! Registrazione non avvenuta!","",{duration:3000});
 
       },
 
