@@ -4,6 +4,8 @@ import { MatCardModule } from '@angular/material/card';
 import { Input } from '@angular/core';
 import { Richiesta } from '../../model/Richiesta';
 import { RichiestaDatabaseService } from '../../services/database-services/richiesta-database.service';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-request-card',
@@ -14,7 +16,7 @@ import { RichiestaDatabaseService } from '../../services/database-services/richi
 })
 export class RequestCardComponent {
 
-  constructor(private richiestaService: RichiestaDatabaseService) {}
+  constructor(private richiestaService: RichiestaDatabaseService, private location: Location) {}
 
 
   @Input() richiesta?: Richiesta;
@@ -22,10 +24,15 @@ export class RequestCardComponent {
   Accetta() {
     this.richiesta!.stato = 2
     this.richiestaService.updateRichiesta(this.richiesta!.id, this.richiesta!)
+    this.location.replaceState(this.location.path());
+    window.location.reload();
+
   }
 
   Rifiuta() {
     this.richiesta!.stato = 1
     this.richiestaService.updateRichiesta(this.richiesta!.id, this.richiesta!)
+    this.location.replaceState(this.location.path());
+    window.location.reload();
   }
 }
