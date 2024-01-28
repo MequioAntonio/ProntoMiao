@@ -3,6 +3,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { Annuncio } from '../../model/Annuncio';
 import { Input } from '@angular/core';
+import { Richiesta } from '../../model/Richiesta';
 
 @Component({
   selector: 'app-adoption-card',
@@ -14,5 +15,6 @@ import { Input } from '@angular/core';
 export class AdoptionCardComponent {
 
   @Input() annuncio?: Annuncio;
+  @Input() richiesta?: Richiesta;
 
 }

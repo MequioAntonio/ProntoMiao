@@ -35,4 +35,9 @@ export class RichiestaDatabaseService{
     })
   }
 
+  public getAllRichiesteByCentro(id_Centro: String): Observable<Richiesta[]>{
+    let result = this.dbs.http.get<Richiesta[]>(this.dbs.baseUrl+"/richiesta/byCentro/"+id_Centro)
+    return result
+  }
+
 }

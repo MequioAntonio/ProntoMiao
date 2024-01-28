@@ -27,17 +27,14 @@
 
     <h2 class="highlight"> Richieste Ricevute </h2>
       <div class="flexGrid">
-        <div class="flexCardItem"><app-adoption-card></app-adoption-card></div>
-        <div class="flexCardItem"><app-adoption-card></app-adoption-card></div>
-        <div class="flexCardItem"><app-adoption-card></app-adoption-card></div>
+        <div class="flexCardItem" *ngFor="let richiesta of richieste"><app-adoption-card [richiesta]="richiesta"></app-adoption-card></div>
       </div>
 
 
       <h2 class="highlight"> Recensioni Ricevute</h2>
     <div class="flexGrid">
 
-            <div class="feedback"><app-feedback-card></app-feedback-card></div>
-            <div class="feedback"><app-feedback-card></app-feedback-card></div>
+            <div class="feedback" *ngFor="let recensione of recensioni"><app-feedback-card [recensione]="recensione"></app-feedback-card></div>
 
 
     </div>

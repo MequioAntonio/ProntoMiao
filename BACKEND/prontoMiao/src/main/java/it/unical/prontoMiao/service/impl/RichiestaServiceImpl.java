@@ -1,6 +1,7 @@
 package it.unical.prontoMiao.service.impl;
 
 import it.unical.prontoMiao.model.Annuncio;
+import it.unical.prontoMiao.model.Recensione;
 import it.unical.prontoMiao.model.Richiesta;
 import it.unical.prontoMiao.repository.AnimaleRepository;
 import it.unical.prontoMiao.repository.AnnuncioRepository;
@@ -40,4 +41,14 @@ public class RichiestaServiceImpl implements RichiestaService {
         richiesta = richiestaRepository.save(richiesta);
         return richiesta;
     }
+
+    @Override
+    public List<Richiesta> getRichiesteByCentro(int idCentro) throws ChangeSetPersister.NotFoundException{
+        List<Richiesta> list = richiestaRepository.findByCentro_Id(idCentro);
+        if (list.isEmpty()) {
+            throw new ChangeSetPersister.NotFoundException();
+        }
+        return list;
+    }
+
 }

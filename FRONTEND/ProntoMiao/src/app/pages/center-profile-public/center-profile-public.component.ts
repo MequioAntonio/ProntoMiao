@@ -49,15 +49,11 @@ export class CenterProfilePublicComponent implements OnInit{
     })
 
     this.ads.getAllAnnunciByCentro(lastElement).subscribe(data=>{
-      console.log("AByC");
-      console.log(data);
       this.annunci = data;
 
     })
 
     this.rds.getAllRecensioniByCentro(lastElement).subscribe(data=>{
-      console.log("rec");
-      console.log(data);
       this.recensioni = data;
 
     })
