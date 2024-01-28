@@ -10,6 +10,7 @@ import { Recensione } from '../../model/Recensione';
 import { RichiestaDatabaseService } from '../../services/database-services/richiesta-database.service';
 import { RecensioneDatabaseService } from '../../services/database-services/recensione-database.service';
 import { CommonModule } from '@angular/common';
+import { CentroAdozioniDatabaseService } from '../../services/database-services/centro-adozioni-database.service';
 
 @Component({
   selector: 'app-center-profile-private',
@@ -27,6 +28,7 @@ export class CenterProfilePrivateComponent {
   recensioni?: Recensione[] = new Array();
 
   constructor(
+    private cds: CentroAdozioniDatabaseService,
     private ric: RichiestaDatabaseService,
     private rds: RecensioneDatabaseService,
     private router: Router
@@ -38,7 +40,12 @@ export class CenterProfilePrivateComponent {
     const parts = path.split("/");
     const lastElement = parts[parts.length - 1];
 
+    this.cds.getCenterByID(lastElement).subscribe(data=>{
+      this.centro = data;
+    })
+
     this.ric.getAllRichiesteByCentro(lastElement).subscribe(data=>{
+      console.warn(data)
       this.richieste = data;
     })
 

@@ -20,6 +20,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
+import { AuthService } from '../../services/auth.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-review-form',
@@ -47,13 +49,20 @@ export class ReviewFormComponent implements OnInit {
 
   votoControl = new FormControl('', [Validators.required]);
   descrizioneControl = new FormControl('', [Validators.required]);
+  userID: number;
+  idCentro!: string;
 
-  ngOnInit(): void {
-    console.log(this.votoControl)
-    console.log(this.descrizioneControl)
+  constructor(private authService: AuthService, private route: ActivatedRoute) {
+    this.userID = this.authService.getIdUtente();
   }
 
-
+  ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+      this.idCentro = params.get('idCentro')!;
+    });
+    console.log(this.votoControl)
+    console.log(this.descrizioneControl)
+    console.log(this.userID)
+    console.log(this.idCentro)
+  }
 }
-
-

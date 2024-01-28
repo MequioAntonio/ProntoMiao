@@ -12,5 +12,5 @@ import java.util.Optional;
 @Repository
 public interface RichiestaRepository extends JpaRepository<Richiesta,Integer> {
     Optional<Richiesta> findById(int idRichiesta);
-    List<Richiesta> findByCentro_Id(int idCentro);
+    List<Richiesta> findByAnnuncio_Centro_Id(int idCentro);
 }
