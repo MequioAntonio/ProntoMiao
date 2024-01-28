@@ -20,6 +20,9 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from '../../services/auth.service';
+import { SegnalazioneDatabaseService } from '../../services/database-services/segnalazione-database.service';
 
 @Component({
   selector: 'app-segnalation-form',
@@ -44,4 +47,33 @@ export class SegnalationFormComponent {
   pngInputChange(fileInputEvent: any) {
     console.log(fileInputEvent.target.files[0]);
   }
+
+  constructor (private auth: AuthService, private fb: FormBuilder, private segnalazioneservice : SegnalazioneDatabaseService, private snackBar: MatSnackBar){}
+
+  segnalationForm = this.fb.group({
+    titolo: ['', [ Validators.required,]],
+    descrizione: ['', [Validators.required]],
+    indirizzo: ['', Validators.required],
+    informazioni: [''],
+    file: ['', Validators.required],
+  });
+
+  inserisciSegnalazione(): void{
+    var req = {
+      titolo: this.segnalationForm.controls["titolo"].value!,
+      descrizione: this.segnalationForm.controls["descrizione"].value!,
+      indirizzo: this.segnalationForm.controls["indirizzo"].value!,
+      informazioni: this.segnalationForm.controls["informazioni"].value!,
+      privato: this.auth.getIdUtente(),
+      centro: undefined,
+      id: undefined,
+
+    }
+    this.segnalazioneservice.insertSegnalazione(req)
+
+
+
+
+  }
+
 }
