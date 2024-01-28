@@ -51,6 +51,7 @@ export class ReviewFormComponent implements OnInit {
   descrizioneControl = new FormControl('', [Validators.required]);
   userID: number;
   idCentro!: string;
+
   constructor(private authService: AuthService, private route: ActivatedRoute) {
     this.userID = this.authService.getIdUtente();
   }
