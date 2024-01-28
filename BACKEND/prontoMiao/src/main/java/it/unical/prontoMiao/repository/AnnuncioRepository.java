@@ -4,6 +4,7 @@ import it.unical.prontoMiao.model.Annuncio;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -11,6 +12,6 @@ import java.util.Optional;
 public interface AnnuncioRepository extends JpaRepository<Annuncio,Integer> {
 
     Optional<Annuncio> findById(int idAnnuncio);
-    Optional<Annuncio> findByCentro_Id(int idCentro);
+    List<Annuncio> findByCentro_Id(int idCentro);
 
 }

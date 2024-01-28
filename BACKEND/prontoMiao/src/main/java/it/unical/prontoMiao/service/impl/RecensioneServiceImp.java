@@ -32,11 +32,11 @@ public class RecensioneServiceImp implements RecensioneService {
 
     @Override
     public List<Recensione> getRecensioniByCentro(int idCentro)  throws ChangeSetPersister.NotFoundException{
-        Optional<Recensione> opt = recensioneRepository.findByCentro_Id(idCentro);
-        if (opt.isEmpty()) {
+        List<Recensione> list = recensioneRepository.findByCentro_Id(idCentro);
+        if (list.isEmpty()) {
             throw new ChangeSetPersister.NotFoundException();
         }
-        return (List<Recensione>) opt.get();
+        return list;
     }
 
 

@@ -57,10 +57,10 @@ public class AnnuncioServiceImpl implements AnnuncioService {
 
     @Override
     public List<Annuncio> getAnnunciByCentro(int idAnnuncio)  throws ChangeSetPersister.NotFoundException{
-        Optional<Annuncio> opt = annuncioRepository.findByCentro_Id(idAnnuncio);
-        if (opt.isEmpty()) {
+        List<Annuncio> lista = annuncioRepository.findByCentro_Id(idAnnuncio);
+        if (lista.isEmpty()) {
             throw new ChangeSetPersister.NotFoundException();
         }
-        return (List<Annuncio>) opt.get();
+        return lista;
     }
 }
