@@ -14,4 +14,5 @@ public interface AnimaleService {
     public Animale updateAnimale(int idAnimale, Animale a);
     public void deleteAnimale(int idAnimale);
     public Animale getAnimaleById(int idAnimale) throws ChangeSetPersister.NotFoundException;
+    public List<Animale> getAnimaliSenzaAnnuncio();
 }

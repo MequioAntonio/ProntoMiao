@@ -23,16 +23,14 @@
   </div>
 
       <h2 class="highlight"> Le nostre adozioni </h2>
-    <div class="centerpost">
-        <div class="flexGrid" *ngIf="annunci!.length>0">
-            <div class="flexCardItem" *ngFor="let annuncio of annunci">
+
+        <div class="adoptions" *ngIf="annunci!.length>0">
+            <div class="adoption" *ngFor="let annuncio of annunci">
               <app-adoption-card [annuncio]="annuncio"></app-adoption-card>
             </div>
           </div>
-    </div>
+
     <h2 class="highlight"> Cosa pensano di noi </h2>
-    <div class="centerpost">
-      <div class="feedbackrows" *ngIf="annunci!.length>0">
-          <div class="feedback" *ngFor="let recensione of recensioni"><app-feedback-card [recensione]="recensione"></app-feedback-card></div>
+      <div class="reviews" *ngIf="annunci!.length>0">
+          <div class="review" *ngFor="let recensione of recensioni"><app-feedback-card [recensione]="recensione"></app-feedback-card></div>
         </div>
-    </div>

@@ -3,6 +3,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { Annuncio } from '../../model/Annuncio';
 import { Input } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { RichiestaConfirmComponent } from '../richiesta-confirm/richiesta-confirm.component';
 import { RichiestaDatabaseService } from '../../services/database-services/richiesta-database.service';
@@ -14,13 +15,16 @@ import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-adoption-card',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule],
+  imports: [MatCardModule, MatButtonModule, RouterLink],
   templateUrl: './adoption-card.component.html',
   styleUrl: './adoption-card.component.scss',
 })
 export class AdoptionCardComponent {
 
   @Input() annuncio?: Annuncio;
+
+  animalRoute = "/animail-info/"+this.annuncio?.id;
+  
   @Input() richiesta?: Richiesta | undefined;
   constructor(private authService: AuthService,public dialog: MatDialog, private richiestaService: RichiestaDatabaseService) {}
 
@@ -42,7 +46,7 @@ export class AdoptionCardComponent {
           },
           error:(e:any)=>{
             console.error(e);
-    
+
           },
         });
       }

@@ -1,7 +1,7 @@
 .maindata{
     margin-left: 10%;
     margin-top: 3em;
-    display: flex;
+    display: grid;
 
 }
 
@@ -12,13 +12,9 @@
     margin-top: 1%;
 }
 .username {
-    
+
     font-size: 3em;
 
-}
-
-.subtitle{
-    
 }
 
 .userpic {
@@ -33,7 +29,7 @@
     display: grid;
     grid-template-columns: repeat(2, 10fr);
     grid-gap: 50px;
-    
+
 }
 
 .personaldata{
@@ -49,11 +45,32 @@
     margin-top: 1%;
 }
 
-.centerpost{
+.adoptions{
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 5%;
     grid-gap: 1px;
     margin-top: 50px;
+    place-items: center;
+    align-items: center;
+}
+
+.reviews{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    column-gap: 5%;
+    grid-gap: 1px;
+    margin-top: 50px;
+    place-items: center;
+    align-items: center;
+}
+
+.adoption{
+  min-width: 300px;
+}
+
+.review{
+  min-width: 200px;
 }
 
 .feedback{

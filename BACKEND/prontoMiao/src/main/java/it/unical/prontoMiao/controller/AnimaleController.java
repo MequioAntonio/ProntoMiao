@@ -24,6 +24,10 @@ public class AnimaleController {
     public ResponseEntity<List<Animale>> getAllAnimali(@Nullable @Param(value = "nome") String nome, @Nullable @Param(value = "eta") Integer eta, @Nullable @Param(value = "razza") String razza, @Nullable @Param(value = "taglia") String taglia) {
         return new ResponseEntity<List<Animale>>(animaleService.getAnimali(nome, razza, taglia),HttpStatus.OK);
     }
+    @RequestMapping(value = "/notAnnuncio",method = RequestMethod.GET)
+    public ResponseEntity<List<Animale>> getAllAnimaliNotAnnuncio() {
+        return new ResponseEntity<List<Animale>>(animaleService.getAnimaliSenzaAnnuncio(),HttpStatus.OK);
+    }
     @RequestMapping(value = "/byNome",method = RequestMethod.GET)
     public ResponseEntity<List<Animale>> getAllAnimaliByNome(@Param(value = "nome") String nome) {
         return new ResponseEntity<List<Animale>>(animaleService.getAnimaleByNome(nome),HttpStatus.OK);

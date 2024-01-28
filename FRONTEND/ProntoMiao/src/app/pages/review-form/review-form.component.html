@@ -12,7 +12,7 @@
           <mat-option value="5">★★★★★</mat-option>
         </mat-select>
         @if (votoControl.hasError('required')) {
-          <mat-error>This field is required</mat-error>
+          <mat-error>Questo campo è obbligatorio</mat-error>
         }
       </mat-form-field>
 
@@ -20,7 +20,7 @@
         <mat-label required>Descrizione</mat-label>
         <textarea matInput [formControl]="descrizioneControl"></textarea>
         @if (descrizioneControl.hasError('required')) {
-          <mat-error>This field is required</mat-error>
+          <mat-error>Questo campo è obbligatorio</mat-error>
         }
       </mat-form-field>
     </form>
