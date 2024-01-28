@@ -21,8 +21,8 @@ export class RichiestaDatabaseService{
 
     return result
   }
-
-  public insertRichiesta(richiesta: Richiesta){
+  
+  public insertRichiesta(richiesta: any){
     return this.dbs.http.post(this.dbs.baseUrl+"/richiesta", richiesta, {headers: this.dbs.headers});
   }
 
