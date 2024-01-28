@@ -24,6 +24,10 @@ public class AnnuncioController {
     public ResponseEntity<List<Annuncio>> getAllAnnunci(){
         return new ResponseEntity<List<Annuncio>>(annuncioService.getAnnunci(), HttpStatus.OK);
     }
+    @RequestMapping(value = "/nonAccettati",method = RequestMethod.GET)
+    public ResponseEntity<List<Annuncio>> getAllAnnunciNonAccettati(){
+        return new ResponseEntity<List<Annuncio>>(annuncioService.getAnnunciNotRichiestaAccettata(), HttpStatus.OK);
+    }
     @RequestMapping(value= "/{idAnnuncio}", method = RequestMethod.GET)
     public ResponseEntity getAnnuncioById(@PathVariable int idAnnuncio) {
         try {

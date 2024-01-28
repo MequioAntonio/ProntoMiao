@@ -12,4 +12,7 @@ public interface AnnuncioService {
 
     public Annuncio insertAnnuncio(Annuncio annuncio) throws IOException;
     public List<Annuncio> getAnnunciByCentro(int idCentro) throws ChangeSetPersister.NotFoundException;
+
+    public List<Annuncio> getAnnunciNotRichiestaAccettata();
+
 }

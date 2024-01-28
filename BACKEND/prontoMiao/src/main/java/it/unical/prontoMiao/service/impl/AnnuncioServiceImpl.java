@@ -63,4 +63,9 @@ public class AnnuncioServiceImpl implements AnnuncioService {
         }
         return lista;
     }
+
+    @Override
+    public List<Annuncio> getAnnunciNotRichiestaAccettata() {
+        return annuncioRepository.findAllNotInRichiestaAccettata();
+    }
 }
