@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {MatCardModule} from '@angular/material/card';
 import { Recensione } from '../../model/Recensione';
 
@@ -11,7 +11,7 @@ import { Recensione } from '../../model/Recensione';
 })
 export class FeedbackCardComponent {
 
-  recensione?: Recensione;
+  @Input() recensione?: Recensione;
 
   constructor() {}
 
