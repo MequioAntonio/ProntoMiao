@@ -23,34 +23,8 @@ export class AdoptionCardComponent {
 
   @Input() annuncio?: Annuncio;
 
-  animalRoute = "/animail-info/"+this.annuncio?.id;
   
   @Input() richiesta?: Richiesta | undefined;
   constructor(private authService: AuthService,public dialog: MatDialog, private richiestaService: RichiestaDatabaseService) {}
 
-  adottaAnimale() {
-    this.dialog.open(RichiestaConfirmComponent, {
-      data: this.annuncio,
-    }).afterClosed().subscribe(result => {
-      console.log(result);
-      if (result && result == "OK") {
-        let utentep = new UtentePrivatoImpl();
-        utentep.id = this.authService.getIdUtente();
-        let richiesta = new RichiestaImpl();
-        richiesta.data = new Date();
-        richiesta.annuncio = this.annuncio;
-        richiesta.utente = utentep;
-        this.richiestaService.insertRichiesta(richiesta).subscribe({
-          next:(c:any)=>{
-            alert("Invio riuscito!")
-          },
-          error:(e:any)=>{
-            console.error(e);
-
-          },
-        });
-      }
-    });
-
-  }
 }
