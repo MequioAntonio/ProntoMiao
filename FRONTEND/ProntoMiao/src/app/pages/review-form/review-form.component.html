@@ -18,10 +18,13 @@
 
       <mat-form-field class="formField" appearance="outline">
         <mat-label required>Descrizione</mat-label>
-        <textarea matInput required></textarea>
+        <textarea matInput [formControl]="descrizioneControl"></textarea>
+        @if (descrizioneControl.hasError('required')) {
+          <mat-error>This field is required</mat-error>
+        }
       </mat-form-field>
     </form>
-    <button class="formButton" mat-raised-button color="primary">
+    <button class="formButton" mat-raised-button color="primary" type="submit" [disabled]="!votoControl.valid || !descrizioneControl.valid">
       Invia Dati
     </button>
   </div>

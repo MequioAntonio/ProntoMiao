@@ -46,9 +46,11 @@ export class ReviewFormComponent implements OnInit {
   }
 
   votoControl = new FormControl('', [Validators.required]);
-  
+  descrizioneControl = new FormControl('', [Validators.required]);
+
   ngOnInit(): void {
     console.log(this.votoControl)
+    console.log(this.descrizioneControl)
   }
 
 
