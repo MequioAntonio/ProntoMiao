@@ -32,7 +32,7 @@ export class AdoptionsPageComponent implements OnInit {
 
     // quello sotto è di test
 
-    let example: Annuncio = {
+    /*let example: Annuncio = {
       id: 0,
       titolo: "titolo",
       descrizione: "Questo è un esempio, inserito manualmente nel ts",
@@ -58,8 +58,8 @@ export class AdoptionsPageComponent implements OnInit {
       }
     }
     this.annunciLista.push(example)
-  }
+  }*/
 
-  test(){
-  }
-}
+  //test(){
+  //}
+}}
