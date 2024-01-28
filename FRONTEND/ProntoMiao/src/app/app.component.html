@@ -26,17 +26,17 @@
     <span class="spacerBig"></span>
     @if (isLogged()) {
       @if (getTipoUtente() == "Privato") {
-        <button mat-stroked-button class="stroke" routerLink="/signup">
+        <button mat-stroked-button class="stroke" routerLink="/segnalation-form">
           Segnala
         </button>
-        <button mat-stroked-button class="stroke" routerLink="/signup">
+        <button mat-stroked-button class="stroke" routerLink="/adoptions">
           Adozioni Disponibili
         </button>
       } @else {
-        <button mat-stroked-button class="stroke" routerLink="/signup">
+        <button mat-stroked-button class="stroke" routerLink="/requests">
           Richieste Arrivate
         </button>
-        <button mat-stroked-button class="stroke" routerLink="/signup">
+        <button mat-stroked-button class="stroke" routerLink="/segnalations">
           Seganalazioni in Sospeso
         </button>
       }
