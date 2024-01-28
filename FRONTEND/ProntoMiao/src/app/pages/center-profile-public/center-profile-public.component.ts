@@ -48,7 +48,10 @@ export class CenterProfilePublicComponent implements OnInit{
       this.recensioni = data;
 
     })
+  }
 
+  aggiungiRecensione(){
+    location.href="/review-form";
   }
 
 }
