@@ -50,8 +50,9 @@
     
 }
 
-
 .items{
+    display: flex;
+    flex-direction: column;
     margin-left: 4px;
     margin-right: 4px;
 }
