@@ -11,6 +11,7 @@ import { RichiestaImpl } from '../../model/RichiestaImpl';
 import { RichiestaConfirmComponent } from '../../components/richiesta-confirm/richiesta-confirm.component';
 import { RichiestaDatabaseService } from '../../services/database-services/richiesta-database.service';
 import { AuthService } from '../../services/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-animal-info',
@@ -22,7 +23,7 @@ import { AuthService } from '../../services/auth.service';
 export class AnimalInfoComponent implements OnInit {
   annuncio!: Annuncio;
 
-  constructor(private authService: AuthService,public dialog: MatDialog,private ads: AnnuncioDatabaseService, private router: Router, private richiestaService: RichiestaDatabaseService) {}
+  constructor(private authService: AuthService,public dialog: MatDialog,private ads: AnnuncioDatabaseService, private router: Router, private richiestaService: RichiestaDatabaseService, private snackBar: MatSnackBar) {}
   animalRoute = "/animail-info/"+this.annuncio?.id;
 
   ngOnInit(): void {
@@ -51,7 +52,9 @@ export class AnimalInfoComponent implements OnInit {
         richiesta.utente = utentep;
         this.richiestaService.insertRichiesta(richiesta).subscribe({
           next:(c:any)=>{
-            alert("Invio riuscito!")
+            this.snackBar.open("Richiesta inviata.","",{duration:3000}).afterDismissed().subscribe(() => {
+              location.href="/";
+            });
           },
           error:(e:any)=>{
             console.error(e);
