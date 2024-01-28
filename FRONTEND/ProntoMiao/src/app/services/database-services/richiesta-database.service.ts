@@ -17,7 +17,7 @@ export class RichiestaDatabaseService{
   }
 
   public getRichiestaById(id: String): Observable<Richiesta>{
-    let result = this.dbs.http.get<Richiesta>(this.dbs.baseUrl+"/richiesta/${id}")
+    let result = this.dbs.http.get<Richiesta>(this.dbs.baseUrl+"/richiesta/"+id)
 
     return result
   }

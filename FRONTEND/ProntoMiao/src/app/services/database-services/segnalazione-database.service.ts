@@ -17,7 +17,7 @@ export class SegnalazioneDatabaseService{
   }
 
   public getSegnalazioneById(id: String): Observable<Segnalazione>{
-    let result = this.dbs.http.get<Segnalazione>(this.dbs.baseUrl+"/segnalazione/${id}")
+    let result = this.dbs.http.get<Segnalazione>(this.dbs.baseUrl+"/segnalazione/"+id)
 
     return result
   }

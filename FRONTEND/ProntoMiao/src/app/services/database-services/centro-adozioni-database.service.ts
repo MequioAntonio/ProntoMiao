@@ -16,7 +16,7 @@ export class CentroAdozioniDatabaseService{
   }
 
   public getCenterByID(id: String): Observable<Centro> {
-    let result = this.dbs.http.get<Centro>(this.dbs.baseUrl+"/centro-adozioni/${id}")
+    let result = this.dbs.http.get<Centro>(this.dbs.baseUrl+"/centro-adozioni/"+id)
 
     return result
   }
