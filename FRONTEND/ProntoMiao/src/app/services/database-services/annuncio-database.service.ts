@@ -17,17 +17,8 @@ export class AnnuncioDatabaseService {
     return result
   }
 
-  public insertAnnuncio(annuncio: Annuncio){
-    let observable: Observable<Annuncio> = of(annuncio)
-    observable.subscribe({
-      next:(r:any)=>{
-        this.dbs.http.post(this.dbs.baseUrl+"/annuncio", r)
-      },
-      error:(e:any)=>{
-        console.error(e);
-      },
-
-    })
+  public insertAnnuncio(annuncio: any){
+    return this.dbs.http.post(this.dbs.baseUrl+"/annuncio", annuncio);
   }
 
   public getAnnuncioByID(id: String): Observable<Annuncio> {

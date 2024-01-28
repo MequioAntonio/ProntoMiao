@@ -4,7 +4,7 @@ import { UtentePrivato } from "./UtentePrivato";
 export interface Richiesta {
   id: number;
   stato: number;
-  data: Date;
-  annuncio: Annuncio;
-  utente: UtentePrivato;
+  data: Date | undefined;
+  annuncio: Annuncio | undefined;
+  utente: UtentePrivato | undefined;
 }

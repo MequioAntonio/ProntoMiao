@@ -21,7 +21,7 @@ public class FileUtility {
         String filename = getNomeFIle(encodedFile);
         String path = System.getProperty("user.dir") + "/" + folderName;
         //File folder = new File("/Users/saradramis/Desktop/prontomiao/"+folderName);
-        Files.createDirectories(Paths.get(fileDirectory + "/"+folderName));
+        Files.createDirectories(Paths.get(path));
 
         byte[] imageData = Base64.getDecoder().decode(encodedFile.split("base64,")[1]);
         OutputStream os = new FileOutputStream(path+"/"+filename);
@@ -30,7 +30,7 @@ public class FileUtility {
     }
 
     public byte[] getImage(String nomeContesto, int idContesto, String nomeFile) throws IOException {
-        File image = new File(fileDirectory + "/" + nomeContesto + "/" + Integer.toString(idContesto) + "/" + nomeFile);
+        File image = new File(System.getProperty("user.dir")  + "/" + nomeContesto + "/" + Integer.toString(idContesto) + "/" + nomeFile);
         InputStream is = new FileInputStream(image);
         return IOUtils.toByteArray(is);
     }
