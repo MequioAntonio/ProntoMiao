@@ -22,6 +22,7 @@ export const routes: Routes = [
   { path: 'centerprofile/:idCentro', component: CenterProfilePublicComponent},
   { path: 'private/:idCentro', component: CenterProfilePrivateComponent},
   { path: 'adoptions', component: AdoptionsPageComponent},
+  { path: 'animal-info/:idCentro', component: AnimalInfoComponent},
   { path: '404', component: NotFoundComponent},
   { path : '**', redirectTo: '404'}
 
