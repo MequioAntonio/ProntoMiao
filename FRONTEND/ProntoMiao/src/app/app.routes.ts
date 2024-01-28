@@ -7,7 +7,6 @@ import { HomeComponent } from './pages/home/home.component';
 import { AnimalInfoComponent } from './pages/animal-info/animal-info.component';
 import { AdoptionCardComponent } from './components/adoption-card/adoption-card.component';
 import { ProfilepageComponent } from './pages/profilepage/profilepage.component';
-import { UserhomeComponent } from './pages/userhome/userhome.component';
 import { CenterProfilePrivateComponent } from './pages/center-profile-private/center-profile-private.component';
 import { CenterProfilePublicComponent } from './pages/center-profile-public/center-profile-public.component';
 import { AdoptionsPageComponent } from './pages/adoptions-page/adoptions-page.component';
@@ -23,7 +22,7 @@ export const routes: Routes = [
   { path: 'card', component: AdoptionCardComponent },
   { path: 'annuncio/:idAnnuncio', component: AnimalInfoComponent },
   { path: 'profile/:idUtente', component: ProfilepageComponent},
-  { path: 'userhome', component : UserhomeComponent},
+  { path: 'userhome', component : AdoptionsPageComponent},
   { path: 'centerhome', component: CenterhomeComponent},
   { path: 'centerprofile/:idCentro', component: CenterProfilePublicComponent},
   { path: 'private/:idCentro', component: CenterProfilePrivateComponent},
