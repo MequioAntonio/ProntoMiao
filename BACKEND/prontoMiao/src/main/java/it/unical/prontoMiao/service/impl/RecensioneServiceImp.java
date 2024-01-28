@@ -42,7 +42,7 @@ public class RecensioneServiceImp implements RecensioneService {
 
     @Override
     public Recensione insertRecensione(Recensione recensione) throws IOException {
-        return null;
+        return recensioneRepository.save(recensione);
     }
 
     @Override
