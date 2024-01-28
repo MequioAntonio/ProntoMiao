@@ -3,28 +3,54 @@
     <form class="form">
       <mat-form-field class="formField" appearance="outline">
         <mat-label required>Titolo</mat-label>
-        <input matInput required />
+        <input matInput [formControl]="titoloControl" />
+        @if (titoloControl.hasError('required')) {
+        <mat-error>Questo campo è obbligatorio</mat-error>
+        }
       </mat-form-field>
       <mat-form-field class="formField" appearance="outline">
         <mat-label required>Descrizione</mat-label>
-        <textarea matInput required></textarea>
-      </mat-form-field>
-      <mat-form-field class="formField" appearance="outline">
-        <mat-label required>Dati di Geolocalizzazione</mat-label>
-        <textarea matInput required></textarea>
+        <textarea matInput [formControl]="descrizioneControl"></textarea>
+        @if (titoloControl.hasError('required')) {
+        <mat-error>Questo campo è obbligatorio</mat-error>
+        }
       </mat-form-field>
       <mat-form-field class="formField" appearance="outline">
         <mat-label>Informazioni Aggiuntive</mat-label>
-        <textarea matInput></textarea>
+        <textarea matInput [formControl]="informazioniControl"></textarea>
       </mat-form-field>
-      <input #pngInput hidden="true" type="file" onclick="this.value=null" (change)="pngInputChange($event)"
-        accept=".png" />
-      <button class="formButton" mat-flat-button color="primary" (click)="pngInput.click()">
+      <input
+        #pngInput
+        hidden="true"
+        type="file"
+        onclick="this.value=null"
+        (change)="pngInputChange($event)"
+        accept=".png"
+      />
+      <button
+        class="formButton"
+        mat-flat-button
+        color="primary"
+        (click)="pngInput.click()"
+      >
         Scegli immagine (PNG)
       </button>
     </form>
-    <button class="formButton" mat-raised-button color="primary">Invia Dati</button>
+    <button
+      class="formButton"
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="!titoloControl.valid || !descrizioneControl.valid"
+    >
+      Invia Dati
+    </button>
   </div>
 
-  <img src="./assets/imgs/adoption-form.png" alt="Dai, inserisci un annuncio!" height="300" width="300" />
+  <img
+    src="./assets/imgs/adoption-form.png"
+    alt="Dai, inserisci un annuncio!"
+    height="300"
+    width="300"
+  />
 </div>

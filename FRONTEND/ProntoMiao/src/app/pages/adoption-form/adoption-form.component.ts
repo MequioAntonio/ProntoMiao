@@ -20,6 +20,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
+import { AuthService } from '../../services/auth.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-adoption-form',
@@ -43,5 +45,21 @@ import { MatButtonModule } from '@angular/material/button';
 export class AdoptionFormComponent {
   pngInputChange(fileInputEvent: any) {
     console.log(fileInputEvent.target.files[0]);
+  }
+
+  titoloControl = new FormControl('', [Validators.required]);
+  descrizioneControl = new FormControl('', [Validators.required]);
+  informazioniControl = new FormControl('');
+  userID: number;
+
+  constructor(private authService: AuthService, private route: ActivatedRoute) {
+    this.userID = this.authService.getIdUtente();
+  }
+
+  ngOnInit(): void {
+    console.log(this.titoloControl)
+    console.log(this.descrizioneControl)
+    console.log(this.informazioniControl)
+    console.log(this.userID)
   }
 }
