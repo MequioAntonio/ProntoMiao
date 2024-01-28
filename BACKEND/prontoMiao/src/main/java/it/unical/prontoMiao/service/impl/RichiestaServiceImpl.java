@@ -51,4 +51,13 @@ public class RichiestaServiceImpl implements RichiestaService {
         return list;
     }
 
+    @Override
+    public List<Richiesta> getRichiesteByUtente(int idUtente) throws ChangeSetPersister.NotFoundException{
+        List<Richiesta> list = richiestaRepository.findByUtente_Id(idUtente);
+        if (list.isEmpty()) {
+            throw new ChangeSetPersister.NotFoundException();
+        }
+        return list;
+    }
+
 }

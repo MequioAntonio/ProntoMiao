@@ -46,7 +46,15 @@ public class RichiestaController {
         try {
             return new ResponseEntity<List<Richiesta>>(richiestaService.getRichiesteByCentro(idCentro), HttpStatus.OK);
         } catch (ChangeSetPersister.NotFoundException e) {
-            return new ResponseEntity("Nessuna recensione trovata", HttpStatus.NOT_FOUND);
+            return new ResponseEntity("Nessuna richiesta trovata", HttpStatus.NOT_FOUND);
+        }
+    }
+    @RequestMapping(value= "/byUtente/{idUtente}", method = RequestMethod.GET)
+    public ResponseEntity<List<Richiesta>> getAllRichiesteByUtente(@PathVariable int idUtente){
+        try {
+            return new ResponseEntity<List<Richiesta>>(richiestaService.getRichiesteByUtente(idUtente), HttpStatus.OK);
+        } catch (ChangeSetPersister.NotFoundException e) {
+            return new ResponseEntity("Nessuna richiesta trovata", HttpStatus.NOT_FOUND);
         }
     }
 }
