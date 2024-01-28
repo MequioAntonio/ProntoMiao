@@ -17,6 +17,14 @@ export class AnimaleDatabaseService{
 
     return result
   }
+  public getAllAnimaliNotAnnuncio(): Observable<Animale[]> {
+    let result =  this.dbs.http.get<Animale[]>(this.dbs.baseUrl+"/animale/notAnnuncio")
+
+    console.log(result)
+    console.log("result")
+
+    return result
+  }
 
   public getAllAnimaliByNome(): Observable<Animale[]> {
     let result =  this.dbs.http.get<Animale[]>(this.dbs.baseUrl+"/animale/byNome", {headers: this.dbs.headers})

@@ -13,4 +13,5 @@ import java.util.Optional;
 public interface RichiestaRepository extends JpaRepository<Richiesta,Integer> {
     Optional<Richiesta> findById(int idRichiesta);
     List<Richiesta> findByAnnuncio_Centro_Id(int idCentro);
+    List<Richiesta> findByUtente_Id(int idUtente);
 }

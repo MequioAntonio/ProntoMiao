@@ -2,21 +2,28 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Annuncio } from '../../model/Annuncio';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AnnuncioDatabaseService } from '../../services/database-services/annuncio-database.service';
+import { MatDialog } from '@angular/material/dialog';
+import { UtentePrivatoImpl } from '../../model/UtentePrivatoImpl';
+import { RichiestaImpl } from '../../model/RichiestaImpl';
+import { RichiestaConfirmComponent } from '../../components/richiesta-confirm/richiesta-confirm.component';
+import { RichiestaDatabaseService } from '../../services/database-services/richiesta-database.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-animal-info',
   standalone: true,
-  imports: [MatButtonModule, MatIconModule],
+  imports: [MatButtonModule, MatIconModule,RouterLink],
   templateUrl: './animal-info.component.html',
   styleUrl: './animal-info.component.scss',
 })
 export class AnimalInfoComponent implements OnInit {
   annuncio!: Annuncio;
 
-  constructor(private ads: AnnuncioDatabaseService, private router: Router) {}
+  constructor(private authService: AuthService,public dialog: MatDialog,private ads: AnnuncioDatabaseService, private router: Router, private richiestaService: RichiestaDatabaseService) {}
+  animalRoute = "/animail-info/"+this.annuncio?.id;
 
   ngOnInit(): void {
     const path = this.router.url;
@@ -30,6 +37,30 @@ export class AnimalInfoComponent implements OnInit {
 
   }
 
+  adottaAnimale() {
+    this.dialog.open(RichiestaConfirmComponent, {
+      data: this.annuncio,
+    }).afterClosed().subscribe(result => {
+      console.log(result);
+      if (result && result == "OK") {
+        let utentep = new UtentePrivatoImpl();
+        utentep.id = this.authService.getIdUtente();
+        let richiesta = new RichiestaImpl();
+        richiesta.data = new Date();
+        richiesta.annuncio = this.annuncio;
+        richiesta.utente = utentep;
+        this.richiestaService.insertRichiesta(richiesta).subscribe({
+          next:(c:any)=>{
+            alert("Invio riuscito!")
+          },
+          error:(e:any)=>{
+            console.error(e);
 
+          },
+        });
+      }
+    });
+
+  }
 
 }
