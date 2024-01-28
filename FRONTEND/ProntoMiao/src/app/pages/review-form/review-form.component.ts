@@ -1,3 +1,4 @@
+import { DatabaseService } from './../../services/database-services/database.service';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -22,7 +23,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { AuthService } from '../../services/auth.service';
 import { ActivatedRoute } from '@angular/router';
-
+import { RecensioneDatabaseService } from '../../services/database-services/recensione-database.service';
+import { Recensione } from '../../model/Recensione';
 @Component({
   selector: 'app-review-form',
   standalone: true,
@@ -52,7 +54,7 @@ export class ReviewFormComponent implements OnInit {
   userID: number;
   idCentro!: string;
 
-  constructor(private authService: AuthService, private route: ActivatedRoute) {
+  constructor(private authService: AuthService, private route: ActivatedRoute, private recensioneService: RecensioneDatabaseService) {
     this.userID = this.authService.getIdUtente();
   }
 
@@ -64,5 +66,20 @@ export class ReviewFormComponent implements OnInit {
     console.log(this.descrizioneControl)
     console.log(this.userID)
     console.log(this.idCentro)
+  }
+
+  inserisciRecensione() {
+
+    let recensione = {
+      voto: this.votoControl.value,
+      descrizione: this.descrizioneControl.value,
+      privato: {id: this.userID},
+      centro: {id: this.idCentro}
+    }
+
+    this.recensioneService.insertRecensione(recensione).subscribe((data) => {
+      console.log("inserito Recensione!");
+      alert("recensione inserita!")
+    })
   }
 }

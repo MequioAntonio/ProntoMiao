@@ -24,7 +24,7 @@
         }
       </mat-form-field>
     </form>
-    <button class="formButton" mat-raised-button color="primary" type="submit" [disabled]="!votoControl.valid || !descrizioneControl.valid">
+    <button class="formButton" mat-raised-button color="primary" (click)="inserisciRecensione()" type="submit" [disabled]="!votoControl.valid || !descrizioneControl.valid">
       Invia Dati
     </button>
   </div>

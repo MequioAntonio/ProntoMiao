@@ -31,7 +31,7 @@
         Scegli immagine (PNG)
       </button>
     </form>
-    <button class="formButton" mat-raised-button color="primary" (click)="inserisciAnnuncio()">Invia Dati</button>
+    <button class="formButton" mat-raised-button color="primary"  (click)="inserisciAnnuncio()" type="submit" [disabled]="!annuncioForm.valid">Invia Dati</button>
   </div>
 
   <img src="./assets/imgs/adoption-form.png" alt="Dai, inserisci un annuncio!" height="300" width="300" />
