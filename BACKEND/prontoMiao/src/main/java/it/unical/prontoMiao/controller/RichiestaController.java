@@ -1,6 +1,7 @@
 package it.unical.prontoMiao.controller;
 
 import it.unical.prontoMiao.model.Annuncio;
+import it.unical.prontoMiao.model.Recensione;
 import it.unical.prontoMiao.model.Richiesta;
 import it.unical.prontoMiao.service.AnnuncioService;
 import it.unical.prontoMiao.service.RichiestaService;
@@ -38,6 +39,14 @@ public class RichiestaController {
         } catch (IOException e) {
             e.printStackTrace();
             return new ResponseEntity("Errore nel salvataggio della richiesta", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @RequestMapping(value= "/byCentro/{idCentro}", method = RequestMethod.GET)
+    public ResponseEntity<List<Richiesta>> getAllRichiesteByCentro(@PathVariable int idCentro){
+        try {
+            return new ResponseEntity<List<Richiesta>>(richiestaService.getRichiesteByCentro(idCentro), HttpStatus.OK);
+        } catch (ChangeSetPersister.NotFoundException e) {
+            return new ResponseEntity("Nessuna recensione trovata", HttpStatus.NOT_FOUND);
         }
     }
 }
