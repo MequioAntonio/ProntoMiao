@@ -26,6 +26,7 @@ import { ValidatorsService } from '../../services/validators.service';
 import { Animale } from '../../model/Animale';
 import { AnimaleDatabaseService } from '../../services/database-services/animale-database.service';
 import { AuthService } from '../../services/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-adoption-form',
@@ -48,7 +49,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class AdoptionFormComponent {
   
-  constructor(private authService: AuthService, private fb: FormBuilder, private annuncioService: AnnuncioDatabaseService, private animaleService: AnimaleDatabaseService) {}
+  constructor( private snackBar: MatSnackBar, private authService: AuthService, private fb: FormBuilder, private annuncioService: AnnuncioDatabaseService, private animaleService: AnimaleDatabaseService) {}
 
   animali : Animale[]= [];
 
@@ -61,7 +62,7 @@ export class AdoptionFormComponent {
   });
 
   ngOnInit() {
-    this.animaleService.getAllAnimali().subscribe((response => {
+    this.animaleService.getAllAnimaliNotAnnuncio().subscribe((response => {
       this.animali = response;
     }))
   }
@@ -115,7 +116,9 @@ export class AdoptionFormComponent {
 
     this.annuncioService.insertAnnuncio(annuncio).subscribe((data) => {
       console.log("inserito annuncio!");
-      alert("annuncio inserito!")
+      this.snackBar.open("Annuncio creato!","",{duration:3000}).afterDismissed().subscribe(() => {
+        location.href="/login";
+      });
     })
   }
 
