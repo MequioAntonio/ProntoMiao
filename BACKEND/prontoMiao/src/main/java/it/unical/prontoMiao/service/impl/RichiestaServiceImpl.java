@@ -44,7 +44,7 @@ public class RichiestaServiceImpl implements RichiestaService {
 
     @Override
     public List<Richiesta> getRichiesteByCentro(int idCentro) throws ChangeSetPersister.NotFoundException{
-        List<Richiesta> list = richiestaRepository.findByCentro_Id(idCentro);
+        List<Richiesta> list = richiestaRepository.findByAnnuncio_Centro_Id(idCentro);
         if (list.isEmpty()) {
             throw new ChangeSetPersister.NotFoundException();
         }
