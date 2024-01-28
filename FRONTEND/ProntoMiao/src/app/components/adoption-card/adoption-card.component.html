@@ -1,5 +1,5 @@
 <mat-card class="animal-card" >
-  <img mat-card-image src="{{annuncio?.foto_profilo}}" alt="Cane" height="250px" width="300px">
+  <img mat-card-image [src]="annuncio?.foto_profilo" alt="Cane" height="250px" width="300px">
   <mat-card-content class="content">
     <mat-card-title>{{annuncio?.animale?.nome}} - {{annuncio?.animale?.razza}}</mat-card-title>
     <p >
@@ -7,7 +7,7 @@
     </p>
   </mat-card-content>
   <mat-card-actions class="actions">
-    <button mat-raised-button color="accent">ADOTTAMI</button>
+    <button mat-raised-button color="accent" [routerLink]="animalRoute">ADOTTAMI</button>
   </mat-card-actions>
   <mat-card-header>
     <div mat-card-avatar class="animal-header-image"></div>
