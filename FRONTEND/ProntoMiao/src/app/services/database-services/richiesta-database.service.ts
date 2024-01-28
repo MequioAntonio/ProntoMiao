@@ -23,16 +23,7 @@ export class RichiestaDatabaseService{
   }
 
   public insertRichiesta(richiesta: Richiesta){
-    let observable: Observable<Richiesta> = of(richiesta)
-    observable.subscribe({
-      next:(r:any)=>{
-        this.dbs.http.post(this.dbs.baseUrl+"/richiesta", r)
-      },
-      error:(e:any)=>{
-        console.error(e);
-      },
-
-    })
+    return this.dbs.http.post(this.dbs.baseUrl+"/richiesta", richiesta);
   }
 
   public getAllRichiesteByCentro(id_Centro: String): Observable<Richiesta[]>{
