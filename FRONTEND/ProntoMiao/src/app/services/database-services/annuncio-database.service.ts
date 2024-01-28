@@ -31,10 +31,11 @@ export class AnnuncioDatabaseService {
   }
 
   public getAnnuncioByID(id: String): Observable<Annuncio> {
-    return this.dbs.http.get<Annuncio>(this.dbs.baseUrl+"/annuncio/${id}")
+    let result = this.dbs.http.get<Annuncio>(this.dbs.baseUrl+"/annuncio/"+id)
+    return result
   }
 
   public getAllAnnunciByCentro(id_Centro: String): Observable<Annuncio[]> {
-    return this.dbs.http.get<Annuncio[]>(this.dbs.baseUrl+"/annuncio/byCentro/${id_Centro}")
+    return this.dbs.http.get<Annuncio[]>(this.dbs.baseUrl+"/annuncio/byCentro/"+id_Centro)
   }
 }

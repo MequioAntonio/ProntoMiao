@@ -17,12 +17,12 @@ export class RecensioneDatabaseService {
   }
 
   public getRecensioneById(id: String): Observable<Recensione>{
-    let result = this.dbs.http.get<Recensione>(this.dbs.baseUrl+"/recensione/${id}")
+    let result = this.dbs.http.get<Recensione>(this.dbs.baseUrl+"/recensione/"+id)
     return result
   }
 
   public getAllRecensioniByCentro(id_Centro: String): Observable<Recensione[]>{
-    let result = this.dbs.http.get<Recensione[]>(this.dbs.baseUrl+"/recensione/byCentro/${id_Centro}")
+    let result = this.dbs.http.get<Recensione[]>(this.dbs.baseUrl+"/recensione/byCentro/"+id_Centro)
     return result
   }
 
@@ -40,7 +40,7 @@ export class RecensioneDatabaseService {
   }
 
   public deleteRecensioneById(id: String){
-    this.dbs.http.delete(this.dbs.baseUrl+"/recensione/${id}")
+    this.dbs.http.delete(this.dbs.baseUrl+"/recensione/"+id)
   }
 
 }

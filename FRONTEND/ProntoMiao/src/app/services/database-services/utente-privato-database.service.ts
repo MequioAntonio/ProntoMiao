@@ -32,7 +32,7 @@ export class UtentePrivatoDatabaseService{
     let observable: Observable<UtentePrivato> = of(privato)
     observable.subscribe({
       next:(r:any)=>{
-        this.dbs.http.post(this.dbs.baseUrl+"/utente/${id}", r)
+        this.dbs.http.post(this.dbs.baseUrl+"/utente/"+id, r)
       },
       error:(e:any)=>{
         console.error(e);
@@ -42,17 +42,17 @@ export class UtentePrivatoDatabaseService{
   }
 
   public deleteAnimale(id: String){
-    this.dbs.http.delete(this.dbs.baseUrl+"/utente/${id}")
+    this.dbs.http.delete(this.dbs.baseUrl+"/utente/"+id)
   }
 
   public getUserByID(id: String): Observable<UtentePrivato>{
-    let result = this.dbs.http.get<UtentePrivato>(this.dbs.baseUrl+"/utente/${id}")
+    let result = this.dbs.http.get<UtentePrivato>(this.dbs.baseUrl+"/utente/"+id)
 
     return result
   }
 
   public getUserByEmail(email: String): Observable<UtentePrivato>{
-    let result = this.dbs.http.get<UtentePrivato>(this.dbs.baseUrl+"/utente/${email}")
+    let result = this.dbs.http.get<UtentePrivato>(this.dbs.baseUrl+"/utente/"+email)
 
 
     return result

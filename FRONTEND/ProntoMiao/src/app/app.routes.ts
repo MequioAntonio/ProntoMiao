@@ -10,6 +10,8 @@ import { CenterProfilePrivateComponent } from './pages/center-profile-private/ce
 import { CenterProfilePublicComponent } from './pages/center-profile-public/center-profile-public.component';
 import { AdoptionsPageComponent } from './pages/adoptions-page/adoptions-page.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { ReviewFormComponent } from './pages/review-form/review-form.component';
+
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -22,6 +24,7 @@ export const routes: Routes = [
   { path: 'centerprofile/:idCentro', component: CenterProfilePublicComponent},
   { path: 'private/:idCentro', component: CenterProfilePrivateComponent},
   { path: 'adoptions', component: AdoptionsPageComponent},
+  { path: 'review-form', component: ReviewFormComponent },
   { path: '404', component: NotFoundComponent},
   { path : '**', redirectTo: '404'}
 
