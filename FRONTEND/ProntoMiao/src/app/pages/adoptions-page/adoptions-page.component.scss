@@ -5,5 +5,13 @@
 .centrale {
   display: grid;
   place-items: center;
+  margin-top: 5%;
+}
+
+mat-grid-tile {
+  background: lightblue;
+}
+
+.gridCont{
   margin-top: 3%;
 }

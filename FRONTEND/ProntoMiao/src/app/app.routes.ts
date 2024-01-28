@@ -5,7 +5,7 @@ import { SegnalationFormComponent } from './pages/segnalation-form/segnalation-f
 import { AdoptionFormComponent } from './pages/adoption-form/adoption-form.component';
 import { HomeComponent } from './pages/home/home.component';
 import { AnimalInfoComponent } from './pages/animal-info/animal-info.component';
-import { AnimalCardComponent } from './components/animal-card/animal-card.component';
+import { AdoptionCardComponent } from './components/adoption-card/adoption-card.component';
 import { ProfilepageComponent } from './pages/profilepage/profilepage.component';
 import { UserhomeComponent } from './pages/userhome/userhome.component';
 import { CenterProfilePrivateComponent } from './pages/center-profile-private/center-profile-private.component';
@@ -20,7 +20,7 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'adoption-form', component: AdoptionFormComponent },
   { path: 'segnalation-form', component: SegnalationFormComponent },
-  { path: 'card', component: AnimalCardComponent },
+  { path: 'card', component: AdoptionCardComponent },
   { path: 'annuncio/:idAnnuncio', component: AnimalInfoComponent },
   { path: 'profile/:idUtente', component: ProfilepageComponent},
   { path: 'userhome', component : UserhomeComponent},
@@ -29,6 +29,6 @@ export const routes: Routes = [
   { path: 'private/:idCentro', component: CenterProfilePrivateComponent},
   { path: 'adoptions', component: AdoptionsPageComponent},
   { path: '404', component: NotFoundComponent},
-  { path : '**', redirectTo: '404'} 
+  { path : '**', redirectTo: '404'}
 
 ];

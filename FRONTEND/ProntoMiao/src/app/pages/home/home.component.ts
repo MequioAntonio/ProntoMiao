@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { AnimalCardComponent } from '../../components/animal-card/animal-card.component';
+import { AdoptionCardComponent } from '../../components/adoption-card/adoption-card.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatIconModule} from '@angular/material/icon';
 import {MatGridListModule} from '@angular/material/grid-list';
@@ -13,7 +13,7 @@ import { SmallCardComponent } from '../../components/small-card/small-card.compo
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [AnimalCardComponent, MatTabsModule, MatIconModule, MatGridListModule, MatCardModule, NgbCarouselModule, FormsModule, SmallCardComponent],
+  imports: [AdoptionCardComponent, MatTabsModule, MatIconModule, MatGridListModule, MatCardModule, NgbCarouselModule, FormsModule, SmallCardComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })

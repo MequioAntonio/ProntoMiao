@@ -1,7 +1,10 @@
-<div class="centrale"><p class="title">Annunci disponibili:</p></div>
-
-<mat-grid-list cols="4" rowHeight="1:1">
-  <mat-grid-tile *ngFor="let annuncio of annunci">
-    <app-animal-card></app-animal-card>
-  </mat-grid-tile>
-</mat-grid-list>
+<div class="centrale">
+  <div class="title">Sono disponibili {{annunciLista.length}} adozioni:</div>
+</div>
+<div class="gridCont">
+  <mat-grid-list cols="3" rowHeight="9:12">
+    <mat-grid-tile *ngFor="let annuncio of annunciLista">
+      <app-adoption-card [annuncio]="annuncio"></app-adoption-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
