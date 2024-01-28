@@ -17,15 +17,7 @@ export class UtentePrivatoDatabaseService{
   }
 
   public insertUtentePrivato(privato: UtentePrivato){
-    let observable: Observable<UtentePrivato> = of(privato)
-    observable.subscribe({
-      next:(r:any)=>{
-        this.dbs.http.post(this.dbs.baseUrl+"/utente", r, {headers: this.dbs.headers})
-      },
-      error:(e:any)=>{
-        console.error(e);
-      },
-    })
+    return this.dbs.http.post(this.dbs.baseUrl+"/utente", privato, {headers: this.dbs.headers});
   }
 
   public updateUtentePrivato(id: String, privato: UtentePrivato){

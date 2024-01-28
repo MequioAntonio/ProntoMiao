@@ -27,16 +27,7 @@ export class RecensioneDatabaseService {
   }
 
   public insertRecensione(recensione: Recensione){
-    let observable: Observable<Recensione> = of(recensione)
-    observable.subscribe({
-      next:(r:any)=>{
-        this.dbs.http.post(this.dbs.baseUrl+"/recensione", r, {headers: this.dbs.headers})
-      },
-      error:(e:any)=>{
-        console.error(e);
-      },
-
-    })
+    return this.dbs.http.post(this.dbs.baseUrl+"/recensione", recensione, {headers: this.dbs.headers});
   }
 
   public deleteRecensioneById(id: String){
