@@ -59,20 +59,22 @@ export class ReviewFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     this.route.paramMap.subscribe(params => {
       this.idCentro = params.get('idCentro')!;
     });
-    console.log(this.votoControl)
-    console.log(this.descrizioneControl)
+    console.log(this.votoControl.value)
+    console.log(this.descrizioneControl.value)
     console.log(this.userID)
     console.log(this.idCentro)
+
   }
 
   inserisciRecensione() {
 
     let recensione = {
-      voto: this.votoControl,
-      descrizione: this.descrizioneControl,
+      voto: this.votoControl.value,
+      descrizione: this.descrizioneControl.value,
       privato: {id: this.userID},
       centro: {id: this.idCentro}
     }
