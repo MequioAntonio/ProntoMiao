@@ -10,37 +10,20 @@ export class RecensioneDatabaseService {
 
   constructor(private dbs: DatabaseService) {}
 
-  public getAllRecensioni(){
-    this.dbs.http.get(this.dbs.baseUrl+"/recensione").subscribe({
-      next:(r:any)=>{
-        return r;
-      },
-      error:(e:any)=>{
-        console.error(e);
-      },
-    })
+  public getAllRecensioni(): Observable<Recensione[]>{
+    let result = this.dbs.http.get<Recensione[]>(this.dbs.baseUrl+"/recensione")
+
+    return result
   }
 
-  public getRecensioneById(id: String){
-    this.dbs.http.get(this.dbs.baseUrl+"/recensione/${id}").subscribe({
-      next:(r:any)=>{
-        return r;
-      },
-      error:(e:any)=>{
-        console.error(e);
-      },
-    })
+  public getRecensioneById(id: String): Observable<Recensione>{
+    let result = this.dbs.http.get<Recensione>(this.dbs.baseUrl+"/recensione/"+id)
+    return result
   }
 
-  public getAllRecensioniByCentro(id_Centro: String){
-    this.dbs.http.get(this.dbs.baseUrl+"/recensione/byCentro/${id_Centro}").subscribe({
-      next:(r:any)=>{
-        return r;
-      },
-      error:(e:any)=>{
-        console.error(e);
-      },
-    })
+  public getAllRecensioniByCentro(id_Centro: String): Observable<Recensione[]>{
+    let result = this.dbs.http.get<Recensione[]>(this.dbs.baseUrl+"/recensione/byCentro/"+id_Centro)
+    return result
   }
 
   public insertRecensione(recensione: Recensione){
@@ -57,7 +40,7 @@ export class RecensioneDatabaseService {
   }
 
   public deleteRecensioneById(id: String){
-    this.dbs.http.delete(this.dbs.baseUrl+"/recensione/${id}")
+    this.dbs.http.delete(this.dbs.baseUrl+"/recensione/"+id)
   }
 
 }

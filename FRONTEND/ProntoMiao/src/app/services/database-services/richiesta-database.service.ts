@@ -6,37 +6,27 @@ import { Observable, of } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class RichiestaDatabaseService extends DatabaseService{
+export class RichiestaDatabaseService{
 
-  constructor() { super(); }
+  constructor(private dbs: DatabaseService) {}
 
-  public static getAllRichieste(){
-    this.http.get(this.baseUrl+"/richiesta").subscribe({
-      next:(r:any)=>{
-        return r;
-      },
-      error:(e:any)=>{
-        console.error(e);
-      },
-    })
+  public getAllRichieste(): Observable<Richiesta[]>{
+    let result = this.dbs.http.get<Richiesta[]>(this.dbs.baseUrl+"/richiesta")
+
+    return result
   }
 
-  public static getRichiestaById(id: String){
-    this.http.get(this.baseUrl+"/richiesta/${id}").subscribe({
-      next:(r:any)=>{
-        return r;
-      },
-      error:(e:any)=>{
-        console.error(e);
-      },
-    })
+  public getRichiestaById(id: String): Observable<Richiesta>{
+    let result = this.dbs.http.get<Richiesta>(this.dbs.baseUrl+"/richiesta/"+id)
+
+    return result
   }
 
-  public static insertRichiesta(richiesta: Richiesta){
+  public insertRichiesta(richiesta: Richiesta){
     let observable: Observable<Richiesta> = of(richiesta)
     observable.subscribe({
       next:(r:any)=>{
-        this.http.post(this.baseUrl+"/richiesta", r)
+        this.dbs.http.post(this.dbs.baseUrl+"/richiesta", r)
       },
       error:(e:any)=>{
         console.error(e);

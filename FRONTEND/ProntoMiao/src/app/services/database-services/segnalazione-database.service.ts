@@ -6,37 +6,27 @@ import { Observable, of } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class SegnalazioneDatabaseService extends DatabaseService{
+export class SegnalazioneDatabaseService{
 
-  constructor() { super(); }
+  constructor(private dbs: DatabaseService) {}
 
-  public static getAllSegnalazioni(){
-    this.http.get(this.baseUrl+"/segnalazione").subscribe({
-      next:(r:any)=>{
-        return r;
-      },
-      error:(e:any)=>{
-        console.error(e);
-      },
-    })
+  public getAllSegnalazioni(): Observable<Segnalazione[]>{
+    let result = this.dbs.http.get<Segnalazione[]>(this.dbs.baseUrl+"/segnalazione")
+
+    return result
   }
 
-  public static getSegnalazioneById(id: String){
-    this.http.get(this.baseUrl+"/segnalazione/${id}").subscribe({
-      next:(r:any)=>{
-        return r;
-      },
-      error:(e:any)=>{
-        console.error(e);
-      },
-    })
+  public getSegnalazioneById(id: String): Observable<Segnalazione>{
+    let result = this.dbs.http.get<Segnalazione>(this.dbs.baseUrl+"/segnalazione/"+id)
+
+    return result
   }
 
-  public static insertSegnalazione(segnalazione: Segnalazione){
+  public insertSegnalazione(segnalazione: Segnalazione){
     let observable: Observable<Segnalazione> = of(segnalazione)
     observable.subscribe({
       next:(r:any)=>{
-        this.http.post(this.baseUrl+"/segnalazione", r)
+        this.dbs.http.post(this.dbs.baseUrl+"/segnalazione", r)
       },
       error:(e:any)=>{
         console.error(e);

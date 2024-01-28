@@ -5,13 +5,13 @@ import { Annuncio } from '../../model/Annuncio';
 import { Input } from '@angular/core';
 
 @Component({
-  selector: 'app-animal-card',
+  selector: 'app-adoption-card',
   standalone: true,
   imports: [MatCardModule, MatButtonModule],
-  templateUrl: './animal-card.component.html',
-  styleUrl: './animal-card.component.scss',
+  templateUrl: './adoption-card.component.html',
+  styleUrl: './adoption-card.component.scss',
 })
-export class AnimalCardComponent {
+export class AdoptionCardComponent {
 
   @Input() annuncio?: Annuncio;
 

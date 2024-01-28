@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AnimalCardComponent } from '../../components/animal-card/animal-card.component';
+import { AdoptionCardComponent } from '../../components/adoption-card/adoption-card.component';
 import {MatButtonModule} from '@angular/material/button';
 import { FeedbackCardComponent } from '../../components/feedback-card/feedback-card.component';
 import { Centro } from '../../model/Centro';
@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-center-profile-private',
   standalone: true,
-  imports: [AnimalCardComponent, FeedbackCardComponent, MatButtonModule],
+  imports: [AdoptionCardComponent, FeedbackCardComponent, MatButtonModule],
   templateUrl: './center-profile-private.component.html',
   styleUrl: './center-profile-private.component.scss'
 })
@@ -22,7 +22,7 @@ export class CenterProfilePrivateComponent {
 
   ngOnInit(): void {
 
-    this.http.get("http://localhost:8080/centro/"+this.route.snapshot.paramMap.get("idCentro")).subscribe({
+    this.http.get("http://localhost:8080/centro-adozioni/"+this.route.snapshot.paramMap.get("idCentro")).subscribe({
       next:(c:any)=>{
         this.centro = c;
       },
@@ -38,7 +38,7 @@ export class CenterProfilePrivateComponent {
 
     //Fare modificaProfilo
     modificaProfilo(){}
-    
+
     aggiungiAdozione(){
       location.href="/adoption-form";
     }

@@ -3,7 +3,7 @@
     <a class="logo" routerLink="/">
       <img class="logo" src="./assets/imgs/logo.png" alt="ProntoMiao">
     </a>
-    
+
     @if (!isLogged()) {
       <button mat-button>
         La Nostra Missione
@@ -19,35 +19,43 @@
       </button>
       <button mat-button (click)="logoutUser()">
         Logout
-      </button>  
+      </button>
     }
 
 
     <span class="spacerBig"></span>
-    @if (!isLogged()) {
+    @if (isLogged()) {
+      @if (getTipoUtente() == "Privato") {
+        <button mat-stroked-button class="stroke" routerLink="/segnalation-form">
+          Segnala
+        </button>
+        <button mat-stroked-button class="stroke" routerLink="/adoptions">
+          Adozioni Disponibili
+        </button>
+      } @else {
+        <button mat-stroked-button class="stroke" routerLink="/requests">
+          Richieste Arrivate
+        </button>
+        <button mat-stroked-button class="stroke" routerLink="/segnalations">
+          Seganalazioni in Sospeso
+        </button>
+      }
+    } @else {
       <button mat-stroked-button class="stroke" routerLink="/login">
         Login
       </button>
       <button mat-stroked-button class="stroke" routerLink="/signup">
         Registrati
-      </button>  
-    } @else {
-      <span class="rightcorner">
-      <mat-form-field class="searchbar" >
-        <mat-label>Ricerca</mat-label>
-        <input matInput type="text"  [(ngModel)]="searchValue" >
-      </mat-form-field>
-      <button mat-stroked-button class="stroke"><mat-icon>search</mat-icon></button>
-    </span>
+      </button>
     }
   </mat-toolbar>
 </p>
 
 
 
-  
+
     <router-outlet></router-outlet>
-  
+
 
 
 
