@@ -17,11 +17,6 @@
         <mat-label>Informazioni Aggiuntive</mat-label>
         <textarea type="informazioni" matInput></textarea>
       </mat-form-field>
-      <input #pngInput hidden="true" type="file" onclick="this.value=null" (change)="pngInputChange($event)"
-        accept=".png" />
-      <button class="formButton" mat-flat-button color="primary" (click)="pngInput.click()">
-        Scegli immagine (PNG)
-      </button>
     </form>
     <button class="formButton" mat-raised-button color="primary" (click)="inserisciSegnalazione()">Invia Dati</button>
   </div>
