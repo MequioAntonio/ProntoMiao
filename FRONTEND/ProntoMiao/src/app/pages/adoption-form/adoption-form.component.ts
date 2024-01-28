@@ -27,6 +27,7 @@ import { Animale } from '../../model/Animale';
 import { AnimaleDatabaseService } from '../../services/database-services/animale-database.service';
 import { AuthService } from '../../services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-adoption-form',
@@ -89,7 +90,7 @@ export class AdoptionFormComponent {
   }
 
   inserisciAnnuncio() {
-    
+
     /*
 {
     "id": 1,
@@ -117,9 +118,8 @@ export class AdoptionFormComponent {
     this.annuncioService.insertAnnuncio(annuncio).subscribe((data) => {
       console.log("inserito annuncio!");
       this.snackBar.open("Annuncio creato!","",{duration:3000}).afterDismissed().subscribe(() => {
-        location.href="/login";
+        location.href="/";
       });
     })
   }
-
 }
