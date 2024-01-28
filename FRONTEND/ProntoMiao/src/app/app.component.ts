@@ -11,6 +11,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { Router } from '@angular/router';
 import { CenterProfilePrivateComponent } from './pages/center-profile-private/center-profile-private.component';
+import { MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-root',
@@ -57,7 +58,7 @@ export class AppComponent {
       this.router.navigate(['profile/' + id]);
     } else if(this.authService.getTipoUtente() == "CENTRO") {
       this.router.navigate(['private/' + id]);
-  } 
+  }
 }
 
 homepage(){
@@ -67,7 +68,7 @@ homepage(){
     this.router.navigate(['userhome']);
   } else if(this.authService.getTipoUtente() == "CENTRO") {
     this.router.navigate(['centerhome']);
-} 
+}
 }
 
   logoutUser() {
@@ -76,5 +77,30 @@ homepage(){
   title = 'ProntoMiao';
   searchValue: string = "";
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router, public dialog: MatDialog) {}
+
+  openMissionDialog(){
+    this.dialog.open(DiaologMissione);
+  }
+
+  openChiDialog(){
+    this.dialog.open(DiaologChiSiamo);
+  }
 }
+
+@Component({
+  selector: 'dialog-chisiamo',
+  templateUrl: 'dialog-chisiamo.html',
+  standalone: true,
+  imports: [MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose, MatButtonModule],
+})
+export class DiaologChiSiamo {}
+
+
+@Component({
+  selector: 'dialog-missione',
+  templateUrl: 'dialog-missione.html',
+  standalone: true,
+  imports: [MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose, MatButtonModule],
+})
+export class DiaologMissione {}
