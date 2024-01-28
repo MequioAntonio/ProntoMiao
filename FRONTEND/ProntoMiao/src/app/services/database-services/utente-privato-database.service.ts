@@ -11,7 +11,7 @@ export class UtentePrivatoDatabaseService{
   constructor(private dbs: DatabaseService) {}
 
   public getAllUtentiPrivati(): Observable<UtentePrivato[]>{
-    let result = this.dbs.http.get<UtentePrivato[]>(this.dbs.baseUrl+"/utente")
+    let result = this.dbs.http.get<UtentePrivato[]>(this.dbs.baseUrl+"/utente", {headers: this.dbs.headers})
 
     return result
   }
@@ -20,7 +20,7 @@ export class UtentePrivatoDatabaseService{
     let observable: Observable<UtentePrivato> = of(privato)
     observable.subscribe({
       next:(r:any)=>{
-        this.dbs.http.post(this.dbs.baseUrl+"/utente", r)
+        this.dbs.http.post(this.dbs.baseUrl+"/utente", r, {headers: this.dbs.headers})
       },
       error:(e:any)=>{
         console.error(e);
@@ -32,7 +32,7 @@ export class UtentePrivatoDatabaseService{
     let observable: Observable<UtentePrivato> = of(privato)
     observable.subscribe({
       next:(r:any)=>{
-        this.dbs.http.post(this.dbs.baseUrl+"/utente/"+id, r)
+        this.dbs.http.post(this.dbs.baseUrl+"/utente/"+id, r, {headers: this.dbs.headers})
       },
       error:(e:any)=>{
         console.error(e);
@@ -42,17 +42,17 @@ export class UtentePrivatoDatabaseService{
   }
 
   public deleteAnimale(id: String){
-    this.dbs.http.delete(this.dbs.baseUrl+"/utente/"+id)
+    this.dbs.http.delete(this.dbs.baseUrl+"/utente/"+id, {headers: this.dbs.headers})
   }
 
   public getUserByID(id: String): Observable<UtentePrivato>{
-    let result = this.dbs.http.get<UtentePrivato>(this.dbs.baseUrl+"/utente/"+id)
+    let result = this.dbs.http.get<UtentePrivato>(this.dbs.baseUrl+"/utente/"+id, {headers: this.dbs.headers})
 
     return result
   }
 
   public getUserByEmail(email: String): Observable<UtentePrivato>{
-    let result = this.dbs.http.get<UtentePrivato>(this.dbs.baseUrl+"/utente/"+email)
+    let result = this.dbs.http.get<UtentePrivato>(this.dbs.baseUrl+"/utente/"+email, {headers: this.dbs.headers})
 
 
     return result

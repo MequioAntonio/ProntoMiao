@@ -13,16 +13,13 @@ export class AnimaleDatabaseService{
 
 
   public getAllAnimali(): Observable<Animale[]> {
-    let result =  this.dbs.http.get<Animale[]>(this.dbs.baseUrl+"/animale?nome=&razza=&taglia=")
-
-    console.log(result)
-    console.log("result")
+    let result =  this.dbs.http.get<Animale[]>(this.dbs.baseUrl+"/animale?nome=&razza=&taglia=", {headers: this.dbs.headers})
 
     return result
   }
 
   public getAllAnimaliByNome(): Observable<Animale[]> {
-    let result =  this.dbs.http.get<Animale[]>(this.dbs.baseUrl+"/animale/byNome")
+    let result =  this.dbs.http.get<Animale[]>(this.dbs.baseUrl+"/animale/byNome", {headers: this.dbs.headers})
 
     return result
   }
@@ -31,7 +28,7 @@ export class AnimaleDatabaseService{
     let observable: Observable<Animale> = of(animale)
     observable.subscribe({
       next:(r:any)=>{
-        this.dbs.http.post(this.dbs.baseUrl+"/animale", r)
+        this.dbs.http.post(this.dbs.baseUrl+"/animale", r, {headers: this.dbs.headers})
       },
       error:(e:any)=>{
         console.error(e);
@@ -44,7 +41,7 @@ export class AnimaleDatabaseService{
     let observable: Observable<Animale> = of(animale)
     observable.subscribe({
       next:(r:any)=>{
-        this.dbs.http.post(this.dbs.baseUrl+"/animale/"+id, r)
+        this.dbs.http.post(this.dbs.baseUrl+"/animale/"+id, r, {headers: this.dbs.headers})
       },
       error:(e:any)=>{
         console.error(e);
@@ -54,11 +51,11 @@ export class AnimaleDatabaseService{
   }
 
   public deleteAnimale(id: String){
-    this.dbs.http.delete(this.dbs.baseUrl+"/animale/"+id)
+    this.dbs.http.delete(this.dbs.baseUrl+"/animale/"+id, {headers: this.dbs.headers})
   }
 
   public getAnimaleByID(id: String): Observable<Animale> {
-    let result = this.dbs.http.get<Animale>(this.dbs.baseUrl+"/animale/"+id)
+    let result = this.dbs.http.get<Animale>(this.dbs.baseUrl+"/animale/"+id, {headers: this.dbs.headers})
 
     return result
   }

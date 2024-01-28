@@ -12,21 +12,21 @@ export class AnnuncioDatabaseService {
 
   public getAllAnnunci(): Observable<Annuncio[]> {
 
-    let result =  this.dbs.http.get<Annuncio[]>(this.dbs.baseUrl+"/annuncio")
+    let result =  this.dbs.http.get<Annuncio[]>(this.dbs.baseUrl+"/annuncio", {headers: this.dbs.headers})
 
     return result
   }
 
   public insertAnnuncio(annuncio: any){
-    return this.dbs.http.post(this.dbs.baseUrl+"/annuncio", annuncio);
+    return this.dbs.http.post(this.dbs.baseUrl+"/annuncio", annuncio, {headers: this.dbs.headers});
   }
 
   public getAnnuncioByID(id: String): Observable<Annuncio> {
-    let result = this.dbs.http.get<Annuncio>(this.dbs.baseUrl+"/annuncio/"+id)
+    let result = this.dbs.http.get<Annuncio>(this.dbs.baseUrl+"/annuncio/"+id, {headers: this.dbs.headers})
     return result
   }
 
   public getAllAnnunciByCentro(id_Centro: String): Observable<Annuncio[]> {
-    return this.dbs.http.get<Annuncio[]>(this.dbs.baseUrl+"/annuncio/byCentro/"+id_Centro)
+    return this.dbs.http.get<Annuncio[]>(this.dbs.baseUrl+"/annuncio/byCentro/"+id_Centro, {headers: this.dbs.headers})
   }
 }
