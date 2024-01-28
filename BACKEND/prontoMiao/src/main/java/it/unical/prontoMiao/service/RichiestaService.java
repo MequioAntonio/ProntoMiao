@@ -14,4 +14,5 @@ public interface RichiestaService {
 
     public Richiesta insertRichiesta(Richiesta richiesta) throws IOException;
     public List<Richiesta> getRichiesteByCentro(int idCentro) throws ChangeSetPersister.NotFoundException;
+    public List<Richiesta> getRichiesteByUtente(int idUtente) throws ChangeSetPersister.NotFoundException;
 }

@@ -31,4 +31,9 @@ export class RichiestaDatabaseService{
     return result
   }
 
+  public getAllRichiesteByUtente(id_Utente: String): Observable<Richiesta[]>{
+    let result = this.dbs.http.get<Richiesta[]>(this.dbs.baseUrl+"/richiesta/byUtente/"+id_Utente)
+    return result
+  }
+
 }
