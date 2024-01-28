@@ -11,17 +11,15 @@
           <mat-option value="4">★★★★✰</mat-option>
           <mat-option value="5">★★★★★</mat-option>
         </mat-select>
-        @if (votoControl.hasError('required')) {
-          <mat-error>Questo campo è obbligatorio</mat-error>
-        }
+          <mat-error *ngIf="votoControl.hasError('required')">Questo campo è obbligatorio</mat-error>
+
       </mat-form-field>
 
       <mat-form-field class="formField" appearance="outline">
         <mat-label required>Descrizione</mat-label>
         <textarea matInput [formControl]="descrizioneControl"></textarea>
-        @if (descrizioneControl.hasError('required')) {
-          <mat-error>Questo campo è obbligatorio</mat-error>
-        }
+          <mat-error *ngIf="descrizioneControl.hasError('required')">Questo campo è obbligatorio</mat-error>
+
       </mat-form-field>
     </form>
     <button class="formButton" mat-raised-button color="primary" (click)="inserisciRecensione()" type="submit" [disabled]="!votoControl.valid || !descrizioneControl.valid">
