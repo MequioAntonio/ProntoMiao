@@ -3,35 +3,29 @@
         <img class="userpic" src="./assets/imgs/home/center-cta-report.png">
     </div>
     <div class="usertext">
-    <h1 class="username"> {{centro.nome}} </h1>
+    <h1 class="username"> {{centro!.nome}} </h1>
     <p class="subtitle"> Centro Adozioni </p>
     <div class="otherdata">
-      <div><p class="personaldata">Email:</p><p class="subtext">{{centro.email}}</p></div>
-      <div><p class="personaldata">Indirizzo:</p><p class="subtext">{{centro.indirizzo}}</p></div>
-      <div><p class="personaldata">Orari:</p><p class="subtext">{{centro.orari}}</p></div>
-      <div><p class="personaldata">Descrizione:</p><p class="subtext">{{centro.descrizione}}</p></div>
-      <div><p class="personaldata">Eventi:</p><p class="subtext">{{centro.eventi}}</p></div>   
+      <div><p class="personaldata">Email:</p><p class="subtext"></p>{{centro!.email}}</div>
+      <div><p class="personaldata">Indirizzo:</p><p class="subtext"></p>{{centro!.indirizzo}}</div>
+      <div><p class="personaldata">Orari:</p><p class="subtext"></p>{{centro!.orari}}</div>
+      <div><p class="personaldata">Descrizione:</p><p class="subtext"></p>{{centro!.descrizione}}</div>
+      <div><p class="personaldata">Eventi:</p><p class="subtext"></p>{{centro!.eventi}}</div>
     </div>
     </div>
     </div>
-    
-    <h2 class="highlight"> Animali in evidenza </h2> 
-      <div class="flexGrid">
-        <div class="flexCardItem"><app-adoption-card></app-adoption-card></div>
-        <div class="flexCardItem"><app-adoption-card></app-adoption-card></div>
-        <div class="flexCardItem"><app-adoption-card></app-adoption-card></div>
-      </div>
 
-
-      <h2 class="highlight"> I Nostri Contenuti </h2>       
+      <h2 class="highlight"> Le nostre adozioni </h2>
     <div class="centerpost">
         <div class="flexGrid">
-            <div class="flexCardItem"><app-adoption-card></app-adoption-card></div>
-            <div class="flexCardItem"><app-adoption-card></app-adoption-card></div>
+            <div class="flexCardItem" *ngFor="let annuncio of annunci">
+              <app-adoption-card [annuncio]="annuncio"></app-adoption-card>
+            </div>
           </div>
-        <div class="feedbackrows">
-            <div class="feedback"><app-feedback-card></app-feedback-card></div>
-            <div class="feedback"><app-feedback-card></app-feedback-card></div>
-          </div>
-
+    </div>
+    <h2 class="highlight"> Cosa pensano di noi </h2>
+    <div class="centerpost">
+      <div class="feedbackrows">
+          <div class="feedback" *ngFor="let recensione of recensioni"><app-feedback-card [recensione]="recensione"></app-feedback-card></div>
+        </div>
     </div>
