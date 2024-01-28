@@ -33,7 +33,16 @@ export class AnimaleDatabaseService{
   }
 
   public insertAnimale(animale: Animale){
-    return this.dbs.http.post(this.dbs.baseUrl+"/animale", animale, {headers: this.dbs.headers});
+    let observable: Observable<Animale> = of(animale)
+    observable.subscribe({
+      next:(r:any)=>{
+        this.dbs.http.post(this.dbs.baseUrl+"/animale", r, {headers: this.dbs.headers})
+      },
+      error:(e:any)=>{
+        console.error(e);
+      },
+
+    })
   }
 
   public updateAnimale(id: String, animale: Animale){

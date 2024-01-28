@@ -22,7 +22,16 @@ export class SegnalazioneDatabaseService{
     return result
   }
 
-  public insertSegnalazione(segnalazione: any){
-    return this.dbs.http.post(this.dbs.baseUrl+"/segnalazione", segnalazione, {headers: this.dbs.headers});
+  public insertSegnalazione(segnalazione: Segnalazione){
+    let observable: Observable<Segnalazione> = of(segnalazione)
+    observable.subscribe({
+      next:(r:any)=>{
+        this.dbs.http.post(this.dbs.baseUrl+"/segnalazione", r, {headers: this.dbs.headers})
+      },
+      error:(e:any)=>{
+        console.error(e);
+      },
+
+    })
   }
 }

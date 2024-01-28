@@ -16,8 +16,14 @@ export class AnnuncioDatabaseService {
 
     return result
   }
+  public getAllAnnunciNonAccettati(): Observable<Annuncio[]> {
 
-  public insertAnnuncio(annuncio: Annuncio){
+    let result =  this.dbs.http.get<Annuncio[]>(this.dbs.baseUrl+"/annuncio/nonAccettati", {headers: this.dbs.headers})
+
+    return result
+  }
+
+  public insertAnnuncio(annuncio: any){
     return this.dbs.http.post(this.dbs.baseUrl+"/annuncio", annuncio, {headers: this.dbs.headers});
   }
 
