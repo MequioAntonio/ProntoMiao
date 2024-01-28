@@ -5,10 +5,10 @@
     </a>
 
     @if (!isLogged()) {
-      <button mat-button>
+      <button mat-button (click)="openMissionDialog()">
         La Nostra Missione
       </button>
-      <button mat-button>
+      <button mat-button (click)="openChiDialog()">
         Chi Siamo
       </button>
     } @else {

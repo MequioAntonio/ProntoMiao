@@ -11,18 +11,18 @@ export class RecensioneDatabaseService {
   constructor(private dbs: DatabaseService) {}
 
   public getAllRecensioni(): Observable<Recensione[]>{
-    let result = this.dbs.http.get<Recensione[]>(this.dbs.baseUrl+"/recensione")
+    let result = this.dbs.http.get<Recensione[]>(this.dbs.baseUrl+"/recensione", {headers: this.dbs.headers})
 
     return result
   }
 
   public getRecensioneById(id: String): Observable<Recensione>{
-    let result = this.dbs.http.get<Recensione>(this.dbs.baseUrl+"/recensione/"+id)
+    let result = this.dbs.http.get<Recensione>(this.dbs.baseUrl+"/recensione/"+id, {headers: this.dbs.headers})
     return result
   }
 
   public getAllRecensioniByCentro(id_Centro: String): Observable<Recensione[]>{
-    let result = this.dbs.http.get<Recensione[]>(this.dbs.baseUrl+"/recensione/byCentro/"+id_Centro)
+    let result = this.dbs.http.get<Recensione[]>(this.dbs.baseUrl+"/recensione/byCentro/"+id_Centro, {headers: this.dbs.headers})
     return result
   }
 
@@ -30,7 +30,7 @@ export class RecensioneDatabaseService {
     let observable: Observable<Recensione> = of(recensione)
     observable.subscribe({
       next:(r:any)=>{
-        this.dbs.http.post(this.dbs.baseUrl+"/recensione", r)
+        this.dbs.http.post(this.dbs.baseUrl+"/recensione", r, {headers: this.dbs.headers})
       },
       error:(e:any)=>{
         console.error(e);
@@ -40,7 +40,7 @@ export class RecensioneDatabaseService {
   }
 
   public deleteRecensioneById(id: String){
-    this.dbs.http.delete(this.dbs.baseUrl+"/recensione/"+id)
+    this.dbs.http.delete(this.dbs.baseUrl+"/recensione/"+id, {headers: this.dbs.headers})
   }
 
 }

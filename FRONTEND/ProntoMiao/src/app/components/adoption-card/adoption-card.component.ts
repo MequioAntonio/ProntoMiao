@@ -23,8 +23,6 @@ export class AdoptionCardComponent {
 
   @Input() annuncio?: Annuncio;
 
-  
-  @Input() richiesta?: Richiesta | undefined;
   constructor(private authService: AuthService,public dialog: MatDialog, private richiestaService: RichiestaDatabaseService) {}
 
 }
