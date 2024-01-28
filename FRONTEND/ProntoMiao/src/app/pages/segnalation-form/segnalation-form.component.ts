@@ -54,22 +54,23 @@ export class SegnalationFormComponent {
     titolo: ['', [ Validators.required,]],
     descrizione: ['', [Validators.required]],
     indirizzo: ['', Validators.required],
-    informazioni: [''],
-    file: ['', Validators.required],
   });
 
-  inserisciSegnalazione(): void{
-    var req = {
+  inserisciSegnalazione() {
+    let req = {
       titolo: this.segnalationForm.controls["titolo"].value!,
       descrizione: this.segnalationForm.controls["descrizione"].value!,
       indirizzo: this.segnalationForm.controls["indirizzo"].value!,
-      informazioni: this.segnalationForm.controls["informazioni"].value!,
-      privato: this.auth.getIdUtente(),
-      centro: undefined,
-      id: undefined,
+      privato: {id: this.auth.getIdUtente()},
+      centro: {id: this.auth.getIdUtente()},
 
     }
-    this.segnalazioneservice.insertSegnalazione(req)
+    this.segnalazioneservice.insertSegnalazione(req).subscribe((data) => {
+      console.log("inserita segnalazione!");
+      this.snackBar.open("Segnalazione creata!","",{duration:3000}).afterDismissed().subscribe(() => {
+        location.href="/";
+      });
+    })
 
 
 
