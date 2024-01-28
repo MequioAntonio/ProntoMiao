@@ -5,6 +5,7 @@ import org.apache.coyote.Response;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -13,6 +14,6 @@ public interface RecensioneRepository extends JpaRepository<Recensione,Integer> 
 
     Optional<Recensione> deleteById(int idRecensione);
 
-    Optional<Recensione> findByCentro_Id(int idCentro);
+    List<Recensione> findByCentro_Id(int idCentro);
 
 }
