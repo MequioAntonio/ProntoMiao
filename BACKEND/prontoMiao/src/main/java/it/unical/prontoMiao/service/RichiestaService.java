@@ -3,6 +3,8 @@ package it.unical.prontoMiao.service;
 import it.unical.prontoMiao.model.Annuncio;
 import it.unical.prontoMiao.model.Recensione;
 import it.unical.prontoMiao.model.Richiesta;
+import it.unical.prontoMiao.model.UtentePrivato;
+
 import org.springframework.data.crossstore.ChangeSetPersister;
 
 import java.io.IOException;
@@ -15,4 +17,5 @@ public interface RichiestaService {
     public Richiesta insertRichiesta(Richiesta richiesta) throws IOException;
     public List<Richiesta> getRichiesteByCentro(int idCentro) throws ChangeSetPersister.NotFoundException;
     public List<Richiesta> getRichiesteByUtente(int idUtente) throws ChangeSetPersister.NotFoundException;
+    public Richiesta updateRichiesta(int id, Richiesta up);
 }

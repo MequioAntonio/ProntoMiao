@@ -3,6 +3,7 @@ package it.unical.prontoMiao.controller;
 import it.unical.prontoMiao.model.Annuncio;
 import it.unical.prontoMiao.model.Recensione;
 import it.unical.prontoMiao.model.Richiesta;
+import it.unical.prontoMiao.model.UtentePrivato;
 import it.unical.prontoMiao.service.AnnuncioService;
 import it.unical.prontoMiao.service.RichiestaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,5 +57,9 @@ public class RichiestaController {
         } catch (ChangeSetPersister.NotFoundException e) {
             return new ResponseEntity("Nessuna richiesta trovata", HttpStatus.NOT_FOUND);
         }
+    }
+    @RequestMapping(value= "/{id}", method = RequestMethod.POST)
+    public ResponseEntity<Richiesta> updateRichiesta(@PathVariable int id, @RequestBody Richiesta up) {
+        return new ResponseEntity<Richiesta>(richiestaService.updateRichiesta(id, up), HttpStatus.OK);
     }
 }

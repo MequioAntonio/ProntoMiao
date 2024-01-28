@@ -3,6 +3,7 @@ package it.unical.prontoMiao.service.impl;
 import it.unical.prontoMiao.model.Annuncio;
 import it.unical.prontoMiao.model.Recensione;
 import it.unical.prontoMiao.model.Richiesta;
+import it.unical.prontoMiao.model.UtentePrivato;
 import it.unical.prontoMiao.repository.AnimaleRepository;
 import it.unical.prontoMiao.repository.AnnuncioRepository;
 import it.unical.prontoMiao.repository.CentroAdozioniRepository;
@@ -58,6 +59,12 @@ public class RichiestaServiceImpl implements RichiestaService {
             throw new ChangeSetPersister.NotFoundException();
         }
         return list;
+    }
+
+    @Override
+    public Richiesta updateRichiesta(int id, Richiesta up) {
+        up.setId(id);
+        return richiestaRepository.save(up);
     }
 
 }
