@@ -45,4 +45,8 @@ public class AnimaleServiceImpl implements AnimaleService {
         }
         return opt.get();
     }
+
+    public List<Animale> getAnimaliSenzaAnnuncio() {
+        return animaleRepository.findAllNotInAnnuncio();
+    }
 }

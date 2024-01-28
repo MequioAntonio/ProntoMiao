@@ -11,11 +11,12 @@ import { RichiestaDatabaseService } from '../../services/database-services/richi
 import { RecensioneDatabaseService } from '../../services/database-services/recensione-database.service';
 import { CommonModule } from '@angular/common';
 import { CentroAdozioniDatabaseService } from '../../services/database-services/centro-adozioni-database.service';
+import { RequestCardComponent } from '../../components/request-card/request-card.component';
 
 @Component({
   selector: 'app-center-profile-private',
   standalone: true,
-  imports: [AdoptionCardComponent, FeedbackCardComponent, MatButtonModule, CommonModule],
+  imports: [AdoptionCardComponent, FeedbackCardComponent, MatButtonModule, CommonModule, RequestCardComponent],
   templateUrl: './center-profile-private.component.html',
   styleUrl: './center-profile-private.component.scss',
 })
