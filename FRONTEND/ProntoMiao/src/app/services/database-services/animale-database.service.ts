@@ -13,7 +13,7 @@ export class AnimaleDatabaseService{
 
 
   public getAllAnimali(): Observable<Animale[]> {
-    let result =  this.dbs.http.get<Animale[]>(this.dbs.baseUrl+"/animale")
+    let result =  this.dbs.http.get<Animale[]>(this.dbs.baseUrl+"/animale?nome=&razza=&taglia=")
 
     console.log(result)
     console.log("result")

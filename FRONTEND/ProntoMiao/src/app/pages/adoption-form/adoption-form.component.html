@@ -1,23 +1,21 @@
 <div class="parent">
   <div class="form">
-    <form class="form">
-      <mat-form-field class="formField" appearance="outline">
+    <form class="form" [formGroup]="annuncioForm">
+      <mat-form-field class="formField" appearance="outline" >
         <mat-label required>Titolo</mat-label>
-        <input matInput [formControl]="titoloControl" />
-        @if (titoloControl.hasError('required')) {
-        <mat-error>Questo campo è obbligatorio</mat-error>
-        }
+        <input matInput required />
+      </mat-form-field>
+      <mat-form-field class="formField" appearance="outline" >
+        <mat-label required>Descrizione</mat-label>
+        <textarea matInput required></textarea>
       </mat-form-field>
       <mat-form-field class="formField" appearance="outline">
-        <mat-label required>Descrizione</mat-label>
-        <textarea matInput [formControl]="descrizioneControl"></textarea>
-        @if (titoloControl.hasError('required')) {
-        <mat-error>Questo campo è obbligatorio</mat-error>
-        }
+        <mat-label required>Dati di Geolocalizzazione</mat-label>
+        <textarea matInput required></textarea>
       </mat-form-field>
       <mat-form-field class="formField" appearance="outline">
         <mat-label>Informazioni Aggiuntive</mat-label>
-        <textarea matInput [formControl]="informazioniControl"></textarea>
+        <textarea matInput></textarea>
       </mat-form-field>
       <input
         #pngInput
@@ -36,15 +34,7 @@
         Scegli immagine (PNG)
       </button>
     </form>
-    <button
-      class="formButton"
-      mat-raised-button
-      color="primary"
-      type="submit"
-      [disabled]="!titoloControl.valid || !descrizioneControl.valid"
-    >
-      Invia Dati
-    </button>
+    <button class="formButton" mat-raised-button color="primary">Invia Dati</button>
   </div>
 
   <img

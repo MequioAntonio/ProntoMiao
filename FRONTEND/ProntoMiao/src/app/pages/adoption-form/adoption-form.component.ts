@@ -20,6 +20,11 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
+import { AnnuncioDatabaseService } from '../../services/database-services/annuncio-database.service';
+import { Subject } from 'rxjs';
+import { ValidatorsService } from '../../services/validators.service';
+import { Animale } from '../../model/Animale';
+import { AnimaleDatabaseService } from '../../services/database-services/animale-database.service';
 import { AuthService } from '../../services/auth.service';
 import { ActivatedRoute } from '@angular/router';
 
@@ -43,23 +48,75 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './adoption-form.component.scss',
 })
 export class AdoptionFormComponent {
+
+  constructor(private authService: AuthService, private fb: FormBuilder, private annuncioService: AnnuncioDatabaseService, private animaleService: AnimaleDatabaseService) {}
+
+  animali : Animale[]= [];
+
+  imageBase64: string = "";
+  annuncioForm = this.fb.group({
+    titolo: ['', [ Validators.required]],
+    descrizione: ['', [Validators.required]],
+    informazioni: ['', Validators.required],
+    animale: ['', Validators.required],
+  });
+
+  ngOnInit() {
+    this.animaleService.getAllAnimali().subscribe((response => {
+      this.animali = response;
+    }))
+  }
+
   pngInputChange(fileInputEvent: any) {
     console.log(fileInputEvent.target.files[0]);
+   this.readFile(fileInputEvent.target.files[0]).subscribe((encoded) => {
+    //console.log(encoded)
+    let filename = fileInputEvent.target.files[0].name.replaceAll(" ", "_");
+    this.imageBase64 = filename + ";" + encoded;
+   })
   }
 
-  titoloControl = new FormControl('', [Validators.required]);
-  descrizioneControl = new FormControl('', [Validators.required]);
-  informazioniControl = new FormControl('');
-  userID: number;
-
-  constructor(private authService: AuthService, private route: ActivatedRoute) {
-    this.userID = this.authService.getIdUtente();
+  readFile(file: File) {
+    const sub = new Subject<string>();
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      const content: string = reader.result as string;
+      sub.next(content);
+      sub.complete();
+    }
+    return sub.asObservable();
   }
 
-  ngOnInit(): void {
-    console.log(this.titoloControl)
-    console.log(this.descrizioneControl)
-    console.log(this.informazioniControl)
-    console.log(this.userID)
+  inserisciAnnuncio() {
+
+    /*
+{
+    "id": 1,
+    "descrizione": "annuncio",
+    "informazioni_mediche": "mecc",
+    "titolo": "ANNUNCIAZIONE",
+    "foto_profilo": "foto",
+    "centro": {
+        "id": 905
+    },
+    "animale": {
+        "id": 4,
+    }
+}
+    */
+    let annuncio = {
+      descrizione: this.annuncioForm.controls["descrizione"].value!,
+      informazioni_mediche: this.annuncioForm.controls["informazioni"].value!,
+      titolo: this.annuncioForm.controls["titolo"].value!,
+      foto_profilo: this.imageBase64,
+      centro: {id: this.authService.getIdUtente()},
+      animale: {id: this.annuncioForm.controls["animale"].value!}
+    }
+
+    this.annuncioService.insertAnnuncio(annuncio).subscribe((data) => {
+      console.log("inserito annuncio!");
+      alert("annuncio inserito!")
+    })
   }
 }
