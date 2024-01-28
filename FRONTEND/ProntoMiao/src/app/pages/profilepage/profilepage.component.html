@@ -1,0 +1,20 @@
+<div class="maindata">
+<div class="imgbox">
+    <img class="userpic" src="./assets/imgs/home/private-cta-report.png">
+</div>
+<div class="usertext">
+<h1 class="username"> {{utenteprivato.nome}} </h1>
+<p class="subtitle"> Utente privato </p>
+<div class="otherdata">
+    <p class="personaldata">Email:<br>{{utenteprivato.email}}</p>
+    <p class="personaldata">Indirizzo:<br>{{utenteprivato.indirizzo}}</p>
+    <p class="personaldata">Condizioni abitative:<br>{{utenteprivato.condizioni_abitative}}</p>
+    <p class="personaldata">Altre info:<br>{{utenteprivato.informazioni_aggiuntive}}</p>
+</div>
+</div>
+</div>
+
+<h2 class="requesttitle"> Richieste effettuate </h2>
+  <div class="flexGrid">
+    <div class="flexCardItem" *ngFor="let richiesta of richieste"><app-adoption-card [annuncio]="richiesta.annuncio"></app-adoption-card></div>
+  </div>

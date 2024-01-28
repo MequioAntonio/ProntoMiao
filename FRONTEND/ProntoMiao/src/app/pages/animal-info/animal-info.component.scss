@@ -1,0 +1,96 @@
+.main-content {
+    flex: 66%;
+    text-align: center;
+}
+.sidebar-content {
+    margin: 0 0 0 4%;
+    display: flex;
+    flex-direction: column;
+    flex: 30%;
+    color: black;
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px 0 20px 0;
+    text-align: center;
+}
+
+
+.my-container {
+    margin: 20px 10% 0 10%;
+    background-color: #eff7fc;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.animal-name {
+    color: black;
+    background-color: white;
+    border-radius: 10px;
+    padding: 15px 0 15px 0;
+    font-size: 2.5em;
+}
+
+.shortinfo {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+
+}
+
+.mat-icon{
+    margin-top: 3px;
+    margin-bottom: 3px;
+    margin-left: 10px;
+}
+
+.longinfo {
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    column-gap: 20%;
+
+}
+
+.longinfospec {
+    margin-top: 10px;
+    margin-left: 5%;
+    margin-right: 10%;
+    
+}
+
+.longtext {
+    margin: 0 0 1em 0;
+    max-width: 300px;
+    text-align: left;
+  }
+
+.adotta {
+    width: 10%;
+    margin-left: 40%;
+    margin-top: 10px;
+}
+
+.topinfo {
+display: flex;
+margin-top: 2%;
+column-gap: 10px;
+
+}
+
+.shortinfo{
+    display: flex;
+    justify-content: flex-start;
+   width: 73%;
+}
+
+.shortstring{
+
+    display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}

@@ -1,0 +1,48 @@
+.logo{
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+}
+
+.spacerBig {
+  flex: auto;
+  justify-content: end;
+  align-items: center;
+}
+
+.full{
+  height: 75%;
+  display: grid;
+  align-items: center;
+  grid-template-rows: 1fr;
+
+}
+
+.stroke {
+    border: solid !important;
+    border-width: thin !important;
+    margin: 0 0.4em;
+}
+
+
+.mat-toolbar{
+  height: 6rem;
+  box-shadow: 1px 1px 10px #171717;
+}
+
+
+.toolFoot{
+  position:relative;
+  bottom: 0;
+  z-index: 100;
+  margin-top: 20px;
+}
+
+
+
+.rightcorner{
+  display: flex; 
+  align-items: start; 
+  justify-content: center;
+  
+}
