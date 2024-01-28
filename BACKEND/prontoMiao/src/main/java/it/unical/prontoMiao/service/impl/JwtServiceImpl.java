@@ -21,7 +21,7 @@ public class JwtServiceImpl implements JwtService {
     @Value("${token.signing.key}")
     private String jwtSigningKey;
 
-    private final int TOKEN_EXP = 1000 * 60 * 24; //24 Minuti
+    private final int TOKEN_EXP = 1000 * 60 * 120; //120 Minuti
     @Override
     public String extractUserName(String token) {
         return extractClaim(token, Claims::getSubject);
