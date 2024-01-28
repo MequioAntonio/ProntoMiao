@@ -10,11 +10,20 @@ import { Annuncio } from '../../model/Annuncio';
 import { CommonModule } from '@angular/common';
 import { RecensioneDatabaseService } from '../../services/database-services/recensione-database.service';
 import { Recensione } from '../../model/Recensione';
-
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { RouterLink, RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-center-profile-public',
   standalone: true,
-  imports: [AdoptionCardComponent, FeedbackCardComponent, CommonModule],
+  imports: [
+    AdoptionCardComponent,
+    FeedbackCardComponent,
+    CommonModule,
+    MatIconModule,
+    MatButtonModule,
+    RouterLink,
+    RouterOutlet],
   templateUrl: './center-profile-public.component.html',
   styleUrl: './center-profile-public.component.scss'
 })
@@ -27,14 +36,14 @@ export class CenterProfilePublicComponent implements OnInit{
   recensioni?: Recensione[] = new Array();
 
   constructor(private cds: CentroAdozioniDatabaseService, private ads: AnnuncioDatabaseService, private rds: RecensioneDatabaseService, private router: Router) {}
-
+  routeRecensioni:string="";
 
   ngOnInit(): void {
 
     const path = this.router.url;
     const parts = path.split("/");
     const lastElement = parts[parts.length - 1];
-
+    this.routeRecensioni = "/review-form/"+lastElement
     this.cds.getCenterByID(lastElement).subscribe(data=>{
       this.centro = data;
     })
@@ -51,7 +60,7 @@ export class CenterProfilePublicComponent implements OnInit{
   }
 
   aggiungiRecensione(){
-    location.href="/review-form";
+
   }
 
 }

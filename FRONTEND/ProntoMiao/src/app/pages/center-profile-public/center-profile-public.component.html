@@ -18,13 +18,13 @@
     <div class="flexGrid">
       <div class="items">
         <h3>Aggiungi una nuova recensione</h3>
-        <button mat-stroked-button (click)="aggiungiRecensione()">Aggiungi Recensione</button>
+        <button mat-stroked-button [routerLink]="routeRecensioni">Aggiungi Recensione</button>
       </div>
   </div>
 
       <h2 class="highlight"> Le nostre adozioni </h2>
     <div class="centerpost">
-        <div class="flexGrid">
+        <div class="flexGrid" *ngIf="annunci!.length>0">
             <div class="flexCardItem" *ngFor="let annuncio of annunci">
               <app-adoption-card [annuncio]="annuncio"></app-adoption-card>
             </div>
@@ -32,7 +32,7 @@
     </div>
     <h2 class="highlight"> Cosa pensano di noi </h2>
     <div class="centerpost">
-      <div class="feedbackrows">
+      <div class="feedbackrows" *ngIf="annunci!.length>0">
           <div class="feedback" *ngFor="let recensione of recensioni"><app-feedback-card [recensione]="recensione"></app-feedback-card></div>
         </div>
     </div>
