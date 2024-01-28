@@ -71,8 +71,8 @@ export class ReviewFormComponent implements OnInit {
   inserisciRecensione() {
 
     let recensione = {
-      voto: this.votoControl.value,
-      descrizione: this.descrizioneControl.value,
+      voto: this.votoControl,
+      descrizione: this.descrizioneControl,
       privato: {id: this.userID},
       centro: {id: this.idCentro}
     }
