@@ -25,7 +25,7 @@ export class AdoptionsPageComponent implements OnInit {
   constructor(private ads: AnnuncioDatabaseService) { }
 
   ngOnInit(): void {
-    this.ads.getAllAnnunci().subscribe((data: any) => {
+    this.ads.getAllAnnunciNonAccettati().subscribe((data: any) => {
       this.annunciLista.push(...data)
     })
 
