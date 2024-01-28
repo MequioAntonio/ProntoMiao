@@ -29,6 +29,9 @@ export class AdoptionsPageComponent implements OnInit {
       this.annunciLista.push(...data)
     })
 
+
+    // quello sotto è di test
+
     let example: Annuncio = {
       id: 0,
       titolo: "titolo",
