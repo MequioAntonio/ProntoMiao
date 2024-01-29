@@ -1,1 +1,10 @@
-<app-segnalation-form></app-segnalation-form>
+<div class="centrale">
+  <div class="title">Segnalazioni in attesa:</div>
+</div>
+<div class="gridCont">
+  <mat-grid-list cols="3" rowHeight="16:9">
+    <mat-grid-tile *ngFor="let segnalazione of segnalazioniLista">
+      <app-segnalation-card [segnalazione]="segnalazione" *ngIf="segnalazione.centro == null"></app-segnalation-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
