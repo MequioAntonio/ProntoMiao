@@ -23,6 +23,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../../services/auth.service';
 import { SegnalazioneDatabaseService } from '../../services/database-services/segnalazione-database.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-segnalation-form',
@@ -43,38 +44,44 @@ import { SegnalazioneDatabaseService } from '../../services/database-services/se
   templateUrl: './segnalation-form.component.html',
   styleUrl: './segnalation-form.component.scss',
 })
-export class SegnalationFormComponent {
+export class SegnalationFormComponent implements OnInit{
   pngInputChange(fileInputEvent: any) {
     console.log(fileInputEvent.target.files[0]);
   }
 
-  constructor (private auth: AuthService, private fb: FormBuilder, private segnalazioneservice : SegnalazioneDatabaseService, private snackBar: MatSnackBar){}
+  titoloControl = new FormControl('', [Validators.required]);
+  descrizioneControl = new FormControl('', [Validators.required]);
+  indirizzoControl = new FormControl('', [Validators.required]);
+  userID: number;
 
-  segnalationForm = this.fb.group({
-    titolo: ['', [ Validators.required,]],
-    descrizione: ['', [Validators.required]],
-    indirizzo: ['', Validators.required],
-  });
+  constructor (private authService: AuthService, private fb: FormBuilder, private route: ActivatedRoute, private segnalazioneService : SegnalazioneDatabaseService, private snackBar: MatSnackBar){
+    this.userID = this.authService.getIdUtente();
+  }
+
+  ngOnInit(): void {
+
+    console.log('Titolo:', this.titoloControl.value)
+    console.log('Descrizione:', this.descrizioneControl.value)
+    console.log('Indirizzo:', this.indirizzoControl.value)
+    console.log('UserID:', this.userID)
+
+  }
 
   inserisciSegnalazione() {
-    let req = {
-      titolo: this.segnalationForm.controls["titolo"].value!,
-      descrizione: this.segnalationForm.controls["descrizione"].value!,
-      indirizzo: this.segnalationForm.controls["indirizzo"].value!,
-      privato: {id: this.auth.getIdUtente()},
-      centro: {id: this.auth.getIdUtente()},
+
+    let segnalazione = {
+
+      titolo: this.titoloControl.value,
+      descrizione: this.descrizioneControl.value,
+      indirizzo: this.indirizzoControl.value,
+      utente: {id: this.userID}
 
     }
-    this.segnalazioneservice.insertSegnalazione(req).subscribe((data) => {
+
+    this.segnalazioneService.insertSegnalazione(segnalazione).subscribe((data) => {
       console.log("inserita segnalazione!");
-      this.snackBar.open("Segnalazione creata!","",{duration:3000}).afterDismissed().subscribe(() => {
-        location.href="/";
-      });
+      alert("segnalazione inserita!")
     })
-
-
-
-
   }
 
 }

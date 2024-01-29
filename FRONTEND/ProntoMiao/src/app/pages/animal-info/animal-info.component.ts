@@ -23,8 +23,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class AnimalInfoComponent implements OnInit {
   annuncio!: Annuncio;
 
-  constructor(private authService: AuthService,public dialog: MatDialog,private ads: AnnuncioDatabaseService, private router: Router, private richiestaService: RichiestaDatabaseService, private snackBar: MatSnackBar) {}
+  constructor(private authService: AuthService,public dialog: MatDialog,private ads: AnnuncioDatabaseService, private router: Router, private richiestaService: RichiestaDatabaseService, private snackBar: MatSnackBar, private route: ActivatedRoute) {}
   animalRoute = "/animail-info/"+this.annuncio?.id;
+
 
   ngOnInit(): void {
     const path = this.router.url;
@@ -63,7 +64,11 @@ export class AnimalInfoComponent implements OnInit {
         });
       }
     });
+  }
 
+
+  indirizzamentoCentro(){
+    location.href="/centerprofile/"+this.annuncio.centro.id
   }
 
 }

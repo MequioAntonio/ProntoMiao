@@ -24,5 +24,7 @@ export class AdoptionCardComponent {
   @Input() annuncio?: Annuncio;
 
   constructor(private authService: AuthService,public dialog: MatDialog, private richiestaService: RichiestaDatabaseService) {}
-
+  indirizzamentoCentro(){
+    location.href="/centerprofile/"+this.annuncio!.centro.id
+  }
 }

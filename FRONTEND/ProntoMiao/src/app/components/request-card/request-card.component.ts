@@ -22,17 +22,28 @@ export class RequestCardComponent {
   @Input() richiesta?: Richiesta;
 
   Accetta() {
-    this.richiesta!.stato = 2
-    this.richiestaService.updateRichiesta(this.richiesta!.id, this.richiesta!)
-    this.location.replaceState(this.location.path());
-    window.location.reload();
-
+    let ric = {
+      stato: 2,
+      data: this.richiesta?.data,
+      annuncio: {id: this.richiesta?.annuncio?.id},
+      utente: {id: this.richiesta?.utente?.id}
+    }
+    this.richiestaService.updateRichiesta(this.richiesta!.id, ric!).subscribe(()=>{
+      this.location.replaceState(this.location.path());
+      window.location.reload();
+    });
   }
 
   Rifiuta() {
-    this.richiesta!.stato = 1
-    this.richiestaService.updateRichiesta(this.richiesta!.id, this.richiesta!)
-    this.location.replaceState(this.location.path());
-    window.location.reload();
+    let ric = {
+      stato: 1,
+      data: this.richiesta?.data,
+      annuncio: {id: this.richiesta?.annuncio?.id},
+      utente: {id: this.richiesta?.utente?.id}
+    }
+    this.richiestaService.updateRichiesta(this.richiesta!.id, ric!).subscribe(()=>{
+      this.location.replaceState(this.location.path());
+      window.location.reload();
+    });
   }
 }
