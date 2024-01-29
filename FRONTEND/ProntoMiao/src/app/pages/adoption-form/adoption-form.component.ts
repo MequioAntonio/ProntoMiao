@@ -11,6 +11,7 @@ import {
 } from '@angular/forms';
 import {
   FloatLabelType,
+  MatFormFieldAppearance,
   MatFormFieldModule,
 } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -28,6 +29,7 @@ import { AnimaleDatabaseService } from '../../services/database-services/animale
 import { AuthService } from '../../services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
+import { MatStepper, MatStepperModule } from '@angular/material/stepper';
 
 @Component({
   selector: 'app-adoption-form',
@@ -43,23 +45,37 @@ import { ActivatedRoute } from '@angular/router';
     MatSelectModule,
     MatIconModule,
     MatButtonModule,
+    MatStepperModule,
     MatDividerModule,
   ],
   templateUrl: './adoption-form.component.html',
   styleUrl: './adoption-form.component.scss',
 })
 export class AdoptionFormComponent {
-  
-  constructor( private snackBar: MatSnackBar, private authService: AuthService, private fb: FormBuilder, private annuncioService: AnnuncioDatabaseService, private animaleService: AnimaleDatabaseService) {}
+  isLinear = true
+  apparenceSetting = 'outline' as MatFormFieldAppearance
+  animale!: Animale;
+
+  constructor( private ads: AnimaleDatabaseService, private snackBar: MatSnackBar, private authService: AuthService, private fb: FormBuilder, private annuncioService: AnnuncioDatabaseService, private animaleService: AnimaleDatabaseService) {}
 
   animali : Animale[]= [];
 
   imageBase64: string = "";
+
+  animalForm = this.fb.group({
+    nome: ['', Validators.required],
+    razza: ['', Validators.required],
+    taglia: ['', Validators.required],
+    eta : ['', Validators.required],
+    sesso : ['', Validators.required],
+    specie: ['', Validators.required],
+  });
+
+
   annuncioForm = this.fb.group({
     titolo: ['', [ Validators.required]],
     descrizione: ['', [Validators.required]],
     informazioni: ['', Validators.required],
-    animale: ['', Validators.required],
   });
 
   ngOnInit() {
@@ -112,7 +128,7 @@ export class AdoptionFormComponent {
       titolo: this.annuncioForm.controls["titolo"].value!,
       foto_profilo: this.imageBase64,
       centro: {id: this.authService.getIdUtente()},
-      animale: {id: this.annuncioForm.controls["animale"].value!}
+      animale: {id: this.animale.id}
     }
 
     this.annuncioService.insertAnnuncio(annuncio).subscribe((data) => {
@@ -122,4 +138,18 @@ export class AdoptionFormComponent {
       });
     })
   }
+
+
+
+  next(stepper: MatStepper): void{
+    this.ads.insertAnimale(this.animalForm.value).subscribe((data) => {
+      console.log("inserito animale!");
+      this.animale = data as Animale;
+    })
+
+
+    stepper.next();
+
+  }
+
 }

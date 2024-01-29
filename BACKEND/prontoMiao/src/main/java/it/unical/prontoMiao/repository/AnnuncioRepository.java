@@ -17,7 +17,7 @@ public interface AnnuncioRepository extends JpaRepository<Annuncio,Integer> {
     List<Annuncio> findByCentro_Id(int idCentro);
 
     @Query(
-            value = "SELECT * FROM annuncio WHERE annuncio.id IN (SELECT x.id_annuncio from (SELECT richiesta.id_annuncio, max(stato) status FROM richiesta GROUP BY richiesta.id_annuncio) x where status <> 2) ORDER BY annuncio.id ASC",
+            value = "select * from annuncio where annuncio.id IN (SELECT annuncio.id  FROM annuncio  EXCEPT  SELECT richiesta.id_annuncio  FROM richiesta  WHERE richiesta.stato = 2)",
             nativeQuery = true)
     List<Annuncio> findAllNotInRichiestaAccettata();
 
