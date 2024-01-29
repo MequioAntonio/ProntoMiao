@@ -29,7 +29,7 @@ export class AuthService {
     }
     return "";
   }
-  
+
   decodeToken() {
     if (this.getToken() != "") {
       return JSON.parse(window.atob(this.getToken()!.split('.')[1]));
@@ -59,11 +59,11 @@ export class AuthService {
   }
 
   isPrivato(){
-    return this.Privato
+    return this.decodeToken().tipo == "PRIVATO"
   }
 
   isCentro(){
-    return !this.Privato
+    return this.decodeToken().tipo == "CENTRO"
   }
 
   signUpGeneric(_email: string, _password: string){

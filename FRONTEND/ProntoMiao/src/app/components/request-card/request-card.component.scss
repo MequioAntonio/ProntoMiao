@@ -11,9 +11,15 @@ background-size: cover;
   text-align: center;
 }
 
-.actions
+.center
 {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  column-gap: 1%;
+}
+.private
+{
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
   column-gap: 1%;
 }

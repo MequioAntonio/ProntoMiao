@@ -26,7 +26,10 @@ export class ProfilepageComponent {
   constructor(
     private ute: UtentePrivatoDatabaseService,
     private ric: RichiestaDatabaseService,
-    private router: Router) {}
+    private router: Router,
+    private as: AuthService) {}
+
+    isCentro = this.as.isCentro()
 
   ngOnInit(): void {
 
