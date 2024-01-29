@@ -24,13 +24,11 @@ public class Segnalazione {
     public Segnalazione() {
     }
 
-    public Segnalazione(int id, String titolo, String descrizione, String indirizzo, CentroAdozioni centro, UtentePrivato utente) {
+    public Segnalazione(int id, String titolo, String descrizione, String indirizzo) {
         this.id = id;
         this.titolo = titolo;
         this.descrizione = descrizione;
         this.indirizzo = indirizzo;
-        this.centro = centro;
-        this.utente = utente;
     }
 
     public int getId() {

@@ -28,12 +28,10 @@ public class Richiesta {
     public Richiesta() {
     }
 
-    public Richiesta(int id, int stato, Date data, UtentePrivato utente, Annuncio annuncio) {
+    public Richiesta(int id, int stato, Date data) {
         this.id = id;
         this.stato = stato;
         this.data = data;
-        this.utente = utente;
-        this.annuncio = annuncio;
     }
 
     public int getId() {

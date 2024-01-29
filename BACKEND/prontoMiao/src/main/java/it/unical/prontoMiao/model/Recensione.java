@@ -20,12 +20,10 @@ public class Recensione {
     public Recensione() {
     }
 
-    public Recensione(int id, int voto, String descrizione, CentroAdozioni centro, UtentePrivato privato) {
+    public Recensione(int id, int voto, String descrizione) {
         this.id = id;
         this.voto = voto;
         this.descrizione = descrizione;
-        this.centro = centro;
-        this.privato = privato;
     }
 
     public int getId() {
