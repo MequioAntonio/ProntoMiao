@@ -4,6 +4,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { FeedbackCardComponent } from '../../components/feedback-card/feedback-card.component';
 import { Centro } from '../../model/Centro';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AnnuncioDatabaseService } from '../../services/database-services/annuncio-database.service';
+import { Annuncio } from '../../model/Annuncio';
 import { HttpClient } from '@angular/common/http';
 import { Richiesta } from '../../model/Richiesta';
 import { Recensione } from '../../model/Recensione';
@@ -24,6 +26,9 @@ export class CenterProfilePrivateComponent {
   //string immagine?
   centro!: Centro;
 
+  annunci?: Annuncio[] = new Array();
+
+
   richieste?: Richiesta[] = new Array();
 
   recensioni?: Recensione[] = new Array();
@@ -32,6 +37,7 @@ export class CenterProfilePrivateComponent {
     private cds: CentroAdozioniDatabaseService,
     private ric: RichiestaDatabaseService,
     private rds: RecensioneDatabaseService,
+    private ads: AnnuncioDatabaseService,
     private router: Router
   ) {}
 
@@ -48,6 +54,11 @@ export class CenterProfilePrivateComponent {
     this.ric.getAllRichiesteByCentro(lastElement).subscribe(data=>{
       console.warn(data)
       this.richieste = data;
+    })
+
+    this.ads.getAllAnnunciByCentro(lastElement).subscribe(data=>{
+      this.annunci = data;
+
     })
 
     this.rds.getAllRecensioniByCentro(lastElement).subscribe(data=>{
