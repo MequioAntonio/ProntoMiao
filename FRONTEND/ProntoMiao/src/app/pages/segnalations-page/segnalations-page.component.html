@@ -4,7 +4,7 @@
 <div class="gridCont">
   <mat-grid-list cols="3" rowHeight="16:9">
     <mat-grid-tile *ngFor="let segnalazione of segnalazioniLista">
-      <app-segnalation-card [segnalazione]="segnalazione" *ngIf="segnalazione.centro == null"></app-segnalation-card>
+      <div><app-segnalation-card [segnalazione]="segnalazione"></app-segnalation-card></div>
     </mat-grid-tile>
   </mat-grid-list>
 </div>

@@ -1,6 +1,6 @@
+import { Segnalazione } from './../../model/Segnalazione';
 import { Component, OnInit } from '@angular/core';
 import { SegnalationFormComponent } from '../segnalation-form/segnalation-form.component';
-import { Segnalazione } from '../../model/Segnalazione';
 import { SegnalazioneDatabaseService } from '../../services/database-services/segnalazione-database.service';
 import { MatGridList, MatGridTile } from '@angular/material/grid-list';
 import { SegnalationCardComponent } from '../../components/segnalation-card/segnalation-card.component';
@@ -21,7 +21,12 @@ export class SegnalationsPageComponent implements OnInit {
   ngOnInit(): void {
     this.seg.getAllSegnalazioni().subscribe((data: any) => {
       console.warn(data)
-      this.segnalazioniLista = data;
+      data.forEach((segnalazione: Segnalazione) => {
+        console.warn(segnalazione)
+        if(segnalazione.centro == null) {
+          this.segnalazioniLista.push(segnalazione)
+        }
+      });
     })
   }
 }
