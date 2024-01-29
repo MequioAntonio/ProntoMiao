@@ -33,8 +33,21 @@
 
       <h2 class="highlight"> Recensioni Ricevute</h2>
     <div class="flexGrid">
+      <div style="clear: both;">
+            <div class="feedback" *ngFor="let recensione of recensioni">
+              <app-feedback-card [recensione]="recensione">
+              </app-feedback-card>
+            </div>
+            <div style="clear: both;">
+            <h2> <br> Le nostre adozioni <br> </h2>
 
-            <div class="feedback" *ngFor="let recensione of recensioni"><app-feedback-card [recensione]="recensione"></app-feedback-card></div>
-
+            <div class="flexGrid" style="display: flex; flex-wrap: wrap;" *ngIf="annunci!.length>0">
+                <div class="flexCardItem" *ngFor="let annuncio of annunci">
+                  <app-adoption-card [annuncio]="annuncio"></app-adoption-card>
+                </div>
+              </div>
+              </div>
+            </div>
+            
 
     </div>
