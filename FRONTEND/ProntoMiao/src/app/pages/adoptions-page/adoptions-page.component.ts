@@ -26,7 +26,8 @@ export class AdoptionsPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.ads.getAllAnnunciNonAccettati().subscribe((data: any) => {
-      this.annunciLista.push(...data)
+      console.warn(data);
+      this.annunciLista = data;
     })
 
 
