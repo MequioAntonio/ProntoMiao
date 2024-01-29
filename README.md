@@ -7,7 +7,10 @@
 - Frontend: Nella cartella FRONTEND/ProntoMiao e eseguire da terminale ng serve
     Richiede angular e nodejs installati. Eventualmente effettuare una npm install
 
-
+CREDENZIALI PER ACCEDERE:
+- Account Centro: demo@centro.it
+- Account Utente: demo@utente.it
+- Password per entrambi: Password1!
 
 [ING_SW_GDocs][ING_SW_Link]
 
