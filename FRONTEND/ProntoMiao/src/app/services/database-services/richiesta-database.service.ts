@@ -21,7 +21,7 @@ export class RichiestaDatabaseService{
 
     return result
   }
-  
+
   public insertRichiesta(richiesta: any){
     return this.dbs.http.post(this.dbs.baseUrl+"/richiesta", richiesta, {headers: this.dbs.headers});
   }
@@ -36,17 +36,8 @@ export class RichiestaDatabaseService{
     return result
   }
 
-  public updateRichiesta(id: Number, richiesta: Richiesta){
-    let observable: Observable<Richiesta> = of(richiesta)
-    observable.subscribe({
-      next:(r:any)=>{
-        this.dbs.http.post(this.dbs.baseUrl+"/richiesta/"+id, r, {headers: this.dbs.headers})
-      },
-      error:(e:any)=>{
-        console.error(e);
-      },
-
-    })
+  public updateRichiesta(id: Number, richiesta: any){
+    return this.dbs.http.post(this.dbs.baseUrl+"/richiesta/"+id, richiesta, {headers: this.dbs.headers});
   }
 
 }
