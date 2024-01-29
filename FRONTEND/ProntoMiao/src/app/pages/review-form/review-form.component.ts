@@ -20,6 +20,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { AuthService } from '../../services/auth.service';
 import { ActivatedRoute } from '@angular/router';
@@ -54,7 +55,7 @@ export class ReviewFormComponent implements OnInit {
   userID: number;
   idCentro!: string;
 
-  constructor(private authService: AuthService, private route: ActivatedRoute, private recensioneService: RecensioneDatabaseService) {
+  constructor(private authService: AuthService, private route: ActivatedRoute, private recensioneService: RecensioneDatabaseService, private snackBar: MatSnackBar) {
     this.userID = this.authService.getIdUtente();
   }
 
@@ -81,7 +82,7 @@ export class ReviewFormComponent implements OnInit {
 
     this.recensioneService.insertRecensione(recensione).subscribe((data) => {
       console.log("inserito Recensione!");
-      alert("recensione inserita!")
+      this.snackBar.open("Recensione inserita con Successo!","",{duration:3000});
     })
   }
 }
