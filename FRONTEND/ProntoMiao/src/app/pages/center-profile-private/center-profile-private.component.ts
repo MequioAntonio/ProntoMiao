@@ -12,6 +12,7 @@ import { RecensioneDatabaseService } from '../../services/database-services/rece
 import { CommonModule } from '@angular/common';
 import { CentroAdozioniDatabaseService } from '../../services/database-services/centro-adozioni-database.service';
 import { RequestCardComponent } from '../../components/request-card/request-card.component';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-center-profile-private',
@@ -32,11 +33,12 @@ export class CenterProfilePrivateComponent {
     private cds: CentroAdozioniDatabaseService,
     private ric: RichiestaDatabaseService,
     private rds: RecensioneDatabaseService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private as: AuthService) {}
+
+    isCentro = this.as.isCentro()
 
   ngOnInit(): void {
-
     const path = this.router.url;
     const parts = path.split("/");
     const lastElement = parts[parts.length - 1];

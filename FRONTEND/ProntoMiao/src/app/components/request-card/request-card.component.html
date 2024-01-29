@@ -6,9 +6,12 @@
       {{richiesta?.annuncio?.descrizione}}
     </p>
   </mat-card-content>
-  <mat-card-actions class="actions">
+  <mat-card-actions class="center" *ngIf="isCentro">
     <button mat-raised-button color="primary" (click)="Accetta()">ACCETTA</button>
     <button mat-raised-button color="warn" (click)="Rifiuta()">DECLINA</button>
+  </mat-card-actions>
+  <mat-card-actions class="private" *ngIf="!isCentro">
+    <button mat-raised-button color="warn" (click)="Rifiuta()">ANNULLA</button>
   </mat-card-actions>
   <mat-card-header>
     <div mat-card-avatar class="animal-header-image"></div>

@@ -16,5 +16,6 @@
 
 <h2 class="requesttitle"> Richieste effettuate </h2>
   <div class="flexGrid">
-    <div class="flexCardItem" *ngFor="let richiesta of richieste"><app-adoption-card [annuncio]="richiesta.annuncio"></app-adoption-card></div>
+    <div class="flexCardItem" *ngFor="let richiesta of richieste"><app-request-card *ngIf="richiesta.stato == 0" [isCentro]="isCentro" [richiesta]="richiesta"></app-request-card></div>
+
   </div>

@@ -5,12 +5,13 @@ import { Input } from '@angular/core';
 import { Richiesta } from '../../model/Richiesta';
 import { RichiestaDatabaseService } from '../../services/database-services/richiesta-database.service';
 import { Router } from '@angular/router';
-import { Location } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-request-card',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule],
+  imports: [MatCardModule, MatButtonModule, CommonModule],
   templateUrl: './request-card.component.html',
   styleUrl: './request-card.component.scss'
 })
@@ -18,10 +19,11 @@ export class RequestCardComponent {
 
   constructor(private richiestaService: RichiestaDatabaseService, private location: Location) {}
 
-
   @Input() richiesta?: Richiesta;
+  @Input() isCentro?: boolean;
 
   Accetta() {
+
     let ric = {
       stato: 2,
       data: this.richiesta?.data,
