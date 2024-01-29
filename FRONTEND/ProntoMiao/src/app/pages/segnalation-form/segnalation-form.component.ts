@@ -74,7 +74,7 @@ export class SegnalationFormComponent implements OnInit{
       titolo: this.titoloControl.value,
       descrizione: this.descrizioneControl.value,
       indirizzo: this.indirizzoControl.value,
-      privato: {id: this.userID}
+      utente: {id: this.userID}
 
     }
 
