@@ -1,19 +1,35 @@
 @use "@angular/material" as mat;
+@use './palette.scss' as pal;
+@use 'sass:map';
+
 
 @include mat.core();
 
-$my-primary: mat.define-palette(mat.$orange-palette, 200);
-$my-accent: mat.define-palette(mat.$light-green-palette, A200, A100, A400);
 
-$my-theme: mat.define-light-theme(
+
+$light-theme: mat.define-light-theme(
   (
     color: (
-      primary: $my-primary,
-      accent: $my-accent,
+      primary: mat.define-palette(pal.$l-primary),
+      accent: mat.define-palette(pal.$l-secondary),
+      warn: mat.define-palette(pal.$l-warn)
     ),
     typography: mat.define-typography-config(),
     density: 0,
   )
 );
 
-@include mat.all-component-themes($my-theme);
+
+$dark-theme: mat.define-dark-theme(
+  (
+    color: (
+      primary: mat.define-palette(pal.$d-primary),
+      accent: mat.define-palette(pal.$d-secondary),
+      warn: mat.define-palette(pal.$d-warn)
+    ),
+    typography: mat.define-typography-config(),
+    density: 0,
+  )
+);
+
+@include mat.all-component-themes($dark-theme);
