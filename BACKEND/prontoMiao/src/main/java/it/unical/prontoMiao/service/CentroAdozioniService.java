@@ -1,6 +1,6 @@
 package it.unical.prontoMiao.service;
 
-import it.unical.prontoMiao.model.CentroAdozioni;
+import it.unical.prontoMiao.model_old.CentroAdozioni;
 
 import java.util.List;
 import java.util.Optional;

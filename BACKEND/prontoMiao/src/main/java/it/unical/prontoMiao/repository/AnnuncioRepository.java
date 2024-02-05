@@ -1,7 +1,6 @@
 package it.unical.prontoMiao.repository;
 
-import it.unical.prontoMiao.model.Animale;
-import it.unical.prontoMiao.model.Annuncio;
+import it.unical.prontoMiao.model_old.Annuncio;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

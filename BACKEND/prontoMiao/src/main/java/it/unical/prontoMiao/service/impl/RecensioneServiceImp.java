@@ -1,7 +1,6 @@
 package it.unical.prontoMiao.service.impl;
 
-import it.unical.prontoMiao.model.Annuncio;
-import it.unical.prontoMiao.model.Recensione;
+import it.unical.prontoMiao.model_old.Recensione;
 import it.unical.prontoMiao.repository.RecensioneRepository;
 import it.unical.prontoMiao.service.RecensioneService;
 import org.springframework.beans.factory.annotation.Autowired;

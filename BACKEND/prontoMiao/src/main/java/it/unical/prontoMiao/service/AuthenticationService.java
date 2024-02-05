@@ -1,6 +1,6 @@
 package it.unical.prontoMiao.service;
 
-import it.unical.prontoMiao.model.Utente;
+import it.unical.prontoMiao.model_old.Utente;
 import it.unical.prontoMiao.request.AuthRequest;
 import it.unical.prontoMiao.response.JwtTokenResponse;
 

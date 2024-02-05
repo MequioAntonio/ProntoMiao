@@ -1,7 +1,6 @@
 package it.unical.prontoMiao.controller;
 
-import it.unical.prontoMiao.model.CentroAdozioni;
-import it.unical.prontoMiao.model.UtentePrivato;
+import it.unical.prontoMiao.model_old.CentroAdozioni;
 import it.unical.prontoMiao.service.CentroAdozioniService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;

@@ -1,9 +1,6 @@
 package it.unical.prontoMiao.controller;
 
-import it.unical.prontoMiao.model.Annuncio;
-import it.unical.prontoMiao.model.Richiesta;
-import it.unical.prontoMiao.model.Segnalazione;
-import it.unical.prontoMiao.service.AnnuncioService;
+import it.unical.prontoMiao.model_old.Segnalazione;
 import it.unical.prontoMiao.service.SegnalazioneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;

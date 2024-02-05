@@ -1,10 +1,9 @@
 package it.unical.prontoMiao.controller;
 
-import it.unical.prontoMiao.model.Utente;
+import it.unical.prontoMiao.model_old.Utente;
 import it.unical.prontoMiao.request.AuthRequest;
 import it.unical.prontoMiao.response.JwtTokenResponse;
 import it.unical.prontoMiao.service.AuthenticationService;
-import jakarta.persistence.Access;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

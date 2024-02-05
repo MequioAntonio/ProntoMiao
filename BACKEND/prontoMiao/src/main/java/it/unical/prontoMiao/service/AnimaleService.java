@@ -1,9 +1,7 @@
 package it.unical.prontoMiao.service;
 
-import it.unical.prontoMiao.model.Animale;
+import it.unical.prontoMiao.model_old.Animale;
 import org.springframework.data.crossstore.ChangeSetPersister;
-import org.springframework.data.repository.query.Param;
-import org.springframework.lang.Nullable;
 
 import java.util.List;
 

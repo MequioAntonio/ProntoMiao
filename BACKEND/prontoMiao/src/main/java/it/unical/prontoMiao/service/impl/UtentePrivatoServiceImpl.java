@@ -1,6 +1,6 @@
 package it.unical.prontoMiao.service.impl;
 
-import it.unical.prontoMiao.model.UtentePrivato;
+import it.unical.prontoMiao.model_old.UtentePrivato;
 import it.unical.prontoMiao.repository.UtentePrivatoRepository;
 import it.unical.prontoMiao.service.UtentePrivatoService;
 import jakarta.transaction.Transactional;

@@ -1,7 +1,6 @@
-package it.unical.prontoMiao.model;
+package it.unical.prontoMiao.model_old;
 
 import jakarta.persistence.*;
-import org.springframework.lang.NonNull;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

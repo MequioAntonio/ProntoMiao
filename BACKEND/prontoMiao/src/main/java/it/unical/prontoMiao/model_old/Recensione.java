@@ -1,4 +1,4 @@
-package it.unical.prontoMiao.model;
+package it.unical.prontoMiao.model_old;
 
 import jakarta.persistence.*;
 

@@ -1,6 +1,6 @@
 package it.unical.prontoMiao.service;
 
-import it.unical.prontoMiao.model.Annuncio;
+import it.unical.prontoMiao.model_old.Annuncio;
 import org.springframework.data.crossstore.ChangeSetPersister;
 
 import java.io.IOException;

@@ -1,7 +1,6 @@
 package it.unical.prontoMiao.repository;
 
-import it.unical.prontoMiao.model.CentroAdozioni;
-import it.unical.prontoMiao.model.UtentePrivato;
+import it.unical.prontoMiao.model_old.CentroAdozioni;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

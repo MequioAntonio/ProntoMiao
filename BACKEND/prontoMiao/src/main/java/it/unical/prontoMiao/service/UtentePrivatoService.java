@@ -1,6 +1,6 @@
 package it.unical.prontoMiao.service;
 
-import it.unical.prontoMiao.model.UtentePrivato;
+import it.unical.prontoMiao.model_old.UtentePrivato;
 import org.springframework.data.crossstore.ChangeSetPersister;
 
 import java.util.List;
