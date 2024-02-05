@@ -44,7 +44,7 @@ public class AnimaleDaoPostgres implements AnimaleDao {
     @Override
     public List<Animale> findByNome(String nome) throws SQLException {
         List<Animale> animali = new ArrayList<Animale>();
-        String query = "select * from animale where nome = ?";
+        String query = "select * from animale where lower(nome) = lower(?)";
         PreparedStatement st = conn.prepareStatement(query);
         st.setString(1, nome);
 
@@ -165,7 +165,7 @@ public class AnimaleDaoPostgres implements AnimaleDao {
     @Override
     public List<Animale> findByAllLikeAsc(String nome, Integer eta, String razza, String taglia) throws SQLException {
         List<Animale> animaliLista = new ArrayList<Animale>();
-        String query = "select * from animale where (nome like ?) or (eta like ?) or (razza like ?) or (taglia like ?) order by asc";
+        String query = "select * from animale where (lower(nome) like lower(?)) or (eta like ?) or (lower(razza) like lower(?)) or (lower(taglia) like lower(?)) order by asc";
         PreparedStatement st = conn.prepareStatement(query);
         st.setString(1, nome);
         st.setInt(2, eta);
