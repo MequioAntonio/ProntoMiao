@@ -20,13 +20,15 @@ public class CentroAdozioniDaoPostgres implements CentroAdozioniDao {
     @Override
     public CentroAdozioni findCentroById(int id) {
         CentroAdozioni centro = null;
-        String query = "select * from centro_adozioni where id = ?";
+        String query = "SELECT * FROM centro_adozioni INNER JOIN utente ON utente.id = centro_adozioni.id WHERE id = ?";
         try {
             PreparedStatement st = conn.prepareStatement(query);
             st.setInt(1, id);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
                 centro = new CentroAdozioni();
+
+                centro.setEmail(rs.getString("email"));
                 centro.setId(rs.getInt("id"));
                 centro.setDescrizione(rs.getString("descrizione"));
                 centro.setEventi(rs.getString("eventi"));
