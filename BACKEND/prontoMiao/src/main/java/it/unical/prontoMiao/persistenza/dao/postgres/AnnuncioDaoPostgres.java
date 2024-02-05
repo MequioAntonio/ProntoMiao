@@ -23,81 +23,73 @@ public class AnnuncioDaoPostgres implements AnnuncioDao{
     }
 
     @Override
-    public List<Annuncio> getAnnunci() {
+    public List<Annuncio> findAll() throws SQLException {
         List<Annuncio> annunci = new ArrayList<Annuncio>();
-        String query = "select * from annunci";
-        try {
-            Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery(query);
+        String query = "select * from annuncio";
+        Statement st = conn.createStatement();
+        ResultSet rs = st.executeQuery(query);
 
-            while (rs.next()) {
-                Annuncio annuncio = new Annuncio();
-                annuncio.setId(rs.getInt("id"));
-                annuncio.setDescrizione(rs.getString("descrizione"));
-                annuncio.setInformazioni_mediche(rs.getString("informazioni_mediche"));
-                annuncio.setTitolo(rs.getString("titolo"));
-                annuncio.setFoto_profilo(rs.getString("foto_profilo"));
+        while (rs.next()) {
+            Annuncio annuncio = new Annuncio();
+            annuncio.setId(rs.getInt("id"));
+            annuncio.setDescrizione(rs.getString("descrizione"));
+            annuncio.setInformazioni_mediche(rs.getString("informazioni_mediche"));
+            annuncio.setTitolo(rs.getString("titolo"));
+            annuncio.setFoto_profilo(rs.getString("foto_profilo"));
 
-                Integer centroId = rs.getInt("centro");
-                CentroAdozioni centro = DBManager.getInstance().getCentroAdozioniDao()
-                                .findByPrimaryKey(centroId);
-                annuncio.setCentro(centro);
+            Integer centroId = rs.getInt("centro");
+            CentroAdozioni centro = DBManager.getInstance().getCentroAdozioniDao()
+                            .findById(centroId);
+            annuncio.setCentro(centro);
 
-                Integer animaleId = rs.getInt("animale");
-                Animale animale = DBManager.getInstance().getAnimaleDao()
-                                .getAnimaleById(animaleId);
-                annuncio.setAnimale(animale);
+            Integer animaleId = rs.getInt("animale");
+            Animale animale = DBManager.getInstance().getAnimaleDao()
+                            .findById(animaleId);
+            annuncio.setAnimale(animale);
 
-                annunci.add(annuncio);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+            annunci.add(annuncio);
         }
+
         return annunci;
     }
 
     @Override
-    public Annuncio getAnnuncioById(int idAnnuncio) {
+    public Annuncio findById(Integer idAnnuncio) throws SQLException {
         Annuncio annuncio = null;
         String query = "select * from annuncio where id = ?";
-        try {
-            PreparedStatement st = conn.prepareStatement(query);
-            st.setInt(1, idAnnuncio);
+        PreparedStatement st = conn.prepareStatement(query);
+        st.setInt(1, idAnnuncio);
 
-            ResultSet rs = st.executeQuery();
+        ResultSet rs = st.executeQuery();
 
-            if (rs.next()) {
-                annuncio = new Annuncio();
-                annuncio.setId(rs.getInt("id"));
-                annuncio.setDescrizione(rs.getString("descrizione"));
-                annuncio.setInformazioni_mediche(rs.getString("informazioni_mediche"));
-                annuncio.setTitolo(rs.getString("titolo"));
-                annuncio.setFoto_profilo(rs.getString("foto_profilo"));
+        if (rs.next()) {
+            annuncio = new Annuncio();
+            annuncio.setId(rs.getInt("id"));
+            annuncio.setDescrizione(rs.getString("descrizione"));
+            annuncio.setInformazioni_mediche(rs.getString("informazioni_mediche"));
+            annuncio.setTitolo(rs.getString("titolo"));
+            annuncio.setFoto_profilo(rs.getString("foto_profilo"));
 
-                Integer centroId = rs.getInt("centro");
-                CentroAdozioni centro = DBManager.getInstance().getCentroAdozioniDao()
-                                .findByPrimaryKey(centroId);
-                annuncio.setCentro(centro);
+            Integer centroId = rs.getInt("centro");
+            CentroAdozioni centro = DBManager.getInstance().getCentroAdozioniDao()
+                            .findById(centroId);
+            annuncio.setCentro(centro);
 
-                Integer animaleId = rs.getInt("animale");
-                Animale animale = DBManager.getInstance().getAnimaleDao()
-                                .getAnimaleById(animaleId);
-                annuncio.setAnimale(animale);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+            Integer animaleId = rs.getInt("animale");
+            Animale animale = DBManager.getInstance().getAnimaleDao()
+                            .findById(animaleId);
+            annuncio.setAnimale(animale);
         }
+
         return annuncio;
     }
 
     @Override
-    public void insertAnnuncio(Annuncio annuncio) {
-        String insertStr = "INSERT INTO annuncio VALUES (?, ?, ?, ?, ?, ?, ?)";
+    public Annuncio saveOrUpdate(Annuncio annuncio) throws SQLException {
+        if (annuncio.getId()!=null){
+            String insertStr = "INSERT INTO annuncio VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-        PreparedStatement st;
-        try {
+            PreparedStatement st;
             st = conn.prepareStatement(insertStr);
 
             Integer newId = IdBroker.getId(conn);
@@ -108,83 +100,102 @@ public class AnnuncioDaoPostgres implements AnnuncioDao{
             st.setString(3, annuncio.getInformazioni_mediche());
             st.setString(4, annuncio.getTitolo());
             st.setString(5, annuncio.getFoto_profilo());
-            st.setInt(6, annuncio.getCentro().getUser().getId());
+            st.setInt(6, annuncio.getCentro().getId());
             st.setInt(7, annuncio.getAnimale().getId());
 
             st.executeUpdate();
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } else {
+            String updateStr = "UPDATE annuncio set descrizione = ?," +
+                    "informazioni_mediche = ?, titolo = ?, foto_profilo = ?, id_centro = ?, id_animale = ? where id = ?";
+
+            PreparedStatement st;
+            st = conn.prepareStatement(updateStr);
+
+            st.setString(2, annuncio.getDescrizione());
+            st.setString(3, annuncio.getInformazioni_mediche());
+            st.setString(4, annuncio.getTitolo());
+            st.setString(5, annuncio.getFoto_profilo());
+            st.setInt(6, annuncio.getCentro().getId());
+            st.setInt(7, annuncio.getAnimale().getId());
+
+            st.setInt(7, annuncio.getId());
+
+            st.executeUpdate();
+
         }
+        return annuncio;
     }
 
     @Override
-    public List<Annuncio> getAnnunciByCentro(int idCentro) {
+    public void delete(Integer idAnnuncio) throws SQLException {
+        String query = "DELETE FROM annuncio WHERE id = ?";
+        PreparedStatement st = conn.prepareStatement(query);
+        st.setInt(1, idAnnuncio);
+        st.executeUpdate();
+    }
+
+    @Override
+    public List<Annuncio> findByCentroId(Integer idCentro) throws SQLException {
         List<Annuncio> annunci = new ArrayList<Annuncio>();
         String query = "select * from annuncio where id_centro = ?";
-        try {
-            PreparedStatement st = conn.prepareStatement(query);
-            st.setInt(1, idCentro);
+        PreparedStatement st = conn.prepareStatement(query);
+        st.setInt(1, idCentro);
 
-            ResultSet rs = st.executeQuery();
+        ResultSet rs = st.executeQuery();
 
-            if (rs.next()) {
-                Annuncio annuncio = new Annuncio();
-                annuncio.setId(rs.getInt("id"));
-                annuncio.setDescrizione(rs.getString("descrizione"));
-                annuncio.setInformazioni_mediche(rs.getString("informazioni_mediche"));
-                annuncio.setTitolo(rs.getString("titolo"));
-                annuncio.setFoto_profilo(rs.getString("foto_profilo"));
+        if (rs.next()) {
+            Annuncio annuncio = new Annuncio();
+            annuncio.setId(rs.getInt("id"));
+            annuncio.setDescrizione(rs.getString("descrizione"));
+            annuncio.setInformazioni_mediche(rs.getString("informazioni_mediche"));
+            annuncio.setTitolo(rs.getString("titolo"));
+            annuncio.setFoto_profilo(rs.getString("foto_profilo"));
 
-                Integer centroId = rs.getInt("centro");
-                CentroAdozioni centro = DBManager.getInstance().getCentroAdozioniDao()
-                                .findByPrimaryKey(centroId);
-                annuncio.setCentro(centro);
+            Integer centroId = rs.getInt("centro");
+            CentroAdozioni centro = DBManager.getInstance().getCentroAdozioniDao()
+                            .findById(centroId);
+            annuncio.setCentro(centro);
 
-                Integer animaleId = rs.getInt("animale");
-                Animale animale = DBManager.getInstance().getAnimaleDao()
-                                .getAnimaleById(animaleId);
-                annuncio.setAnimale(animale);
+            Integer animaleId = rs.getInt("animale");
+            Animale animale = DBManager.getInstance().getAnimaleDao()
+                            .findById(animaleId);
+            annuncio.setAnimale(animale);
 
-                annunci.add(annuncio);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+            annunci.add(annuncio);
         }
+
         return annunci;
     }
 
     @Override
-    public List<Annuncio> findAllNotInRichiestaAccettata() {
+    public List<Annuncio> findSenzaRichiestaAccettata() throws SQLException {
         List<Annuncio> annunciLista = new ArrayList<Annuncio>();
-        try {
-            Statement st = conn.createStatement();
-            String query = "select * from annuncio where annuncio.id IN (SELECT annuncio.id  FROM annuncio  EXCEPT  SELECT richiesta.id_annuncio  FROM richiesta  WHERE richiesta.stato = 2)";
+        Statement st = conn.createStatement();
+        String query = "select * from annuncio where annuncio.id IN " +
+                "(SELECT annuncio.id  FROM annuncio  EXCEPT " +
+                "SELECT richiesta.id_annuncio  FROM richiesta WHERE richiesta.stato = 2)";
 
-            ResultSet rs = st.executeQuery(query);
-            while (rs.next()){
-                Annuncio annuncio = new Annuncio();
-                annuncio.setId(rs.getInt("id"));
-                annuncio.setDescrizione(rs.getString("descrizione"));
-                annuncio.setInformazioni_mediche(rs.getString("informazioni_mediche"));
-                annuncio.setTitolo(rs.getString("titolo"));
-                annuncio.setFoto_profilo(rs.getString("foto_profilo"));
+        ResultSet rs = st.executeQuery(query);
+        while (rs.next()){
+            Annuncio annuncio = new Annuncio();
+            annuncio.setId(rs.getInt("id"));
+            annuncio.setDescrizione(rs.getString("descrizione"));
+            annuncio.setInformazioni_mediche(rs.getString("informazioni_mediche"));
+            annuncio.setTitolo(rs.getString("titolo"));
+            annuncio.setFoto_profilo(rs.getString("foto_profilo"));
 
-                Integer centroId = rs.getInt("centro");
-                CentroAdozioni centro = DBManager.getInstance().getCentroAdozioniDao()
-                                .findByPrimaryKey(centroId);
-                annuncio.setCentro(centro);
+            Integer centroId = rs.getInt("centro");
+            CentroAdozioni centro = DBManager.getInstance().getCentroAdozioniDao()
+                            .findById(centroId);
+            annuncio.setCentro(centro);
 
-                Integer animaleId = rs.getInt("animale");
-                Animale animale = DBManager.getInstance().getAnimaleDao()
-                                .getAnimaleById(animaleId);
-                annuncio.setAnimale(animale);
+            Integer animaleId = rs.getInt("animale");
+            Animale animale = DBManager.getInstance().getAnimaleDao()
+                            .findById(animaleId);
+            annuncio.setAnimale(animale);
 
-                annunciLista.add(annuncio);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            annunciLista.add(annuncio);
         }
 
         return annunciLista;

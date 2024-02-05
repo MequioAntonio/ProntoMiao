@@ -1,53 +1,85 @@
 package it.unical.prontoMiao.controller;
 
-import it.unical.prontoMiao.model_old.Annuncio;
-import it.unical.prontoMiao.service.AnnuncioService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
+
+import it.unical.prontoMiao.persistenza.DBManager;
+import it.unical.prontoMiao.persistenza.dao.AnnuncioDao;
+import it.unical.prontoMiao.persistenza.model.Annuncio;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
-import java.util.List;
+import java.sql.SQLException;
 
 @RestController
 @RequestMapping(value = "/annuncio")
 public class AnnuncioController {
-    @Autowired
-    private AnnuncioService annuncioService;
-    @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<Annuncio>> getAllAnnunci(){
-        return new ResponseEntity<List<Annuncio>>(annuncioService.getAnnunci(), HttpStatus.OK);
-    }
-    @RequestMapping(value = "/nonAccettati",method = RequestMethod.GET)
-    public ResponseEntity<List<Annuncio>> getAllAnnunciNonAccettati(){
-        return new ResponseEntity<List<Annuncio>>(annuncioService.getAnnunciNotRichiestaAccettata(), HttpStatus.OK);
-    }
-    @RequestMapping(value= "/{idAnnuncio}", method = RequestMethod.GET)
-    public ResponseEntity getAnnuncioById(@PathVariable int idAnnuncio) {
+
+    @GetMapping
+    public ResponseEntity getAllAnnunci(){
+        AnnuncioDao annuncioDao = DBManager.getInstance().getAnnuncioDao();
         try {
-            Annuncio res = annuncioService.getAnnuncioById(idAnnuncio);
-            return new ResponseEntity<>(res, HttpStatus.OK);
-        } catch (ChangeSetPersister.NotFoundException e) {
-            return new ResponseEntity("Nessun annuncio trovato", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(annuncioDao.findAll(), HttpStatus.OK);
+        } catch (SQLException e) {
+            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Annuncio> insertAnnuncio(@RequestBody Annuncio annuncio) {
+    @GetMapping("/nonAccettati")
+    public ResponseEntity getAllAnnunciNonAccettati(){
+        AnnuncioDao annuncioDao = DBManager.getInstance().getAnnuncioDao();
         try {
-            return new ResponseEntity<>(annuncioService.insertAnnuncio(annuncio), HttpStatus.OK);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return new ResponseEntity("Errore nel salvataggio del file", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(annuncioDao.findSenzaRichiestaAccettata(), HttpStatus.OK);
+        } catch (SQLException e) {
+            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @RequestMapping(value= "/byCentro/{idCentro}", method = RequestMethod.GET)
-    public ResponseEntity<List<Annuncio>> getAllAnnunciByCentro(@PathVariable int idCentro){
+    @GetMapping("/{idAnnuncio}")
+    public ResponseEntity getAnnuncioById(@PathVariable Integer idAnnuncio) {
+        AnnuncioDao annuncioDao = DBManager.getInstance().getAnnuncioDao();
         try {
-            return new ResponseEntity<List<Annuncio>>(annuncioService.getAnnunciByCentro(idCentro), HttpStatus.OK);
-        } catch (ChangeSetPersister.NotFoundException e) {
-            return new ResponseEntity("Nessun annuncio trovato", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(annuncioDao.findById(idAnnuncio), HttpStatus.OK);
+        } catch (SQLException e) {
+            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @PostMapping
+    public ResponseEntity insertAnnuncio(@RequestBody Annuncio annuncio) {
+        AnnuncioDao annuncioDao = DBManager.getInstance().getAnnuncioDao();
+        try {
+            return new ResponseEntity<>(annuncioDao.saveOrUpdate(annuncio), HttpStatus.OK);
+        } catch (SQLException e) {
+            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/{idAnnuncio}")
+    public ResponseEntity updateAnnuncio(@PathVariable Integer idAnnuncio, @RequestBody Annuncio annuncio) {
+        AnnuncioDao annuncioDao = DBManager.getInstance().getAnnuncioDao();
+        annuncio.setId(idAnnuncio);
+        try {
+            return new ResponseEntity<>(annuncioDao.saveOrUpdate(annuncio), HttpStatus.OK);
+        } catch (SQLException e) {
+            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @DeleteMapping("/{idAnnuncio}")
+    public ResponseEntity deleteAnnuncio(@PathVariable Integer idAnnuncio) {
+        AnnuncioDao annuncioDao = DBManager.getInstance().getAnnuncioDao();
+        try {
+            annuncioDao.delete(idAnnuncio);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (SQLException e) {
+            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/byCentro/{idCentro}")
+    public ResponseEntity getAllAnnunciByCentro(@PathVariable int idCentro){
+        AnnuncioDao annuncioDao = DBManager.getInstance().getAnnuncioDao();
+        try {
+            return new ResponseEntity<>(annuncioDao.findByCentroId(idCentro),HttpStatus.OK);
+        } catch (SQLException e) {
+            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

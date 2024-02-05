@@ -2,7 +2,7 @@ package it.unical.prontoMiao.persistenza.model;
 
 public class Annuncio {
 
-    private int id;
+    private Integer id;
     private String descrizione;
     private String informazioni_mediche;
     private String titolo;
@@ -23,11 +23,11 @@ public class Annuncio {
         this.animale = animale;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
