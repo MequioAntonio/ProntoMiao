@@ -6,11 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import it.unical.prontoMiao.persistenza.model.Animale;
-import it.unical.prontoMiao.persistenza.DBManager;
 import it.unical.prontoMiao.persistenza.IdBroker;
 import it.unical.prontoMiao.persistenza.dao.AnimaleDao;
 
@@ -22,65 +20,57 @@ public class AnimaleDaoPostgres implements AnimaleDao {
     }
 
     @Override
-    public List<Animale> getAnimali() {
+    public List<Animale> findAll() throws SQLException {
         List<Animale> animali = new ArrayList<Animale>();
         String query = "select * from animale";
-        try {
-            Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery(query);
+        Statement st = conn.createStatement();
+        ResultSet rs = st.executeQuery(query);
 
-            while (rs.next()) {
-                Animale animale = new Animale();
-                animale.setId(rs.getInt("id"));
-                animale.setNome(rs.getString("nome"));
-                animale.setEta(rs.getInt("eta"));
-                animale.setRazza(rs.getString("razza"));
-                animale.setTaglia(rs.getString("taglia"));
-                animale.setSpecie(rs.getString("specie"));
-                animale.setSesso(rs.getString("sesso"));
-                animali.add(animale);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+        while (rs.next()) {
+            Animale animale = new Animale();
+            animale.setId(rs.getInt("id"));
+            animale.setNome(rs.getString("nome"));
+            animale.setEta(rs.getInt("eta"));
+            animale.setRazza(rs.getString("razza"));
+            animale.setTaglia(rs.getString("taglia"));
+            animale.setSpecie(rs.getString("specie"));
+            animale.setSesso(rs.getString("sesso"));
+            animali.add(animale);
         }
+
         return animali;
     }
 
     @Override
-    public List<Animale> getAnimaleByNome(String nome) {
+    public List<Animale> findByNome(String nome) throws SQLException {
         List<Animale> animali = new ArrayList<Animale>();
         String query = "select * from animale where nome = ?";
-        try {
-            PreparedStatement st = conn.prepareStatement(query);
-            st.setString(1, nome);
+        PreparedStatement st = conn.prepareStatement(query);
+        st.setString(1, nome);
 
-            ResultSet rs = st.executeQuery();
+        ResultSet rs = st.executeQuery();
 
-            if (rs.next()) {
-                Animale animale = new Animale();
-                animale.setId(rs.getInt("id"));
-                animale.setNome(rs.getString("nome"));
-                animale.setEta(rs.getInt("eta"));
-                animale.setRazza(rs.getString("razza"));
-                animale.setTaglia(rs.getString("taglia"));
-                animale.setSpecie(rs.getString("specie"));
-                animale.setSesso(rs.getString("sesso"));
-                animali.add(animale);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+        if (rs.next()) {
+            Animale animale = new Animale();
+            animale.setId(rs.getInt("id"));
+            animale.setNome(rs.getString("nome"));
+            animale.setEta(rs.getInt("eta"));
+            animale.setRazza(rs.getString("razza"));
+            animale.setTaglia(rs.getString("taglia"));
+            animale.setSpecie(rs.getString("specie"));
+            animale.setSesso(rs.getString("sesso"));
+            animali.add(animale);
         }
+
         return animali;
     }
 
     @Override
-    public void insertAnimale(Animale animale) {
-        String insertStr = "INSERT INTO animale VALUES (?, ?, ?, ?, ?, ?, ?)";
+    public Animale saveOrUpdate(Animale animale) throws SQLException {
+        if (animale.getId()!=null){
+            String insertStr = "INSERT INTO animale VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-        PreparedStatement st;
-        try {
+            PreparedStatement st;
             st = conn.prepareStatement(insertStr);
 
             Integer newId = IdBroker.getId(conn);
@@ -96,17 +86,10 @@ public class AnimaleDaoPostgres implements AnimaleDao {
 
             st.executeUpdate();
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+        } else {
+            String updateStr = "UPDATE animale set nome = ?, eta = ?, razza = ?, taglia = ?, specie = ?, sesso = ? where id = ?";
 
-    @Override
-    public void updateAnimale(Animale animale) {
-        String updateStr = "UPDATE animale set nome = ?, eta = ?, razza = ?, taglia = ?, specie = ?, sesso = ? where id = ?";
-
-        PreparedStatement st;
-        try {
+            PreparedStatement st;
             st = conn.prepareStatement(updateStr);
 
             st.setString(1, animale.getNome());
@@ -120,71 +103,86 @@ public class AnimaleDaoPostgres implements AnimaleDao {
 
             st.executeUpdate();
 
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
+        return animale;
+
     }
 
+
     @Override
-    public void deleteAnimale(int idAnimale) {
+    public void delete(int idAnimale) throws SQLException {
         String query = "DELETE FROM animale WHERE id = ?";
-        try {
-            PreparedStatement st = conn.prepareStatement(query);
-            st.setInt(1, idAnimale);
-            st.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        PreparedStatement st = conn.prepareStatement(query);
+        st.setInt(1, idAnimale);
+        st.executeUpdate();
     }
 
     @Override
-    public Animale getAnimaleById(int idAnimale) {
+    public Animale findById(Integer idAnimale) throws SQLException {
         Animale animale = null;
         String query = "select * from animale where id = ?";
-        try {
-            PreparedStatement st = conn.prepareStatement(query);
-            st.setInt(1, idAnimale);
+        PreparedStatement st = conn.prepareStatement(query);
+        st.setInt(1, idAnimale);
 
-            ResultSet rs = st.executeQuery();
+        ResultSet rs = st.executeQuery();
 
-            if (rs.next()) {
-                animale = new Animale();
-                animale.setId(rs.getInt("id"));
-                animale.setNome(rs.getString("nome"));
-                animale.setEta(rs.getInt("eta"));
-                animale.setRazza(rs.getString("razza"));
-                animale.setTaglia(rs.getString("taglia"));
-                animale.setSpecie(rs.getString("specie"));
-                animale.setSesso(rs.getString("sesso"));
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+        if (rs.next()) {
+            animale = new Animale();
+            animale.setId(rs.getInt("id"));
+            animale.setNome(rs.getString("nome"));
+            animale.setEta(rs.getInt("eta"));
+            animale.setRazza(rs.getString("razza"));
+            animale.setTaglia(rs.getString("taglia"));
+            animale.setSpecie(rs.getString("specie"));
+            animale.setSesso(rs.getString("sesso"));
         }
+
         return animale;
     }
 
     @Override
-    public List<Animale> getAnimaliSenzaAnnuncio() {
+    public List<Animale> findSenzaAnnuncio() throws SQLException {
         List<Animale> animaliLista = new ArrayList<Animale>();
-        try {
-            Statement st = conn.createStatement();
-            String query = "select * from animale where id not in (select id_animale from annuncio)";
+        Statement st = conn.createStatement();
+        String query = "select * from animale where id not in (select id_animale from annuncio)";
 
-            ResultSet rs = st.executeQuery(query);
-            while (rs.next()){
-                Animale animale = new Animale();
-                animale.setId(rs.getInt("id"));
-                animale.setNome(rs.getString("nome"));
-                animale.setEta(rs.getInt("eta"));
-                animale.setRazza(rs.getString("razza"));
-                animale.setTaglia(rs.getString("taglia"));
-                animale.setSpecie(rs.getString("specie"));
-                animale.setSesso(rs.getString("sesso"));
-                animaliLista.add(animale);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        ResultSet rs = st.executeQuery(query);
+        while (rs.next()){
+            Animale animale = new Animale();
+            animale.setId(rs.getInt("id"));
+            animale.setNome(rs.getString("nome"));
+            animale.setEta(rs.getInt("eta"));
+            animale.setRazza(rs.getString("razza"));
+            animale.setTaglia(rs.getString("taglia"));
+            animale.setSpecie(rs.getString("specie"));
+            animale.setSesso(rs.getString("sesso"));
+            animaliLista.add(animale);
+        }
+
+        return animaliLista;
+    }
+
+    @Override
+    public List<Animale> findByAllLikeAsc(String nome, Integer eta, String razza, String taglia) throws SQLException {
+        List<Animale> animaliLista = new ArrayList<Animale>();
+        String query = "select * from animale where (nome like ?) or (eta like ?) or (razza like ?) or (taglia like ?) order by asc";
+        PreparedStatement st = conn.prepareStatement(query);
+        st.setString(1, nome);
+        st.setInt(2, eta);
+        st.setString(3, razza);
+        st.setString(4, taglia);
+
+        ResultSet rs = st.executeQuery(query);
+        while (rs.next()){
+            Animale animale = new Animale();
+            animale.setId(rs.getInt("id"));
+            animale.setNome(rs.getString("nome"));
+            animale.setEta(rs.getInt("eta"));
+            animale.setRazza(rs.getString("razza"));
+            animale.setTaglia(rs.getString("taglia"));
+            animale.setSpecie(rs.getString("specie"));
+            animale.setSesso(rs.getString("sesso"));
+            animaliLista.add(animale);
         }
 
         return animaliLista;
