@@ -1,12 +1,9 @@
 package it.unical.prontoMiao.repository;
 
-import it.unical.prontoMiao.model.Animale;
-import it.unical.prontoMiao.model.Utente;
-import it.unical.prontoMiao.model.UtentePrivato;
+import it.unical.prontoMiao.model_old.UtentePrivato;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Optional;
 
 @Repository

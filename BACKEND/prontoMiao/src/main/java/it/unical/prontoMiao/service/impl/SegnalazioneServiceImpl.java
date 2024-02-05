@@ -1,15 +1,9 @@
 package it.unical.prontoMiao.service.impl;
 
-import it.unical.prontoMiao.model.Annuncio;
-import it.unical.prontoMiao.model.Richiesta;
-import it.unical.prontoMiao.model.Segnalazione;
-import it.unical.prontoMiao.repository.AnimaleRepository;
-import it.unical.prontoMiao.repository.AnnuncioRepository;
+import it.unical.prontoMiao.model_old.Segnalazione;
 import it.unical.prontoMiao.repository.CentroAdozioniRepository;
 import it.unical.prontoMiao.repository.SegnalazioneRepository;
-import it.unical.prontoMiao.service.AnnuncioService;
 import it.unical.prontoMiao.service.SegnalazioneService;
-import it.unical.prontoMiao.utility.FileUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;

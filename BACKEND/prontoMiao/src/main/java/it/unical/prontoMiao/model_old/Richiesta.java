@@ -1,10 +1,8 @@
-package it.unical.prontoMiao.model;
+package it.unical.prontoMiao.model_old;
 
 import jakarta.persistence.*;
 
 import java.util.Date;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "richiesta")

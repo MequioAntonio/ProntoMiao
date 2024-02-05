@@ -1,7 +1,6 @@
 package it.unical.prontoMiao.service.impl;
 
-import it.unical.prontoMiao.model.Animale;
-import it.unical.prontoMiao.model.Annuncio;
+import it.unical.prontoMiao.model_old.Annuncio;
 import it.unical.prontoMiao.repository.AnimaleRepository;
 import it.unical.prontoMiao.repository.AnnuncioRepository;
 import it.unical.prontoMiao.repository.CentroAdozioniRepository;

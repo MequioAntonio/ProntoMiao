@@ -1,9 +1,6 @@
 package it.unical.prontoMiao.service;
 
-import it.unical.prontoMiao.model.Annuncio;
-import it.unical.prontoMiao.model.Recensione;
-import it.unical.prontoMiao.model.Richiesta;
-import it.unical.prontoMiao.model.UtentePrivato;
+import it.unical.prontoMiao.model_old.Richiesta;
 
 import org.springframework.data.crossstore.ChangeSetPersister;
 

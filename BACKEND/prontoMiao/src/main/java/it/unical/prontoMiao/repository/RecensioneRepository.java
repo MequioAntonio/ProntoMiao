@@ -1,7 +1,6 @@
 package it.unical.prontoMiao.repository;
 
-import it.unical.prontoMiao.model.Recensione;
-import org.apache.coyote.Response;
+import it.unical.prontoMiao.model_old.Recensione;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

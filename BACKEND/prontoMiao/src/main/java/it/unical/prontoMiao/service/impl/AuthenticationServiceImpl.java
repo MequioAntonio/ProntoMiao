@@ -1,8 +1,8 @@
 package it.unical.prontoMiao.service.impl;
 
-import it.unical.prontoMiao.model.CentroAdozioni;
-import it.unical.prontoMiao.model.Utente;
-import it.unical.prontoMiao.model.UtentePrivato;
+import it.unical.prontoMiao.model_old.CentroAdozioni;
+import it.unical.prontoMiao.model_old.Utente;
+import it.unical.prontoMiao.model_old.UtentePrivato;
 import it.unical.prontoMiao.repository.CentroAdozioniRepository;
 import it.unical.prontoMiao.repository.UtentePrivatoRepository;
 import it.unical.prontoMiao.repository.UtenteRepository;
@@ -10,7 +10,6 @@ import it.unical.prontoMiao.request.AuthRequest;
 import it.unical.prontoMiao.response.JwtTokenResponse;
 import it.unical.prontoMiao.service.AuthenticationService;
 import it.unical.prontoMiao.service.JwtService;
-import it.unical.prontoMiao.service.UtenteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
