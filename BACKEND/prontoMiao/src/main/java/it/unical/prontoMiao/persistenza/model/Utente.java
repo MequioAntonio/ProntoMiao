@@ -20,7 +20,7 @@ public class Utente implements UserDetails {
     }
 
     public Utente(String email, String password) {
-        this.email = email
+        this.email = email;
     }
 
     public int getId() {
