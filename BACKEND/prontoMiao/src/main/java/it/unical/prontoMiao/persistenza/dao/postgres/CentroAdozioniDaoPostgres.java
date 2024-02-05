@@ -1,8 +1,9 @@
 package it.unical.prontoMiao.persistenza.dao.postgres;
 
-import it.unical.prontoMiao.model_old.CentroAdozioni;
+
 import it.unical.prontoMiao.persistenza.dao.CentroAdozioniDao;
-import it.unical.prontoMiao.persistenza.model.Recensione;
+import it.unical.prontoMiao.persistenza.model.CentroAdozioni;
+
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -29,6 +30,7 @@ public class CentroAdozioniDaoPostgres implements CentroAdozioniDao {
                 centro = new CentroAdozioni();
 
                 centro.setEmail(rs.getString("email"));
+                centro.setPassword("");
                 centro.setId(rs.getInt("id"));
                 centro.setDescrizione(rs.getString("descrizione"));
                 centro.setEventi(rs.getString("eventi"));
