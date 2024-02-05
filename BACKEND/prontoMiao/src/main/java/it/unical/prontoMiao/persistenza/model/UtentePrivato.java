@@ -2,6 +2,8 @@ package it.unical.prontoMiao.persistenza.model;
 
 public class UtentePrivato {
 
+    private Utente user;
+
     private String nome;
     private String cognome;
     private String cf;

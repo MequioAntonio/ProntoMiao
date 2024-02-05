@@ -2,6 +2,7 @@ package it.unical.prontoMiao.persistenza.model;
 
 public class CentroAdozioni {
 
+    private Utente user;
     private String nome;
     private String descrizione;
     private String orari;
