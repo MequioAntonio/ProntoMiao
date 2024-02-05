@@ -2,6 +2,8 @@ package it.unical.prontoMiao.persistenza.model;
 
 public class UtentePrivato {
 
+    private Utente user;
+
     private String nome;
     private String cognome;
     private String cf;
@@ -23,6 +25,14 @@ public class UtentePrivato {
         this.preferenze = preferenze;
         this.condizioni_abitative = condizioni_abitative;
         this.informazioni_aggiuntive = informazioni_aggiuntive;
+    }
+
+    public Utente getUser() {
+        return user;
+    }
+
+    public void setUser(Utente user) {
+        this.user = user;
     }
 
     public String getNome() {
