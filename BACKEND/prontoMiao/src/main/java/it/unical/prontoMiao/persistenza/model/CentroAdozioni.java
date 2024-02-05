@@ -20,6 +20,14 @@ public class CentroAdozioni {
         this.indirizzo = indirizzo;
     }
 
+    public Utente getUser() {
+        return user;
+    }
+
+    public void setUser(Utente user) {
+        this.user = user;
+    }
+
     public String getNome() {
         return nome;
     }

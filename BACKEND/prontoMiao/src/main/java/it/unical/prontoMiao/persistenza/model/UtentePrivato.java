@@ -27,6 +27,14 @@ public class UtentePrivato {
         this.informazioni_aggiuntive = informazioni_aggiuntive;
     }
 
+    public Utente getUser() {
+        return user;
+    }
+
+    public void setUser(Utente user) {
+        this.user = user;
+    }
+
     public String getNome() {
         return nome;
     }
