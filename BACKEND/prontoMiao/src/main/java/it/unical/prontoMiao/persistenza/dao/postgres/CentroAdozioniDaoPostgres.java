@@ -19,7 +19,7 @@ public class CentroAdozioniDaoPostgres implements CentroAdozioniDao {
         this.conn = conn;
     }
     @Override
-    public CentroAdozioni findCentroById(int id) {
+    public CentroAdozioni findById(int id) {
         CentroAdozioni centro = null;
         String query = "SELECT * FROM centro_adozioni INNER JOIN utente ON utente.id = centro_adozioni.id WHERE id = ?";
         try {

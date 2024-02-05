@@ -8,8 +8,7 @@ import java.util.Optional;
 
 public interface CentroAdozioniDao {
 
-    public CentroAdozioni findCentroById(int id);
+    public CentroAdozioni findById(int id);
 
     public Optional<CentroAdozioni> findByEmailIgnoreCase(String email);
-
 }
