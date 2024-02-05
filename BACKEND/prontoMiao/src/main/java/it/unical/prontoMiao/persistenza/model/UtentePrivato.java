@@ -1,8 +1,6 @@
 package it.unical.prontoMiao.persistenza.model;
 
-public class UtentePrivato {
-
-    private Utente user;
+public class UtentePrivato extends Utente{
 
     private String nome;
     private String cognome;
@@ -27,12 +25,8 @@ public class UtentePrivato {
         this.informazioni_aggiuntive = informazioni_aggiuntive;
     }
 
-    public Utente getUser() {
-        return user;
-    }
-
-    public void setUser(Utente user) {
-        this.user = user;
+    public UtentePrivato(String email, String password) {
+        super(email, password);
     }
 
     public String getNome() {
