@@ -1,4 +1,10 @@
 package it.unical.prontoMiao.persistenza.dao.postgres;
 
-public class RichiestaDaoPostgres {
+import it.unical.prontoMiao.persistenza.dao.RecensioneDao;
+
+public class RichiestaDaoPostgres implements RecensioneDao {
+
+
+
+
 }
