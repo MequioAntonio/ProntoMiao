@@ -8,7 +8,8 @@ import java.util.List;
 public interface RichiestaDao {
     public List<Richiesta> getRichiesta();
     public Richiesta getRichiestaById(Integer idRichiesta);
-    public List<Richiesta> getRichiestaByCentro(Integer idCentro);
+    List<Richiesta> findByAnnuncio_Centro_Id(int idCentro);
+    List<Richiesta> findByUtente_Id(int idUtente);
     public Richiesta insertRichieta (Richiesta richiesta);
     public void deleteRichiestaById(Integer idRichiesta);
 
