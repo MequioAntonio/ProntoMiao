@@ -9,14 +9,14 @@ public class IdBroker {
 
     private static final String query = "SELECT nextval('db_sequence') AS id";//postgresql
 
-    public static Long getId(Connection connection){
-        Long id = null;
+    public static Integer getId(Connection connection){
+        Integer id = null;
         try {
             PreparedStatement statement = connection.prepareStatement(query);
 
             ResultSet result = statement.executeQuery();
             result.next();
-            id = result.getLong("id");
+            id = result.getInt("id");
         } catch (SQLException e) {
             e.printStackTrace();
         }
