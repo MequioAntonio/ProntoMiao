@@ -18,7 +18,7 @@ public class CentroAdozioni extends Utente{
         this.eventi = eventi;
         this.indirizzo = indirizzo;
     }
-    
+
     public String getNome() {
         return nome;
     }
