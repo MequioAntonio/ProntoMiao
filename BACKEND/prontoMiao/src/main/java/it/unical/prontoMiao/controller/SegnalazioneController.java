@@ -1,7 +1,6 @@
 package it.unical.prontoMiao.controller;
 
 import it.unical.prontoMiao.model.Annuncio;
-import it.unical.prontoMiao.model.Richiesta;
 import it.unical.prontoMiao.model.Segnalazione;
 import it.unical.prontoMiao.service.AnnuncioService;
 import it.unical.prontoMiao.service.SegnalazioneService;
@@ -40,9 +39,5 @@ public class SegnalazioneController {
             e.printStackTrace();
             return new ResponseEntity("Errore nel salvataggio della segnalazione", HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }
-    @RequestMapping(value= "/{id}", method = RequestMethod.POST)
-    public ResponseEntity<Segnalazione> updateSegnalazione(@PathVariable int id, @RequestBody Segnalazione up) {
-        return new ResponseEntity<Segnalazione>(segnalazioneService.updateSegnalazione(id, up), HttpStatus.OK);
     }
 }

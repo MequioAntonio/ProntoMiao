@@ -1,10 +1,1 @@
-<div class="centrale">
-  <div class="title">Segnalazioni in attesa:</div>
-</div>
-<div class="gridCont">
-  <mat-grid-list cols="3" rowHeight="16:9">
-    <mat-grid-tile *ngFor="let segnalazione of segnalazioniLista">
-      <div><app-segnalation-card [segnalazione]="segnalazione"></app-segnalation-card></div>
-    </mat-grid-tile>
-  </mat-grid-list>
-</div>
+<app-segnalation-form></app-segnalation-form>

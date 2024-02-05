@@ -11,7 +11,6 @@ import { CenterProfilePublicComponent } from './pages/center-profile-public/cent
 import { AdoptionsPageComponent } from './pages/adoptions-page/adoptions-page.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { ReviewFormComponent } from './pages/review-form/review-form.component';
-import { SegnalationsPageComponent } from './pages/segnalations-page/segnalations-page.component';
 
 
 export const routes: Routes = [
@@ -25,7 +24,6 @@ export const routes: Routes = [
   { path: 'centerprofile/:idCentro', component: CenterProfilePublicComponent},
   { path: 'private/:idCentro', component: CenterProfilePrivateComponent},
   { path: 'adoptions', component: AdoptionsPageComponent},
-  { path: 'segnalations', component: SegnalationsPageComponent},
   { path: 'animal-info/:idCentro', component: AnimalInfoComponent},
   { path: 'review-form/:idCentro', component: ReviewFormComponent },
   { path: '404', component: NotFoundComponent},

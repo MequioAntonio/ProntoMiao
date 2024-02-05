@@ -1,7 +1,6 @@
 package it.unical.prontoMiao.service;
 
 import it.unical.prontoMiao.model.Annuncio;
-import it.unical.prontoMiao.model.Richiesta;
 import it.unical.prontoMiao.model.Segnalazione;
 import org.springframework.data.crossstore.ChangeSetPersister;
 
@@ -12,5 +11,4 @@ public interface SegnalazioneService {
     public List<Segnalazione> getSegnalazione();
     public Segnalazione getSegnalazioneById(int idSegnalazione) throws ChangeSetPersister.NotFoundException;
     public Segnalazione insertSegnalazione(Segnalazione segnalazione) throws IOException;
-    public Segnalazione updateSegnalazione(int id, Segnalazione up);
 }

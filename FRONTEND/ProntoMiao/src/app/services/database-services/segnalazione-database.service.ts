@@ -24,7 +24,4 @@ export class SegnalazioneDatabaseService{
   public insertSegnalazione(segnalazione: any){
     return this.dbs.http.post(this.dbs.baseUrl+"/segnalazione", segnalazione, {headers: this.dbs.headers});
   }
-  public updateSegnalazione(id: Number, segnalazione: any){
-    return this.dbs.http.post(this.dbs.baseUrl+"/segnalazione/"+id, segnalazione, {headers: this.dbs.headers});
-  }
 }

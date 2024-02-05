@@ -1,7 +1,6 @@
 package it.unical.prontoMiao.service.impl;
 
 import it.unical.prontoMiao.model.Annuncio;
-import it.unical.prontoMiao.model.Richiesta;
 import it.unical.prontoMiao.model.Segnalazione;
 import it.unical.prontoMiao.repository.AnimaleRepository;
 import it.unical.prontoMiao.repository.AnnuncioRepository;
@@ -43,10 +42,5 @@ public class SegnalazioneServiceImpl implements SegnalazioneService {
         //System.out.println(annuncio.getFoto_profilo());
         segnalazione = segnalazioneRepository.save(segnalazione);
         return segnalazioneRepository.save(segnalazione);
-    }
-    @Override
-    public Segnalazione updateSegnalazione(int id, Segnalazione up) {
-        up.setId(id);
-        return segnalazioneRepository.save(up);
     }
 }

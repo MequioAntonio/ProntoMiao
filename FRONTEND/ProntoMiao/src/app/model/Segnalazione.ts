@@ -6,6 +6,6 @@ export interface Segnalazione {
     titolo : string;
     descrizione : string;
     indirizzo : string;
-    utente : UtentePrivato;
+    privato : UtentePrivato;
     centro : Centro | undefined;
 }
