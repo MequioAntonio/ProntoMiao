@@ -72,8 +72,8 @@ public class AnimaleController {
     }
     @DeleteMapping("/{idAnimale}")
     public ResponseEntity deleteAnimale(@PathVariable Integer idAnimale) {
+        AnimaleDao animaleDao = DBManager.getInstance().getAnimaleDao();
         try {
-            AnimaleDao animaleDao = DBManager.getInstance().getAnimaleDao();
             animaleDao.delete(idAnimale);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (SQLException e) {
@@ -83,10 +83,9 @@ public class AnimaleController {
     }
     @GetMapping("/{idAnimale}")
     public ResponseEntity getAnimaleById(@PathVariable Integer idAnimale) {
+        AnimaleDao animaleDao = DBManager.getInstance().getAnimaleDao();
         try {
-            AnimaleDao animaleDao = DBManager.getInstance().getAnimaleDao();
-            Animale res = animaleDao.findById(idAnimale);
-            return new ResponseEntity<>(res, HttpStatus.OK);
+            return new ResponseEntity<>(animaleDao.findById(idAnimale), HttpStatus.OK);
         } catch (SQLException e) {
             return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
