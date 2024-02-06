@@ -1,6 +1,5 @@
 package it.unical.prontoMiao.persistenza.dao.postgres;
 
-import it.unical.prontoMiao.persistenza.dao.RecensioneDao;
 import it.unical.prontoMiao.persistenza.dao.RichiestaDao;
 import it.unical.prontoMiao.persistenza.model.*;
 
@@ -77,14 +76,14 @@ public class RichiestaDaoPostgres implements RichiestaDao {
 
     @Override
     public Richiesta insertRichieta(Richiesta richiesta) {
-        String query = "insert into richiesta (id, stato, data, annuncio, utente) values (?, ?, ?)";
+        String query = "insert into richiesta (id, id_annuncio, id_utente, stato, data) values (?, ?, ?, ? ,?)";
         try {
             PreparedStatement st = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             st.setInt(1, richiesta.getId());
-            st.setInt(2, richiesta.getStato());
-            st.setString(3, richiesta.getData().toString());
-            st.setInt(4, richiesta.getAnnuncio().getId());
-            st.setInt(5, richiesta.getUtente().getId());
+            st.setInt(2, richiesta.getAnnuncio().getId());
+            st.setInt(3, richiesta.getUtente().getId());
+            st.setInt(4, richiesta.getStato());
+            st.setDate(5, richiesta.getData());
             int affectedRows = st.executeUpdate();
 
             if (affectedRows == 0) {
@@ -114,7 +113,28 @@ public class RichiestaDaoPostgres implements RichiestaDao {
     }
 
     @Override
-    public void deleteRichiestaById(Integer idRichiesta) {
+    public Richiesta updateRichiesta(int id, Richiesta richiesta) {
+        String query = "update richiesta set id = ?, id_annuncio = ?, id_utente = ?, stato = ?, data = ? where id = ?";
+        try {
+            PreparedStatement st = conn.prepareStatement(query);
+            st.setInt(1, richiesta.getId());
+            st.setInt(2, richiesta.getAnnuncio().getId());
+            st.setInt(3, richiesta.getUtente().getId());
+            st.setInt(4, richiesta.getStato());
+            st.setDate(5, richiesta.getData());
+            st.setInt(6, id);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return richiesta;
+    }
 
+
+    @Override
+    public void deleteRichiestaById(Integer idRichiesta) throws SQLException {
+        PreparedStatement delRichiesta = conn.prepareStatement("DELETE FROM richiesta WHERE id = ?");
+        delRichiesta.setInt(1, idRichiesta);
+        delRichiesta.executeUpdate();
     }
 }
