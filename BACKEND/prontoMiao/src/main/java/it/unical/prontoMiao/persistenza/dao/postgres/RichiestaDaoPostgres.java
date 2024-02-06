@@ -1,5 +1,6 @@
 package it.unical.prontoMiao.persistenza.dao.postgres;
 
+import it.unical.prontoMiao.persistenza.DBManager;
 import it.unical.prontoMiao.persistenza.dao.RichiestaDao;
 import it.unical.prontoMiao.persistenza.model.*;
 
@@ -108,8 +109,32 @@ public class RichiestaDaoPostgres implements RichiestaDao {
         return null;
     }
 
-    public List<Richiesta> findByUtente_Id(int idUtente) {
-        return null;
+    public List<Richiesta> findByUtente_Id(int idUtente) throws SQLException {
+        List<Richiesta> richieste = new ArrayList<Richiesta>();
+        String query = "select * from richiesta where id_utente = ?";
+        PreparedStatement st = conn.prepareStatement(query);
+        st.setInt(1, idUtente);
+
+        ResultSet rs = st.executeQuery();
+
+        while (rs.next()) {
+            Richiesta ric = new Richiesta();
+            ric.setId(rs.getInt("id"));
+            ric.setId(rs.getInt("id"));
+            ric.setStato(rs.getInt("stato"));
+            ric.setData(Date.valueOf(rs.getString("data")));
+            AnnuncioDaoPostgres annuncioDao = new AnnuncioDaoPostgres(conn);
+            Annuncio annuncio = annuncioDao.findById(rs.getInt("annuncio_id"));
+            ric.setAnnuncio(annuncio);
+
+            UtentePrivatoDaoPostgres utenteDao = new UtentePrivatoDaoPostgres(conn);
+            UtentePrivato utente = utenteDao.findById(rs.getInt("utente_id"));
+            ric.setUtente(utente);
+
+            richieste.add(ric);
+        }
+
+        return richieste;
     }
 
     @Override
