@@ -10,7 +10,6 @@ import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
-import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -55,7 +54,7 @@ public class AnimaleController {
     public ResponseEntity insertAnimale(@RequestBody Animale animale) {
         AnimaleDao animaleDao = DBManager.getInstance().getAnimaleDao();
         try {
-            return new ResponseEntity<>(animaleDao.saveOrUpdate(animale), HttpStatus.OK);
+            return new ResponseEntity<>(animaleDao.save(animale), HttpStatus.OK);
         } catch (SQLException e) {
             return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -65,7 +64,7 @@ public class AnimaleController {
         AnimaleDao animaleDao = DBManager.getInstance().getAnimaleDao();
         animale.setId(idAnimale);
         try {
-            return new ResponseEntity<>(animaleDao.saveOrUpdate(animale), HttpStatus.OK);
+            return new ResponseEntity<>(animaleDao.save(animale), HttpStatus.OK);
         } catch (SQLException e) {
             return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }

@@ -45,7 +45,7 @@ public class AnnuncioController {
     public ResponseEntity insertAnnuncio(@RequestBody Annuncio annuncio) {
         AnnuncioDao annuncioDao = DBManager.getInstance().getAnnuncioDao();
         try {
-            return new ResponseEntity<>(annuncioDao.saveOrUpdate(annuncio), HttpStatus.OK);
+            return new ResponseEntity<>(annuncioDao.save(annuncio), HttpStatus.OK);
         } catch (SQLException e) {
             return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -56,7 +56,7 @@ public class AnnuncioController {
         AnnuncioDao annuncioDao = DBManager.getInstance().getAnnuncioDao();
         annuncio.setId(idAnnuncio);
         try {
-            return new ResponseEntity<>(annuncioDao.saveOrUpdate(annuncio), HttpStatus.OK);
+            return new ResponseEntity<>(annuncioDao.save(annuncio), HttpStatus.OK);
         } catch (SQLException e) {
             return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }

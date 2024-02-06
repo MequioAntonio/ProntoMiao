@@ -85,7 +85,7 @@ public class AnnuncioDaoPostgres implements AnnuncioDao{
     }
 
     @Override
-    public Annuncio saveOrUpdate(Annuncio annuncio) throws SQLException {
+    public Annuncio save(Annuncio annuncio) throws SQLException {
         if (annuncio.getId()!=null){
             String insertStr = "INSERT INTO annuncio VALUES (?, ?, ?, ?, ?, ?, ?)";
 
