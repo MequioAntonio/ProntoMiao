@@ -50,7 +50,7 @@ public class AnimaleDaoPostgres implements AnimaleDao {
 
         ResultSet rs = st.executeQuery();
 
-        if (rs.next()) {
+        while (rs.next()) {
             Animale animale = new Animale();
             animale.setId(rs.getInt("id"));
             animale.setNome(rs.getString("nome"));

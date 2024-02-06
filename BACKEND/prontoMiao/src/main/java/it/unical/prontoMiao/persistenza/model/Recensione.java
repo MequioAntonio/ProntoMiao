@@ -1,8 +1,8 @@
 package it.unical.prontoMiao.persistenza.model;
 
 public class Recensione {
-    private int id;
-    private int voto;
+    private Integer id;
+    private Integer voto;
     private String descrizione;
     private CentroAdozioni centro;
     private UtentePrivato privato;
@@ -10,7 +10,7 @@ public class Recensione {
     public Recensione() {
     }
 
-    public Recensione(int id, int voto, String descrizione, CentroAdozioni centro, UtentePrivato privato) {
+    public Recensione(Integer id, Integer voto, String descrizione, CentroAdozioni centro, UtentePrivato privato) {
         this.id = id;
         this.voto = voto;
         this.descrizione = descrizione;
@@ -18,19 +18,19 @@ public class Recensione {
         this.privato = privato;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getVoto() {
+    public Integer getVoto() {
         return voto;
     }
 
-    public void setVoto(int voto) {
+    public void setVoto(Integer voto) {
         this.voto = voto;
     }
 

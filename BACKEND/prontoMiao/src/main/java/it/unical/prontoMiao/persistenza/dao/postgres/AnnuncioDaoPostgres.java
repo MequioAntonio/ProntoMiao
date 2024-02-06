@@ -37,12 +37,12 @@ public class AnnuncioDaoPostgres implements AnnuncioDao{
             annuncio.setTitolo(rs.getString("titolo"));
             annuncio.setFoto_profilo(rs.getString("foto_profilo"));
 
-            Integer centroId = rs.getInt("centro");
+            Integer centroId = rs.getInt("id_centro");
             CentroAdozioni centro = DBManager.getInstance().getCentroAdozioniDao()
                             .findById(centroId);
             annuncio.setCentro(centro);
 
-            Integer animaleId = rs.getInt("animale");
+            Integer animaleId = rs.getInt("id_animale");
             Animale animale = DBManager.getInstance().getAnimaleDao()
                             .findById(animaleId);
             annuncio.setAnimale(animale);
@@ -70,12 +70,12 @@ public class AnnuncioDaoPostgres implements AnnuncioDao{
             annuncio.setTitolo(rs.getString("titolo"));
             annuncio.setFoto_profilo(rs.getString("foto_profilo"));
 
-            Integer centroId = rs.getInt("centro");
+            Integer centroId = rs.getInt("id_centro");
             CentroAdozioni centro = DBManager.getInstance().getCentroAdozioniDao()
                             .findById(centroId);
             annuncio.setCentro(centro);
 
-            Integer animaleId = rs.getInt("animale");
+            Integer animaleId = rs.getInt("id_animale");
             Animale animale = DBManager.getInstance().getAnimaleDao()
                             .findById(animaleId);
             annuncio.setAnimale(animale);
@@ -144,7 +144,7 @@ public class AnnuncioDaoPostgres implements AnnuncioDao{
 
         ResultSet rs = st.executeQuery();
 
-        if (rs.next()) {
+        while (rs.next()) {
             Annuncio annuncio = new Annuncio();
             annuncio.setId(rs.getInt("id"));
             annuncio.setDescrizione(rs.getString("descrizione"));
@@ -152,12 +152,12 @@ public class AnnuncioDaoPostgres implements AnnuncioDao{
             annuncio.setTitolo(rs.getString("titolo"));
             annuncio.setFoto_profilo(rs.getString("foto_profilo"));
 
-            Integer centroId = rs.getInt("centro");
+            Integer centroId = rs.getInt("id_centro");
             CentroAdozioni centro = DBManager.getInstance().getCentroAdozioniDao()
                             .findById(centroId);
             annuncio.setCentro(centro);
 
-            Integer animaleId = rs.getInt("animale");
+            Integer animaleId = rs.getInt("id_animale");
             Animale animale = DBManager.getInstance().getAnimaleDao()
                             .findById(animaleId);
             annuncio.setAnimale(animale);
@@ -185,12 +185,12 @@ public class AnnuncioDaoPostgres implements AnnuncioDao{
             annuncio.setTitolo(rs.getString("titolo"));
             annuncio.setFoto_profilo(rs.getString("foto_profilo"));
 
-            Integer centroId = rs.getInt("centro");
+            Integer centroId = rs.getInt("id_centro");
             CentroAdozioni centro = DBManager.getInstance().getCentroAdozioniDao()
                             .findById(centroId);
             annuncio.setCentro(centro);
 
-            Integer animaleId = rs.getInt("animale");
+            Integer animaleId = rs.getInt("id_animale");
             Animale animale = DBManager.getInstance().getAnimaleDao()
                             .findById(animaleId);
             annuncio.setAnimale(animale);
