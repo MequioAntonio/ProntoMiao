@@ -4,7 +4,7 @@ public class UtentePrivato extends Utente{
 
     private String nome;
     private String cognome;
-    private String cf;
+    private String codice_fiscale;
     private String telefono;
     private String indirizzo;
     private String preferenze;
@@ -14,10 +14,10 @@ public class UtentePrivato extends Utente{
     public UtentePrivato() {
     }
 
-    public UtentePrivato(String nome, String cognome, String cf, String telefono, String indirizzo, String preferenze, String condizioni_abitative, String informazioni_aggiuntive) {
+    public UtentePrivato(String nome, String cognome, String codice_fiscale, String telefono, String indirizzo, String preferenze, String condizioni_abitative, String informazioni_aggiuntive) {
         this.nome = nome;
         this.cognome = cognome;
-        this.cf = cf;
+        this.codice_fiscale = codice_fiscale;
         this.telefono = telefono;
         this.indirizzo = indirizzo;
         this.preferenze = preferenze;
@@ -45,12 +45,12 @@ public class UtentePrivato extends Utente{
         this.cognome = cognome;
     }
 
-    public String getCf() {
-        return cf;
+    public String getCodice_fiscale() {
+        return codice_fiscale;
     }
 
-    public void setCf(String cf) {
-        this.cf = cf;
+    public void setCodice_fiscale(String codice_fiscale) {
+        this.codice_fiscale = codice_fiscale;
     }
 
     public String getTelefono() {

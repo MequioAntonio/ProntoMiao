@@ -6,14 +6,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 
 public class Utente implements UserDetails {
-    private int id;
+    private Integer id;
     private String email;
     private String password;
 
     public Utente() {
     }
 
-    public Utente(int id, String email, String password) {
+    public Utente(Integer id, String email, String password) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -23,7 +23,7 @@ public class Utente implements UserDetails {
         this.email = email;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
