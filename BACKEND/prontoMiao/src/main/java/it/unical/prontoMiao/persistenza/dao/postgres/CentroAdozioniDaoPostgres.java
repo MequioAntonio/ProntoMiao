@@ -18,6 +18,7 @@ public class CentroAdozioniDaoPostgres implements CentroAdozioniDao {
     public CentroAdozioniDaoPostgres(Connection conn) {
         this.conn = conn;
     }
+
     @Override
     public CentroAdozioni findById(int id) {
         CentroAdozioni centro = null;
@@ -46,7 +47,56 @@ public class CentroAdozioniDaoPostgres implements CentroAdozioniDao {
     }
 
     @Override
-    public Optional<CentroAdozioni> findByEmailIgnoreCase(String email) {
-        return Optional.empty();
+    public CentroAdozioni findByEmail(String email) throws SQLException {
+        CentroAdozioni centro = null;
+        String query = "select * from centro_adozioni as c, utente as u where u.id=c.id and lower(u.email) = lower(?)";
+        PreparedStatement st = conn.prepareStatement(query);
+        st.setString(1, email);
+
+        ResultSet rs = st.executeQuery();
+
+        if (rs.next()) {
+            centro = new CentroAdozioni();
+
+            centro.setEmail(rs.getString("email"));
+            centro.setPassword("");
+            centro.setId(rs.getInt("id"));
+            centro.setDescrizione(rs.getString("descrizione"));
+            centro.setEventi(rs.getString("eventi"));
+            centro.setIndirizzo(rs.getString("indirizzo"));
+            centro.setNome(rs.getString("nome"));
+            centro.setOrari(rs.getString("orari"));
+        }
+
+        return centro;
     }
+
+
+    @Override
+    public Optional<CentroAdozioni> findByEmailIgnoreCase(String email) {
+        CentroAdozioni centro = null;
+        String query = "SELECT * FROM centro_adozioni INNER JOIN utente ON utente.id = centro_adozioni.id WHERE UPPER(utente.email) = UPPER(?)";
+        try {
+            PreparedStatement st = conn.prepareStatement(query);
+            st.setString(1, email);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                centro = new CentroAdozioni();
+
+                centro.setEmail(rs.getString("email"));
+                centro.setPassword("");
+                centro.setId(rs.getInt("id"));
+                centro.setDescrizione(rs.getString("descrizione"));
+                centro.setEventi(rs.getString("eventi"));
+                centro.setIndirizzo(rs.getString("indirizzo"));
+                centro.setNome(rs.getString("nome"));
+                centro.setOrari(rs.getString("orari"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return Optional.of(centro);
+    }
+
+
 }
