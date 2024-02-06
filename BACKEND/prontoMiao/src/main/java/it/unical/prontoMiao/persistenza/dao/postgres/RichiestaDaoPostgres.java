@@ -2,8 +2,7 @@ package it.unical.prontoMiao.persistenza.dao.postgres;
 
 import it.unical.prontoMiao.persistenza.dao.RecensioneDao;
 import it.unical.prontoMiao.persistenza.dao.RichiestaDao;
-import it.unical.prontoMiao.persistenza.model.Recensione;
-import it.unical.prontoMiao.persistenza.model.Richiesta;
+import it.unical.prontoMiao.persistenza.model.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -29,9 +28,17 @@ public class RichiestaDaoPostgres implements RichiestaDao {
                 ric.setId(rs.getInt("id"));
                 ric.setStato(rs.getInt("stato"));
                 ric.setData(Date.valueOf(rs.getString("data")));
-            //    ric.setUtente(rs.);
-            //    ric.setAnnuncio();
+
+                AnnuncioDaoPostgres annuncioDao = new AnnuncioDaoPostgres(conn);
+                Annuncio annuncio = annuncioDao.findById(rs.getInt("annuncio_id"));
+                ric.setAnnuncio(annuncio);
+
+                UtentePrivatoDaoPostgres utenteDao = new UtentePrivatoDaoPostgres(conn);
+                UtentePrivato utente = utenteDao.findById(rs.getInt("utente_id"));
+                ric.setUtente(utente);
+
                 richieste.add(ric);
+
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -52,8 +59,13 @@ public class RichiestaDaoPostgres implements RichiestaDao {
                 ric.setId(rs.getInt("id"));
                 ric.setStato(rs.getInt("stato"));
                 ric.setData(Date.valueOf(rs.getString("data")));
-                // annuncio
-                // utente
+                AnnuncioDaoPostgres annuncioDao = new AnnuncioDaoPostgres(conn);
+                Annuncio annuncio = annuncioDao.findById(rs.getInt("annuncio_id"));
+                ric.setAnnuncio(annuncio);
+
+                UtentePrivatoDaoPostgres utenteDao = new UtentePrivatoDaoPostgres(conn);
+                UtentePrivato utente = utenteDao.findById(rs.getInt("utente_id"));
+                ric.setUtente(utente);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -71,8 +83,8 @@ public class RichiestaDaoPostgres implements RichiestaDao {
             st.setInt(1, richiesta.getId());
             st.setInt(2, richiesta.getStato());
             st.setString(3, richiesta.getData().toString());
-            // annuncio
-            // utente
+            st.setInt(4, richiesta.getAnnuncio().getId());
+            st.setInt(5, richiesta.getUtente().getId());
             int affectedRows = st.executeUpdate();
 
             if (affectedRows == 0) {
