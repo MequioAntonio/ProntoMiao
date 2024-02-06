@@ -17,6 +17,6 @@ public interface UtentePrivatoDao {
 
     UtentePrivato save(UtentePrivato utente) throws SQLException;
 
-    void delete(Integer idUtente) throws SQLException;
+    void deleteById(Integer idUtente) throws SQLException;
 
 }

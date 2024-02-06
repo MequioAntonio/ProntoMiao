@@ -32,7 +32,7 @@ public class UtenteDaoPostgres implements UtenteDao{
                 Utente utente = new Utente();
                 utente.setId(rs.getInt("id"));
                 utente.setEmail(rs.getString("email"));
-                utente.setPassword("");
+                utente.setPassword(rs.getString("password"));
 
                 return Optional.of(utente);
 

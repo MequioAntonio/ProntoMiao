@@ -86,7 +86,7 @@ public class CentroAdozioniDaoPostgres implements CentroAdozioniDao {
                 centro = new CentroAdozioni();
 
                 centro.setEmail(rs.getString("email"));
-                centro.setPassword("");
+                centro.setPassword(rs.getString("password"));
                 centro.setId(rs.getInt("id"));
                 centro.setDescrizione(rs.getString("descrizione"));
                 centro.setEventi(rs.getString("eventi"));
@@ -97,13 +97,13 @@ public class CentroAdozioniDaoPostgres implements CentroAdozioniDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return Optional.of(centro);
+        return centro == null ? Optional.empty() : Optional.of(centro);
     }
 
 
     @Override
     public CentroAdozioni save(CentroAdozioni centro) throws SQLException {
-        if (centro.getId()!=null){
+        if (centro.getId()==null){
             Integer newId = IdBroker.getId(conn);
             centro.setId(newId);
 

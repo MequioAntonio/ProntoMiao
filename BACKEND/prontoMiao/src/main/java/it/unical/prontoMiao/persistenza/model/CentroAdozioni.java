@@ -19,6 +19,10 @@ public class CentroAdozioni extends Utente{
         this.indirizzo = indirizzo;
     }
 
+    public CentroAdozioni(String email, String password) {
+        super(email, password);
+    }
+
     public String getNome() {
         return nome;
     }

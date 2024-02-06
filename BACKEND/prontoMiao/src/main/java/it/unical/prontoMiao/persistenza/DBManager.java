@@ -24,7 +24,7 @@ public class DBManager {
     public Connection getConnection(){
         if (con == null){
             try {
-                con = DriverManager.getConnection("jdbc:postgresql://postgres.sirioshome.it:5432/public", "postgres", "homeassistant");
+                con = DriverManager.getConnection("jdbc:postgresql://postgres.sirioshome.it:5432/postgres", "postgres", "homeassistant");
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }

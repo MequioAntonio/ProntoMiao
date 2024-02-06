@@ -114,7 +114,7 @@ public class UtentePrivatoDaoPostgres implements UtentePrivatoDao {
 
                 utente.setId(rs.getInt("id"));
                 utente.setEmail(rs.getString("email"));
-                utente.setPassword("");
+                utente.setPassword(rs.getString("password"));
                 utente.setCodice_fiscale(rs.getString("codice_fiscale"));
                 utente.setCognome(rs.getString("cognome"));
                 utente.setNome(rs.getString("nome"));
@@ -138,7 +138,7 @@ public class UtentePrivatoDaoPostgres implements UtentePrivatoDao {
 
     @Override
     public UtentePrivato save(UtentePrivato utente) throws SQLException {
-        if (utente.getId()!=null){
+        if (utente.getId()==null){
             Integer newId = IdBroker.getId(conn);
             utente.setId(newId);
 
@@ -191,7 +191,7 @@ public class UtentePrivatoDaoPostgres implements UtentePrivatoDao {
     }
 
     @Override
-    public void delete(Integer idUtente) throws SQLException {
+    public void deleteById(Integer idUtente) throws SQLException {
         PreparedStatement delPrivato = conn.prepareStatement("DELETE FROM privato WHERE id = ?");
         delPrivato.setInt(1, idUtente);
         delPrivato.executeUpdate();

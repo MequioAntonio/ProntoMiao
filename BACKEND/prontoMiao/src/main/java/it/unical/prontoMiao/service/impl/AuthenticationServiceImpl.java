@@ -1,8 +1,15 @@
 package it.unical.prontoMiao.service.impl;
 
-import it.unical.prontoMiao.model_old.CentroAdozioni;
-import it.unical.prontoMiao.model_old.Utente;
-import it.unical.prontoMiao.model_old.UtentePrivato;
+import it.unical.prontoMiao.persistenza.dao.CentroAdozioniDao;
+import it.unical.prontoMiao.persistenza.dao.postgres.CentroAdozioniDaoPostgres;
+import it.unical.prontoMiao.persistenza.model.CentroAdozioni;
+import it.unical.prontoMiao.persistenza.dao.UtentePrivatoDao;
+import it.unical.prontoMiao.persistenza.dao.postgres.UtentePrivatoDaoPostgres;
+import it.unical.prontoMiao.persistenza.model.Utente;
+import it.unical.prontoMiao.persistenza.model.UtentePrivato;
+import it.unical.prontoMiao.persistenza.DBManager;
+import it.unical.prontoMiao.persistenza.dao.UtenteDao;
+import it.unical.prontoMiao.persistenza.dao.postgres.UtenteDaoPostgres;
 import it.unical.prontoMiao.repository.CentroAdozioniRepository;
 import it.unical.prontoMiao.repository.UtentePrivatoRepository;
 import it.unical.prontoMiao.repository.UtenteRepository;
@@ -16,6 +23,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -23,12 +31,17 @@ import java.util.Optional;
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
 
-    @Autowired
-    UtenteRepository utenteRepository;
-    @Autowired
-    UtentePrivatoRepository utentePrivatoRepository;
-    @Autowired
-    CentroAdozioniRepository centroAdozioniRepository;
+    //@Autowired
+    //UtenteRepository utenteRepository;
+    private UtenteDao utenteRepository = new UtenteDaoPostgres(DBManager.getInstance().getConnection());
+
+    private UtentePrivatoDao utentePrivatoRepository = new UtentePrivatoDaoPostgres(DBManager.getInstance().getConnection());
+
+    private CentroAdozioniDao centroAdozioniRepository = new CentroAdozioniDaoPostgres(DBManager.getInstance().getConnection());
+    //@Autowired
+    //UtentePrivatoRepository utentePrivatoRepository;
+    //@Autowired
+    //CentroAdozioniRepository centroAdozioniRepository;
     @Autowired
     PasswordEncoder encoder;
     @Autowired
@@ -74,12 +87,11 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
-    public Utente signup(AuthRequest utente) {
+    public Utente signup(AuthRequest utente) throws SQLException {
         Utente u = new Utente(utente.getEmail(), encoder.encode(utente.getPassword()));
-        //u = utenteRepository.save(u);
         if (utente.getTipoUtente().equalsIgnoreCase("Privato")) {
             UtentePrivato privato = new UtentePrivato(u.getEmail(),u.getPassword());
-            privato.setCf(utente.getCf());
+            privato.setCodice_fiscale(utente.getCf());
             privato.setNome(utente.getNome());
             privato.setCognome(utente.getCognome());
             privato.setTelefono(utente.getTelefono());
@@ -87,10 +99,11 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             privato.setIndirizzo(utente.getIndirizzo());
             privato.setInformazioni_aggiuntive(utente.getInformazioni());
             privato.setCondizioni_abitative(utente.getCondizioni());
-            privato.setId(u.getId());
+            //privato.setId(u.getId());
             utentePrivatoRepository.save(privato);
             return privato;
         }
+
         CentroAdozioni centro = new CentroAdozioni(u.getEmail(),u.getPassword());
         centro.setNome(utente.getNome());
         centro.setDescrizione(utente.getDescrizione());
@@ -99,5 +112,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         centro.setOrari(utente.getOrari());
         centroAdozioniRepository.save(centro);
         return centro;
+
     }
 }

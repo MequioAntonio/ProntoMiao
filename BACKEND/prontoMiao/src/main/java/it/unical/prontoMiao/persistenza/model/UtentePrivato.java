@@ -29,6 +29,16 @@ public class UtentePrivato extends Utente{
         super(email, password);
     }
 
+    public UtentePrivato(String email, String password, String nome, String cognome, String codiceFiscale, String indirizzo) {
+        super(email, password);
+        this.nome = nome;
+        this.cognome = cognome;
+        this.indirizzo = indirizzo;
+        this.codice_fiscale = codiceFiscale;
+        this.indirizzo = indirizzo;
+
+    }
+
     public String getNome() {
         return nome;
     }

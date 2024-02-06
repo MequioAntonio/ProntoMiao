@@ -1,6 +1,6 @@
 package it.unical.prontoMiao.controller;
 
-import it.unical.prontoMiao.model_old.Utente;
+import it.unical.prontoMiao.persistenza.model.Utente;
 import it.unical.prontoMiao.request.AuthRequest;
 import it.unical.prontoMiao.response.JwtTokenResponse;
 import it.unical.prontoMiao.service.AuthenticationService;
@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.sql.SQLException;
 
 @RestController
 @RequestMapping("/auth")
@@ -29,7 +31,12 @@ public class AutenticazioneController  {
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public ResponseEntity<Utente> signup(@RequestBody AuthRequest request) {
-        return ResponseEntity.ok(authenticationService.signup(request));
+        try {
+            return ResponseEntity.ok(authenticationService.signup(request));
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
+        }
     }
 
 }

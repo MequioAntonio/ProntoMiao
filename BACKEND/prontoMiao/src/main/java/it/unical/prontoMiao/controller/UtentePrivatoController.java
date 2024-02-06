@@ -53,7 +53,7 @@ public class UtentePrivatoController {
     public ResponseEntity deleteUtentePrivato(@PathVariable int id) {
         UtentePrivatoDao utentePrivatoDao = DBManager.getInstance().getUtentePrivatoDao();
         try {
-            utentePrivatoDao.delete(id);
+            utentePrivatoDao.deleteById(id);
             return new ResponseEntity<>( HttpStatus.OK);
         } catch (SQLException e) {
             return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
