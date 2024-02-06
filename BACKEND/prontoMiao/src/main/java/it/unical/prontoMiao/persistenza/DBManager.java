@@ -1,7 +1,7 @@
 package it.unical.prontoMiao.persistenza;
 
-import it.unical.prontoMiao.persistenza.dao.AnimaleDao;
-import it.unical.prontoMiao.persistenza.dao.postgres.AnimaleDaoPostgres;
+import it.unical.prontoMiao.persistenza.dao.*;
+import it.unical.prontoMiao.persistenza.dao.postgres.*;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -35,5 +35,16 @@ public class DBManager {
     public AnimaleDao getAnimaleDao(){
         return new AnimaleDaoPostgres(getConnection());
     }
+    public AnnuncioDao getAnnuncioDao(){
+        return new AnnuncioDaoPostgres(getConnection());
+    }
+    public CentroAdozioniDao getCentroAdozioniDao(){ return new CentroAdozioniDaoPostgres(getConnection()); }
+    public RecensioneDao getRecensioneDao(){ return new RecensioneDaoPostgres(getConnection()); }
+    public RichiestaDao getRichiestaDao(){ return new RichiestaDaoPostgres(getConnection()); }
+    public SegnalazioneDao getSegnalazioneDao(){ return new SegnalazioneDaoPostgres(getConnection()); }
+    public UtenteDao getUtenteDao(){ return new UtenteDaoPostgres(getConnection()); }
+    public UtentePrivatoDao getUtentePrivatoDao(){ return new UtentePrivatoDaoPostgres(getConnection()); }
+
+
 
 }

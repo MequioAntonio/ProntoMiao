@@ -1,20 +1,29 @@
 package it.unical.prontoMiao.persistenza.model;
 
-public class Utente {
-    private int id;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+
+public class Utente implements UserDetails {
+    private Integer id;
     private String email;
     private String password;
 
     public Utente() {
     }
 
-    public Utente(int id, String email, String password) {
+    public Utente(Integer id, String email, String password) {
         this.id = id;
         this.email = email;
         this.password = password;
     }
 
-    public int getId() {
+    public Utente(String email, String password) {
+        this.email = email;
+    }
+
+    public Integer getId() {
         return id;
     }
 
@@ -30,8 +39,39 @@ public class Utente {
         this.email = email;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
     }
 
     public void setPassword(String password) {

@@ -1,8 +1,7 @@
 package it.unical.prontoMiao.persistenza.model;
 
-public class CentroAdozioni {
+public class CentroAdozioni extends Utente{
 
-    private Utente user;
     private String nome;
     private String descrizione;
     private String orari;
@@ -18,14 +17,6 @@ public class CentroAdozioni {
         this.orari = orari;
         this.eventi = eventi;
         this.indirizzo = indirizzo;
-    }
-
-    public Utente getUser() {
-        return user;
-    }
-
-    public void setUser(Utente user) {
-        this.user = user;
     }
 
     public String getNome() {

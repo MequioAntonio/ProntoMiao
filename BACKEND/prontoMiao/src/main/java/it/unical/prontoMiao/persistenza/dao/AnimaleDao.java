@@ -1,23 +1,16 @@
 package it.unical.prontoMiao.persistenza.dao;
 
+import java.sql.SQLException;
 import java.util.List;
-
-import org.springframework.data.crossstore.ChangeSetPersister;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.lang.Nullable;
 
 import it.unical.prontoMiao.persistenza.model.Animale;
 
 public interface AnimaleDao {
-    public List<Animale> getAnimali();
-    public List<Animale> getAnimaleByNome(String nome);
-    public void insertAnimale(Animale a);
-    public void updateAnimale(Animale a);
-    public void deleteAnimale(int idAnimale);
-    public Animale getAnimaleById(int idAnimale);
-    public List<Animale> getAnimaliSenzaAnnuncio();
-
-    // List<Animale> findByNomeLike(String nome);
-
-    // List<Animale> findByNomeLikeIgnoreCaseAndRazzaLikeIgnoreCaseAndTagliaLikeIgnoreCaseOrderByNomeAsc(@Nullable String nome, @Nullable String razza, @Nullable String taglia);
+    public List<Animale> findAll() throws SQLException;
+    public Animale findById(Integer idAnimale) throws SQLException;
+    public List<Animale> findByNome(String nome) throws SQLException;
+    public Animale save(Animale animale) throws SQLException;
+    public void delete(int idAnimale) throws SQLException;
+    public List<Animale> findSenzaAnnuncio() throws SQLException;
+    public List<Animale> findByAllLikeAsc(String nome, Integer eta, String razza, String taglia) throws SQLException;
 }
