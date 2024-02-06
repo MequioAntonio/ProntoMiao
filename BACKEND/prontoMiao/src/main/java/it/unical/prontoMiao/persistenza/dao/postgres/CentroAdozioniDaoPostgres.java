@@ -1,8 +1,10 @@
 package it.unical.prontoMiao.persistenza.dao.postgres;
 
 
+import it.unical.prontoMiao.persistenza.IdBroker;
 import it.unical.prontoMiao.persistenza.dao.CentroAdozioniDao;
 import it.unical.prontoMiao.persistenza.model.CentroAdozioni;
+import it.unical.prontoMiao.persistenza.model.UtentePrivato;
 
 
 import java.sql.Connection;
@@ -98,5 +100,63 @@ public class CentroAdozioniDaoPostgres implements CentroAdozioniDao {
         return Optional.of(centro);
     }
 
+
+    @Override
+    public CentroAdozioni save(CentroAdozioni centro) throws SQLException {
+        if (centro.getId()!=null){
+            Integer newId = IdBroker.getId(conn);
+            centro.setId(newId);
+
+            PreparedStatement stUser = conn.prepareStatement("INSERT INTO utente VALUES (?,?,?)");
+
+            stUser.setInt(1, newId);
+            stUser.setString(2, centro.getEmail());
+            stUser.setString(3, centro.getPassword());
+
+            stUser.executeUpdate();
+
+
+            PreparedStatement stCentro = conn.prepareStatement("INSERT INTO centro_adozioni VALUES (?,?,?,?,?,?)");
+
+            stCentro.setInt(1, newId);
+            stCentro.setString(2, centro.getDescrizione());
+            stCentro.setString(3, centro.getEventi());
+            stCentro.setString(4, centro.getIndirizzo());
+            stCentro.setString(5, centro.getNome());
+            stCentro.setString(6, centro.getOrari());
+
+            stCentro.executeUpdate();
+
+        } else {
+            PreparedStatement updUser = conn.prepareStatement("update utente set email=?, password=? where id=?");
+
+            updUser.setInt(3, centro.getId());
+            updUser.setString(1, centro.getEmail());
+            updUser.setString(2, centro.getPassword());
+
+            updUser.executeUpdate();
+
+            PreparedStatement updCentro = conn.prepareStatement("update centro_adozioni set descrizione=?, eventi=?, indirizzo=?, nome=?, orari=? where id=?");
+
+            updCentro.setInt(9, centro.getId());
+            updCentro.setString(1, centro.getDescrizione());
+            updCentro.setString(2, centro.getEventi());
+            updCentro.setString(3, centro.getIndirizzo());
+            updCentro.setString(4, centro.getNome());
+            updCentro.setString(5, centro.getOrari());
+
+        }
+        return centro;
+    }
+
+    @Override
+    public void delete(Integer idUtente) throws SQLException {
+        PreparedStatement delCentro = conn.prepareStatement("DELETE FROM centro_adozioni WHERE id = ?");
+        delCentro.setInt(1, idUtente);
+        delCentro.executeUpdate();
+        PreparedStatement delUser = conn.prepareStatement("DELETE FROM utente WHERE id = ?");
+        delUser.setInt(1, idUtente);
+        delUser.executeUpdate();
+    }
 
 }

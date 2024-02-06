@@ -14,4 +14,8 @@ public interface CentroAdozioniDao {
     public Optional<CentroAdozioni> findByEmailIgnoreCase(String email);
 
     public CentroAdozioni findByEmail(String email) throws SQLException;
+
+    public CentroAdozioni save(CentroAdozioni centro) throws SQLException;
+
+    public void delete(Integer idUtente) throws SQLException;
 }
