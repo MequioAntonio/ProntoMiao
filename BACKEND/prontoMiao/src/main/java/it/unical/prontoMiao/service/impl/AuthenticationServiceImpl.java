@@ -50,7 +50,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Autowired
     private AuthenticationManager authenticationManager;
     @Override
-    public JwtTokenResponse login(Utente utente) throws IllegalArgumentException{
+    public JwtTokenResponse login(Utente utente) throws IllegalArgumentException, SQLException {
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(utente.getEmail(), utente.getPassword()));
