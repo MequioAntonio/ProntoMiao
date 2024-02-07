@@ -1,46 +1,66 @@
 package it.unical.prontoMiao.controller;
 
-import it.unical.prontoMiao.model_old.Segnalazione;
-import it.unical.prontoMiao.service.SegnalazioneService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
+import it.unical.prontoMiao.persistenza.DBManager;
+import it.unical.prontoMiao.persistenza.dao.SegnalazioneDao;
+import it.unical.prontoMiao.persistenza.model.Segnalazione;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
-import java.util.List;
+import java.sql.SQLException;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping(value = "/segnalazione")
 public class SegnalazioneController {
-    @Autowired
-    private SegnalazioneService segnalazioneService;
-    @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<Segnalazione>> getAllSegnalazioni(){
-        return new ResponseEntity<List<Segnalazione>>(segnalazioneService.getSegnalazione(), HttpStatus.OK);
+
+    @GetMapping
+    public ResponseEntity getAllSegnalazioni(){
+        SegnalazioneDao segnalazioneDao = DBManager.getInstance().getSegnalazioneDao();
+        try {
+            return new ResponseEntity<>(segnalazioneDao.findAll(), HttpStatus.OK);
+        } catch (SQLException e) {
+            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
-    @RequestMapping(value= "/{idSegnalazione}", method = RequestMethod.GET)
+    @GetMapping("/{idSegnalazione}")
     public ResponseEntity getSegnalazioneById(@PathVariable int idSegnalazione) {
+        SegnalazioneDao segnalazioneDao = DBManager.getInstance().getSegnalazioneDao();
         try {
-            Segnalazione res = segnalazioneService.getSegnalazioneById(idSegnalazione);
-            return new ResponseEntity<>(res, HttpStatus.OK);
-        } catch (ChangeSetPersister.NotFoundException e) {
-            return new ResponseEntity("Nessuna segnalazione trovato", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(segnalazioneDao.findById(idSegnalazione), HttpStatus.OK);
+        } catch (SQLException e) {
+            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Segnalazione> insertSegnalazione(@RequestBody Segnalazione segnalazione) {
+    @PostMapping
+    public ResponseEntity insertSegnalazione(@RequestBody Segnalazione segnalazione) {
+        SegnalazioneDao segnalazioneDao = DBManager.getInstance().getSegnalazioneDao();
         try {
-            return new ResponseEntity<>(segnalazioneService.insertSegnalazione(segnalazione), HttpStatus.OK);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return new ResponseEntity("Errore nel salvataggio della segnalazione", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(segnalazioneDao.save(segnalazione), HttpStatus.OK);
+        } catch (SQLException e) {
+            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @RequestMapping(value= "/{id}", method = RequestMethod.POST)
-    public ResponseEntity<Segnalazione> updateSegnalazione(@PathVariable int id, @RequestBody Segnalazione up) {
-        return new ResponseEntity<Segnalazione>(segnalazioneService.updateSegnalazione(id, up), HttpStatus.OK);
+
+    @PostMapping("/{idSegnalazione}")
+    public ResponseEntity updateSegnalazione(@RequestParam Integer idSegnalazione, @RequestBody Segnalazione segnalazione) {
+        SegnalazioneDao segnalazioneDao = DBManager.getInstance().getSegnalazioneDao();
+        try {
+            segnalazione.setId(idSegnalazione);
+            return new ResponseEntity<>(segnalazioneDao.save(segnalazione), HttpStatus.OK);
+        } catch (SQLException e) {
+            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @DeleteMapping("/{idSegnalazione}")
+    public ResponseEntity deleteSegnalazione(@RequestParam Integer idSegnalazione) {
+        SegnalazioneDao segnalazioneDao = DBManager.getInstance().getSegnalazioneDao();
+        try {
+            segnalazioneDao.delete(idSegnalazione);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (SQLException e) {
+            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

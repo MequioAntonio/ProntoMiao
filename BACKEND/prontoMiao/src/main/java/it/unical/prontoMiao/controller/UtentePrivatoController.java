@@ -3,15 +3,12 @@ package it.unical.prontoMiao.controller;
 import it.unical.prontoMiao.persistenza.DBManager;
 import it.unical.prontoMiao.persistenza.dao.UtentePrivatoDao;
 import it.unical.prontoMiao.persistenza.model.UtentePrivato;
-import it.unical.prontoMiao.service.UtentePrivatoService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Optional;
 
 @RestController

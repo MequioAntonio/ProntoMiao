@@ -1,62 +1,83 @@
 package it.unical.prontoMiao.controller;
 
-import it.unical.prontoMiao.model_old.Richiesta;
-import it.unical.prontoMiao.service.RichiestaService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
+
+import it.unical.prontoMiao.persistenza.DBManager;
+import it.unical.prontoMiao.persistenza.dao.RichiestaDao;
+import it.unical.prontoMiao.persistenza.model.Richiesta;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
-import java.util.List;
+import java.sql.SQLException;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping(value = "/richiesta")
 public class RichiestaController {
-    @Autowired
-    private RichiestaService richiestaService;
-    @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<Richiesta>> getAllRichieste(){
-        return new ResponseEntity<List<Richiesta>>(richiestaService.getRichiesta(), HttpStatus.OK);
+
+    @GetMapping
+    public ResponseEntity getAllRichieste(){
+        RichiestaDao richiestaDao = DBManager.getInstance().getRichiestaDao();
+        try {
+            return new ResponseEntity<>(richiestaDao.findAll(), HttpStatus.OK);
+        } catch (SQLException e) {
+            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
-    @RequestMapping(value= "/{idRichiesta}", method = RequestMethod.GET)
+    @GetMapping("/{idRichiesta}")
     public ResponseEntity getRichiestaById(@PathVariable int idRichiesta) {
+        RichiestaDao richiestaDao = DBManager.getInstance().getRichiestaDao();
         try {
-            Richiesta res = richiestaService.getRichiestaById(idRichiesta);
-            return new ResponseEntity<>(res, HttpStatus.OK);
-        } catch (ChangeSetPersister.NotFoundException e) {
-            return new ResponseEntity("Nessuna richiesta trovata", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(richiestaDao.findById(idRichiesta), HttpStatus.OK);
+        } catch (SQLException e) {
+            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Richiesta> insertRichiesta(@RequestBody Richiesta richiesta) {
+    @PostMapping
+    public ResponseEntity insertRichiesta(@RequestBody Richiesta richiesta) {
+        RichiestaDao richiestaDao = DBManager.getInstance().getRichiestaDao();
         try {
-            return new ResponseEntity<>(richiestaService.insertRichiesta(richiesta), HttpStatus.OK);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return new ResponseEntity("Errore nel salvataggio della richiesta", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(richiestaDao.save(richiesta), HttpStatus.OK);
+        } catch (SQLException e) {
+            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @RequestMapping(value= "/byCentro/{idCentro}", method = RequestMethod.GET)
-    public ResponseEntity<List<Richiesta>> getAllRichiesteByCentro(@PathVariable int idCentro){
+    @PostMapping("/{idRichiesta}")
+    public ResponseEntity updateRichiesta(@PathVariable Integer idRichiesta, @RequestBody Richiesta richiesta) {
+        RichiestaDao richiestaDao = DBManager.getInstance().getRichiestaDao();
         try {
-            return new ResponseEntity<List<Richiesta>>(richiestaService.getRichiesteByCentro(idCentro), HttpStatus.OK);
-        } catch (ChangeSetPersister.NotFoundException e) {
-            return new ResponseEntity("Nessuna richiesta trovata", HttpStatus.NOT_FOUND);
+            richiesta.setId(idRichiesta);
+            return new ResponseEntity<>(richiestaDao.save(richiesta), HttpStatus.OK);
+        } catch (SQLException e) {
+            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @RequestMapping(value= "/byUtente/{idUtente}", method = RequestMethod.GET)
-    public ResponseEntity<List<Richiesta>> getAllRichiesteByUtente(@PathVariable int idUtente){
+    @GetMapping("/byCentro/{idCentro}")
+    public ResponseEntity getAllRichiesteByCentro(@PathVariable int idCentro){
+        RichiestaDao richiestaDao = DBManager.getInstance().getRichiestaDao();
         try {
-            return new ResponseEntity<List<Richiesta>>(richiestaService.getRichiesteByUtente(idUtente), HttpStatus.OK);
-        } catch (ChangeSetPersister.NotFoundException e) {
-            return new ResponseEntity("Nessuna richiesta trovata", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(richiestaDao.findByAnnuncioCentro(idCentro), HttpStatus.OK);
+        } catch (SQLException e) {
+            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @RequestMapping(value= "/{id}", method = RequestMethod.POST)
-    public ResponseEntity<Richiesta> updateRichiesta(@PathVariable int id, @RequestBody Richiesta up) {
-        return new ResponseEntity<Richiesta>(richiestaService.updateRichiesta(id, up), HttpStatus.OK);
+    @GetMapping("/byUtente/{idUtente}")
+    public ResponseEntity getAllRichiesteByUtente(@PathVariable int idUtente){
+        RichiestaDao richiestaDao = DBManager.getInstance().getRichiestaDao();
+        try {
+            return new ResponseEntity<>(richiestaDao.findByUtente(idUtente), HttpStatus.OK);
+        } catch (SQLException e) {
+            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteRichiesta(@PathVariable int id) {
+        RichiestaDao richiestaDao = DBManager.getInstance().getRichiestaDao();
+        try {
+            richiestaDao.delete(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (SQLException e) {
+            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

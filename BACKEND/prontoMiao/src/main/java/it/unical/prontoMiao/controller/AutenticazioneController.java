@@ -17,7 +17,7 @@ import java.sql.SQLException;
 public class AutenticazioneController  {
     @Autowired
     private AuthenticationService authenticationService;
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @PostMapping("/login")
     public ResponseEntity<Object> login(@RequestBody Utente request) {
         try {
             JwtTokenResponse token = authenticationService.login(request);
@@ -27,7 +27,7 @@ public class AutenticazioneController  {
         }
     }
 
-    @RequestMapping(value = "/signup", method = RequestMethod.POST)
+    @PostMapping("/signup")
     public ResponseEntity<Utente> signup(@RequestBody AuthRequest request) {
         try {
             return ResponseEntity.ok(authenticationService.signup(request));
