@@ -1,6 +1,7 @@
 package it.unical.prontoMiao.persistenza.dao.postgres;
 
 import it.unical.prontoMiao.persistenza.DBManager;
+import it.unical.prontoMiao.persistenza.IdBroker;
 import it.unical.prontoMiao.persistenza.dao.RichiestaDao;
 import it.unical.prontoMiao.persistenza.model.*;
 
@@ -17,99 +18,105 @@ public class RichiestaDaoPostgres implements RichiestaDao {
     }
 
     @Override
-    public List<Richiesta> getRichiesta() {
+    public List<Richiesta> findAll() throws SQLException {
         List<Richiesta> richieste = new ArrayList<Richiesta>();
         String query = "select * from richiesta";
-        try {
-            PreparedStatement st = conn.prepareStatement(query);
-            ResultSet rs = st.executeQuery();
-            while (rs.next()) {
-                Richiesta ric = new Richiesta();
-                ric.setId(rs.getInt("id"));
-                ric.setStato(rs.getInt("stato"));
-                ric.setData(Date.valueOf(rs.getString("data")));
+        PreparedStatement st = conn.prepareStatement(query);
+        ResultSet rs = st.executeQuery();
+        while (rs.next()) {
+            Richiesta ric = new Richiesta();
+            ric.setId(rs.getInt("id"));
+            ric.setStato(rs.getInt("stato"));
+            ric.setData(Date.valueOf(rs.getString("data")));
 
-                AnnuncioDaoPostgres annuncioDao = new AnnuncioDaoPostgres(conn);
-                Annuncio annuncio = annuncioDao.findById(rs.getInt("annuncio_id"));
-                ric.setAnnuncio(annuncio);
+            Integer annuncioId = rs.getInt("id_annuncio");
+            Annuncio annuncio = DBManager.getInstance().getAnnuncioDao()
+                    .findById(annuncioId);
+            ric.setAnnuncio(annuncio);
 
-                UtentePrivatoDaoPostgres utenteDao = new UtentePrivatoDaoPostgres(conn);
-                UtentePrivato utente = utenteDao.findById(rs.getInt("utente_id"));
-                ric.setUtente(utente);
+            Integer utenteId = rs.getInt("id_utente");
+            UtentePrivato privato = DBManager.getInstance().getUtentePrivatoDao()
+                    .findById(utenteId);
+            ric.setUtente(privato);
 
-                richieste.add(ric);
+            richieste.add(ric);
 
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
 
-        return richieste;    }
+        return richieste;
+    }
 
     @Override
-    public Richiesta getRichiestaById(Integer idRichiesta) {
+    public Richiesta findById(Integer idRichiesta) throws SQLException {
         Richiesta ric = null;
         String query = "select * from richiesta where id = ?";
-        try {
-            PreparedStatement st = conn.prepareStatement(query);
-            st.setInt(1, idRichiesta);
-            ResultSet rs = st.executeQuery();
-            if (rs.next()) {
-                ric = new Richiesta();
-                ric.setId(rs.getInt("id"));
-                ric.setStato(rs.getInt("stato"));
-                ric.setData(Date.valueOf(rs.getString("data")));
-                AnnuncioDaoPostgres annuncioDao = new AnnuncioDaoPostgres(conn);
-                Annuncio annuncio = annuncioDao.findById(rs.getInt("annuncio_id"));
-                ric.setAnnuncio(annuncio);
+        PreparedStatement st = conn.prepareStatement(query);
+        st.setInt(1, idRichiesta);
+        ResultSet rs = st.executeQuery();
+        if (rs.next()) {
+            ric = new Richiesta();
+            ric.setId(rs.getInt("id"));
+            ric.setStato(rs.getInt("stato"));
+            ric.setData(Date.valueOf(rs.getString("data")));
 
-                UtentePrivatoDaoPostgres utenteDao = new UtentePrivatoDaoPostgres(conn);
-                UtentePrivato utente = utenteDao.findById(rs.getInt("utente_id"));
-                ric.setUtente(utente);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+            Integer annuncioId = rs.getInt("id_annuncio");
+            Annuncio annuncio = DBManager.getInstance().getAnnuncioDao()
+                    .findById(annuncioId);
+            ric.setAnnuncio(annuncio);
+
+            Integer utenteId = rs.getInt("id_utente");
+            UtentePrivato privato = DBManager.getInstance().getUtentePrivatoDao()
+                    .findById(utenteId);
+            ric.setUtente(privato);
         }
 
         return ric;
     }
 
-
     @Override
-    public Richiesta insertRichieta(Richiesta richiesta) {
-        String query = "insert into richiesta (id, id_annuncio, id_utente, stato, data) values (?, ?, ?, ? ,?)";
-        try {
-            PreparedStatement st = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            st.setInt(1, richiesta.getId());
-            st.setInt(2, richiesta.getAnnuncio().getId());
+    public Richiesta save(Richiesta richiesta) throws SQLException {
+        if (richiesta.getId() != null) {
+            String query = "insert into richiesta values (?, ?, ?, ? ,?)";
+
+            PreparedStatement st;
+            st = conn.prepareStatement(query);
+
+            Integer newId = IdBroker.getId(conn);
+            richiesta.setId(newId);
+
+            st.setInt(1, newId);
+            st.setInt(2, richiesta.getStato());
+            st.setDate(3, richiesta.getData());
+            st.setInt(4, richiesta.getUtente().getId());
+            st.setInt(5, richiesta.getAnnuncio().getId());
+
+            st.executeUpdate();
+
+        } else {
+            String query = "update richiesta set stato = ?, data = ?, id_utente = ?, id_annuncio = ? where id = ?";
+            
+            PreparedStatement st;
+            st = conn.prepareStatement(query);
+
+            st.setInt(1, richiesta.getStato());
+            st.setDate(2, richiesta.getData());
             st.setInt(3, richiesta.getUtente().getId());
-            st.setInt(4, richiesta.getStato());
-            st.setDate(5, richiesta.getData());
-            int affectedRows = st.executeUpdate();
+            st.setInt(4, richiesta.getAnnuncio().getId());
+            
+            st.setInt(5, richiesta.getId());
 
-            if (affectedRows == 0) {
-                throw new SQLException("Creating Richiesta failed, no rows affected.");
-            }
+            st.executeUpdate();
 
-            try (ResultSet generatedKeys = st.getGeneratedKeys()) {
-                if (generatedKeys.next()) {
-                    richiesta.setId(generatedKeys.getInt(1));
-                } else {
-                    throw new SQLException("Creating Richiesta failed, no ID obtained.");
-                }
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
-
         return richiesta;
+
     }
 
     public List<Richiesta> findByAnnuncio_Centro_Id(int idCentro) {
         return null;
     }
 
-    public List<Richiesta> findByUtente_Id(int idUtente) throws SQLException {
+    public List<Richiesta> findByUtente(int idUtente) throws SQLException {
         List<Richiesta> richieste = new ArrayList<Richiesta>();
         String query = "select * from richiesta where id_utente = ?";
         PreparedStatement st = conn.prepareStatement(query);
@@ -120,16 +127,18 @@ public class RichiestaDaoPostgres implements RichiestaDao {
         while (rs.next()) {
             Richiesta ric = new Richiesta();
             ric.setId(rs.getInt("id"));
-            ric.setId(rs.getInt("id"));
             ric.setStato(rs.getInt("stato"));
             ric.setData(Date.valueOf(rs.getString("data")));
-            AnnuncioDaoPostgres annuncioDao = new AnnuncioDaoPostgres(conn);
-            Annuncio annuncio = annuncioDao.findById(rs.getInt("annuncio_id"));
+
+            Integer annuncioId = rs.getInt("id_annuncio");
+            Annuncio annuncio = DBManager.getInstance().getAnnuncioDao()
+                    .findById(annuncioId);
             ric.setAnnuncio(annuncio);
 
-            UtentePrivatoDaoPostgres utenteDao = new UtentePrivatoDaoPostgres(conn);
-            UtentePrivato utente = utenteDao.findById(rs.getInt("utente_id"));
-            ric.setUtente(utente);
+            Integer utenteId = rs.getInt("id_utente");
+            UtentePrivato privato = DBManager.getInstance().getUtentePrivatoDao()
+                    .findById(utenteId);
+            ric.setUtente(privato);
 
             richieste.add(ric);
         }
@@ -138,28 +147,10 @@ public class RichiestaDaoPostgres implements RichiestaDao {
     }
 
     @Override
-    public Richiesta updateRichiesta(int id, Richiesta richiesta) {
-        String query = "update richiesta set id = ?, id_annuncio = ?, id_utente = ?, stato = ?, data = ? where id = ?";
-        try {
-            PreparedStatement st = conn.prepareStatement(query);
-            st.setInt(1, richiesta.getId());
-            st.setInt(2, richiesta.getAnnuncio().getId());
-            st.setInt(3, richiesta.getUtente().getId());
-            st.setInt(4, richiesta.getStato());
-            st.setDate(5, richiesta.getData());
-            st.setInt(6, id);
-            st.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return richiesta;
-    }
-
-
-    @Override
-    public void deleteRichiestaById(Integer idRichiesta) throws SQLException {
-        PreparedStatement delRichiesta = conn.prepareStatement("DELETE FROM richiesta WHERE id = ?");
-        delRichiesta.setInt(1, idRichiesta);
-        delRichiesta.executeUpdate();
+    public void delete(Integer idRichiesta) throws SQLException {
+        String query = "DELETE FROM richiesta WHERE id = ?";
+        PreparedStatement st = conn.prepareStatement(query);
+        st.setInt(1, idRichiesta);
+        st.executeUpdate();
     }
 }

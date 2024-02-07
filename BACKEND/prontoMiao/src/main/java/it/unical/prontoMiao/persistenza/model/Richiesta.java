@@ -3,8 +3,8 @@ package it.unical.prontoMiao.persistenza.model;
 import java.sql.Date; //se crea problemi cabiare da java.sql a java.util
 
 public class Richiesta {
-    private int id;
-    private int stato;
+    private Integer id;
+    private Integer stato;
     private Date data;
     private UtentePrivato utente;
     private Annuncio annuncio;
@@ -12,7 +12,7 @@ public class Richiesta {
     public Richiesta() {
     }
 
-    public Richiesta(int id, int stato, Date data, UtentePrivato utente, Annuncio annuncio) {
+    public Richiesta(Integer id, Integer stato, Date data, UtentePrivato utente, Annuncio annuncio) {
         this.id = id;
         this.stato = stato;
         this.data = data;
@@ -20,19 +20,19 @@ public class Richiesta {
         this.annuncio = annuncio;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getStato() {
+    public Integer getStato() {
         return stato;
     }
 
-    public void setStato(int stato) {
+    public void setStato(Integer stato) {
         this.stato = stato;
     }
 

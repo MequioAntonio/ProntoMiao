@@ -7,14 +7,12 @@ import java.util.List;
 
 
 public interface RichiestaDao {
-    public List<Richiesta> getRichiesta();
-    public Richiesta getRichiestaById(Integer idRichiesta);
+    public List<Richiesta> findAll() throws SQLException;
+    public Richiesta findById(Integer idRichiesta) throws SQLException;
     List<Richiesta> findByAnnuncio_Centro_Id(int idCentro);
-    List<Richiesta> findByUtente_Id(int idUtente) throws SQLException;
-    public Richiesta insertRichieta (Richiesta richiesta);
-
-    public Richiesta updateRichiesta(int id, Richiesta richiesta);
-    public void deleteRichiestaById(Integer idRichiesta) throws SQLException;
+    public List<Richiesta> findByUtente(int idUtente) throws SQLException;
+    public Richiesta save(Richiesta richiesta) throws SQLException;
+    public void delete(Integer idRichiesta) throws SQLException;
 
 
 }
