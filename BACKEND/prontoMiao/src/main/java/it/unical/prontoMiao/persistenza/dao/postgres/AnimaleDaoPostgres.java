@@ -67,7 +67,7 @@ public class AnimaleDaoPostgres implements AnimaleDao {
 
     @Override
     public Animale save(Animale animale) throws SQLException {
-        if (animale.getId()!=null){
+        if (animale.getId() == null){
             String insertStr = "INSERT INTO animale VALUES (?, ?, ?, ?, ?, ?, ?)";
 
             PreparedStatement st;

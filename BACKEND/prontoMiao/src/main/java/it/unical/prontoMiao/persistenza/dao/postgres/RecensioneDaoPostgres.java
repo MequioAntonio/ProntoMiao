@@ -108,7 +108,7 @@ public class RecensioneDaoPostgres implements RecensioneDao {
 
     @Override
     public Recensione save(Recensione recensione) throws SQLException {
-        if (recensione.getId() != null) {
+        if (recensione.getId() == null) {
             String insertStr = "INSERT INTO recensione VALUES (?, ?, ?, ?, ?)";
 
             PreparedStatement st;

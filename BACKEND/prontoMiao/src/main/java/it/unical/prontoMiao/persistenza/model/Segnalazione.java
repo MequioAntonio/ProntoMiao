@@ -20,7 +20,7 @@ public class Segnalazione {
         this.utente = utente;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

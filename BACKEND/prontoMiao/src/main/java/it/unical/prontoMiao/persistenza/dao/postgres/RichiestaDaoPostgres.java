@@ -75,7 +75,7 @@ public class RichiestaDaoPostgres implements RichiestaDao {
 
     @Override
     public Richiesta save(Richiesta richiesta) throws SQLException {
-        if (richiesta.getId() != null) {
+        if (richiesta.getId() == null) {
             String query = "insert into richiesta values (?, ?, ?, ? ,?)";
 
             PreparedStatement st;

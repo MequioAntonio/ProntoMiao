@@ -22,7 +22,7 @@ public class SegnalazioneDaoPostgres implements SegnalazioneDao {
     }
 
     @Override
-    public List<Segnalazione> getSegnalazione() {
+    public List<Segnalazione> findAll() {
         List<Segnalazione> segnalazioni = new ArrayList<Segnalazione>();
         String query = "select * from segnalazione";
         try {
@@ -53,7 +53,7 @@ public class SegnalazioneDaoPostgres implements SegnalazioneDao {
     }
 
     @Override
-    public Segnalazione getSegnalazioneById(int idSegnalazione) {
+    public Segnalazione findById(int idSegnalazione) {
         Segnalazione seg = null;
         String query = "select * from segnalazione where id = ?";
         try {
@@ -82,42 +82,40 @@ public class SegnalazioneDaoPostgres implements SegnalazioneDao {
     }
 
     @Override
-    public Segnalazione insertSegnalazione(Segnalazione segnalazione) throws IOException {
-        String query = "insert into segnalazione (titolo, descrizione, indirizzo, centro_id, utente_id) values (?, ?, ?, ?, ?)";
-        try {
-            PreparedStatement st = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            st.setString(1, segnalazione.getTitolo());
-            st.setString(2, segnalazione.getDescrizione());
-            st.setString(3, segnalazione.getIndirizzo());
-            st.setInt(4, segnalazione.getCentro().getId());
-            st.setInt(5, segnalazione.getUtente().getId());
-            st.executeUpdate();
-            ResultSet rs = st.getGeneratedKeys();
-            if (rs.next()) {
-                segnalazione.setId(rs.getInt(1));
+    public Segnalazione save(Segnalazione segnalazione) throws IOException {
+        if (segnalazione.getId() == null) {
+            String query = "insert into segnalazione (titolo, descrizione, indirizzo, centro_id, utente_id) values (?, ?, ?, ?, ?)";
+            try {
+                PreparedStatement st = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+                st.setString(1, segnalazione.getTitolo());
+                st.setString(2, segnalazione.getDescrizione());
+                st.setString(3, segnalazione.getIndirizzo());
+                st.setInt(4, segnalazione.getCentro().getId());
+                st.setInt(5, segnalazione.getUtente().getId());
+                st.executeUpdate();
+                ResultSet rs = st.getGeneratedKeys();
+                if (rs.next()) {
+                    segnalazione.setId(rs.getInt(1));
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } else {
+            String query = "update segnalazione set titolo = ?, descrizione = ?, indirizzo = ?, centro_id = ?, utente_id = ? where id = ?";
+            try {
+                PreparedStatement st = conn.prepareStatement(query);
+                st.setString(1, segnalazione.getTitolo());
+                st.setString(2, segnalazione.getDescrizione());
+                st.setString(3, segnalazione.getIndirizzo());
+                st.setInt(4, segnalazione.getCentro().getId());
+                st.setInt(5, segnalazione.getUtente().getId());
+                st.setInt(6, segnalazione.getId());
+                st.executeUpdate();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
         return segnalazione;
-    }
-
-    @Override
-    public Segnalazione updateSegnalazione(int id, Segnalazione up) {
-        String query = "update segnalazione set titolo = ?, descrizione = ?, indirizzo = ?, centro_id = ?, utente_id = ? where id = ?";
-        try {
-            PreparedStatement st = conn.prepareStatement(query);
-            st.setString(1, up.getTitolo());
-            st.setString(2, up.getDescrizione());
-            st.setString(3, up.getIndirizzo());
-            st.setInt(4, up.getCentro().getId());
-            st.setInt(5, up.getUtente().getId());
-            st.setInt(6, id);
-            st.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return up;
     }
 
 }

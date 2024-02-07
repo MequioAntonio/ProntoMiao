@@ -138,7 +138,7 @@ public class UtentePrivatoDaoPostgres implements UtentePrivatoDao {
 
     @Override
     public UtentePrivato save(UtentePrivato utente) throws SQLException {
-        if (utente.getId()==null){
+        if (utente.getId() == null){
             Integer newId = IdBroker.getId(conn);
             utente.setId(newId);
 
