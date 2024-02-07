@@ -22,27 +22,23 @@ public class CentroAdozioniDaoPostgres implements CentroAdozioniDao {
     }
 
     @Override
-    public CentroAdozioni findById(int id) {
+    public CentroAdozioni findById(int id) throws SQLException {
         CentroAdozioni centro = null;
         String query = "SELECT * FROM centro_adozioni INNER JOIN utente ON utente.id = centro_adozioni.id WHERE id = ?";
-        try {
-            PreparedStatement st = conn.prepareStatement(query);
-            st.setInt(1, id);
-            ResultSet rs = st.executeQuery();
-            if (rs.next()) {
-                centro = new CentroAdozioni();
+        PreparedStatement st = conn.prepareStatement(query);
+        st.setInt(1, id);
+        ResultSet rs = st.executeQuery();
+        if (rs.next()) {
+            centro = new CentroAdozioni();
 
-                centro.setEmail(rs.getString("email"));
-                centro.setPassword("");
-                centro.setId(rs.getInt("id"));
-                centro.setDescrizione(rs.getString("descrizione"));
-                centro.setEventi(rs.getString("eventi"));
-                centro.setIndirizzo(rs.getString("indirizzo"));
-                centro.setNome(rs.getString("nome"));
-                centro.setOrari(rs.getString("orari"));
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+            centro.setEmail(rs.getString("email"));
+            centro.setPassword("");
+            centro.setId(rs.getInt("id"));
+            centro.setDescrizione(rs.getString("descrizione"));
+            centro.setEventi(rs.getString("eventi"));
+            centro.setIndirizzo(rs.getString("indirizzo"));
+            centro.setNome(rs.getString("nome"));
+            centro.setOrari(rs.getString("orari"));
         }
 
         return centro;
@@ -75,27 +71,23 @@ public class CentroAdozioniDaoPostgres implements CentroAdozioniDao {
 
 
     @Override
-    public Optional<CentroAdozioni> findByEmailIgnoreCase(String email) {
+    public Optional<CentroAdozioni> findByEmailIgnoreCase(String email) throws SQLException {
         CentroAdozioni centro = null;
         String query = "SELECT * FROM centro_adozioni INNER JOIN utente ON utente.id = centro_adozioni.id WHERE UPPER(utente.email) = UPPER(?)";
-        try {
-            PreparedStatement st = conn.prepareStatement(query);
-            st.setString(1, email);
-            ResultSet rs = st.executeQuery();
-            if (rs.next()) {
-                centro = new CentroAdozioni();
+        PreparedStatement st = conn.prepareStatement(query);
+        st.setString(1, email);
+        ResultSet rs = st.executeQuery();
+        if (rs.next()) {
+            centro = new CentroAdozioni();
 
-                centro.setEmail(rs.getString("email"));
-                centro.setPassword(rs.getString("password"));
-                centro.setId(rs.getInt("id"));
-                centro.setDescrizione(rs.getString("descrizione"));
-                centro.setEventi(rs.getString("eventi"));
-                centro.setIndirizzo(rs.getString("indirizzo"));
-                centro.setNome(rs.getString("nome"));
-                centro.setOrari(rs.getString("orari"));
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+            centro.setEmail(rs.getString("email"));
+            centro.setPassword(rs.getString("password"));
+            centro.setId(rs.getInt("id"));
+            centro.setDescrizione(rs.getString("descrizione"));
+            centro.setEventi(rs.getString("eventi"));
+            centro.setIndirizzo(rs.getString("indirizzo"));
+            centro.setNome(rs.getString("nome"));
+            centro.setOrari(rs.getString("orari"));
         }
         return centro == null ? Optional.empty() : Optional.of(centro);
     }
