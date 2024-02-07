@@ -53,7 +53,7 @@ public class SegnalazioneDaoPostgres implements SegnalazioneDao {
     }
 
     @Override
-    public Segnalazione findById(int idSegnalazione) {
+    public Segnalazione findById(Integer idSegnalazione) {
         Segnalazione seg = null;
         String query = "select * from segnalazione where id = ?";
         try {
@@ -117,5 +117,11 @@ public class SegnalazioneDaoPostgres implements SegnalazioneDao {
         }
         return segnalazione;
     }
-
+    @Override
+    public void delete(Integer id) throws SQLException {
+        String query = "delete from segnalazione where id = ?";
+        PreparedStatement st = conn.prepareStatement(query);
+        st.setInt(1, id);
+        st.executeUpdate();
+    }
 }
