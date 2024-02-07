@@ -24,7 +24,7 @@ public class AutenticazioneController  {
         try {
             JwtTokenResponse token = authenticationService.login(request);
             return ResponseEntity.ok(authenticationService.login(request));
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException | SQLException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }

@@ -14,7 +14,12 @@
       </div>
     </div>
     </div>
-
+    <div class="map"
+      leaflet
+      [leafletOptions]="options"
+      (leafletMapReady)="onMapReady($event)">
+      >
+    </div>
 
     <div class="flexGrid">
         <div class="items">
