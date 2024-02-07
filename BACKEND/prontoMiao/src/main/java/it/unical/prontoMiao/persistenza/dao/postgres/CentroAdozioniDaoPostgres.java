@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class CentroAdozioniDaoPostgres implements CentroAdozioniDao {
@@ -40,6 +42,29 @@ public class CentroAdozioniDaoPostgres implements CentroAdozioniDao {
         }
 
         return centro;
+    }
+
+    @Override
+    public List<CentroAdozioni> findAll() throws SQLException {
+        List<CentroAdozioni> centri = new ArrayList<CentroAdozioni>();
+        PreparedStatement st = conn.prepareStatement("SELECT * FROM centro_adozioni");
+        ResultSet rs = st.executeQuery();
+        while (rs.next()) {
+            CentroAdozioni centro = null;
+            centro = new CentroAdozioni();
+
+            centro.setEmail(rs.getString("email"));
+            centro.setPassword("");
+            centro.setId(rs.getInt("id"));
+            centro.setDescrizione(rs.getString("descrizione"));
+            centro.setEventi(rs.getString("eventi"));
+            centro.setIndirizzo(rs.getString("indirizzo"));
+            centro.setNome(rs.getString("nome"));
+            centro.setOrari(rs.getString("orari"));
+            centri.add(centro);
+        }
+
+        return centri;
     }
 
     @Override
