@@ -3,7 +3,9 @@ package it.unical.prontoMiao.persistenza.dao.postgres;
 import it.unical.prontoMiao.persistenza.DBManager;
 import it.unical.prontoMiao.persistenza.IdBroker;
 import it.unical.prontoMiao.persistenza.dao.RichiestaDao;
-import it.unical.prontoMiao.persistenza.model.*;
+import it.unical.prontoMiao.persistenza.model.Annuncio;
+import it.unical.prontoMiao.persistenza.model.Richiesta;
+import it.unical.prontoMiao.persistenza.model.UtentePrivato;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -76,7 +78,7 @@ public class RichiestaDaoPostgres implements RichiestaDao {
     @Override
     public Richiesta save(Richiesta richiesta) throws SQLException {
         if (richiesta.getId() == null) {
-            String query = "insert into richiesta values (?, ?, ?, ? ,?)";
+            String query = "insert into richiesta (id, stato, data, id_utente, id_annuncio) values (?, ?, ?, ? ,?)";
 
             PreparedStatement st;
             st = conn.prepareStatement(query);
@@ -112,12 +114,38 @@ public class RichiestaDaoPostgres implements RichiestaDao {
 
     }
 
-    public List<Richiesta> findByAnnuncio_Centro_Id(int idCentro) {
-        return null;
+    public List<Richiesta> findByAnnuncioCentro(int idCentro) throws SQLException {
+        List<Richiesta> richieste = new ArrayList<>();
+        String query = "select * from richiesta as r, annuncio as a where r.id_annuncio = a.id and a.id_centro = ?";
+        PreparedStatement st = conn.prepareStatement(query);
+        st.setInt(1, idCentro);
+
+        ResultSet rs = st.executeQuery();
+
+        while (rs.next()) {
+            Richiesta ric = new Richiesta();
+            ric.setId(rs.getInt("r.id"));
+            ric.setStato(rs.getInt("r.stato"));
+            ric.setData(Date.valueOf(rs.getString("r.data")));
+
+            Integer annuncioId = rs.getInt("r.id_annuncio");
+            Annuncio annuncio = DBManager.getInstance().getAnnuncioDao()
+                    .findById(annuncioId);
+            ric.setAnnuncio(annuncio);
+
+            Integer utenteId = rs.getInt("r.id_utente");
+            UtentePrivato privato = DBManager.getInstance().getUtentePrivatoDao()
+                    .findById(utenteId);
+            ric.setUtente(privato);
+
+            richieste.add(ric);
+        }
+
+        return richieste;
     }
 
     public List<Richiesta> findByUtente(int idUtente) throws SQLException {
-        List<Richiesta> richieste = new ArrayList<Richiesta>();
+        List<Richiesta> richieste = new ArrayList<>();
         String query = "select * from richiesta where id_utente = ?";
         PreparedStatement st = conn.prepareStatement(query);
         st.setInt(1, idUtente);

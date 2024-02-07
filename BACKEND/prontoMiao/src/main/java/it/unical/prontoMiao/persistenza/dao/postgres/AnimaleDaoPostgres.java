@@ -1,16 +1,12 @@
 package it.unical.prontoMiao.persistenza.dao.postgres;
 
-import java.sql.Statement;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
-import it.unical.prontoMiao.persistenza.model.Animale;
 import it.unical.prontoMiao.persistenza.IdBroker;
 import it.unical.prontoMiao.persistenza.dao.AnimaleDao;
+import it.unical.prontoMiao.persistenza.model.Animale;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AnimaleDaoPostgres implements AnimaleDao {
     Connection conn;
@@ -68,7 +64,7 @@ public class AnimaleDaoPostgres implements AnimaleDao {
     @Override
     public Animale save(Animale animale) throws SQLException {
         if (animale.getId() == null){
-            String insertStr = "INSERT INTO animale VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String insertStr = "INSERT INTO animale (id, nome, eta, razza, taglia, specie, sesso) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
             PreparedStatement st;
             st = conn.prepareStatement(insertStr);

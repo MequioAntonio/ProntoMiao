@@ -1,9 +1,9 @@
 package it.unical.prontoMiao.persistenza.dao;
 
+import it.unical.prontoMiao.persistenza.model.Animale;
+
 import java.sql.SQLException;
 import java.util.List;
-
-import it.unical.prontoMiao.persistenza.model.Animale;
 
 public interface AnimaleDao {
     public List<Animale> findAll() throws SQLException;

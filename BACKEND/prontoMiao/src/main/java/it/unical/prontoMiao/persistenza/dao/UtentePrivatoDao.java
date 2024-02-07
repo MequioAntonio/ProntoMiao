@@ -8,15 +8,15 @@ import java.util.Optional;
 
 public interface UtentePrivatoDao {
 
-    List<UtentePrivato> findAll() throws SQLException;
-    UtentePrivato findByEmail(String email) throws SQLException;
+    public List<UtentePrivato> findAll() throws SQLException;
+    public UtentePrivato findByEmail(String email) throws SQLException;
 
-    UtentePrivato findById(Integer id) throws SQLException;
+    public UtentePrivato findById(Integer id) throws SQLException;
 
-    Optional<UtentePrivato> findByEmailIgnoreCase(String email);
+    public Optional<UtentePrivato> findByEmailIgnoreCase(String email);
 
-    UtentePrivato save(UtentePrivato utente) throws SQLException;
+    public UtentePrivato save(UtentePrivato utente) throws SQLException;
 
-    void deleteById(Integer idUtente) throws SQLException;
+    public void deleteById(Integer idUtente) throws SQLException;
 
 }

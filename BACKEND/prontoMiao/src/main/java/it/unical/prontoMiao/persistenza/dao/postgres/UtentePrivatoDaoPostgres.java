@@ -1,9 +1,8 @@
 package it.unical.prontoMiao.persistenza.dao.postgres;
 
 import it.unical.prontoMiao.persistenza.IdBroker;
-import it.unical.prontoMiao.persistenza.model.Animale;
-import it.unical.prontoMiao.persistenza.model.UtentePrivato;
 import it.unical.prontoMiao.persistenza.dao.UtentePrivatoDao;
+import it.unical.prontoMiao.persistenza.model.UtentePrivato;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -142,7 +141,7 @@ public class UtentePrivatoDaoPostgres implements UtentePrivatoDao {
             Integer newId = IdBroker.getId(conn);
             utente.setId(newId);
 
-            PreparedStatement stUser = conn.prepareStatement("INSERT INTO utente VALUES (?,?,?)");
+            PreparedStatement stUser = conn.prepareStatement("INSERT INTO utente (id, email, password) VALUES (?,?,?)");
 
             stUser.setInt(1, newId);
             stUser.setString(2, utente.getEmail());
@@ -151,7 +150,7 @@ public class UtentePrivatoDaoPostgres implements UtentePrivatoDao {
             stUser.executeUpdate();
 
 
-            PreparedStatement stPrivato = conn.prepareStatement("INSERT INTO privato VALUES (?,?,?,?,?,?,?,?,?)");
+            PreparedStatement stPrivato = conn.prepareStatement("INSERT INTO privato (id, nome, cognome, codice_fiscale, telefono, indirizzo, preferenze, condizioni_abitative, informazioni_aggiuntive) VALUES (?,?,?,?,?,?,?,?,?)");
 
             stPrivato.setInt(1, newId);
             stPrivato.setString(2, utente.getNome());

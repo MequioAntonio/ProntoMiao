@@ -4,8 +4,6 @@ package it.unical.prontoMiao.persistenza.dao.postgres;
 import it.unical.prontoMiao.persistenza.IdBroker;
 import it.unical.prontoMiao.persistenza.dao.CentroAdozioniDao;
 import it.unical.prontoMiao.persistenza.model.CentroAdozioni;
-import it.unical.prontoMiao.persistenza.model.UtentePrivato;
-
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -99,7 +97,7 @@ public class CentroAdozioniDaoPostgres implements CentroAdozioniDao {
             Integer newId = IdBroker.getId(conn);
             centro.setId(newId);
 
-            PreparedStatement stUser = conn.prepareStatement("INSERT INTO utente VALUES (?,?,?)");
+            PreparedStatement stUser = conn.prepareStatement("INSERT INTO utente (id, email, password) VALUES (?,?,?)");
 
             stUser.setInt(1, newId);
             stUser.setString(2, centro.getEmail());
@@ -108,7 +106,7 @@ public class CentroAdozioniDaoPostgres implements CentroAdozioniDao {
             stUser.executeUpdate();
 
 
-            PreparedStatement stCentro = conn.prepareStatement("INSERT INTO centro_adozioni VALUES (?,?,?,?,?,?)");
+            PreparedStatement stCentro = conn.prepareStatement("INSERT INTO centro_adozioni (id, descrizione, eventi, indirizzo, nome, orari) VALUES (?,?,?,?,?,?)");
 
             stCentro.setInt(1, newId);
             stCentro.setString(2, centro.getDescrizione());

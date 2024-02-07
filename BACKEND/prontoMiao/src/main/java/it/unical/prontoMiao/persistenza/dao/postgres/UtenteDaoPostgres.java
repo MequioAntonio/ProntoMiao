@@ -1,7 +1,6 @@
 package it.unical.prontoMiao.persistenza.dao.postgres;
 
 import it.unical.prontoMiao.persistenza.dao.UtenteDao;
-import it.unical.prontoMiao.persistenza.model.Animale;
 import it.unical.prontoMiao.persistenza.model.Utente;
 
 import java.sql.Connection;
@@ -19,29 +18,24 @@ public class UtenteDaoPostgres implements UtenteDao{
     }
 
     @Override
-    public Optional<Utente> findByEmailIgnoreCase(String email) {
+    public Optional<Utente> findByEmailIgnoreCase(String email) throws SQLException {
         String query = "SELECT * FROM utente WHERE UPPER(utente.email) = UPPER(?)";
 
-        try {
-            PreparedStatement st = conn.prepareStatement(query);
-            st.setString(1, email);
+        PreparedStatement st = conn.prepareStatement(query);
+        st.setString(1, email);
 
-            ResultSet rs = st.executeQuery();
+        ResultSet rs = st.executeQuery();
 
-            if (rs.next()) {
-                Utente utente = new Utente();
-                utente.setId(rs.getInt("id"));
-                utente.setEmail(rs.getString("email"));
-                utente.setPassword(rs.getString("password"));
+        if (rs.next()) {
+            Utente utente = new Utente();
+            utente.setId(rs.getInt("id"));
+            utente.setEmail(rs.getString("email"));
+            utente.setPassword(rs.getString("password"));
 
-                return Optional.of(utente);
+            return Optional.of(utente);
 
-            }
-
-
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
+
 
         return Optional.empty();
     }

@@ -1,16 +1,15 @@
 package it.unical.prontoMiao.persistenza.dao.postgres;
 
+import it.unical.prontoMiao.persistenza.IdBroker;
 import it.unical.prontoMiao.persistenza.dao.SegnalazioneDao;
-import it.unical.prontoMiao.persistenza.model.Segnalazione;
 import it.unical.prontoMiao.persistenza.model.CentroAdozioni;
+import it.unical.prontoMiao.persistenza.model.Segnalazione;
 import it.unical.prontoMiao.persistenza.model.UtentePrivato;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,61 +21,53 @@ public class SegnalazioneDaoPostgres implements SegnalazioneDao {
     }
 
     @Override
-    public List<Segnalazione> findAll() {
+    public List<Segnalazione> findAll() throws SQLException {
         List<Segnalazione> segnalazioni = new ArrayList<Segnalazione>();
         String query = "select * from segnalazione";
-        try {
-            PreparedStatement st = conn.prepareStatement(query);
-            ResultSet rs = st.executeQuery();
-            while (rs.next()) {
-                Segnalazione seg = new Segnalazione();
-                seg.setId(rs.getInt("id"));
-                seg.setTitolo(rs.getString("titolo"));
-                seg.setDescrizione(rs.getString("descrizione"));
-                seg.setIndirizzo(rs.getString("indirizzo"));
+        PreparedStatement st = conn.prepareStatement(query);
+        ResultSet rs = st.executeQuery();
+        while (rs.next()) {
+            Segnalazione seg = new Segnalazione();
+            seg.setId(rs.getInt("id"));
+            seg.setTitolo(rs.getString("titolo"));
+            seg.setDescrizione(rs.getString("descrizione"));
+            seg.setIndirizzo(rs.getString("indirizzo"));
 
-                CentroAdozioniDaoPostgres centroDao = new CentroAdozioniDaoPostgres(conn);
-                CentroAdozioni centro = centroDao.findById(rs.getInt("centro_id"));
-                seg.setCentro(centro);
+            CentroAdozioniDaoPostgres centroDao = new CentroAdozioniDaoPostgres(conn);
+            CentroAdozioni centro = centroDao.findById(rs.getInt("centro_id"));
+            seg.setCentro(centro);
 
-                UtentePrivatoDaoPostgres utenteDao = new UtentePrivatoDaoPostgres(conn);
-                UtentePrivato utente = utenteDao.findById(rs.getInt("utente_id"));
-                seg.setUtente(utente);
+            UtentePrivatoDaoPostgres utenteDao = new UtentePrivatoDaoPostgres(conn);
+            UtentePrivato utente = utenteDao.findById(rs.getInt("utente_id"));
+            seg.setUtente(utente);
 
-                segnalazioni.add(seg);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+            segnalazioni.add(seg);
         }
 
         return segnalazioni;
     }
 
     @Override
-    public Segnalazione findById(Integer idSegnalazione) {
+    public Segnalazione findById(Integer idSegnalazione) throws SQLException {
         Segnalazione seg = null;
         String query = "select * from segnalazione where id = ?";
-        try {
-            PreparedStatement st = conn.prepareStatement(query);
-            st.setInt(1, idSegnalazione);
-            ResultSet rs = st.executeQuery();
-            if (rs.next()) {
-                seg = new Segnalazione();
-                seg.setId(rs.getInt("id"));
-                seg.setTitolo(rs.getString("titolo"));
-                seg.setDescrizione(rs.getString("descrizione"));
-                seg.setIndirizzo(rs.getString("indirizzo"));
+        PreparedStatement st = conn.prepareStatement(query);
+        st.setInt(1, idSegnalazione);
+        ResultSet rs = st.executeQuery();
+        if (rs.next()) {
+            seg = new Segnalazione();
+            seg.setId(rs.getInt("id"));
+            seg.setTitolo(rs.getString("titolo"));
+            seg.setDescrizione(rs.getString("descrizione"));
+            seg.setIndirizzo(rs.getString("indirizzo"));
 
-                CentroAdozioniDaoPostgres centroDao = new CentroAdozioniDaoPostgres(conn);
-                CentroAdozioni centro = centroDao.findById(rs.getInt("centro_id"));
-                seg.setCentro(centro);
+            CentroAdozioniDaoPostgres centroDao = new CentroAdozioniDaoPostgres(conn);
+            CentroAdozioni centro = centroDao.findById(rs.getInt("centro_id"));
+            seg.setCentro(centro);
 
-                UtentePrivatoDaoPostgres utenteDao = new UtentePrivatoDaoPostgres(conn);
-                UtentePrivato utente = utenteDao.findById(rs.getInt("utente_id"));
-                seg.setUtente(utente);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+            UtentePrivatoDaoPostgres utenteDao = new UtentePrivatoDaoPostgres(conn);
+            UtentePrivato utente = utenteDao.findById(rs.getInt("utente_id"));
+            seg.setUtente(utente);
         }
         return seg;
     }
@@ -84,20 +75,22 @@ public class SegnalazioneDaoPostgres implements SegnalazioneDao {
     @Override
     public Segnalazione save(Segnalazione segnalazione) throws SQLException {
         if (segnalazione.getId() == null) {
-            String query = "insert into segnalazione (titolo, descrizione, indirizzo, centro_id, utente_id) values (?, ?, ?, ?, ?)";
-            PreparedStatement st = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            st.setString(1, segnalazione.getTitolo());
-            st.setString(2, segnalazione.getDescrizione());
-            st.setString(3, segnalazione.getIndirizzo());
-            st.setInt(4, segnalazione.getCentro().getId());
-            st.setInt(5, segnalazione.getUtente().getId());
+            String query = "insert into segnalazione (id, titolo, descrizione, indirizzo, id_centro, id_privato) values (?, ?, ?, ?, ?, ?)";
+
+
+            PreparedStatement st = conn.prepareStatement(query);
+
+            Integer newId = IdBroker.getId(conn);
+
+            st.setInt(1, newId);
+            st.setString(2, segnalazione.getTitolo());
+            st.setString(3, segnalazione.getDescrizione());
+            st.setString(4, segnalazione.getIndirizzo());
+            st.setInt(5, segnalazione.getCentro().getId());
+            st.setInt(6, segnalazione.getUtente().getId());
             st.executeUpdate();
-            ResultSet rs = st.getGeneratedKeys();
-            if (rs.next()) {
-                segnalazione.setId(rs.getInt(1));
-            }
         } else {
-            String query = "update segnalazione set titolo = ?, descrizione = ?, indirizzo = ?, centro_id = ?, utente_id = ? where id = ?";
+            String query = "update segnalazione set titolo = ?, descrizione = ?, indirizzo = ?, id_centro = ?, id_privato = ? where id = ?";
             PreparedStatement st = conn.prepareStatement(query);
             st.setString(1, segnalazione.getTitolo());
             st.setString(2, segnalazione.getDescrizione());

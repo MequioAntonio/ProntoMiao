@@ -1,9 +1,9 @@
 package it.unical.prontoMiao.persistenza.dao;
 
+import it.unical.prontoMiao.persistenza.model.Annuncio;
+
 import java.sql.SQLException;
 import java.util.List;
-
-import it.unical.prontoMiao.persistenza.model.Annuncio;
 
 public interface AnnuncioDao {
     public List<Annuncio> findAll() throws SQLException;

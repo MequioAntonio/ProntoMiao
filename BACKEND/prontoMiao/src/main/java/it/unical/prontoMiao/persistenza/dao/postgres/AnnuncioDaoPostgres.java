@@ -1,19 +1,15 @@
 package it.unical.prontoMiao.persistenza.dao.postgres;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-
-import it.unical.prontoMiao.persistenza.model.CentroAdozioni;
-import it.unical.prontoMiao.persistenza.model.Animale;
 import it.unical.prontoMiao.persistenza.DBManager;
 import it.unical.prontoMiao.persistenza.IdBroker;
 import it.unical.prontoMiao.persistenza.dao.AnnuncioDao;
+import it.unical.prontoMiao.persistenza.model.Animale;
 import it.unical.prontoMiao.persistenza.model.Annuncio;
+import it.unical.prontoMiao.persistenza.model.CentroAdozioni;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AnnuncioDaoPostgres implements AnnuncioDao{
     Connection conn;
@@ -87,7 +83,7 @@ public class AnnuncioDaoPostgres implements AnnuncioDao{
     @Override
     public Annuncio save(Annuncio annuncio) throws SQLException {
         if (annuncio.getId() == null){
-            String insertStr = "INSERT INTO annuncio VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String insertStr = "INSERT INTO annuncio (id, descrizione, informazioni_mediche, titolo, foto_profilo, id_centro, id_animale) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
             PreparedStatement st;
             st = conn.prepareStatement(insertStr);
