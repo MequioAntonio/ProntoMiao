@@ -3,22 +3,17 @@ package it.unical.prontoMiao.persistenza.dao.postgres;
 import it.unical.prontoMiao.persistenza.DBManager;
 import it.unical.prontoMiao.persistenza.IdBroker;
 import it.unical.prontoMiao.persistenza.dao.RecensioneDao;
-import it.unical.prontoMiao.persistenza.model.Animale;
 import it.unical.prontoMiao.persistenza.model.CentroAdozioni;
 import it.unical.prontoMiao.persistenza.model.Recensione;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 import it.unical.prontoMiao.persistenza.model.UtentePrivato;
-import org.springframework.data.crossstore.ChangeSetPersister;
-import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 
 public class RecensioneDaoPostgres implements RecensioneDao {
     Connection conn;
@@ -114,7 +109,7 @@ public class RecensioneDaoPostgres implements RecensioneDao {
     @Override
     public Recensione save(Recensione recensione) throws SQLException {
         if (recensione.getId() != null) {
-            String insertStr = "INSERT INTO recensione VALUES (?, ?, ?, ?)";
+            String insertStr = "INSERT INTO recensione VALUES (?, ?, ?, ?, ?)";
 
             PreparedStatement st;
             st = conn.prepareStatement(insertStr);

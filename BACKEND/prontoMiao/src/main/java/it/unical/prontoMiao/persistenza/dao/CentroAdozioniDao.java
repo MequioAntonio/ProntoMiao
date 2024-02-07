@@ -9,9 +9,9 @@ import java.util.Optional;
 
 public interface CentroAdozioniDao {
 
-    public CentroAdozioni findById(int id);
+    public CentroAdozioni findById(int id) throws SQLException;
 
-    public Optional<CentroAdozioni> findByEmailIgnoreCase(String email);
+    public Optional<CentroAdozioni> findByEmailIgnoreCase(String email) throws SQLException;
 
     public CentroAdozioni findByEmail(String email) throws SQLException;
 
