@@ -82,38 +82,30 @@ public class SegnalazioneDaoPostgres implements SegnalazioneDao {
     }
 
     @Override
-    public Segnalazione save(Segnalazione segnalazione) throws IOException {
+    public Segnalazione save(Segnalazione segnalazione) throws SQLException {
         if (segnalazione.getId() == null) {
             String query = "insert into segnalazione (titolo, descrizione, indirizzo, centro_id, utente_id) values (?, ?, ?, ?, ?)";
-            try {
-                PreparedStatement st = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-                st.setString(1, segnalazione.getTitolo());
-                st.setString(2, segnalazione.getDescrizione());
-                st.setString(3, segnalazione.getIndirizzo());
-                st.setInt(4, segnalazione.getCentro().getId());
-                st.setInt(5, segnalazione.getUtente().getId());
-                st.executeUpdate();
-                ResultSet rs = st.getGeneratedKeys();
-                if (rs.next()) {
-                    segnalazione.setId(rs.getInt(1));
-                }
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
+            PreparedStatement st = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            st.setString(1, segnalazione.getTitolo());
+            st.setString(2, segnalazione.getDescrizione());
+            st.setString(3, segnalazione.getIndirizzo());
+            st.setInt(4, segnalazione.getCentro().getId());
+            st.setInt(5, segnalazione.getUtente().getId());
+            st.executeUpdate();
+            ResultSet rs = st.getGeneratedKeys();
+            if (rs.next()) {
+                segnalazione.setId(rs.getInt(1));
             }
         } else {
             String query = "update segnalazione set titolo = ?, descrizione = ?, indirizzo = ?, centro_id = ?, utente_id = ? where id = ?";
-            try {
-                PreparedStatement st = conn.prepareStatement(query);
-                st.setString(1, segnalazione.getTitolo());
-                st.setString(2, segnalazione.getDescrizione());
-                st.setString(3, segnalazione.getIndirizzo());
-                st.setInt(4, segnalazione.getCentro().getId());
-                st.setInt(5, segnalazione.getUtente().getId());
-                st.setInt(6, segnalazione.getId());
-                st.executeUpdate();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
+            PreparedStatement st = conn.prepareStatement(query);
+            st.setString(1, segnalazione.getTitolo());
+            st.setString(2, segnalazione.getDescrizione());
+            st.setString(3, segnalazione.getIndirizzo());
+            st.setInt(4, segnalazione.getCentro().getId());
+            st.setInt(5, segnalazione.getUtente().getId());
+            st.setInt(6, segnalazione.getId());
+            st.executeUpdate();
         }
         return segnalazione;
     }
