@@ -7,7 +7,9 @@ import it.unical.prontoMiao.persistenza.dao.CentroAdozioniDao;
 import it.unical.prontoMiao.persistenza.model.Animale;
 import it.unical.prontoMiao.persistenza.model.Annuncio;
 import it.unical.prontoMiao.persistenza.model.CentroAdozioni;
+import it.unical.prontoMiao.utility.FileUtility;
 
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -86,8 +88,11 @@ public class AnnuncioDaoPostgres implements AnnuncioDao{
     }
 
     @Override
-    public Annuncio save(Annuncio annuncio) throws SQLException {
+    public Annuncio save(Annuncio annuncio) throws SQLException, IOException {
+        FileUtility fileUtility = new FileUtility();
+
         if (annuncio.getId() == null){
+
             String insertStr = "INSERT INTO annuncio (id, descrizione, informazioni_mediche, titolo, foto_profilo, id_centro, id_animale) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
             PreparedStatement st;
@@ -95,6 +100,14 @@ public class AnnuncioDaoPostgres implements AnnuncioDao{
 
             Integer newId = IdBroker.getId(conn);
             annuncio.setId(newId);
+
+            if (annuncio.getFoto_profilo().contains("data:image")){
+                String fileEncoded = annuncio.getFoto_profilo();
+                annuncio.setFoto_profilo(fileUtility.getNomeFIle(fileEncoded));
+
+                fileUtility.base64ToFile(fileEncoded,"annuncio/"+Integer.toString(annuncio.getId()));
+                annuncio.setFoto_profilo(fileUtility.generaUrlImmagine("annuncio",annuncio.getId(),annuncio.getFoto_profilo()));
+            }
 
             st.setInt(1, newId);
             st.setString(2, annuncio.getDescrizione());
@@ -111,6 +124,14 @@ public class AnnuncioDaoPostgres implements AnnuncioDao{
 
             PreparedStatement st;
             st = conn.prepareStatement(updateStr);
+
+            if (annuncio.getFoto_profilo().contains("data:image")){
+                String fileEncoded = annuncio.getFoto_profilo();
+                annuncio.setFoto_profilo(fileUtility.getNomeFIle(fileEncoded));
+
+                fileUtility.base64ToFile(fileEncoded,"annuncio/"+Integer.toString(annuncio.getId()));
+                annuncio.setFoto_profilo(fileUtility.generaUrlImmagine("annuncio",annuncio.getId(),annuncio.getFoto_profilo()));
+            }
 
             st.setString(1, annuncio.getDescrizione());
             st.setString(2, annuncio.getInformazioni_mediche());

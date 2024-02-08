@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 @RestController
@@ -47,7 +48,7 @@ public class AnnuncioController {
         AnnuncioDao annuncioDao = DBManager.getInstance().getAnnuncioDao();
         try {
             return new ResponseEntity<>(annuncioDao.save(annuncio), HttpStatus.OK);
-        } catch (SQLException e) {
+        } catch (SQLException | IOException e) {
             return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -58,7 +59,7 @@ public class AnnuncioController {
         annuncio.setId(idAnnuncio);
         try {
             return new ResponseEntity<>(annuncioDao.save(annuncio), HttpStatus.OK);
-        } catch (SQLException e) {
+        } catch (SQLException | IOException e) {
             return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

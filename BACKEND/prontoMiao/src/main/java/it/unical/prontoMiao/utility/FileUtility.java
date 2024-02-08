@@ -13,17 +13,13 @@ import java.util.Base64;
 @Component
 public class FileUtility {
 
-    @Value("${prontomiao.baseUrl}")
-    private String baseUrl;
-    @Value("${prontomiao.fileDirectory}")
-    private String fileDirectory;
     public void base64ToFile(String encodedFile, String folderName) throws IOException {
         String filename = getNomeFIle(encodedFile);
         String path = System.getProperty("user.dir") + "/" + folderName;
         //File folder = new File("/Users/saradramis/Desktop/prontomiao/"+folderName);
         Files.createDirectories(Paths.get(path));
-
-        byte[] imageData = Base64.getDecoder().decode(encodedFile.split("base64,")[1]);
+        String splitted = encodedFile.split("base64,")[1];
+        byte[] imageData = Base64.getDecoder().decode(splitted);
         OutputStream os = new FileOutputStream(path+"/"+filename);
         os.write(imageData);
 
@@ -40,6 +36,6 @@ public class FileUtility {
     }
 
     public String generaUrlImmagine(String nomeContesto, int idContesto, String nomeFile) {
-        return baseUrl + "/files/" + nomeContesto + "/" + Integer.toString(idContesto) + "?filename=" + nomeFile;
+        return "http://localhost:8080/files/" + nomeContesto + "/" + Integer.toString(idContesto) + "?filename=" + nomeFile;
     }
 }
