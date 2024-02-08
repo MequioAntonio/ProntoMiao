@@ -8,6 +8,7 @@ import it.unical.prontoMiao.persistenza.model.Richiesta;
 import it.unical.prontoMiao.persistenza.model.UtentePrivato;
 
 import java.sql.*;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class RichiestaDaoPostgres implements RichiestaDao {
             Richiesta ric = new Richiesta();
             ric.setId(rs.getInt("id"));
             ric.setStato(rs.getInt("stato"));
-            ric.setData(Date.valueOf(rs.getString("data")));
+            ric.setData(rs.getDate("data"));
 
             Integer annuncioId = rs.getInt("id_annuncio");
             Annuncio annuncio = DBManager.getInstance().getAnnuncioDao()
@@ -59,7 +60,7 @@ public class RichiestaDaoPostgres implements RichiestaDao {
             ric = new Richiesta();
             ric.setId(rs.getInt("id"));
             ric.setStato(rs.getInt("stato"));
-            ric.setData(Date.valueOf(rs.getString("data")));
+            ric.setData(rs.getDate("data"));
 
             Integer annuncioId = rs.getInt("id_annuncio");
             Annuncio annuncio = DBManager.getInstance().getAnnuncioDao()
@@ -124,16 +125,16 @@ public class RichiestaDaoPostgres implements RichiestaDao {
 
         while (rs.next()) {
             Richiesta ric = new Richiesta();
-            ric.setId(rs.getInt("r.id"));
-            ric.setStato(rs.getInt("r.stato"));
-            ric.setData(Date.valueOf(rs.getString("r.data")));
+            ric.setId(rs.getInt("id"));
+            ric.setStato(rs.getInt("stato"));
+            ric.setData(rs.getDate("data"));
 
-            Integer annuncioId = rs.getInt("r.id_annuncio");
+            Integer annuncioId = rs.getInt("id_annuncio");
             Annuncio annuncio = DBManager.getInstance().getAnnuncioDao()
                     .findById(annuncioId);
             ric.setAnnuncio(annuncio);
 
-            Integer utenteId = rs.getInt("r.id_utente");
+            Integer utenteId = rs.getInt("id_utente");
             UtentePrivato privato = DBManager.getInstance().getUtentePrivatoDao()
                     .findById(utenteId);
             ric.setUtente(privato);
@@ -156,7 +157,7 @@ public class RichiestaDaoPostgres implements RichiestaDao {
             Richiesta ric = new Richiesta();
             ric.setId(rs.getInt("id"));
             ric.setStato(rs.getInt("stato"));
-            ric.setData(Date.valueOf(rs.getString("data")));
+            ric.setData(rs.getDate("data"));
 
             Integer annuncioId = rs.getInt("id_annuncio");
             Annuncio annuncio = DBManager.getInstance().getAnnuncioDao()

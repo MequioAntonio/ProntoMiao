@@ -21,23 +21,23 @@ public class UtentePrivatoDaoPostgres implements UtentePrivatoDao {
     public List<UtentePrivato> findAll() throws SQLException {
 
         List<UtentePrivato> utentePrivati = new ArrayList<UtentePrivato>();
-        String query = "select * from privato as p, utente as u where p.id=u.id";
+        String query = "select * FROM privato p JOIN utente u ON p.id = u.id;";
         Statement st = conn.createStatement();
         ResultSet rs = st.executeQuery(query);
 
         while (rs.next()) {
             UtentePrivato utentePrivato = new UtentePrivato();
-            utentePrivato.setId(rs.getInt("p.id"));
-            utentePrivato.setEmail(rs.getString("u.email"));
-            utentePrivato.setPassword(rs.getString("u.password"));
-            utentePrivato.setNome(rs.getString("p.nome"));
-            utentePrivato.setCognome(rs.getString("p.cognome"));
-            utentePrivato.setCodice_fiscale(rs.getString("p.codice_fiscale"));
-            utentePrivato.setTelefono(rs.getString("p.telefono"));
+            utentePrivato.setId(rs.getInt("id"));
+            utentePrivato.setEmail(rs.getString("email"));
+            utentePrivato.setPassword("");
+            utentePrivato.setNome(rs.getString("nome"));
+            utentePrivato.setCognome(rs.getString("cognome"));
+            utentePrivato.setCodice_fiscale(rs.getString("codice_fiscale"));
+            utentePrivato.setTelefono(rs.getString("telefono"));
             utentePrivato.setIndirizzo(rs.getString("indirizzo"));
-            utentePrivato.setPreferenze(rs.getString("p.preferenze"));
-            utentePrivato.setCondizioni_abitative(rs.getString("p.condizioni_abitative"));
-            utentePrivato.setInformazioni_aggiuntive(rs.getString("p.informazioni_aggiuntive"));
+            utentePrivato.setPreferenze(rs.getString("preferenze"));
+            utentePrivato.setCondizioni_abitative(rs.getString("condizioni_abitative"));
+            utentePrivato.setInformazioni_aggiuntive(rs.getString("informazioni_aggiuntive"));
             utentePrivati.add(utentePrivato);
         }
 
@@ -47,7 +47,7 @@ public class UtentePrivatoDaoPostgres implements UtentePrivatoDao {
     @Override
     public UtentePrivato findByEmail(String email) throws SQLException {
         UtentePrivato utentePrivato = null;
-        String query = "select * from privato as p, utente as u where u.id=p.id and lower(u.email) = lower(?)";
+        String query = "select * FROM privato p JOIN utente u ON p.id = u.id and lower(u.email) = lower(?)";
         PreparedStatement st = conn.prepareStatement(query);
         st.setString(1, email);
 
@@ -55,17 +55,17 @@ public class UtentePrivatoDaoPostgres implements UtentePrivatoDao {
 
         if (rs.next()) {
             utentePrivato = new UtentePrivato();
-            utentePrivato.setId(rs.getInt("p.id"));
-            utentePrivato.setEmail(rs.getString("u.email"));
-            utentePrivato.setPassword(rs.getString("u.password"));
-            utentePrivato.setNome(rs.getString("p.nome"));
-            utentePrivato.setCognome(rs.getString("p.cognome"));
-            utentePrivato.setCodice_fiscale(rs.getString("p.codice_fiscale"));
-            utentePrivato.setTelefono(rs.getString("p.telefono"));
+            utentePrivato.setId(rs.getInt("id"));
+            utentePrivato.setEmail(rs.getString("email"));
+            utentePrivato.setPassword("");
+            utentePrivato.setNome(rs.getString("nome"));
+            utentePrivato.setCognome(rs.getString("cognome"));
+            utentePrivato.setCodice_fiscale(rs.getString("codice_fiscale"));
+            utentePrivato.setTelefono(rs.getString("telefono"));
             utentePrivato.setIndirizzo(rs.getString("indirizzo"));
-            utentePrivato.setPreferenze(rs.getString("p.preferenze"));
-            utentePrivato.setCondizioni_abitative(rs.getString("p.condizioni_abitative"));
-            utentePrivato.setInformazioni_aggiuntive(rs.getString("p.informazioni_aggiuntive"));
+            utentePrivato.setPreferenze(rs.getString("preferenze"));
+            utentePrivato.setCondizioni_abitative(rs.getString("condizioni_abitative"));
+            utentePrivato.setInformazioni_aggiuntive(rs.getString("informazioni_aggiuntive"));
         }
 
         return utentePrivato;
@@ -74,7 +74,7 @@ public class UtentePrivatoDaoPostgres implements UtentePrivatoDao {
     @Override
     public UtentePrivato findById(Integer id) throws SQLException {
         UtentePrivato utentePrivato = null;
-        String query = "select * from privato as p, utente as u where u.id=p.id and p.id = ?";
+        String query = "select * FROM privato p JOIN utente u ON p.id = u.id and p.id = ?";
         PreparedStatement st = conn.prepareStatement(query);
         st.setInt(1, id);
 
@@ -82,17 +82,17 @@ public class UtentePrivatoDaoPostgres implements UtentePrivatoDao {
 
         if (rs.next()) {
             utentePrivato = new UtentePrivato();
-            utentePrivato.setId(rs.getInt("p.id"));
-            utentePrivato.setEmail(rs.getString("u.email"));
-            utentePrivato.setPassword(rs.getString("u.password"));
-            utentePrivato.setNome(rs.getString("p.nome"));
-            utentePrivato.setCognome(rs.getString("p.cognome"));
-            utentePrivato.setCodice_fiscale(rs.getString("p.codice_fiscale"));
-            utentePrivato.setTelefono(rs.getString("p.telefono"));
+            utentePrivato.setId(rs.getInt("id"));
+            utentePrivato.setEmail(rs.getString("email"));
+            utentePrivato.setPassword("");
+            utentePrivato.setNome(rs.getString("nome"));
+            utentePrivato.setCognome(rs.getString("cognome"));
+            utentePrivato.setCodice_fiscale(rs.getString("codice_fiscale"));
+            utentePrivato.setTelefono(rs.getString("telefono"));
             utentePrivato.setIndirizzo(rs.getString("indirizzo"));
-            utentePrivato.setPreferenze(rs.getString("p.preferenze"));
-            utentePrivato.setCondizioni_abitative(rs.getString("p.condizioni_abitative"));
-            utentePrivato.setInformazioni_aggiuntive(rs.getString("p.informazioni_aggiuntive"));
+            utentePrivato.setPreferenze(rs.getString("preferenze"));
+            utentePrivato.setCondizioni_abitative(rs.getString("condizioni_abitative"));
+            utentePrivato.setInformazioni_aggiuntive(rs.getString("informazioni_aggiuntive"));
         }
 
         return utentePrivato;
@@ -100,7 +100,7 @@ public class UtentePrivatoDaoPostgres implements UtentePrivatoDao {
 
     @Override
     public Optional<UtentePrivato> findByEmailIgnoreCase(String email) {
-        String query = "SELECT * FROM privato INNER JOIN utente ON utente.id = privato.id WHERE UPPER(utente.email) = UPPER(?)";
+        String query = "select * FROM privato p JOIN utente u ON p.id = u.id WHERE UPPER(u.email) = UPPER(?)";
 
         try {
             PreparedStatement st = conn.prepareStatement(query);

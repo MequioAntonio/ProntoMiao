@@ -1,7 +1,7 @@
 package it.unical.prontoMiao.persistenza.model;
 
 public class Segnalazione {
-    private int id;
+    private Integer id;
     private String titolo;
     private String descrizione;
     private String indirizzo;
@@ -11,7 +11,7 @@ public class Segnalazione {
     public Segnalazione() {
     }
 
-    public Segnalazione(int id, String titolo, String descrizione, String indirizzo, CentroAdozioni centro, UtentePrivato utente) {
+    public Segnalazione(Integer id, String titolo, String descrizione, String indirizzo, CentroAdozioni centro, UtentePrivato utente) {
         this.id = id;
         this.titolo = titolo;
         this.descrizione = descrizione;
@@ -24,7 +24,7 @@ public class Segnalazione {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

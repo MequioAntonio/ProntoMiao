@@ -3,6 +3,7 @@ package it.unical.prontoMiao.persistenza.dao.postgres;
 import it.unical.prontoMiao.persistenza.DBManager;
 import it.unical.prontoMiao.persistenza.IdBroker;
 import it.unical.prontoMiao.persistenza.dao.AnnuncioDao;
+import it.unical.prontoMiao.persistenza.dao.CentroAdozioniDao;
 import it.unical.prontoMiao.persistenza.model.Animale;
 import it.unical.prontoMiao.persistenza.model.Annuncio;
 import it.unical.prontoMiao.persistenza.model.CentroAdozioni;
@@ -25,6 +26,8 @@ public class AnnuncioDaoPostgres implements AnnuncioDao{
         Statement st = conn.createStatement();
         ResultSet rs = st.executeQuery(query);
 
+        System.out.println(rs);
+
         while (rs.next()) {
             Annuncio annuncio = new Annuncio();
             annuncio.setId(rs.getInt("id"));
@@ -34,8 +37,10 @@ public class AnnuncioDaoPostgres implements AnnuncioDao{
             annuncio.setFoto_profilo(rs.getString("foto_profilo"));
 
             Integer centroId = rs.getInt("id_centro");
-            CentroAdozioni centro = DBManager.getInstance().getCentroAdozioniDao()
-                            .findById(centroId);
+            CentroAdozioniDao centroDao = DBManager.getInstance().getCentroAdozioniDao();
+            CentroAdozioni centro = centroDao.findById(centroId);
+
+
             annuncio.setCentro(centro);
 
             Integer animaleId = rs.getInt("id_animale");
@@ -102,18 +107,17 @@ public class AnnuncioDaoPostgres implements AnnuncioDao{
             st.executeUpdate();
 
         } else {
-            String updateStr = "UPDATE annuncio set descrizione = ?," +
-                    "informazioni_mediche = ?, titolo = ?, foto_profilo = ?, id_centro = ?, id_animale = ? where id = ?";
+            String updateStr = "UPDATE annuncio set descrizione = ?, informazioni_mediche = ?, titolo = ?, foto_profilo = ?, id_centro = ?, id_animale = ? where id = ?";
 
             PreparedStatement st;
             st = conn.prepareStatement(updateStr);
 
-            st.setString(2, annuncio.getDescrizione());
-            st.setString(3, annuncio.getInformazioni_mediche());
-            st.setString(4, annuncio.getTitolo());
-            st.setString(5, annuncio.getFoto_profilo());
-            st.setInt(6, annuncio.getCentro().getId());
-            st.setInt(7, annuncio.getAnimale().getId());
+            st.setString(1, annuncio.getDescrizione());
+            st.setString(2, annuncio.getInformazioni_mediche());
+            st.setString(3, annuncio.getTitolo());
+            st.setString(4, annuncio.getFoto_profilo());
+            st.setInt(5, annuncio.getCentro().getId());
+            st.setInt(6, annuncio.getAnimale().getId());
 
             st.setInt(7, annuncio.getId());
 

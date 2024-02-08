@@ -38,7 +38,9 @@ public class DBManager {
     public AnnuncioDao getAnnuncioDao(){
         return new AnnuncioDaoPostgres(getConnection());
     }
-    public CentroAdozioniDao getCentroAdozioniDao(){ return new CentroAdozioniDaoPostgres(getConnection()); }
+    public CentroAdozioniDao getCentroAdozioniDao(){
+        return new CentroAdozioniDaoPostgres(getConnection());
+    }
     public RecensioneDao getRecensioneDao(){ return new RecensioneDaoPostgres(getConnection()); }
     public RichiestaDao getRichiestaDao(){ return new RichiestaDaoPostgres(getConnection()); }
     public SegnalazioneDao getSegnalazioneDao(){ return new SegnalazioneDaoPostgres(getConnection()); }

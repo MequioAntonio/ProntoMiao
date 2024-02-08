@@ -43,7 +43,7 @@ public class SegnalazioneController {
     }
 
     @PostMapping("/{idSegnalazione}")
-    public ResponseEntity updateSegnalazione(@RequestParam Integer idSegnalazione, @RequestBody Segnalazione segnalazione) {
+    public ResponseEntity updateSegnalazione(@PathVariable Integer idSegnalazione, @RequestBody Segnalazione segnalazione) {
         SegnalazioneDao segnalazioneDao = DBManager.getInstance().getSegnalazioneDao();
         try {
             segnalazione.setId(idSegnalazione);
@@ -54,7 +54,7 @@ public class SegnalazioneController {
     }
 
     @DeleteMapping("/{idSegnalazione}")
-    public ResponseEntity deleteSegnalazione(@RequestParam Integer idSegnalazione) {
+    public ResponseEntity deleteSegnalazione(@PathVariable Integer idSegnalazione) {
         SegnalazioneDao segnalazioneDao = DBManager.getInstance().getSegnalazioneDao();
         try {
             segnalazioneDao.delete(idSegnalazione);

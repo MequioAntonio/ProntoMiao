@@ -24,7 +24,7 @@ public class CentroAdozioniDaoPostgres implements CentroAdozioniDao {
     @Override
     public CentroAdozioni findById(int id) throws SQLException {
         CentroAdozioni centro = null;
-        String query = "SELECT * FROM centro_adozioni INNER JOIN utente ON utente.id = centro_adozioni.id WHERE id = ?";
+        String query = "select * FROM centro_adozioni ca JOIN utente u ON ca.id = u.id WHERE ca.id = ?";
         PreparedStatement st = conn.prepareStatement(query);
         st.setInt(1, id);
         ResultSet rs = st.executeQuery();
@@ -47,7 +47,7 @@ public class CentroAdozioniDaoPostgres implements CentroAdozioniDao {
     @Override
     public List<CentroAdozioni> findAll() throws SQLException {
         List<CentroAdozioni> centri = new ArrayList<CentroAdozioni>();
-        PreparedStatement st = conn.prepareStatement("SELECT * FROM centro_adozioni");
+        PreparedStatement st = conn.prepareStatement("select * FROM centro_adozioni ca JOIN utente u ON ca.id = u.id");
         ResultSet rs = st.executeQuery();
         while (rs.next()) {
             CentroAdozioni centro = null;
