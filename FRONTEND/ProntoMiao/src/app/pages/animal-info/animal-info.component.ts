@@ -43,14 +43,14 @@ export class AnimalInfoComponent implements OnInit {
     this.dialog.open(RichiestaConfirmComponent, {
       data: this.annuncio,
     }).afterClosed().subscribe(result => {
-      console.log(result);
       if (result && result == "OK") {
-        let utentep = new UtentePrivatoImpl();
-        utentep.id = this.authService.getIdUtente();
-        let richiesta = new RichiestaImpl();
-        richiesta.data = new Date();
-        richiesta.annuncio = this.annuncio;
-        richiesta.utente = utentep;
+        let richiesta = {
+          id: null,
+          stato: 0,
+          data: new Date(),
+          utente: {id: this.authService.getIdUtente()},
+          annuncio: {id: this.annuncio.id}
+        }
         this.richiestaService.insertRichiesta(richiesta).subscribe({
           next:(c:any)=>{
             this.snackBar.open("Richiesta inviata.","",{duration:3000}).afterDismissed().subscribe(() => {
