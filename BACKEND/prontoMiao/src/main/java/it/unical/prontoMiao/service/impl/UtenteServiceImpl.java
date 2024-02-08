@@ -12,6 +12,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
+
 @Service
 @RequiredArgsConstructor
 public class UtenteServiceImpl implements UtenteService {
@@ -26,8 +28,12 @@ public class UtenteServiceImpl implements UtenteService {
         return new UserDetailsService() {
             @Override
             public UserDetails loadUserByUsername(String username) {
-                return utenteRepository.findByEmailIgnoreCase(username)
-                        .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+                try {
+                    return utenteRepository.findByEmailIgnoreCase(username)
+                            .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
             }
         };
     }

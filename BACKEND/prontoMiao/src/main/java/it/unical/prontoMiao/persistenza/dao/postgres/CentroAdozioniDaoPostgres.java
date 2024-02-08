@@ -153,7 +153,7 @@ public class CentroAdozioniDaoPostgres implements CentroAdozioniDao {
 
             PreparedStatement updCentro = conn.prepareStatement("update centro_adozioni set descrizione=?, eventi=?, indirizzo=?, nome=?, orari=? where id=?");
 
-            updCentro.setInt(9, centro.getId());
+            updCentro.setInt(6, centro.getId());
             updCentro.setString(1, centro.getDescrizione());
             updCentro.setString(2, centro.getEventi());
             updCentro.setString(3, centro.getIndirizzo());
