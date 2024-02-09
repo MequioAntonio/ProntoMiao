@@ -28,7 +28,7 @@ public class CentriServlet extends HttpServlet {
         for (CentroAdozioni c : centri){
             System.out.println(c.getNome());
         }
-        req.setAttribute("lista-centri", centri);
+        req.setAttribute("lista_centri", centri);
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/views/listaCentri.html");
         dispatcher.forward(req, resp);
