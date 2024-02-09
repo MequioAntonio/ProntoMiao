@@ -30,7 +30,7 @@ public class CentriServlet extends HttpServlet {
         }
         req.setAttribute("lista-centri", centri);
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/views/listaCentri.html");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("src/main/resources/templates/listaCentri.html");
         dispatcher.forward(req, resp);
     }
 
