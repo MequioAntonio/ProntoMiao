@@ -9,10 +9,10 @@ import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModu
 import {Validators} from '@angular/forms';
 import { ValidatorsService } from '../../services/validators.service';
 import { NgIf, CommonModule } from '@angular/common';
-import { ChipsComponent } from "../../components/chips/chips.component";
 import { AuthService } from '../../services/auth.service';
 import { routes } from '../../app.routes';
 import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
+import { ChipsComponent } from '../../components/chips/chips.component';
 
 
 @Component({
@@ -31,8 +31,8 @@ import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
         FormsModule,
         ReactiveFormsModule,
         CommonModule,
-        ChipsComponent,
-        MatSnackBarModule        
+        MatSnackBarModule,
+        ChipsComponent
     ]
 })
 

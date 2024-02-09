@@ -1,19 +1,20 @@
 import { Component, ViewChild } from '@angular/core';
-import { AdoptionCardComponent } from '../../components/adoption-card/adoption-card.component';
+
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatIconModule} from '@angular/material/icon';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatCardModule} from '@angular/material/card';
+import { SmallCardComponent } from '../../components/small-card/small-card.component';
 
 import { NgbCarousel, NgbCarouselModule, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
-import { SmallCardComponent } from '../../components/small-card/small-card.component';
+
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [AdoptionCardComponent, MatTabsModule, MatIconModule, MatGridListModule, MatCardModule, NgbCarouselModule, FormsModule, SmallCardComponent],
+  imports: [MatTabsModule, MatIconModule, MatGridListModule, MatCardModule, NgbCarouselModule, FormsModule, SmallCardComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
