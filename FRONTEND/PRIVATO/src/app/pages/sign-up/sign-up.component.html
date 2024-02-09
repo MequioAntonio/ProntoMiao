@@ -1,0 +1,120 @@
+<div class="parent">
+  <div class="form">
+
+    <mat-stepper [linear]="isLinear" #stepper>
+      <mat-step [stepControl]="genericFrom">
+        <ng-template matStepLabel>Inserisci i tuoi dati</ng-template>
+
+        <form [formGroup]="genericFrom" class="form">
+
+          <mat-form-field class="formField" [appearance]="apparenceSetting">
+            <mat-label>Email</mat-label>
+            <input type="email" matInput required formControlName="email">
+            <mat-error style="display: inline;"> {{getErrorMessage(genericFrom.controls["email"])}} </mat-error>
+          </mat-form-field>
+          <mat-form-field class="formField" [appearance]="apparenceSetting">
+            <mat-label>Password</mat-label>
+            <input type="password" matInput required formControlName="password">
+            <mat-error> {{getErrorMessage(genericFrom.controls["password"])}} </mat-error>
+          </mat-form-field>
+          <mat-form-field class="formField" [appearance]="apparenceSetting">
+            <mat-label>Che tipo di utente sei?</mat-label>
+            <mat-select required formControlName="tipo">
+              <mat-option value="one">Utente Privato</mat-option>
+              <mat-option value="two">Centro Adozioni</mat-option>
+            </mat-select>
+            <mat-error> {{getErrorMessage(genericFrom.controls["tipo"])}} </mat-error>
+          </mat-form-field>
+          <section class="formCheckbox">
+            <mat-checkbox required formControlName="terms">Accetto i Termini e Condizioni di utilizzo</mat-checkbox>
+          </section>
+          <mat-error> {{getErrorMessage(genericFrom.controls["terms"])}} </mat-error>
+          <br>
+
+          <button mat-raised-button (click)="next(stepper)" color="primary">Procedi</button>
+          <!-- Questa funzione next(stepper) è fatta apposta per questo form -->
+        </form>
+      </mat-step>
+
+      <mat-step [stepControl]="privatoForm" label="Completa la registrazione">
+        <ng-template matStepLabel>{{ tipoUtente }}</ng-template>
+        <div *ngIf="tipoUtente == 'Privato'">
+          <form [formGroup]="privatoForm" class="form">
+            <mat-form-field class="formField" [appearance]="apparenceSetting">
+              <mat-label>Nome</mat-label>
+              <input type="text" matInput required formControlName="nome">
+            </mat-form-field>
+            <mat-form-field class="formField" [appearance]="apparenceSetting">
+              <mat-label>Cognome</mat-label>
+              <input type="text" matInput required formControlName="cognome">
+            </mat-form-field>
+            <mat-form-field class="formField" [appearance]="apparenceSetting">
+              <mat-label>Codice Fiscale</mat-label>
+              <input type="text" matInput required formControlName="cf">
+            </mat-form-field>
+            <mat-form-field class="formField" [appearance]="apparenceSetting">
+              <mat-label>Indirizzo di Residenza</mat-label>
+              <input type="tel" matInput formControlName="indirizzo">
+            </mat-form-field>
+            <mat-form-field class="formField" [appearance]="apparenceSetting">
+              <mat-label>Numero di Telefono</mat-label>
+              <input type="text" matInput formControlName="telefono">
+            </mat-form-field>
+            <mat-form-field class="formField" [appearance]="apparenceSetting">
+              <mat-label>Preferenze sugli Animali</mat-label>
+              <input type="text" matInput formControlName="preferenze">
+            </mat-form-field>
+            <!-- WIP per ora usare quello sopra <app-chips class="formField" [appearance]="apparenceSetting">
+              <mat-label>Preferenze sugli Animali</mat-label>
+            </app-chips> -->
+            <mat-form-field class="formField" [appearance]="apparenceSetting">
+              <mat-label>Condizioni Abitative</mat-label>
+              <input type="text" matInput formControlName="condizioni">
+            </mat-form-field>
+            <mat-form-field class="formField" [appearance]="apparenceSetting">
+              <mat-label>Informazioni Aggiuntive</mat-label>
+              <input type="text" matInput formControlName="infromazioni">
+            </mat-form-field>
+            <div>
+              <button mat-raised-button matStepperPrevious class="control" color="primary">Indietro</button>
+              <button mat-raised-button (click)="signupPrivato()" color="primary">Registrati</button>
+            </div>
+          </form>
+        </div>
+        <div *ngIf="tipoUtente == 'Centro Adozioni'">
+          <form [formGroup]="centroForm" class="form">
+            <mat-form-field class="formField" [appearance]="apparenceSetting">
+              <mat-label>Nome</mat-label>
+              <input type="text" matInput required formControlName="nome">
+            </mat-form-field>
+            <mat-form-field class="formField" [appearance]="apparenceSetting">
+              <mat-label>Descrizione</mat-label>
+              <input type="text" matInput required formControlName="desc">
+            </mat-form-field>
+            <mat-form-field class="formField" [appearance]="apparenceSetting">
+              <mat-label>Orari</mat-label>
+              <input type="text" matInput required formControlName="orari">
+            </mat-form-field>
+            <mat-form-field class="formField" [appearance]="apparenceSetting">
+              <mat-label>Indirizzo</mat-label>
+              <input type="text" matInput required formControlName="indirizzo">
+            </mat-form-field>
+            <mat-form-field class="formField" [appearance]="apparenceSetting">
+              <mat-label>Eventi</mat-label>
+              <input type="text" matInput formControlName="eventi">
+            </mat-form-field>
+            <div>
+              <button mat-raised-button matStepperPrevious class="control" color="primary">Indietro</button>
+              <button mat-raised-button (click)="signupCentro()" color="primary">Registrati</button>
+            </div>
+          </form>
+        </div>
+      </mat-step>
+
+
+    </mat-stepper>
+  </div>
+  <div class="image">
+    <img src="./assets/imgs/signup.png" alt="Dai, Registrati!" height="250" width="250">
+  </div>
+</div>

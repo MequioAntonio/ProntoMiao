@@ -1,0 +1,21 @@
+<mat-card class="animal-card" >
+  <img mat-card-image [src]="richiesta?.annuncio?.foto_profilo" alt="Cane" height="250px" width="300px">
+  <mat-card-content class="content">
+    <mat-card-title>{{richiesta?.annuncio?.animale?.nome}} - {{richiesta?.annuncio?.animale?.razza}}</mat-card-title>
+    <p >
+      {{richiesta?.annuncio?.descrizione}}
+    </p>
+  </mat-card-content>
+  <mat-card-actions class="center" *ngIf="isCentro">
+    <button mat-raised-button color="primary" (click)="Accetta()">ACCETTA</button>
+    <button mat-raised-button color="warn" (click)="Rifiuta()">DECLINA</button>
+  </mat-card-actions>
+  <mat-card-actions class="private" *ngIf="!isCentro">
+    <button mat-raised-button color="warn" (click)="Rifiuta()">ANNULLA</button>
+  </mat-card-actions>
+  <mat-card-header>
+    <div mat-card-avatar class="animal-header-image"></div>
+    <mat-card-title>{{richiesta?.utente?.nome}} {{richiesta?.utente?.cognome}}</mat-card-title>
+    <mat-card-subtitle>{{richiesta?.utente?.email}}</mat-card-subtitle>
+  </mat-card-header>
+</mat-card>

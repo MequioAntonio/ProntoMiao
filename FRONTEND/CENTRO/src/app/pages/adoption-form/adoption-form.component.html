@@ -1,0 +1,64 @@
+<div class="parent">
+  <div class="form">
+    <mat-stepper [linear]="isLinear" #stepper>
+      <mat-step [stepControl]="animalForm">
+        <ng-template matStepLabel>Inserisci i dati dell'animale</ng-template>
+        <form [formGroup]="animalForm" class="form">
+          <mat-form-field class="formField" [appearance]="apparenceSetting">
+            <mat-label>Nome</mat-label>
+            <input type="text" matInput required formControlName="nome">
+          </mat-form-field>
+          <mat-form-field class="formField" [appearance]="apparenceSetting">
+            <mat-label>Razza</mat-label>
+            <input type="text" matInput required formControlName="razza">
+          </mat-form-field>
+          <mat-form-field class="formField" [appearance]="apparenceSetting">
+            <mat-label>Taglia</mat-label>
+            <input type="text" matInput required formControlName="taglia">
+          </mat-form-field>
+          <mat-form-field class="formField" [appearance]="apparenceSetting">
+            <mat-label>Età</mat-label>
+            <input type="number" matInput required formControlName="eta">
+          </mat-form-field>
+          <mat-form-field class="formField" [appearance]="apparenceSetting">
+            <mat-label>Sesso</mat-label>
+            <input type="text" matInput required formControlName="sesso">
+          </mat-form-field>
+          <mat-form-field class="formField" [appearance]="apparenceSetting">
+            <mat-label>Specie</mat-label>
+            <input type="text" matInput required formControlName="specie">
+          </mat-form-field>
+          <br>
+          <button mat-raised-button (click)="next(stepper)" color="primary">Procedi</button>
+          <!-- Questa funzione next(stepper) è fatta apposta per questo form -->
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="annuncioForm">
+        <form class="form" [formGroup]="annuncioForm">
+          <ng-template matStepLabel>Inserisci i dati dell'adozione</ng-template>
+            <mat-form-field class="formField" appearance="outline">
+              <mat-label required>Titolo</mat-label>
+              <input matInput required formControlName="titolo" />
+            </mat-form-field>
+            <mat-form-field class="formField" appearance="outline">
+              <mat-label required>Descrizione</mat-label>
+              <textarea matInput required formControlName="descrizione"></textarea>
+            </mat-form-field>
+            <mat-form-field class="formField" appearance="outline">
+              <mat-label>Informazioni Aggiuntive</mat-label>
+              <textarea matInput formControlName="informazioni"></textarea>
+            </mat-form-field>
+            <input #pngInput hidden="true" type="file" onclick="this.value=null" (change)="pngInputChange($event)"
+              accept=".png" />
+            <button class="formButton" mat-flat-button color="primary" (click)="pngInput.click()">
+              Scegli immagine (PNG)
+            </button>
+            <button mat-raised-button matStepperPrevious class="control" color="primary">Indietro</button>
+            <button class="formButton" mat-raised-button color="primary" (click)="inserisciAnnuncio()" type="submit" [disabled]="!annuncioForm.valid">Invia Dati</button>
+        </form>
+      </mat-step>
+    </mat-stepper>
+  </div>
+
+  <img src="./assets/imgs/adoption-form.png" alt="Dai, inserisci un annuncio!" height="300" width="300" />
+</div>

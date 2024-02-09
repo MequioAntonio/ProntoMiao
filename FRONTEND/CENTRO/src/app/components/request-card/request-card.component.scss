@@ -1,0 +1,25 @@
+.animal-card {
+  max-width: 300px;
+}
+
+.animal-header-image {
+background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+background-size: cover;
+}
+
+.content {
+  text-align: center;
+}
+
+.center
+{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 1%;
+}
+.private
+{
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  column-gap: 1%;
+}

@@ -1,0 +1,74 @@
+.maindata{
+    margin-left: 10%;
+    margin-top: 3em;
+    display: flex;
+
+}
+
+.usertext {
+    display: flex;
+    flex-direction: column;
+    margin-left: 5%;
+    margin-top: 1%;
+}
+.username {
+    
+    font-size: 3em;
+
+}
+.map {
+    height: 500px;
+    padding: 0;
+  }
+
+.subtitle{
+    
+}
+
+.userpic {
+    height: 200px;
+    width: 200px;
+    border: 3px;
+    border-color: black;
+    border-style:groove;
+}
+
+.otherdata{
+    display: grid;
+    grid-template-columns: repeat(2, 10fr);
+    grid-gap: 50px;
+    
+}
+
+.personaldata{
+    font-weight: bold;
+}
+
+.highlight{
+    text-align: center;
+    margin-top: 5%;
+}
+
+.flexGrid{
+    margin-top: 5%;
+    
+}
+
+.items{
+    display: flex;
+    flex-direction: column;
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
+.centerpost{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1px;
+    margin-top: 50px;
+}
+
+.feedback{
+margin-top: 4px;
+margin-bottom: 2px;
+}

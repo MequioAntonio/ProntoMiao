@@ -1,0 +1,59 @@
+<div class="maindata">
+    <div class="imgbox">
+        <img class="userpic" src="./assets/imgs/home/center-cta-report.png">
+    </div>
+    <div class="usertext">
+    <h1 class="username">  Bentornato! </h1>
+    <p class="subtitle"> {{centro.nome}}</p>
+    <div class="otherdata">
+      <div><p class="personaldata">Email:</p><p class="subtext">{{centro.email}}</p></div>
+      <div><p class="personaldata">Indirizzo:</p><p class="subtext">{{centro.indirizzo}}</p></div>
+      <div><p class="personaldata">Orari:</p><p class="subtext">{{centro.orari}}</p></div>
+      <div><p class="personaldata">Descrizione:</p><p class="subtext">{{centro.descrizione}}</p></div>
+      <div><p class="personaldata">Eventi:</p><p class="subtext">{{centro.eventi}}</p></div>
+      </div>
+    </div>
+    </div>
+    <div class="map"
+      leaflet
+      [leafletOptions]="options"
+      (leafletMapReady)="onMapReady($event)"
+      >
+
+    </div>
+
+    <div class="flexGrid">
+        <div class="items">
+        <h3>Aggiungi una nuova adozione</h3>
+        <button mat-stroked-button (click)="aggiungiAdozione()">Aggiungi</button>
+        </div>
+    </div>
+
+
+
+    <h2 class="highlight"> Richieste Ricevute </h2>
+      <div class="flexGrid">
+        <div class="flexCardItem" *ngFor="let richiesta of richieste"><app-request-card [isCentro]="isCentro" *ngIf="richiesta.stato == 0" [richiesta]="richiesta"></app-request-card></div>
+      </div>
+
+
+      <h2 class="highlight"> Recensioni Ricevute</h2>
+    <div class="flexGrid">
+      <div style="clear: both;">
+            <div class="feedback" *ngFor="let recensione of recensioni">
+              <app-feedback-card [recensione]="recensione">
+              </app-feedback-card>
+            </div>
+            <div style="clear: both;">
+            <h2> <br> Le nostre adozioni <br> </h2>
+
+            <div class="flexGrid" style="display: flex; flex-wrap: wrap;" *ngIf="annunci!.length>0">
+                <div class="flexCardItem" *ngFor="let annuncio of annunci">
+                  <app-adoption-card [annuncio]="annuncio"></app-adoption-card>
+                </div>
+              </div>
+              </div>
+            </div>
+
+
+    </div>

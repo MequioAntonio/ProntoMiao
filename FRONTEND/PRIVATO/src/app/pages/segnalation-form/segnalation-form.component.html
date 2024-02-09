@@ -1,0 +1,21 @@
+<div class="parent">
+  <div class="form">
+    <form class="form">
+      <mat-form-field class="formField" appearance="outline">
+        <mat-label required>Titolo</mat-label>
+        <input type="titolo" matInput [formControl]="titoloControl"/>
+      </mat-form-field>
+      <mat-form-field class="formField" appearance="outline">
+        <mat-label required>Descrizione</mat-label>
+        <textarea type="descrizione" matInput [formControl]="descrizioneControl"></textarea>
+      </mat-form-field>
+      <mat-form-field class="formField" appearance="outline">
+        <mat-label>Indirizzo</mat-label>
+        <textarea type="informazioni" matInput [formControl]="indirizzoControl"></textarea>
+      </mat-form-field>
+    </form>
+    <button class="formButton" mat-raised-button color="primary" (click)="inserisciSegnalazione()" type="submit" [disabled]="!titoloControl.valid || !descrizioneControl.valid || !indirizzoControl.valid">Invia Dati</button>
+  </div>
+
+  <img src="./assets/imgs/segnalation-form.png" alt="Dai, inserisci un annuncio!" height="300" width="300" />
+</div>
