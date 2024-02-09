@@ -7,8 +7,10 @@ import it.unical.prontoMiao.persistenza.model.Annuncio;
 import it.unical.prontoMiao.persistenza.model.Richiesta;
 import it.unical.prontoMiao.persistenza.model.UtentePrivato;
 
-import java.sql.*;
-import java.sql.Date;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 

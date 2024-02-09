@@ -6,12 +6,14 @@ import org.springframework.stereotype.Component;
 
 import java.io.*;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Base64;
 
 @Component
 public class FileUtility {
+
+    @Value("${prontomiao.baseUrl}")
+    private String baseurò;
 
     public void base64ToFile(String encodedFile, String folderName) throws IOException {
         String filename = getNomeFIle(encodedFile);

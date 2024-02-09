@@ -1,8 +1,9 @@
 package it.unical.prontoMiao.security;
 
 import io.jsonwebtoken.ExpiredJwtException;
+import it.unical.prontoMiao.persistenza.DBManager;
+import it.unical.prontoMiao.persistenza.dao.UtenteDao;
 import it.unical.prontoMiao.service.JwtService;
-import it.unical.prontoMiao.service.UtenteService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,17 +15,19 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 @Component
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtService jwtService;
-    private final UtenteService userService;
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request,
                                     @NonNull HttpServletResponse response, @NonNull FilterChain filterChain)
@@ -45,8 +48,20 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
         if (StringUtils.isNotEmpty(userEmail)
                 && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = userService.userDetailsService()
-                    .loadUserByUsername(userEmail);
+            UserDetails userDetails = new UserDetailsService()
+            {
+                @Override
+                public UserDetails loadUserByUsername(String username)
+                {
+                    UtenteDao utenteDao = DBManager.getInstance().getUtenteDao();
+                    try
+                    {
+                        return utenteDao.findByEmailIgnoreCase(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }.loadUserByUsername(userEmail);
             if (jwtService.isTokenValid(jwt, userDetails)) {
                 SecurityContext context = SecurityContextHolder.createEmptyContext();
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(

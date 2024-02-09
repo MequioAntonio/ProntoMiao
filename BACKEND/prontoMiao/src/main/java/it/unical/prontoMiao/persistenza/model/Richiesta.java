@@ -1,6 +1,6 @@
 package it.unical.prontoMiao.persistenza.model;
 
-import java.sql.Date; //se crea problemi cabiare da java.sql a java.util
+import java.sql.Date;
 
 public class Richiesta {
     private Integer id;
