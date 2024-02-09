@@ -17,7 +17,7 @@ public class CentroAdozioniController {
     public ResponseEntity getAllCentriAdozioni(){
         CentroAdozioniDao centroAdozioniDao = DBManager.getInstance().getCentroAdozioniDao();
         try {
-            return new ResponseEntity<>(centroAdozioniDao.findAll(), HttpStatus.OK);
+            return new ResponseEntity<>(centroAdozioniDao.findAllLazy(), HttpStatus.OK);
         } catch (SQLException e) {
             return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }

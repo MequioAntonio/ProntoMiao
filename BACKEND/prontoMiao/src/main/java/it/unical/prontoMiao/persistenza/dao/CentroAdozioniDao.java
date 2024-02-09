@@ -13,6 +13,7 @@ public interface CentroAdozioniDao {
     public CentroAdozioni findById(int id) throws SQLException;
 
     public List<CentroAdozioni> findAll() throws SQLException;
+    public List<CentroAdozioni> findAllLazy() throws SQLException;
 
     public Optional<CentroAdozioni> findByEmailIgnoreCase(String email) throws SQLException;
 

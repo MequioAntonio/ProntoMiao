@@ -1,6 +1,5 @@
 package it.unical.prontoMiao.persistenza.dao.postgres;
 
-
 import it.unical.prontoMiao.persistenza.IdBroker;
 import it.unical.prontoMiao.persistenza.dao.CentroAdozioniDao;
 import it.unical.prontoMiao.persistenza.model.CentroAdozioni;
@@ -9,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -68,6 +68,30 @@ public class CentroAdozioniDaoPostgres implements CentroAdozioniDao {
     }
 
     @Override
+    public List<CentroAdozioni> findAllLazy() throws SQLException {
+        List<CentroAdozioni> centriLista = new ArrayList<CentroAdozioni>();
+        Statement st = conn.createStatement();
+        String query = "select * FROM centro_adozioni ca JOIN utente u ON ca.id = u.id";
+
+        ResultSet rs = st.executeQuery(query);
+        while (rs.next()) {
+            CentroAdozioni centro = new CentroAdozioniProxy(conn);
+
+            centro.setEmail(rs.getString("email"));
+            centro.setPassword("");
+            centro.setId(rs.getInt("id"));
+            centro.setDescrizione(rs.getString("descrizione"));
+            centro.setEventi(rs.getString("eventi"));
+            centro.setIndirizzo(rs.getString("indirizzo"));
+            centro.setNome(rs.getString("nome"));
+            centro.setOrari(rs.getString("orari"));
+            centriLista.add(centro);
+        }
+
+        return centriLista;
+    }
+
+    @Override
     public CentroAdozioni findByEmail(String email) throws SQLException {
         CentroAdozioni centro = null;
         String query = "select * from centro_adozioni as c, utente as u where u.id=c.id and lower(u.email) = lower(?)";
@@ -92,7 +116,6 @@ public class CentroAdozioniDaoPostgres implements CentroAdozioniDao {
         return centro;
     }
 
-
     @Override
     public Optional<CentroAdozioni> findByEmailIgnoreCase(String email) throws SQLException {
         CentroAdozioni centro = null;
@@ -115,10 +138,9 @@ public class CentroAdozioniDaoPostgres implements CentroAdozioniDao {
         return centro == null ? Optional.empty() : Optional.of(centro);
     }
 
-
     @Override
     public CentroAdozioni save(CentroAdozioni centro) throws SQLException {
-        if (centro.getId()==null){
+        if (centro.getId() == null) {
             Integer newId = IdBroker.getId(conn);
             centro.setId(newId);
 
@@ -130,8 +152,8 @@ public class CentroAdozioniDaoPostgres implements CentroAdozioniDao {
 
             stUser.executeUpdate();
 
-
-            PreparedStatement stCentro = conn.prepareStatement("INSERT INTO centro_adozioni (id, descrizione, eventi, indirizzo, nome, orari) VALUES (?,?,?,?,?,?)");
+            PreparedStatement stCentro = conn.prepareStatement(
+                    "INSERT INTO centro_adozioni (id, descrizione, eventi, indirizzo, nome, orari) VALUES (?,?,?,?,?,?)");
 
             stCentro.setInt(1, newId);
             stCentro.setString(2, centro.getDescrizione());
@@ -151,7 +173,8 @@ public class CentroAdozioniDaoPostgres implements CentroAdozioniDao {
 
             updUser.executeUpdate();
 
-            PreparedStatement updCentro = conn.prepareStatement("update centro_adozioni set descrizione=?, eventi=?, indirizzo=?, nome=?, orari=? where id=?");
+            PreparedStatement updCentro = conn.prepareStatement(
+                    "update centro_adozioni set descrizione=?, eventi=?, indirizzo=?, nome=?, orari=? where id=?");
 
             updCentro.setInt(6, centro.getId());
             updCentro.setString(1, centro.getDescrizione());
