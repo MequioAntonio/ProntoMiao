@@ -1,5 +1,9 @@
 package it.unical.prontoMiao.persistenza.model;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 public class CentroAdozioni extends Utente{
 
     private String nome;
@@ -7,6 +11,8 @@ public class CentroAdozioni extends Utente{
     private String orari;
     private String eventi;
     private String indirizzo;
+
+    private List<Annuncio> annunci = new ArrayList<Annuncio>();
 
     public CentroAdozioni() {
     }
@@ -21,6 +27,14 @@ public class CentroAdozioni extends Utente{
 
     public CentroAdozioni(String email, String password) {
         super(email, password);
+    }
+
+    public void setAnnunci(List<Annuncio> annunci) {
+        this.annunci = annunci;
+    }
+
+    public List<Annuncio> getAnnunci() throws SQLException {
+        return annunci;
     }
 
     public String getNome() {
