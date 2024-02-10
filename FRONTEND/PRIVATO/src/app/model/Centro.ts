@@ -1,3 +1,5 @@
+import { Annuncio } from "./Annuncio"
+
 export interface Centro {
     accountNonExpired: boolean | undefined
     accountNonLocked: boolean | undefined
@@ -13,5 +15,5 @@ export interface Centro {
     orari: string
     password: string | undefined
     username: string | undefined
-
+    annunci: Array<Annuncio> | null | undefined
 }
