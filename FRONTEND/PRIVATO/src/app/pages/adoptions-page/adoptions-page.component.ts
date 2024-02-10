@@ -27,7 +27,7 @@ export class AdoptionsPageComponent implements OnInit {
   constructor(private jwtHelper: JwtHelperService, private route: ActivatedRoute, private ads: AnnuncioDatabaseService) { }
 
   ngOnInit(): void {
-    this.jwtHelper.reciveAndSet(this.route)
+    this.jwtHelper.receiveAndSet(this.route)
 
     this.ads.getAllAnnunciNonAccettati().subscribe((data: any) => {
       console.warn(data);

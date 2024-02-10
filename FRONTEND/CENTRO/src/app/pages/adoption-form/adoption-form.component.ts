@@ -61,7 +61,7 @@ export class AdoptionFormComponent implements OnInit {
 
   ngOnInit() {
 
-    this.jwtHelper.reciveAndSet(this.route)
+    this.jwtHelper.receiveAndSet(this.route)
 
     this.animaleService.getAllAnimaliNotAnnuncio().subscribe((response => {
       this.animali = response;

@@ -22,7 +22,7 @@ export class SegnalationsPageComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.jwtHelper.reciveAndSet(this.route)
+    this.jwtHelper.receiveAndSet(this.route)
 
     this.seg.getAllSegnalazioni().subscribe((data: any) => {
       console.warn(data)

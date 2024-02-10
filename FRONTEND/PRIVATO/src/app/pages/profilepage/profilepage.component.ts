@@ -34,7 +34,7 @@ export class ProfilepageComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.jwtHelper.reciveAndSet(this.route)
+    this.jwtHelper.receiveAndSet(this.route)
 
     const path = this.router.url;
     const parts = path.split("/");

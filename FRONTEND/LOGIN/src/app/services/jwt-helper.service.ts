@@ -8,7 +8,7 @@ export class JwtHelperService {
 
   constructor() { }
 
-  public reciveAndSet(route: ActivatedRoute){
+  public receiveAndSet(route: ActivatedRoute){
     let token = route.snapshot.paramMap.get('token');
     let keep = route.snapshot.paramMap.get('keep');
 
@@ -18,8 +18,27 @@ export class JwtHelperService {
       }else{
         sessionStorage.setItem("token", token!)
       }
+    }
+  }
 
+  public sendAndGet(){
+    let keep;
+    if(localStorage.getItem("token") !== null) {
+      keep = true;
+    }
+    else if(sessionStorage.getItem("token") !== null) {
+      keep = false;
     }
 
+    let token;
+
+    if(keep){
+      token = localStorage.getItem("token");
+    }
+    else {
+      token = sessionStorage.getItem("token");
+    }
+
+    return "?token="+token+"&keep="+keep;
   }
 }

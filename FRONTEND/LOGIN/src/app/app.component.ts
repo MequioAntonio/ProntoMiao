@@ -1,3 +1,4 @@
+import { JwtHelperService } from './services/jwt-helper.service';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
@@ -31,6 +32,7 @@ import { MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialo
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
+
   isLogged() {
     return this.authService.isLogged();
   }
@@ -76,7 +78,7 @@ homepage(){
   title = 'ProntoMiao';
   searchValue: string = "";
 
-  constructor(private authService: AuthService, private router: Router, public dialog: MatDialog) {}
+  constructor(private jwt_helper: JwtHelperService, private authService: AuthService, private router: Router, public dialog: MatDialog) {}
 
   openMissionDialog(){
     this.dialog.open(DiaologMissione);

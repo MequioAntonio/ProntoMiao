@@ -61,7 +61,7 @@ export class SegnalationFormComponent implements OnInit{
 
   ngOnInit(): void {
 
-    this.jwtHelper.reciveAndSet(this.route)
+    this.jwtHelper.receiveAndSet(this.route)
 
     console.log('Titolo:', this.titoloControl.value)
     console.log('Descrizione:', this.descrizioneControl.value)

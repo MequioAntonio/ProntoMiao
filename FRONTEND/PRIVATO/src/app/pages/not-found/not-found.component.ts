@@ -15,7 +15,7 @@ export class NotFoundComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.jwtHelper.reciveAndSet(this.route)
+    this.jwtHelper.receiveAndSet(this.route)
   }
 
 }

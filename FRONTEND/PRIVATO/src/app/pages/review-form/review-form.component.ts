@@ -62,7 +62,7 @@ export class ReviewFormComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.jwtHelper.reciveAndSet(this.route)
+    this.jwtHelper.receiveAndSet(this.route)
 
     this.route.paramMap.subscribe(params => {
       this.idCentro = params.get('idCentro')!;

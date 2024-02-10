@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit{
 
   ngOnInit(): void {
 
-    this.jwtHelper.reciveAndSet(this.route)
+    this.jwtHelper.receiveAndSet(this.route)
   }
 
   images = [1, 2, 3].map((n) => `./assets/imgs/home/slide${n}.jpg`);
