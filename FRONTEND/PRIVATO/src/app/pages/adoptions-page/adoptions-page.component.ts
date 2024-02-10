@@ -7,6 +7,8 @@ import { Annuncio } from '../../model/Annuncio';
 import { AnnuncioDatabaseService } from '../../services/database-services/annuncio-database.service';
 import { Observable } from 'rxjs';
 import { Animale } from '../../model/Animale';
+import { ActivatedRoute } from '@angular/router';
+import { JwtHelperService } from '../../services/jwt-helper.service';
 
 @Component({
     selector: 'app-adoptions-page',
@@ -22,9 +24,11 @@ import { Animale } from '../../model/Animale';
 export class AdoptionsPageComponent implements OnInit {
   annunciLista: Annuncio[] = new Array();
 
-  constructor(private ads: AnnuncioDatabaseService) { }
+  constructor(private jwtHelper: JwtHelperService, private route: ActivatedRoute, private ads: AnnuncioDatabaseService) { }
 
   ngOnInit(): void {
+    this.jwtHelper.reciveAndSet(this.route)
+
     this.ads.getAllAnnunciNonAccettati().subscribe((data: any) => {
       console.warn(data);
       this.annunciLista = data;

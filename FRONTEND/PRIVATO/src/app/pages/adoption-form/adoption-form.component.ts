@@ -30,6 +30,7 @@ import { AuthService } from '../../services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { MatStepper, MatStepperModule } from '@angular/material/stepper';
+import { JwtHelperService } from '../../services/jwt-helper.service';
 
 @Component({
   selector: 'app-adoption-form',
@@ -51,13 +52,21 @@ import { MatStepper, MatStepperModule } from '@angular/material/stepper';
   templateUrl: './adoption-form.component.html',
   styleUrl: './adoption-form.component.scss',
 })
-export class AdoptionFormComponent {
+export class AdoptionFormComponent implements OnInit {
   isLinear = true
   apparenceSetting = 'outline' as MatFormFieldAppearance
   animale!: Animale;
 
-  constructor( private ads: AnimaleDatabaseService, private snackBar: MatSnackBar, private authService: AuthService, private fb: FormBuilder, private annuncioService: AnnuncioDatabaseService, private animaleService: AnimaleDatabaseService) {}
+  constructor(private jwtHelper: JwtHelperService, private route: ActivatedRoute, private ads: AnimaleDatabaseService, private snackBar: MatSnackBar, private authService: AuthService, private fb: FormBuilder, private annuncioService: AnnuncioDatabaseService, private animaleService: AnimaleDatabaseService) {}
 
+
+  ngOnInit() {
+    this.jwtHelper.reciveAndSet(this.route)
+
+    this.animaleService.getAllAnimaliNotAnnuncio().subscribe((response => {
+      this.animali = response;
+    }))
+  }
   animali : Animale[]= [];
 
   imageBase64: string = "";
@@ -77,12 +86,6 @@ export class AdoptionFormComponent {
     descrizione: ['', [Validators.required]],
     informazioni: ['', Validators.required],
   });
-
-  ngOnInit() {
-    this.animaleService.getAllAnimaliNotAnnuncio().subscribe((response => {
-      this.animali = response;
-    }))
-  }
 
   pngInputChange(fileInputEvent: any) {
     console.log(fileInputEvent.target.files[0]);

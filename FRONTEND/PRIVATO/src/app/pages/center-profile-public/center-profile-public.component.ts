@@ -13,6 +13,7 @@ import { Recensione } from '../../model/Recensione';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import { JwtHelperService } from '../../services/jwt-helper.service';
 @Component({
   selector: 'app-center-profile-public',
   standalone: true,
@@ -35,10 +36,12 @@ export class CenterProfilePublicComponent implements OnInit{
 
   recensioni?: Recensione[] = new Array();
 
-  constructor(private cds: CentroAdozioniDatabaseService, private ads: AnnuncioDatabaseService, private rds: RecensioneDatabaseService, private router: Router) {}
+  constructor(private jwtHelper: JwtHelperService, private route: ActivatedRoute, private cds: CentroAdozioniDatabaseService, private ads: AnnuncioDatabaseService, private rds: RecensioneDatabaseService, private router: Router) {}
   routeRecensioni:string="";
 
   ngOnInit(): void {
+
+    this.jwtHelper.reciveAndSet(this.route)
 
     const path = this.router.url;
     const parts = path.split("/");

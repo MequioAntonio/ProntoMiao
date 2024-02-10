@@ -1,4 +1,4 @@
-import { Component, SecurityContext } from '@angular/core';
+import { Component, OnInit, SecurityContext } from '@angular/core';
 import { AdoptionCardComponent } from '../../components/adoption-card/adoption-card.component';
 import { MatButtonModule } from '@angular/material/button';
 import { FeedbackCardComponent } from '../../components/feedback-card/feedback-card.component';
@@ -18,6 +18,7 @@ import { AuthService } from '../../services/auth.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import * as Leaflet from 'leaflet';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import { JwtHelperService } from '../../services/jwt-helper.service';
 
 @Component({
   selector: 'app-center-profile-private',
@@ -26,7 +27,7 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
   templateUrl: './center-profile-private.component.html',
   styleUrl: './center-profile-private.component.scss',
 })
-export class CenterProfilePrivateComponent {
+export class CenterProfilePrivateComponent implements OnInit{
   //string immagine?
   centro!: Centro;
 
@@ -45,9 +46,9 @@ export class CenterProfilePrivateComponent {
     center: Leaflet.latLng(45.3212164, 16.2432423),
     layers: this.getLayers(),
     zoom: 1,
-    
+
   };
-  
+
   constructor(
     private cds: CentroAdozioniDatabaseService,
     private ric: RichiestaDatabaseService,
@@ -56,9 +57,38 @@ export class CenterProfilePrivateComponent {
     private ads: AnnuncioDatabaseService,
     private router: Router,
     private sanitizer: DomSanitizer,
-    private http: HttpClient
+    private http: HttpClient,
+    private jwtHelper: JwtHelperService, private route: ActivatedRoute
   ) {}
     isCentro = this.as.isCentro()
+
+    ngOnInit(): void {
+      this.jwtHelper.reciveAndSet(this.route)
+
+      const path = this.router.url;
+      const parts = path.split("/");
+      const lastElement = parts[parts.length - 1];
+
+      this.cds.getCenterByID(lastElement).subscribe(data=>{
+        this.centro = data;
+      })
+
+      this.ric.getAllRichiesteByCentro(lastElement).subscribe(data=>{
+        console.warn(data)
+        this.richieste = data;
+      })
+
+      this.ads.getAllAnnunciByCentro(lastElement).subscribe(data=>{
+        this.annunci = data;
+
+      })
+
+      this.rds.getAllRecensioniByCentro(lastElement).subscribe(data=>{
+        this.recensioni = data;
+      })
+
+
+    }
 
 
     onMapReady(map: Leaflet.Map) {
@@ -77,37 +107,11 @@ export class CenterProfilePrivateComponent {
               }),
               title: 'Workspace'
             } as Leaflet.MarkerOptions).addTo(map);
-          }, 500) 
+          }, 500)
         }
       }, (error) => {
         console.log(error)
       })
-  
-  }
-  
-  ngOnInit(): void {
-    const path = this.router.url;
-    const parts = path.split("/");
-    const lastElement = parts[parts.length - 1];
-
-    this.cds.getCenterByID(lastElement).subscribe(data=>{
-      this.centro = data;
-    })
-
-    this.ric.getAllRichiesteByCentro(lastElement).subscribe(data=>{
-      console.warn(data)
-      this.richieste = data;
-    })
-
-    this.ads.getAllAnnunciByCentro(lastElement).subscribe(data=>{
-      this.annunci = data;
-
-    })
-
-    this.rds.getAllRecensioniByCentro(lastElement).subscribe(data=>{
-      this.recensioni = data;
-    })
-
 
   }
 
@@ -126,9 +130,9 @@ export class CenterProfilePrivateComponent {
         attribution: '&copy; OpenStreetMap contributors'
       } as Leaflet.TileLayerOptions)
     ] as Leaflet.Layer[];
-  
+
   }
-  
+
   getMarkers() {
     return [
       new Leaflet.Marker(new Leaflet.LatLng(45.3212164, 16.2432423), {
@@ -141,6 +145,6 @@ export class CenterProfilePrivateComponent {
       } as Leaflet.MarkerOptions),
     ] as Leaflet.Marker[];
   }
-  
+
 }
 

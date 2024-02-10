@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AdoptionCardComponent } from '../../components/adoption-card/adoption-card.component';
 import { UtentePrivato } from '../../model/UtentePrivato';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -9,6 +9,7 @@ import { Richiesta } from '../../model/Richiesta';
 import { UtentePrivatoDatabaseService } from '../../services/database-services/utente-privato-database.service';
 import { CommonModule } from '@angular/common';
 import { RequestCardComponent } from "../../components/request-card/request-card.component";
+import { JwtHelperService } from '../../services/jwt-helper.service';
 
 @Component({
     selector: 'app-profilepage',
@@ -17,7 +18,7 @@ import { RequestCardComponent } from "../../components/request-card/request-card
     styleUrl: './profilepage.component.scss',
     imports: [AdoptionCardComponent, CommonModule, RequestCardComponent]
 })
-export class ProfilepageComponent {
+export class ProfilepageComponent implements OnInit {
 
   utenteprivato!: UtentePrivato;
 
@@ -27,11 +28,13 @@ export class ProfilepageComponent {
     private ute: UtentePrivatoDatabaseService,
     private ric: RichiestaDatabaseService,
     private router: Router,
-    private as: AuthService) {}
+    private as: AuthService,private jwtHelper: JwtHelperService, private route: ActivatedRoute) {}
 
     isCentro = this.as.isCentro()
 
   ngOnInit(): void {
+
+    this.jwtHelper.reciveAndSet(this.route)
 
     const path = this.router.url;
     const parts = path.split("/");

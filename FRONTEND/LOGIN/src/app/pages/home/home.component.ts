@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatIconModule} from '@angular/material/icon';
@@ -8,6 +8,8 @@ import { SmallCardComponent } from '../../components/small-card/small-card.compo
 
 import { NgbCarousel, NgbCarouselModule, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
+import { JwtHelperService } from '../../services/jwt-helper.service';
+import { ActivatedRoute } from '@angular/router';
 
 
 
@@ -18,7 +20,14 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
+  constructor(private jwtHelper: JwtHelperService, private route: ActivatedRoute){}
+
+  ngOnInit(): void {
+
+    this.jwtHelper.reciveAndSet(this.route)
+  }
+
   images = [1, 2, 3].map((n) => `./assets/imgs/home/slide${n}.jpg`);
 
 	paused = false;

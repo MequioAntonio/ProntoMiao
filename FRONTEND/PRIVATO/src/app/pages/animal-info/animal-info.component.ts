@@ -12,6 +12,7 @@ import { RichiestaConfirmComponent } from '../../components/richiesta-confirm/ri
 import { RichiestaDatabaseService } from '../../services/database-services/richiesta-database.service';
 import { AuthService } from '../../services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { JwtHelperService } from '../../services/jwt-helper.service';
 
 @Component({
   selector: 'app-animal-info',
@@ -23,11 +24,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class AnimalInfoComponent implements OnInit {
   annuncio!: Annuncio;
 
-  constructor(private authService: AuthService,public dialog: MatDialog,private ads: AnnuncioDatabaseService, private router: Router, private richiestaService: RichiestaDatabaseService, private snackBar: MatSnackBar, private route: ActivatedRoute) {}
+  constructor(private jwtHelper: JwtHelperService, private authService: AuthService,public dialog: MatDialog,private ads: AnnuncioDatabaseService, private router: Router, private richiestaService: RichiestaDatabaseService, private snackBar: MatSnackBar, private route: ActivatedRoute) {}
   animalRoute = "/animail-info/"+this.annuncio?.id;
 
 
   ngOnInit(): void {
+
+    this.jwtHelper.reciveAndSet(this.route)
+
     const path = this.router.url;
     const parts = path.split("/");
     const lastElement = parts[parts.length - 1];

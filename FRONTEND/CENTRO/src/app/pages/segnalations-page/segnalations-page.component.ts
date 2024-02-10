@@ -5,6 +5,8 @@ import { SegnalazioneDatabaseService } from '../../services/database-services/se
 import { MatGridList, MatGridTile } from '@angular/material/grid-list';
 import { SegnalationCardComponent } from '../../components/segnalation-card/segnalation-card.component';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
+import { JwtHelperService } from '../../services/jwt-helper.service';
 
 @Component({
   selector: 'app-segnalations-page',
@@ -16,9 +18,12 @@ import { CommonModule } from '@angular/common';
 export class SegnalationsPageComponent implements OnInit {
   segnalazioniLista: Segnalazione[] = new Array();
 
-  constructor(private seg: SegnalazioneDatabaseService) { }
+  constructor(private jwtHelper: JwtHelperService, private route: ActivatedRoute, private seg: SegnalazioneDatabaseService) { }
 
   ngOnInit(): void {
+
+    this.jwtHelper.reciveAndSet(this.route)
+
     this.seg.getAllSegnalazioni().subscribe((data: any) => {
       console.warn(data)
       data.forEach((segnalazione: Segnalazione) => {

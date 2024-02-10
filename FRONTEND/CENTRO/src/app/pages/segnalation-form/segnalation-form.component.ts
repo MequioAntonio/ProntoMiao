@@ -24,6 +24,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../../services/auth.service';
 import { SegnalazioneDatabaseService } from '../../services/database-services/segnalazione-database.service';
 import { ActivatedRoute } from '@angular/router';
+import { JwtHelperService } from '../../services/jwt-helper.service';
 
 @Component({
   selector: 'app-segnalation-form',
@@ -54,11 +55,13 @@ export class SegnalationFormComponent implements OnInit{
   indirizzoControl = new FormControl('', [Validators.required]);
   userID: number;
 
-  constructor (private authService: AuthService, private fb: FormBuilder, private route: ActivatedRoute, private segnalazioneService : SegnalazioneDatabaseService, private snackBar: MatSnackBar){
+  constructor (private jwtHelper: JwtHelperService, private authService: AuthService, private fb: FormBuilder, private route: ActivatedRoute, private segnalazioneService : SegnalazioneDatabaseService, private snackBar: MatSnackBar){
     this.userID = this.authService.getIdUtente();
   }
 
   ngOnInit(): void {
+
+    this.jwtHelper.reciveAndSet(this.route)
 
     console.log('Titolo:', this.titoloControl.value)
     console.log('Descrizione:', this.descrizioneControl.value)

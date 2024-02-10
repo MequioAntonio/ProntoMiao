@@ -26,6 +26,7 @@ import { AuthService } from '../../services/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { RecensioneDatabaseService } from '../../services/database-services/recensione-database.service';
 import { Recensione } from '../../model/Recensione';
+import { JwtHelperService } from '../../services/jwt-helper.service';
 @Component({
   selector: 'app-review-form',
   standalone: true,
@@ -55,11 +56,13 @@ export class ReviewFormComponent implements OnInit {
   userID: number;
   idCentro!: string;
 
-  constructor(private authService: AuthService, private route: ActivatedRoute, private recensioneService: RecensioneDatabaseService, private snackBar: MatSnackBar) {
+  constructor(private jwtHelper: JwtHelperService, private authService: AuthService, private route: ActivatedRoute, private recensioneService: RecensioneDatabaseService, private snackBar: MatSnackBar) {
     this.userID = this.authService.getIdUtente();
   }
 
   ngOnInit(): void {
+
+    this.jwtHelper.reciveAndSet(this.route)
 
     this.route.paramMap.subscribe(params => {
       this.idCentro = params.get('idCentro')!;
