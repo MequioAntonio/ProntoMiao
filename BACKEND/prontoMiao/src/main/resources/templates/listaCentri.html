@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista dei  centri registrati sul nostro sito</title>
+</head>
+<body>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Descrizione</th>
+    </tr>
+    <tr th:each="centro : ${lista_centri}">
+        <td th:text="${centro.id}"></td>
+        <td th:text="${centro.nome}"></td>
+        <td th:text="${centro.descrizione}"></td>
+    </tr>
+</table>
+
+
+
+</body>
+</html>

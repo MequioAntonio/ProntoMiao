@@ -2,7 +2,7 @@ import { Annuncio } from "./Annuncio";
 import { UtentePrivato } from "./UtentePrivato";
 
 export interface Richiesta {
-  id: number;
+  id: number | null;
   stato: number;
   data: Date | undefined;
   annuncio: Annuncio | undefined;

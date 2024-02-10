@@ -1,22 +1,26 @@
 package it.unical.prontoMiao.service.impl;
 
-import it.unical.prontoMiao.model.CentroAdozioni;
-import it.unical.prontoMiao.model.Utente;
-import it.unical.prontoMiao.model.UtentePrivato;
-import it.unical.prontoMiao.repository.CentroAdozioniRepository;
-import it.unical.prontoMiao.repository.UtentePrivatoRepository;
-import it.unical.prontoMiao.repository.UtenteRepository;
+import it.unical.prontoMiao.persistenza.DBManager;
+import it.unical.prontoMiao.persistenza.dao.CentroAdozioniDao;
+import it.unical.prontoMiao.persistenza.dao.UtenteDao;
+import it.unical.prontoMiao.persistenza.dao.UtentePrivatoDao;
+import it.unical.prontoMiao.persistenza.dao.postgres.CentroAdozioniDaoPostgres;
+import it.unical.prontoMiao.persistenza.dao.postgres.UtenteDaoPostgres;
+import it.unical.prontoMiao.persistenza.dao.postgres.UtentePrivatoDaoPostgres;
+import it.unical.prontoMiao.persistenza.model.CentroAdozioni;
+import it.unical.prontoMiao.persistenza.model.Utente;
+import it.unical.prontoMiao.persistenza.model.UtentePrivato;
 import it.unical.prontoMiao.request.AuthRequest;
 import it.unical.prontoMiao.response.JwtTokenResponse;
 import it.unical.prontoMiao.service.AuthenticationService;
 import it.unical.prontoMiao.service.JwtService;
-import it.unical.prontoMiao.service.UtenteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -24,12 +28,13 @@ import java.util.Optional;
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
 
-    @Autowired
-    UtenteRepository utenteRepository;
-    @Autowired
-    UtentePrivatoRepository utentePrivatoRepository;
-    @Autowired
-    CentroAdozioniRepository centroAdozioniRepository;
+
+    private UtenteDao utenteDao = new UtenteDaoPostgres(DBManager.getInstance().getConnection());
+
+    private UtentePrivatoDao utentePrivatoDao = new UtentePrivatoDaoPostgres(DBManager.getInstance().getConnection());
+
+    private CentroAdozioniDao centroAdozioniDao = new CentroAdozioniDaoPostgres(DBManager.getInstance().getConnection());
+
     @Autowired
     PasswordEncoder encoder;
     @Autowired
@@ -38,7 +43,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Autowired
     private AuthenticationManager authenticationManager;
     @Override
-    public JwtTokenResponse login(Utente utente) throws IllegalArgumentException{
+    public JwtTokenResponse login(Utente utente) throws IllegalArgumentException, SQLException {
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(utente.getEmail(), utente.getPassword()));
@@ -48,8 +53,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         }
 
         Utente user = null;
-        Optional<UtentePrivato> optPrivato = utentePrivatoRepository.findByEmailIgnoreCase(utente.getEmail());
-        Optional<CentroAdozioni> optCentro = centroAdozioniRepository.findByEmailIgnoreCase(utente.getEmail());
+        Optional<UtentePrivato> optPrivato = utentePrivatoDao.findByEmailIgnoreCase(utente.getEmail());
+        Optional<CentroAdozioni> optCentro = centroAdozioniDao.findByEmailIgnoreCase(utente.getEmail());
         String tipoUtente = "NA";
         if (optPrivato.isPresent()) {
             user = optPrivato.get();
@@ -60,7 +65,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             tipoUtente = "CENTRO";
         }
         if (user == null) {
-            user = utenteRepository.findByEmailIgnoreCase(utente.getEmail())
+            user = utenteDao.findByEmailIgnoreCase(utente.getEmail())
                     .orElseThrow(() -> new IllegalArgumentException("Credenziali errate"));
         }
         if(!encoder.matches(utente.getPassword(),user.getPassword())){
@@ -75,12 +80,11 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
-    public Utente signup(AuthRequest utente) {
+    public Utente signup(AuthRequest utente) throws SQLException {
         Utente u = new Utente(utente.getEmail(), encoder.encode(utente.getPassword()));
-        //u = utenteRepository.save(u);
         if (utente.getTipoUtente().equalsIgnoreCase("Privato")) {
             UtentePrivato privato = new UtentePrivato(u.getEmail(),u.getPassword());
-            privato.setCf(utente.getCf());
+            privato.setCodice_fiscale(utente.getCf());
             privato.setNome(utente.getNome());
             privato.setCognome(utente.getCognome());
             privato.setTelefono(utente.getTelefono());
@@ -88,17 +92,19 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             privato.setIndirizzo(utente.getIndirizzo());
             privato.setInformazioni_aggiuntive(utente.getInformazioni());
             privato.setCondizioni_abitative(utente.getCondizioni());
-            privato.setId(u.getId());
-            utentePrivatoRepository.save(privato);
+            //privato.setId(u.getId());
+            utentePrivatoDao.save(privato);
             return privato;
         }
+
         CentroAdozioni centro = new CentroAdozioni(u.getEmail(),u.getPassword());
         centro.setNome(utente.getNome());
         centro.setDescrizione(utente.getDescrizione());
         centro.setEventi(utente.getEventi());
         centro.setIndirizzo(utente.getIndirizzo());
         centro.setOrari(utente.getOrari());
-        centroAdozioniRepository.save(centro);
+        centroAdozioniDao.save(centro);
         return centro;
+
     }
 }

@@ -30,7 +30,7 @@ export class RequestCardComponent {
       annuncio: {id: this.richiesta?.annuncio?.id},
       utente: {id: this.richiesta?.utente?.id}
     }
-    this.richiestaService.updateRichiesta(this.richiesta!.id, ric!).subscribe(()=>{
+    this.richiestaService.updateRichiesta(this.richiesta!.id!, ric!).subscribe(()=>{
       this.location.replaceState(this.location.path());
       window.location.reload();
     });
@@ -43,7 +43,7 @@ export class RequestCardComponent {
       annuncio: {id: this.richiesta?.annuncio?.id},
       utente: {id: this.richiesta?.utente?.id}
     }
-    this.richiestaService.updateRichiesta(this.richiesta!.id, ric!).subscribe(()=>{
+    this.richiestaService.updateRichiesta(this.richiesta!.id!, ric!).subscribe(()=>{
       this.location.replaceState(this.location.path());
       window.location.reload();
     });

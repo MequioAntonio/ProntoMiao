@@ -1,60 +1,79 @@
 package it.unical.prontoMiao.controller;
 
-import it.unical.prontoMiao.model.UtentePrivato;
-import it.unical.prontoMiao.service.UtentePrivatoService;
-import org.springframework.beans.factory.annotation.Autowired;
+import it.unical.prontoMiao.persistenza.DBManager;
+import it.unical.prontoMiao.persistenza.dao.UtentePrivatoDao;
+import it.unical.prontoMiao.persistenza.model.UtentePrivato;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.sql.SQLException;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping(value = "/utente")
 public class UtentePrivatoController {
-    @Autowired
-    private UtentePrivatoService utentePrivatoService;
+
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<UtentePrivato>> getAllUtentiPrivati(){
-        return new ResponseEntity<List<UtentePrivato>>(utentePrivatoService.getUtentiPrivati(), HttpStatus.OK);
+    public ResponseEntity getAllUtentiPrivati(){
+        UtentePrivatoDao utentePrivatoDao = DBManager.getInstance().getUtentePrivatoDao();
+        try {
+            return new ResponseEntity<>(utentePrivatoDao.findAll(), HttpStatus.OK);
+        } catch (SQLException e) {
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<UtentePrivato> insertUtentePrivato(@RequestBody UtentePrivato up) {
-        return new ResponseEntity<UtentePrivato>(utentePrivatoService.insertUtentePrivato(up), HttpStatus.OK);
+    public ResponseEntity insertUtentePrivato(@RequestBody UtentePrivato up) {
+        UtentePrivatoDao utentePrivatoDao = DBManager.getInstance().getUtentePrivatoDao();
+        try {
+            return new ResponseEntity<>(utentePrivatoDao.save(up), HttpStatus.OK);
+        } catch (SQLException e) {
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @RequestMapping(value= "/{id}", method = RequestMethod.POST)
-    public ResponseEntity<UtentePrivato> updateUtentePrivato(@PathVariable int id, @RequestBody UtentePrivato up) {
-        return new ResponseEntity<UtentePrivato>(utentePrivatoService.updateUtentePrivato(id, up), HttpStatus.OK);
+    public ResponseEntity updateUtentePrivato(@PathVariable int id, @RequestBody UtentePrivato up) {
+        UtentePrivatoDao utentePrivatoDao = DBManager.getInstance().getUtentePrivatoDao();
+        up.setId(id);
+        try {
+            return new ResponseEntity<>(utentePrivatoDao.save(up), HttpStatus.OK);
+        } catch (SQLException e) {
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @RequestMapping(value= "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity deleteUtentePrivato(@PathVariable int id) {
-        utentePrivatoService.deleteUtentePrivato(id);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-  /*  @RequestMapping(value= "/utente/{id}", method = RequestMethod.GET)
-    public ResponseEntity getUtenteByID(@PathVariable String id) {
+        UtentePrivatoDao utentePrivatoDao = DBManager.getInstance().getUtentePrivatoDao();
         try {
-            Optional<UtentePrivato> res = utentePrivatoService.getUtenteByID(id);
-            return new ResponseEntity<>(res, HttpStatus.OK);
-        } catch (ChangeSetPersister.NotFoundException e) {
-            return new ResponseEntity("Nessun utente trovato", HttpStatus.NOT_FOUND);
+            utentePrivatoDao.deleteById(id);
+            return new ResponseEntity<>( HttpStatus.OK);
+        } catch (SQLException e) {
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    } */
+    }
 
     @GetMapping("/byEmail/{email}")
     public Optional<UtentePrivato> getUserByEmail(@PathVariable String email) throws ChangeSetPersister.NotFoundException {
-        return utentePrivatoService.getUtenteByEmail(email);
+
+        UtentePrivatoDao utentePrivatoDao = DBManager.getInstance().getUtentePrivatoDao();
+
+        return utentePrivatoDao.findByEmailIgnoreCase(email);
     }
 
     @GetMapping("/{id}")
-    public Optional<UtentePrivato> getUserByID(@PathVariable int id) throws ChangeSetPersister.NotFoundException {
-        return utentePrivatoService.getUtenteByID(id);
+    public ResponseEntity getUserByID(@PathVariable int id) throws ChangeSetPersister.NotFoundException {
+        UtentePrivatoDao utentePrivatoDao = DBManager.getInstance().getUtentePrivatoDao();
+        try {
+            return new ResponseEntity<>(utentePrivatoDao.findById(id), HttpStatus.OK);
+        } catch (SQLException e) {
+            return new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 }

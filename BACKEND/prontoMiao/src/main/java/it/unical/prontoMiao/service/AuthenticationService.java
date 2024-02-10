@@ -1,12 +1,14 @@
 package it.unical.prontoMiao.service;
 
-import it.unical.prontoMiao.model.Utente;
+import it.unical.prontoMiao.persistenza.model.Utente;
 import it.unical.prontoMiao.request.AuthRequest;
 import it.unical.prontoMiao.response.JwtTokenResponse;
 
-public interface AuthenticationService {
-    public JwtTokenResponse login(Utente utente) throws IllegalArgumentException;
+import java.sql.SQLException;
 
-    public Utente signup(AuthRequest utente);
+public interface AuthenticationService {
+    public JwtTokenResponse login(Utente utente) throws IllegalArgumentException, SQLException;
+
+    public Utente signup(AuthRequest utente) throws SQLException;
 }
 
