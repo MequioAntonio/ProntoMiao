@@ -11,10 +11,9 @@ export class AuthService {
 
   Logged=false
   Privato=true
-  token: string;
 
   constructor(private http: HttpClient)
-  {  this.token = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");}
+  { }
 
   clearToken(){
     sessionStorage.removeItem("token");
@@ -55,7 +54,7 @@ export class AuthService {
   }
 
   isLogged(){
-    return (sessionStorage.getItem("token") || localStorage.getItem("token")) && !!this.token;
+    return sessionStorage.getItem("token") || localStorage.getItem("token");
     //return this.Logged
   }
 
@@ -88,6 +87,6 @@ export class AuthService {
 
   logout() {
     this.clearToken()
-    location.href="http://localhost:4200/";
+    location.href="/";
   }
 }

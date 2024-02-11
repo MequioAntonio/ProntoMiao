@@ -103,7 +103,6 @@ export class LoginComponent {
       } else {
         sessionStorage.setItem("token", data.token);
       }
-      document.cookie=`token=${data.token}; path=/`;
       console.log(data);
 
       if(this.authService.isLogged()) {
