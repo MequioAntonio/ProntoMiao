@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.sql.SQLException;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:4200", "http://localhost:4200"})
 @RequestMapping(value = "/animale")
 public class AnimaleController {
 

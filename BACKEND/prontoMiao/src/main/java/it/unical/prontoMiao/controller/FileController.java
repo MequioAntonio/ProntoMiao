@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:4210", "http://localhost:4220"})
 @RequestMapping(value = "/files")
 public class FileController {
     @RequestMapping(value = "/{nomeContesto}/{idContesto}",method = RequestMethod.GET, produces = MediaType.IMAGE_PNG_VALUE)

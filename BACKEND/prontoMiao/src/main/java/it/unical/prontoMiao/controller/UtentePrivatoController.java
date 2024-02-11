@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:4210", "http://localhost:4220"})
 @RequestMapping(value = "/utente")
 public class UtentePrivatoController {
 
