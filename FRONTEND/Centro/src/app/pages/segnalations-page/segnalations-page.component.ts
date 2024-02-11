@@ -1,6 +1,5 @@
 import { Segnalazione } from './../../model/Segnalazione';
 import { Component, OnInit } from '@angular/core';
-import { SegnalationFormComponent } from '../segnalation-form/segnalation-form.component';
 import { SegnalazioneDatabaseService } from '../../services/database-services/segnalazione-database.service';
 import { MatGridList, MatGridTile } from '@angular/material/grid-list';
 import { SegnalationCardComponent } from '../../components/segnalation-card/segnalation-card.component';

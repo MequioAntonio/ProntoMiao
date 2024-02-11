@@ -10,9 +10,14 @@ export class ErrorInterceptor implements HttpInterceptor {
     constructor(private authService: AuthService) {}
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        
-        const modifiedReq = request.clone({ 
-            headers: request.headers.set('Authorization', `Bearer ${this.authService.getToken()}`),
+        let token = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+
+
+
+
+
+        const modifiedReq = request.clone({
+            headers: request.headers.set('Authorization', `Bearer ${token}`),
         });
         return next.handle(modifiedReq).pipe(catchError(err => {
             if ([401, 403].includes(err.status)) {
@@ -24,5 +29,8 @@ export class ErrorInterceptor implements HttpInterceptor {
             console.error(err);
             return throwError(() => error);
         }))
-    }
+
+    return next.handle(request);
+      }
+
 }
