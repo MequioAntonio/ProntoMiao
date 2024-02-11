@@ -23,6 +23,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { AuthService } from '../../services/auth.service';
 import { ValidatorsService } from '../../services/validators.service';
 import { JwtTokenResponse } from '../../model/JwtTokenResponse';
+import { JwtHelperService } from '../../services/jwt-helper.service';
 
 @Component({
   selector: 'app-login',
@@ -48,7 +49,7 @@ export class LoginComponent {
   apparenceSetting = 'outline' as MatFormFieldAppearance
   jwtToken: JwtTokenResponse | undefined;
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {}
+  constructor(private fb: FormBuilder, private authService: AuthService, private jh: JwtHelperService) {}
 
   loginForm = this.fb.group({
     email: ['', [Validators.required, ValidatorsService.emailValidator()]],
@@ -99,18 +100,20 @@ export class LoginComponent {
     ).subscribe((data) =>{
       this.authService.clearToken()
       if (this.loginForm.controls["keepConnected"].value){
+        sessionStorage.removeItem("token");
         localStorage.setItem("token", data.token);
       } else {
+        localStorage.removeItem("token");
         sessionStorage.setItem("token", data.token);
       }
       console.log(data);
 
       if(this.authService.isLogged()) {
         if(this.authService.isPrivato()) {
-          location.href = "http://localhost:4220/";
+          this.jh.sendAndGet("http://localhost:4220/")
         }
         else {
-          location.href = "http://localhost:4210/";
+          this.jh.sendAndGet("http://localhost:4210/")
         }
       }
 

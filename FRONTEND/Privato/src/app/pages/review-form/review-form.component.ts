@@ -82,7 +82,7 @@ export class ReviewFormComponent implements OnInit {
 
     this.recensioneService.insertRecensione(recensione).subscribe((data) => {
       console.log("inserito Recensione!");
-      this.snackBar.open("Recensione inserita con Successo!","",{duration:3000});
+      this.snackBar.open("Recensione inserita con Successo!","",{duration:1200});
     })
   }
 }

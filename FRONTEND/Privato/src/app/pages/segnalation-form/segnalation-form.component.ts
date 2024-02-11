@@ -80,7 +80,7 @@ export class SegnalationFormComponent implements OnInit{
 
     this.segnalazioneService.insertSegnalazione(segnalazione).subscribe((data) => {
       console.log("inserita segnalazione!");
-      this.snackBar.open("Segnalazione inserita con Successo!","",{duration:3000});
+      this.snackBar.open("Segnalazione inserita con Successo!","",{duration:1200});
       location.href="/";
     })
   }

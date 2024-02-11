@@ -53,7 +53,7 @@ export class AnimalInfoComponent implements OnInit {
         }
         this.richiestaService.insertRichiesta(richiesta).subscribe({
           next:(c:any)=>{
-            this.snackBar.open("Richiesta inviata.","",{duration:3000}).afterDismissed().subscribe(() => {
+            this.snackBar.open("Richiesta inviata.","",{duration:1200}).afterDismissed().subscribe(() => {
               location.href="/";
             });
           },

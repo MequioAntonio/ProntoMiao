@@ -31,10 +31,13 @@ export class AuthService {
   }
 
   decodeToken() {
-    if (this.getToken() != "") {
+    try {
       return JSON.parse(window.atob(this.getToken()!.split('.')[1]));
+    } catch (error) {
+      this.clearToken()
+      location.href="http://localhost:4200/"
+      return null;
     }
-    return null;
   }
 
   getTipoUtente() {//ritorna "PRIVATO", "CENTRO" o "NA"
@@ -87,6 +90,6 @@ export class AuthService {
 
   logout() {
     this.clearToken()
-    location.href="/";
+    location.href="http://localhost:4200/";
   }
 }

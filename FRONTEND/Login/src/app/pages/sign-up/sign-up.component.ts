@@ -32,7 +32,7 @@ import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
         ReactiveFormsModule,
         CommonModule,
         ChipsComponent,
-        MatSnackBarModule        
+        MatSnackBarModule
     ]
 })
 
@@ -164,13 +164,13 @@ export class SignUpComponent {
       next:(a:any)=>{
         if (a.id > 0) {
           //alert("Registrazione è avvenuta con successo!")
-          this.snackBar.open("Registrazione è avvenuta con successo!","",{duration:3000}).afterDismissed().subscribe(() => {
+          this.snackBar.open("Registrazione è avvenuta con successo!","",{duration:1200}).afterDismissed().subscribe(() => {
             location.href="/login";
           });
         }
       },
       error:(e:any)=>{
-        this.snackBar.open("ERRORE! Registrazione non avvenuta!","",{duration:3000});
+        this.snackBar.open("ERRORE! Registrazione non avvenuta!","",{duration:1200});
 
       },
 
@@ -198,13 +198,13 @@ export class SignUpComponent {
       next:(a:any)=>{
         if (a.id > 0) {
           //alert("Registrazione è avvenuta con successo!")
-          this.snackBar.open("Registrazione è avvenuta con successo!","",{duration:3000}).afterDismissed().subscribe(() => {
+          this.snackBar.open("Registrazione è avvenuta con successo!","",{duration:1200}).afterDismissed().subscribe(() => {
             location.href="/login";
           });
         }
       },
       error:(e:any)=>{
-        this.snackBar.open("ERRORE! Registrazione non avvenuta!","",{duration:3000});
+        this.snackBar.open("ERRORE! Registrazione non avvenuta!","",{duration:1200});
 
       },
 

@@ -133,7 +133,7 @@ export class AdoptionFormComponent {
 
     this.annuncioService.insertAnnuncio(annuncio).subscribe((data) => {
       console.log("inserito annuncio!");
-      this.snackBar.open("Annuncio creato!","",{duration:3000}).afterDismissed().subscribe(() => {
+      this.snackBar.open("Annuncio creato!","",{duration:1200}).afterDismissed().subscribe(() => {
         location.href="/private/"+this.authService.getIdUtente();
       });
     })
