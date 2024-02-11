@@ -103,6 +103,7 @@ export class LoginComponent {
       } else {
         sessionStorage.setItem("token", data.token);
       }
+      document.cookie=`token=${data.token}; path=/`;
       console.log(data);
       location.href = "/";
     });
