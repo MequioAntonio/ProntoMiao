@@ -105,7 +105,16 @@ export class LoginComponent {
       }
       document.cookie=`token=${data.token}; path=/`;
       console.log(data);
-      location.href = "/";
+
+      if(this.authService.isLogged()) {
+        if(this.authService.isPrivato()) {
+          location.href = "http://localhost:4220/";
+        }
+        else {
+          location.href = "http://localhost:4210/";
+        }
+      }
+
     });
     console.log(this.loginForm);
   }

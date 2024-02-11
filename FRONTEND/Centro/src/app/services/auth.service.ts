@@ -88,6 +88,6 @@ export class AuthService {
 
   logout() {
     this.clearToken()
-    location.href="/";
+    location.href="http://localhost:4200/";
   }
 }
