@@ -1,0 +1,14 @@
+<mat-card class="animal-card" >
+  <img mat-card-image [src]="annuncio?.foto_profilo" alt="Cane" height="250px" width="300px">
+  <mat-card-content class="content">
+    <mat-card-title>{{annuncio?.animale?.nome}} - {{annuncio?.animale?.razza}}</mat-card-title>
+    <p >
+      {{annuncio?.descrizione}}
+    </p>
+  </mat-card-content>
+  <mat-card-header (click)="indirizzamentoCentro()" class="pointer">
+    <div mat-card-avatar class="animal-header-image"></div>
+    <mat-card-title>{{annuncio?.centro?.nome}}</mat-card-title>
+    <mat-card-subtitle>{{annuncio?.centro?.indirizzo}}</mat-card-subtitle>
+  </mat-card-header>
+</mat-card>

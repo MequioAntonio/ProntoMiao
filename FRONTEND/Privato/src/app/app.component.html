@@ -1,0 +1,69 @@
+
+<div class="mat-app-background">
+  <p class="tb">
+    <mat-toolbar color="primary">
+      <a class="logo" routerLink="/">
+        <img class="logo" src="./assets/imgs/logo.png" alt="ProntoMiao">
+      </a>
+
+      @if (!isLogged()) {
+      <button mat-button (click)="openMissionDialog()">
+        La Nostra Missione
+      </button>
+      <button mat-button (click)="openChiDialog()">
+        Chi Siamo
+      </button>
+      } @else {
+      <button mat-button (click)="profilepage()">
+        Il Mio Profilo
+      </button>
+      <button mat-button (click)="logoutUser()">
+        Logout
+      </button>
+      }
+
+
+      <span class="spacerBig"></span>
+      @if (isLogged()) {
+      @if (getTipoUtente() == "Privato") {
+      <button mat-stroked-button class="stroke" routerLink="/segnalation-form">
+        Segnala
+      </button>
+      <button mat-stroked-button class="stroke" routerLink="/adoptions">
+        Adozioni Disponibili
+      </button>
+      } @else {
+      <button mat-stroked-button class="stroke" routerLink="/segnalations">
+        Segnalazioni in Sospeso
+      </button>
+      }
+      } @else {
+      <button mat-stroked-button class="stroke" routerLink="/login">
+        Login
+      </button>
+      <button mat-stroked-button class="stroke" routerLink="/signup">
+        Registrati
+      </button>
+      }
+    </mat-toolbar>
+  </p>
+
+
+
+
+  <router-outlet></router-outlet>
+
+
+
+
+
+
+
+  <mat-toolbar class="toolFoot">
+    <span><img src="./assets/imgs/logo.png" alt="ProntoMiao" height="100px" width="100px"></span>
+    <span class="spacerBig"></span>
+    <span>Progetto by Arienzo-Dramis-Marrapodi-Mequio</span>
+  </mat-toolbar>
+
+
+</div>

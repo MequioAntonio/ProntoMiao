@@ -1,0 +1,19 @@
+<mat-form-field [appearance]="appearance">
+  <mat-label>
+    <ng-content select="mat-label"></ng-content>
+  </mat-label>
+
+  <mat-chip-grid #chipGrid aria-label="Enter fruits">
+    @for (element of elements; track element) {
+    <mat-chip-row (removed)="remove(element)" [editable]="true" (edited)="edit(element, $event)"
+      [aria-description]="'press enter to edit ' + element.name">
+      {{element.name}}
+      <button matChipRemove [attr.aria-label]="'remove ' + element.name">
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </mat-chip-row>
+    }
+    <input [matChipInputFor]="chipGrid" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+      [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)" />
+  </mat-chip-grid>
+</mat-form-field>
