@@ -6,9 +6,6 @@
       {{annuncio?.descrizione}}
     </p>
   </mat-card-content>
-  <mat-card-actions class="actions">
-    <button mat-raised-button color="accent" [routerLink]="'/animal-info/'+annuncio?.id">ADOTTAMI</button>
-  </mat-card-actions>
   <mat-card-header (click)="indirizzamentoCentro()" class="pointer">
     <div mat-card-avatar class="animal-header-image"></div>
     <mat-card-title>{{annuncio?.centro?.nome}}</mat-card-title>
